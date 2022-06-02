@@ -1,0 +1,7 @@
+Excluded:
+  - src/pet_store/api/*.cr
+  - bin
+  - lib
+  - local
+Metrics/CyclomaticComplexity:
+  Enabled: false
