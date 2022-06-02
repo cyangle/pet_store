@@ -17,36 +17,27 @@ module PetStore
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Optional properties
-    @[JSON::Field(key: "color", type: String?, presence: true, ignore_serialize: color.nil? && !color_present?)]
+    # Required properties
+    @[JSON::Field(key: "color", type: String?)]
     property color : String?
 
-    @[JSON::Field(ignore: true)]
-    property? color_present : Bool = false
-
-    @[JSON::Field(key: "cultivar", type: String?, presence: true, ignore_serialize: cultivar.nil? && !cultivar_present?)]
+    @[JSON::Field(key: "cultivar", type: String?)]
     property cultivar : String?
 
-    @[JSON::Field(ignore: true)]
-    property? cultivar_present : Bool = false
-
-    @[JSON::Field(key: "lengthCm", type: Float64?, presence: true, ignore_serialize: length_cm.nil? && !length_cm_present?)]
+    @[JSON::Field(key: "lengthCm", type: Float64?)]
     property length_cm : Float64?
-
-    @[JSON::Field(ignore: true)]
-    property? length_cm_present : Bool = false
 
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
       [
-        Apple,
-        Banana,
+        PetStore::Apple,
+        PetStore::Banana,
       ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @color : String? = nil, @cultivar : String? = nil, @length_cm : Float64? = nil)
+    def initialize(*, @color : String, @cultivar : String, @length_cm : Float64)
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -61,11 +52,15 @@ module PetStore
     # @return true if the model is valid
     def valid?
       _any_of_found = false
-      self.class.openapi_any_of.each do |_class|
-        _any_of = PetStore.const_get(_class).build_from_hash(self.to_hash)
-        if _any_of.valid?
-          _any_of_found = true
+      json_string : String = self.to_json
+      _any_of_found = self.class.openapi_any_of.any? do |_class|
+        _any_of = begin
+          _class.from_json(json_string)
+        rescue
+          nil
         end
+
+        !_any_of.nil? && _any_of.not_nil!.valid?
       end
 
       if !_any_of_found

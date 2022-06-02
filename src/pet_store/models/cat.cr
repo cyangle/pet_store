@@ -13,7 +13,7 @@ require "log"
 
 module PetStore
   @[JSON::Serializable::Options(emit_nulls: true)]
-  class Cat < Animal
+  class Cat
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
@@ -37,8 +37,8 @@ module PetStore
     # List of class defined in allOf (OpenAPI v3)
     def self.openapi_all_of
       [
-        Animal,
-        CatAllOf,
+        PetStore::Animal,
+        PetStore::CatAllOf,
       ]
     end
 
@@ -50,7 +50,7 @@ module PetStore
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
-      invalid_properties = super
+      invalid_properties = Array(String).new
 
       invalid_properties
     end
@@ -58,7 +58,7 @@ module PetStore
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      true && super
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -66,7 +66,7 @@ module PetStore
     def ==(o)
       return true if self.same?(o)
       self.class == o.class &&
-        declawed == o.declawed && super(o)
+        declawed == o.declawed
     end
 
     # @see the `==` method

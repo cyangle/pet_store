@@ -12,42 +12,5 @@ require "time"
 require "log"
 
 module PetStore
-  module Mammal
-    class << self
-      # List of class defined in oneOf (OpenAPI v3)
-      def openapi_one_of
-        [
-          Whale,
-          Zebra
-        ]
-      end
-
-      # Discriminator's property name (OpenAPI v3)
-      def openapi_discriminator_name
-        "class_name"
-      end
-
-      # Discriminator's mapping (OpenAPI v3)
-      def openapi_discriminator_mapping
-        {
-          "whale" => Whale,
-          "zebra" => Zebra
-        }
-      end
-
-      # Builds the object
-      # @param [Mixed] Data to be matched against the list of oneOf items
-      # @return [Object] Returns the model or the data itself
-      def build(data)
-        discriminator_value = data[openapi_discriminator_name]
-        return nil unless discriminator_value
-
-        klass = openapi_discriminator_mapping[discriminator_value.to_sym]
-        return nil unless klass
-
-        PetStore.const_get(klass).build_from_hash(data)
-      end
-    end
-  end
-
+  alias Mammal = Whale | Zebra
 end

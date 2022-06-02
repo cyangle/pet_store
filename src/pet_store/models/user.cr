@@ -68,36 +68,36 @@ module PetStore
     property? user_status_present : Bool = false
 
     # test code generation for objects Value must be a map of strings to values. It cannot be the 'null' value.
-    @[JSON::Field(key: "arbitraryObject", type: Object?, presence: true, ignore_serialize: arbitrary_object.nil? && !arbitrary_object_present?)]
-    property arbitrary_object : Object?
+    @[JSON::Field(key: "arbitraryObject", type: Hash(String, String)?, presence: true, ignore_serialize: arbitrary_object.nil? && !arbitrary_object_present?)]
+    property arbitrary_object : Hash(String, String)?
 
     @[JSON::Field(ignore: true)]
     property? arbitrary_object_present : Bool = false
 
     # test code generation for nullable objects. Value must be a map of strings to values or the 'null' value.
-    @[JSON::Field(key: "arbitraryNullableObject", type: Object?, presence: true, ignore_serialize: arbitrary_nullable_object.nil? && !arbitrary_nullable_object_present?)]
-    property arbitrary_nullable_object : Object?
+    @[JSON::Field(key: "arbitraryNullableObject", type: Hash(String, String)?, presence: true, ignore_serialize: arbitrary_nullable_object.nil? && !arbitrary_nullable_object_present?)]
+    property arbitrary_nullable_object : Hash(String, String)?
 
     @[JSON::Field(ignore: true)]
     property? arbitrary_nullable_object_present : Bool = false
 
     # test code generation for any type Value can be any type - string, number, boolean, array or object.
-    @[JSON::Field(key: "arbitraryTypeValue", type: AnyType?, presence: true, ignore_serialize: arbitrary_type_value.nil? && !arbitrary_type_value_present?)]
-    property arbitrary_type_value : AnyType?
+    @[JSON::Field(key: "arbitraryTypeValue", type: JSON::Any?, presence: true, ignore_serialize: arbitrary_type_value.nil? && !arbitrary_type_value_present?)]
+    property arbitrary_type_value : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? arbitrary_type_value_present : Bool = false
 
     # test code generation for any type Value can be any type - string, number, boolean, array, object or the 'null' value.
-    @[JSON::Field(key: "arbitraryNullableTypeValue", type: AnyType?, presence: true, ignore_serialize: arbitrary_nullable_type_value.nil? && !arbitrary_nullable_type_value_present?)]
-    property arbitrary_nullable_type_value : AnyType?
+    @[JSON::Field(key: "arbitraryNullableTypeValue", type: JSON::Any?, presence: true, ignore_serialize: arbitrary_nullable_type_value.nil? && !arbitrary_nullable_type_value_present?)]
+    property arbitrary_nullable_type_value : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? arbitrary_nullable_type_value_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @id : Int64? = nil, @username : String? = nil, @first_name : String? = nil, @last_name : String? = nil, @email : String? = nil, @password : String? = nil, @phone : String? = nil, @user_status : Int32? = nil, @arbitrary_object : Object? = nil, @arbitrary_nullable_object : Object? = nil, @arbitrary_type_value : AnyType? = nil, @arbitrary_nullable_type_value : AnyType? = nil)
+    def initialize(*, @id : Int64? = nil, @username : String? = nil, @first_name : String? = nil, @last_name : String? = nil, @email : String? = nil, @password : String? = nil, @phone : String? = nil, @user_status : Int32? = nil, @arbitrary_object : Hash(String, String)? = nil, @arbitrary_nullable_object : Hash(String, String)? = nil, @arbitrary_type_value : JSON::Any? = nil, @arbitrary_nullable_type_value : JSON::Any? = nil)
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?

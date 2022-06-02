@@ -1,0 +1,12 @@
+tasks:
+  - name: 'Update models'
+    file_glob: './src/pet_store/models/*cr'
+    changes:
+      -
+        name: 'Correct AnyType?'
+        pattern: 'AnyType?'
+        new_value: 'JSON::Any'
+      -
+        name: 'Correct ??'
+        pattern: '\?\?'
+        new_value: '?'

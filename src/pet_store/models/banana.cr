@@ -17,16 +17,13 @@ module PetStore
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Optional properties
-    @[JSON::Field(key: "lengthCm", type: Float64?, presence: true, ignore_serialize: length_cm.nil? && !length_cm_present?)]
-    property length_cm : Float64?
-
-    @[JSON::Field(ignore: true)]
-    property? length_cm_present : Bool = false
+    # Required properties
+    @[JSON::Field(key: "lengthCm", type: Float64)]
+    property length_cm : Float64
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @length_cm : Float64? = nil)
+    def initialize(*, @length_cm : Float64)
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?

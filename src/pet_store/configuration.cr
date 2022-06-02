@@ -257,37 +257,39 @@ module PetStore
         {
           "url"         => "http://{server}.swagger.io:{port}/v2",
           "description" => "petstore server",
-          "variables" => {
+          "variables"   => {
             "server" => {
-                "description" => "No description provided",
-                "default_value" => "petstore",
-                "enum_values" => [
-                  "petstore",
-                  "qa-petstore",
-                  "dev-petstore"
-                ]
-              },
+              "description"   => "No description provided",
+              "default_value" => "petstore",
+              "enum_values"   => [
+                "petstore",
+                "qa-petstore",
+                "dev-petstore",
+              ],
+            },
             "port" => {
-                "description" => "No description provided",
-                "default_value" => "80",
-                "enum_values" => [
-                  "80",
-                  "8080"
-                ]
-              },
+              "description"   => "No description provided",
+              "default_value" => "80",
+              "enum_values"   => [
+                "80",
+                "8080",
+              ],
+            },
+          },
         },
         {
           "url"         => "https://localhost:8080/{version}",
           "description" => "The local server",
-          "variables" => {
+          "variables"   => {
             "version" => {
-                "description" => "No description provided",
-                "default_value" => "v2",
-                "enum_values" => [
-                  "v1",
-                  "v2"
-                ]
-              },
+              "description"   => "No description provided",
+              "default_value" => "v2",
+              "enum_values"   => [
+                "v1",
+                "v2",
+              ],
+            },
+          },
         },
         {
           "url"         => "https://127.0.0.1/no_variable",
@@ -300,25 +302,25 @@ module PetStore
       {
         "PetApi.add_pet" => [
           {
-          "url" => "http://petstore.swagger.io/v2",
-          "description" => "No description provided",
+            "url"         => "http://petstore.swagger.io/v2",
+            "description" => "No description provided",
           },
           {
-          "url" => "http://path-server-test.petstore.local/v2",
-          "description" => "No description provided",
-          }
+            "url"         => "http://path-server-test.petstore.local/v2",
+            "description" => "No description provided",
+          },
         ],
       }
       {
         "PetApi.update_pet" => [
           {
-          "url" => "http://petstore.swagger.io/v2",
-          "description" => "No description provided",
+            "url"         => "http://petstore.swagger.io/v2",
+            "description" => "No description provided",
           },
           {
-          "url" => "http://path-server-test.petstore.local/v2",
-          "description" => "No description provided",
-          }
+            "url"         => "http://path-server-test.petstore.local/v2",
+            "description" => "No description provided",
+          },
         ],
       }
     end

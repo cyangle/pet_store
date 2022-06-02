@@ -20,6 +20,34 @@ describe PetStore::GmFruit do
     end
   end
 
+  describe "#valid?" do
+    context "is apple" do
+      it "returns true" do
+        apple = PetStore::Apple.new(cultivar: "cultivar")
+        gm_fruit = PetStore::GmFruit.from_json(apple.to_json)
+        (gm_fruit.valid?).should be_true
+      end
+    end
+
+    context "is banana" do
+      it "returns true" do
+        banana = PetStore::Banana.new(length_cm: 123.45)
+        gm_fruit = PetStore::GmFruit.from_json(banana.to_json)
+        (gm_fruit.valid?).should be_true
+      end
+    end
+
+    context "is both apple and banana" do
+      it "returns true" do
+      end
+    end
+
+    context "is not apple or banana" do
+      it "returns false" do
+      end
+    end
+  end
+
   describe "test attribute 'color'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
