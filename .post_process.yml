@@ -8,5 +8,5 @@ tasks:
         new_value: 'JSON::Any'
       -
         name: 'Correct ??'
-        pattern: '\?\?'
+        pattern: '\?+'
         new_value: '?'
