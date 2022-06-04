@@ -18,6 +18,7 @@ module PetStore
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     @[JSON::Field(key: "number", type: Float64)]
     getter number : Float64
 
@@ -31,6 +32,7 @@ module PetStore
     getter password : String
 
     # Optional properties
+
     @[JSON::Field(key: "integer", type: Int32?, presence: true, ignore_serialize: integer.nil? && !integer_present?)]
     getter integer : Int32?
 
@@ -101,7 +103,26 @@ module PetStore
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @number : Float64, @byte : String, @date : Time, @password : String, @integer : Int32? = nil, @int32 : Int32? = nil, @int64 : Int64? = nil, @float : Float32? = nil, @double : Float64? = nil, @string : String? = nil, @binary : ::File? = nil, @date_time : Time? = nil, @uuid : String? = nil, @pattern_with_digits : String? = nil, @pattern_with_digits_and_delimiter : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @number : Float64,
+      @byte : String,
+      @date : Time,
+      @password : String,
+      # Optional properties
+      @integer : Int32? = nil,
+      @int32 : Int32? = nil,
+      @int64 : Int64? = nil,
+      @float : Float32? = nil,
+      @double : Float64? = nil,
+      @string : String? = nil,
+      @binary : ::File? = nil,
+      @date_time : Time? = nil,
+      @uuid : String? = nil,
+      @pattern_with_digits : String? = nil,
+      @pattern_with_digits_and_delimiter : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -180,26 +201,18 @@ module PetStore
     def valid?
       return false if @number > 543.2
       return false if @number < 32.1
-
       return false if @password.to_s.size > 64
       return false if @password.to_s.size < 10
-
       return false if !@integer.nil? && @integer > 100
       return false if !@integer.nil? && @integer < 10
-
       return false if !@int32.nil? && @int32 > 200
       return false if !@int32.nil? && @int32 < 20
-
       return false if !@float.nil? && @float > 987.6
       return false if !@float.nil? && @float < 54.3
-
       return false if !@double.nil? && @double > 123.4
       return false if !@double.nil? && @double < 67.8
-
       return false if !@string.nil? && @string !~ /[a-z]/i
-
       return false if !@pattern_with_digits.nil? && @pattern_with_digits !~ /^\d{10}$/
-
       return false if !@pattern_with_digits_and_delimiter.nil? && @pattern_with_digits_and_delimiter !~ /^image_\d{1,3}$/i
 
       true

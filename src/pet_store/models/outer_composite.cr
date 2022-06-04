@@ -18,6 +18,7 @@ module PetStore
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "my_number", type: Float64?, presence: true, ignore_serialize: my_number.nil? && !my_number_present?)]
     property my_number : Float64?
 
@@ -38,7 +39,13 @@ module PetStore
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @my_number : Float64? = nil, @my_string : String? = nil, @my_boolean : Bool? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @my_number : Float64? = nil,
+      @my_string : String? = nil,
+      @my_boolean : Bool? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?

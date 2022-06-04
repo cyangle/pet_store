@@ -18,12 +18,17 @@ module PetStore
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     @[JSON::Field(key: "lengthCm", type: Float64)]
     property length_cm : Float64
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @length_cm : Float64)
+    def initialize(
+      *,
+      # Required properties
+      @length_cm : Float64
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?

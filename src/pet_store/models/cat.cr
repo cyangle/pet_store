@@ -18,19 +18,23 @@ module PetStore
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     @[JSON::Field(key: "name", type: String)]
     getter name : String
 
+    # This is the name of the class
     @[JSON::Field(key: "className", type: String)]
     getter class_name : String
 
     # Optional properties
+
     @[JSON::Field(key: "declawed", type: Bool?, presence: true, ignore_serialize: declawed.nil? && !declawed_present?)]
     property declawed : Bool?
 
     @[JSON::Field(ignore: true)]
     property? declawed_present : Bool = false
 
+    # The color of the pet
     @[JSON::Field(key: "color", type: String?, default: "red", presence: true, ignore_serialize: color.nil? && !color_present?)]
     property color : String?
 
@@ -47,7 +51,15 @@ module PetStore
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @name : String, @class_name : String, @declawed : Bool? = nil, @color : String? = "red")
+    def initialize(
+      *,
+      # Required properties
+      @name : String,
+      @class_name : String,
+      # Optional properties
+      @declawed : Bool? = nil,
+      @color : String? = "red"
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -70,7 +82,6 @@ module PetStore
     # @return true if the model is valid
     def valid?
       return false if @name.to_s.size > 255
-
       return false if @class_name.to_s.size > 64
 
       true

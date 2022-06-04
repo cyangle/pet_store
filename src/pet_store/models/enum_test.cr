@@ -18,12 +18,14 @@ module PetStore
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     @[JSON::Field(key: "enum_string_required", type: String)]
     getter enum_string_required : String
 
     ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED = EnumValidator.new("enum_string_required", "String", ["UPPER", "lower", ""])
 
     # Optional properties
+
     @[JSON::Field(key: "enum_string", type: String?, presence: true, ignore_serialize: enum_string.nil? && !enum_string_present?)]
     getter enum_string : String?
 
@@ -74,13 +76,26 @@ module PetStore
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @enum_string_required : String, @enum_string : String? = nil, @enum_integer : Int32? = nil, @enum_number : Float64? = nil, @outer_enum : OuterEnum? = nil, @outer_enum_integer : OuterEnumInteger? = nil, @outer_enum_default_value : OuterEnumDefaultValue? = "placed", @outer_enum_integer_default_value : OuterEnumIntegerDefaultValue? = 0)
+    def initialize(
+      *,
+      # Required properties
+      @enum_string_required : String,
+      # Optional properties
+      @enum_string : String? = nil,
+      @enum_integer : Int32? = nil,
+      @enum_number : Float64? = nil,
+      @outer_enum : OuterEnum? = nil,
+      @outer_enum_integer : OuterEnumInteger? = nil,
+      @outer_enum_default_value : OuterEnumDefaultValue? = "placed",
+      @outer_enum_integer_default_value : OuterEnumIntegerDefaultValue? = 0
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.error_message) unless ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.valid?(@enum_string_required, false)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_STRING.error_message) unless ENUM_VALIDATOR_FOR_ENUM_STRING.valid?(@enum_string)
@@ -96,11 +111,8 @@ module PetStore
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.valid?(@enum_string_required, false)
-
       return false unless ENUM_VALIDATOR_FOR_ENUM_STRING.valid?(@enum_string)
-
       return false unless ENUM_VALIDATOR_FOR_ENUM_INTEGER.valid?(@enum_integer)
-
       return false unless ENUM_VALIDATOR_FOR_ENUM_NUMBER.valid?(@enum_number)
 
       true

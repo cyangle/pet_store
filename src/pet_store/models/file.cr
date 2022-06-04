@@ -19,6 +19,7 @@ module PetStore
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Test capitalization
     @[JSON::Field(key: "sourceURI", type: String?, presence: true, ignore_serialize: source_uri.nil? && !source_uri_present?)]
     property source_uri : String?
@@ -28,7 +29,11 @@ module PetStore
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @source_uri : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @source_uri : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?

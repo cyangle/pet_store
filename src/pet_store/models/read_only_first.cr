@@ -18,6 +18,7 @@ module PetStore
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "bar", type: String?, presence: true, ignore_serialize: bar.nil? && !bar_present?)]
     property bar : String?
 
@@ -32,7 +33,12 @@ module PetStore
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @bar : String? = nil, @baz : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @bar : String? = nil,
+      @baz : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?

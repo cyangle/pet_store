@@ -19,6 +19,7 @@ module PetStore
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "return", type: Int32?, presence: true, ignore_serialize: _return.nil? && !_return_present?)]
     property _return : Int32?
 
@@ -27,7 +28,11 @@ module PetStore
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @_return : Int32? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @_return : Int32? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?

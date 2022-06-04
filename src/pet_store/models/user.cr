@@ -18,6 +18,7 @@ module PetStore
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "id", type: Int64?, presence: true, ignore_serialize: id.nil? && !id_present?)]
     property id : Int64?
 
@@ -97,7 +98,22 @@ module PetStore
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @id : Int64? = nil, @username : String? = nil, @first_name : String? = nil, @last_name : String? = nil, @email : String? = nil, @password : String? = nil, @phone : String? = nil, @user_status : Int32? = nil, @arbitrary_object : Hash(String, String)? = nil, @arbitrary_nullable_object : Hash(String, String)? = nil, @arbitrary_type_value : JSON::Any? = nil, @arbitrary_nullable_type_value : JSON::Any? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @id : Int64? = nil,
+      @username : String? = nil,
+      @first_name : String? = nil,
+      @last_name : String? = nil,
+      @email : String? = nil,
+      @password : String? = nil,
+      @phone : String? = nil,
+      @user_status : Int32? = nil,
+      @arbitrary_object : Hash(String, String)? = nil,
+      @arbitrary_nullable_object : Hash(String, String)? = nil,
+      @arbitrary_type_value : JSON::Any? = nil,
+      @arbitrary_nullable_type_value : JSON::Any? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?

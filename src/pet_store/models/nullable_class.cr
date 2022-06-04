@@ -18,6 +18,7 @@ module PetStore
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "integer_prop", type: Int32?, presence: true, ignore_serialize: integer_prop.nil? && !integer_prop_present?)]
     property integer_prop : Int32?
 
@@ -92,7 +93,22 @@ module PetStore
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @integer_prop : Int32? = nil, @number_prop : Float64? = nil, @boolean_prop : Bool? = false, @string_prop : String? = nil, @date_prop : Time? = nil, @datetime_prop : Time? = nil, @array_nullable_prop : Array(Object)? = nil, @array_and_items_nullable_prop : Array(Object)? = nil, @array_items_nullable : Array(Object)? = nil, @object_nullable_prop : Hash(String, Object)? = nil, @object_and_items_nullable_prop : Hash(String, Object)? = nil, @object_items_nullable : Hash(String, Object)? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @integer_prop : Int32? = nil,
+      @number_prop : Float64? = nil,
+      @boolean_prop : Bool? = false,
+      @string_prop : String? = nil,
+      @date_prop : Time? = nil,
+      @datetime_prop : Time? = nil,
+      @array_nullable_prop : Array(Object)? = nil,
+      @array_and_items_nullable_prop : Array(Object)? = nil,
+      @array_items_nullable : Array(Object)? = nil,
+      @object_nullable_prop : Hash(String, Object)? = nil,
+      @object_and_items_nullable_prop : Hash(String, Object)? = nil,
+      @object_items_nullable : Hash(String, Object)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?

@@ -18,6 +18,7 @@ module PetStore
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "just_symbol", type: String?, presence: true, ignore_serialize: just_symbol.nil? && !just_symbol_present?)]
     getter just_symbol : String?
 
@@ -36,13 +37,19 @@ module PetStore
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @just_symbol : String? = nil, @array_enum : Array(String)? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @just_symbol : String? = nil,
+      @array_enum : Array(String)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_JUST_SYMBOL.error_message) unless ENUM_VALIDATOR_FOR_JUST_SYMBOL.valid?(@just_symbol)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ARRAY_ENUM.error_message) unless ENUM_VALIDATOR_FOR_ARRAY_ENUM.all_valid?(@array_enum)
@@ -54,7 +61,6 @@ module PetStore
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_JUST_SYMBOL.valid?(@just_symbol)
-
       return false unless ENUM_VALIDATOR_FOR_ARRAY_ENUM.all_valid?(@array_enum)
 
       true
