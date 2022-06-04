@@ -54,7 +54,9 @@ module PetStore
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_JUST_SYMBOL.valid?(@just_symbol)
+
       return false unless ENUM_VALIDATOR_FOR_ARRAY_ENUM.all_valid?(@array_enum)
+
       true
     end
 
@@ -72,23 +74,16 @@ module PetStore
       @array_enum = array_enum
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        just_symbol == o.just_symbol &&
-        array_enum == o.array_enum
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@just_symbol, @array_enum)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@just_symbol, @array_enum)
   end
 end

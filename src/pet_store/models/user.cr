@@ -114,33 +114,16 @@ module PetStore
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        id == o.id &&
-        username == o.username &&
-        first_name == o.first_name &&
-        last_name == o.last_name &&
-        email == o.email &&
-        password == o.password &&
-        phone == o.phone &&
-        user_status == o.user_status &&
-        arbitrary_object == o.arbitrary_object &&
-        arbitrary_nullable_object == o.arbitrary_nullable_object &&
-        arbitrary_type_value == o.arbitrary_type_value &&
-        arbitrary_nullable_type_value == o.arbitrary_nullable_type_value
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@id, @username, @first_name, @last_name, @email, @password, @phone, @user_status, @arbitrary_object, @arbitrary_nullable_object, @arbitrary_type_value, @arbitrary_nullable_type_value)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@id, @username, @first_name, @last_name, @email, @password, @phone, @user_status, @arbitrary_object, @arbitrary_nullable_object, @arbitrary_type_value, @arbitrary_nullable_type_value)
   end
 end

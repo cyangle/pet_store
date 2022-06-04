@@ -39,6 +39,7 @@ module PetStore
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
 
       invalid_properties
@@ -48,6 +49,7 @@ module PetStore
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
+
       true
     end
 
@@ -58,23 +60,16 @@ module PetStore
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        _type == o._type &&
-        class_name == o.class_name
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@_type, @class_name)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@class_name, @_type)
   end
 end

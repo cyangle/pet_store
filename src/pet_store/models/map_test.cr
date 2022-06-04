@@ -63,6 +63,7 @@ module PetStore
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_MAP_OF_ENUM_STRING.all_valid?(@map_of_enum_string)
+
       true
     end
 
@@ -73,25 +74,16 @@ module PetStore
       @map_of_enum_string = map_of_enum_string
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        map_map_of_string == o.map_map_of_string &&
-        map_of_enum_string == o.map_of_enum_string &&
-        direct_map == o.direct_map &&
-        indirect_map == o.indirect_map
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@map_map_of_string, @map_of_enum_string, @direct_map, @indirect_map)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@map_map_of_string, @map_of_enum_string, @direct_map, @indirect_map)
   end
 end

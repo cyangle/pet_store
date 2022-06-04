@@ -39,11 +39,25 @@ describe PetStore::GmFruit do
 
     context "is both apple and banana" do
       it "returns true" do
+        gm_fruit = PetStore::GmFruit.new(cultivar: "cultivar", length_cm: 123.45)
+        json_string = gm_fruit.to_json
+        banana = PetStore::Banana.from_json(json_string)
+        apple = PetStore::Apple.from_json(json_string)
+        (banana.valid?).should be_true
+        (apple.valid?).should be_true
       end
     end
 
     context "is not apple or banana" do
       it "returns false" do
+        gm_fruit = PetStore::GmFruit.new(color: "orange")
+        json_string = gm_fruit.to_json
+        expect_raises(JSON::SerializableError) do
+          PetStore::Banana.from_json(json_string)
+        end
+        expect_raises(JSON::SerializableError) do
+          PetStore::Apple.from_json(json_string)
+        end
       end
     end
   end

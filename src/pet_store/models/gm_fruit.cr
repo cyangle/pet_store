@@ -37,7 +37,7 @@ module PetStore
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @color : String, @cultivar : String, @length_cm : Float64)
+    def initialize(*, @color : String? = nil, @cultivar : String? = nil, @length_cm : Float64? = nil)
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -62,22 +62,9 @@ module PetStore
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        color == o.color &&
-        cultivar == o.cultivar &&
-        length_cm == o.length_cm
     end
 
     # @see the `==` method
@@ -86,8 +73,10 @@ module PetStore
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@color, @cultivar, @length_cm)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@color, @cultivar, @length_cm)
   end
 end

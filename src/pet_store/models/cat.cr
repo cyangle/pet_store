@@ -18,8 +18,11 @@ module PetStore
     include JSON::Serializable::Unmapped
 
     # Required properties
+    @[JSON::Field(key: "name", type: String)]
+    getter name : String
+
     @[JSON::Field(key: "className", type: String)]
-    property class_name : String
+    getter class_name : String
 
     # Optional properties
     @[JSON::Field(key: "declawed", type: Bool?, presence: true, ignore_serialize: declawed.nil? && !declawed_present?)]
@@ -44,7 +47,7 @@ module PetStore
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @class_name : String, @declawed : Bool? = nil, @color : String? = "red")
+    def initialize(*, @name : String, @class_name : String, @declawed : Bool? = nil, @color : String? = "red")
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -52,21 +55,45 @@ module PetStore
     def list_invalid_properties
       invalid_properties = Array(String).new
 
+      if @name.to_s.size > 255
+        invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 255.")
+      end
+
+      if @class_name.to_s.size > 64
+        invalid_properties.push("invalid value for \"class_name\", the character length must be smaller than or equal to 64.")
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @name.to_s.size > 255
+
+      return false if @class_name.to_s.size > 64
+
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        declawed == o.declawed
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if name.to_s.size > 255
+        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 255.")
+      end
+
+      @name = name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] class_name Value to be assigned
+    def class_name=(class_name)
+      if class_name.to_s.size > 64
+        raise ArgumentError.new("invalid value for \"class_name\", the character length must be smaller than or equal to 64.")
+      end
+
+      @class_name = class_name
     end
 
     # @see the `==` method
@@ -75,8 +102,10 @@ module PetStore
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@declawed)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@name, @class_name, @declawed, @color)
   end
 end

@@ -79,28 +79,16 @@ module PetStore
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        prop1 == o.prop1 &&
-        prop2 == o.prop2 &&
-        prop3 == o.prop3 &&
-        bool_prop1 == o.bool_prop1 &&
-        bool_prop2 == o.bool_prop2 &&
-        int_prop1 == o.int_prop1 &&
-        int_prop2 == o.int_prop2
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@prop1, @prop2, @prop3, @bool_prop1, @bool_prop2, @int_prop1, @int_prop2)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@prop1, @prop2, @prop3, @bool_prop1, @bool_prop2, @int_prop1, @int_prop2)
   end
 end

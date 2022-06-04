@@ -109,33 +109,16 @@ module PetStore
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        integer_prop == o.integer_prop &&
-        number_prop == o.number_prop &&
-        boolean_prop == o.boolean_prop &&
-        string_prop == o.string_prop &&
-        date_prop == o.date_prop &&
-        datetime_prop == o.datetime_prop &&
-        array_nullable_prop == o.array_nullable_prop &&
-        array_and_items_nullable_prop == o.array_and_items_nullable_prop &&
-        array_items_nullable == o.array_items_nullable &&
-        object_nullable_prop == o.object_nullable_prop &&
-        object_and_items_nullable_prop == o.object_and_items_nullable_prop &&
-        object_items_nullable == o.object_items_nullable
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@integer_prop, @number_prop, @boolean_prop, @string_prop, @date_prop, @datetime_prop, @array_nullable_prop, @array_and_items_nullable_prop, @array_items_nullable, @object_nullable_prop, @object_and_items_nullable_prop, @object_items_nullable)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@integer_prop, @number_prop, @boolean_prop, @string_prop, @date_prop, @datetime_prop, @array_nullable_prop, @array_and_items_nullable_prop, @array_items_nullable, @object_nullable_prop, @object_and_items_nullable_prop, @object_items_nullable)
   end
 end

@@ -76,6 +76,7 @@ module PetStore
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
+
       true
     end
 
@@ -86,27 +87,16 @@ module PetStore
       @status = status
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        id == o.id &&
-        pet_id == o.pet_id &&
-        quantity == o.quantity &&
-        ship_date == o.ship_date &&
-        status == o.status &&
-        complete == o.complete
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@id, @pet_id, @quantity, @ship_date, @status, @complete)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@id, @pet_id, @quantity, @ship_date, @status, @complete)
   end
 end

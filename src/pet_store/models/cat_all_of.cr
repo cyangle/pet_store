@@ -17,6 +17,10 @@ module PetStore
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+    # Required properties
+    @[JSON::Field(key: "name", type: String)]
+    getter name : String
+
     # Optional properties
     @[JSON::Field(key: "declawed", type: Bool?, presence: true, ignore_serialize: declawed.nil? && !declawed_present?)]
     property declawed : Bool?
@@ -26,7 +30,7 @@ module PetStore
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @declawed : Bool? = nil)
+    def initialize(*, @name : String, @declawed : Bool? = nil)
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -34,21 +38,29 @@ module PetStore
     def list_invalid_properties
       invalid_properties = Array(String).new
 
+      if @name.to_s.size > 255
+        invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 255.")
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @name.to_s.size > 255
+
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        declawed == o.declawed
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if name.to_s.size > 255
+        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 255.")
+      end
+
+      @name = name
     end
 
     # @see the `==` method
@@ -57,8 +69,10 @@ module PetStore
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@declawed)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@name, @declawed)
   end
 end

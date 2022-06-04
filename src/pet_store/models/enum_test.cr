@@ -81,9 +81,9 @@ module PetStore
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_STRING.error_message) unless ENUM_VALIDATOR_FOR_ENUM_STRING.valid?(@enum_string)
-
       invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.error_message) unless ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.valid?(@enum_string_required, false)
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_STRING.error_message) unless ENUM_VALIDATOR_FOR_ENUM_STRING.valid?(@enum_string)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_INTEGER.error_message) unless ENUM_VALIDATOR_FOR_ENUM_INTEGER.valid?(@enum_integer)
 
@@ -95,18 +95,15 @@ module PetStore
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false unless ENUM_VALIDATOR_FOR_ENUM_STRING.valid?(@enum_string)
       return false unless ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.valid?(@enum_string_required, false)
-      return false unless ENUM_VALIDATOR_FOR_ENUM_INTEGER.valid?(@enum_integer)
-      return false unless ENUM_VALIDATOR_FOR_ENUM_NUMBER.valid?(@enum_number)
-      true
-    end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] enum_string Object to be assigned
-    def enum_string=(enum_string)
-      ENUM_VALIDATOR_FOR_ENUM_STRING.valid!(enum_string)
-      @enum_string = enum_string
+      return false unless ENUM_VALIDATOR_FOR_ENUM_STRING.valid?(@enum_string)
+
+      return false unless ENUM_VALIDATOR_FOR_ENUM_INTEGER.valid?(@enum_integer)
+
+      return false unless ENUM_VALIDATOR_FOR_ENUM_NUMBER.valid?(@enum_number)
+
+      true
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -114,6 +111,13 @@ module PetStore
     def enum_string_required=(enum_string_required)
       ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.valid!(enum_string_required, false)
       @enum_string_required = enum_string_required
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] enum_string Object to be assigned
+    def enum_string=(enum_string)
+      ENUM_VALIDATOR_FOR_ENUM_STRING.valid!(enum_string)
+      @enum_string = enum_string
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -130,29 +134,16 @@ module PetStore
       @enum_number = enum_number
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        enum_string == o.enum_string &&
-        enum_string_required == o.enum_string_required &&
-        enum_integer == o.enum_integer &&
-        enum_number == o.enum_number &&
-        outer_enum == o.outer_enum &&
-        outer_enum_integer == o.outer_enum_integer &&
-        outer_enum_default_value == o.outer_enum_default_value &&
-        outer_enum_integer_default_value == o.outer_enum_integer_default_value
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@enum_string, @enum_string_required, @enum_integer, @enum_number, @outer_enum, @outer_enum_integer, @outer_enum_default_value, @outer_enum_integer_default_value)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@enum_string_required, @enum_string, @enum_integer, @enum_number, @outer_enum, @outer_enum_integer, @outer_enum_default_value, @outer_enum_integer_default_value)
   end
 end

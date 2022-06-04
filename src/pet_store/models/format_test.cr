@@ -109,6 +109,22 @@ module PetStore
     def list_invalid_properties
       invalid_properties = Array(String).new
 
+      if @number > 543.2
+        invalid_properties.push("invalid value for \"number\", must be smaller than or equal to 543.2.")
+      end
+
+      if @number < 32.1
+        invalid_properties.push("invalid value for \"number\", must be greater than or equal to 32.1.")
+      end
+
+      if @password.to_s.size > 64
+        invalid_properties.push("invalid value for \"password\", the character length must be smaller than or equal to 64.")
+      end
+
+      if @password.to_s.size < 10
+        invalid_properties.push("invalid value for \"password\", the character length must be great than or equal to 10.")
+      end
+
       if !@integer.nil? && @integer > 100
         invalid_properties.push("invalid value for \"integer\", must be smaller than or equal to 100.")
       end
@@ -123,14 +139,6 @@ module PetStore
 
       if !@int32.nil? && @int32 < 20
         invalid_properties.push("invalid value for \"int32\", must be greater than or equal to 20.")
-      end
-
-      if @number > 543.2
-        invalid_properties.push("invalid value for \"number\", must be smaller than or equal to 543.2.")
-      end
-
-      if @number < 32.1
-        invalid_properties.push("invalid value for \"number\", must be greater than or equal to 32.1.")
       end
 
       if !@float.nil? && @float > 987.6
@@ -154,14 +162,6 @@ module PetStore
         invalid_properties.push("invalid value for \"string\", must conform to the pattern #{pattern}.")
       end
 
-      if @password.to_s.size > 64
-        invalid_properties.push("invalid value for \"password\", the character length must be smaller than or equal to 64.")
-      end
-
-      if @password.to_s.size < 10
-        invalid_properties.push("invalid value for \"password\", the character length must be great than or equal to 10.")
-      end
-
       pattern = /^\d{10}$/
       if !@pattern_with_digits.nil? && @pattern_with_digits !~ pattern
         invalid_properties.push("invalid value for \"pattern_with_digits\", must conform to the pattern #{pattern}.")
@@ -178,22 +178,59 @@ module PetStore
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@integer.nil? && @integer > 100
-      return false if !@integer.nil? && @integer < 10
-      return false if !@int32.nil? && @int32 > 200
-      return false if !@int32.nil? && @int32 < 20
       return false if @number > 543.2
       return false if @number < 32.1
-      return false if !@float.nil? && @float > 987.6
-      return false if !@float.nil? && @float < 54.3
-      return false if !@double.nil? && @double > 123.4
-      return false if !@double.nil? && @double < 67.8
-      return false if !@string.nil? && @string !~ /[a-z]/i
+
       return false if @password.to_s.size > 64
       return false if @password.to_s.size < 10
+
+      return false if !@integer.nil? && @integer > 100
+      return false if !@integer.nil? && @integer < 10
+
+      return false if !@int32.nil? && @int32 > 200
+      return false if !@int32.nil? && @int32 < 20
+
+      return false if !@float.nil? && @float > 987.6
+      return false if !@float.nil? && @float < 54.3
+
+      return false if !@double.nil? && @double > 123.4
+      return false if !@double.nil? && @double < 67.8
+
+      return false if !@string.nil? && @string !~ /[a-z]/i
+
       return false if !@pattern_with_digits.nil? && @pattern_with_digits !~ /^\d{10}$/
+
       return false if !@pattern_with_digits_and_delimiter.nil? && @pattern_with_digits_and_delimiter !~ /^image_\d{1,3}$/i
+
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] number Value to be assigned
+    def number=(number)
+      if number > 543.2
+        raise ArgumentError.new("invalid value for \"number\", must be smaller than or equal to 543.2.")
+      end
+
+      if number < 32.1
+        raise ArgumentError.new("invalid value for \"number\", must be greater than or equal to 32.1.")
+      end
+
+      @number = number
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] password Value to be assigned
+    def password=(password)
+      if password.to_s.size > 64
+        raise ArgumentError.new("invalid value for \"password\", the character length must be smaller than or equal to 64.")
+      end
+
+      if password.to_s.size < 10
+        raise ArgumentError.new("invalid value for \"password\", the character length must be great than or equal to 10.")
+      end
+
+      @password = password
     end
 
     # Custom attribute writer method with validation
@@ -222,20 +259,6 @@ module PetStore
       end
 
       @int32 = int32
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] number Value to be assigned
-    def number=(number)
-      if number > 543.2
-        raise ArgumentError.new("invalid value for \"number\", must be smaller than or equal to 543.2.")
-      end
-
-      if number < 32.1
-        raise ArgumentError.new("invalid value for \"number\", must be greater than or equal to 32.1.")
-      end
-
-      @number = number
     end
 
     # Custom attribute writer method with validation
@@ -278,20 +301,6 @@ module PetStore
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] password Value to be assigned
-    def password=(password)
-      if password.to_s.size > 64
-        raise ArgumentError.new("invalid value for \"password\", the character length must be smaller than or equal to 64.")
-      end
-
-      if password.to_s.size < 10
-        raise ArgumentError.new("invalid value for \"password\", the character length must be great than or equal to 10.")
-      end
-
-      @password = password
-    end
-
-    # Custom attribute writer method with validation
     # @param [Object] pattern_with_digits Value to be assigned
     def pattern_with_digits=(pattern_with_digits)
       pattern = /^\d{10}$/
@@ -313,36 +322,16 @@ module PetStore
       @pattern_with_digits_and_delimiter = pattern_with_digits_and_delimiter
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        integer == o.integer &&
-        int32 == o.int32 &&
-        int64 == o.int64 &&
-        number == o.number &&
-        float == o.float &&
-        double == o.double &&
-        string == o.string &&
-        byte == o.byte &&
-        binary == o.binary &&
-        date == o.date &&
-        date_time == o.date_time &&
-        uuid == o.uuid &&
-        password == o.password &&
-        pattern_with_digits == o.pattern_with_digits &&
-        pattern_with_digits_and_delimiter == o.pattern_with_digits_and_delimiter
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@integer, @int32, @int64, @number, @float, @double, @string, @byte, @binary, @date, @date_time, @uuid, @password, @pattern_with_digits, @pattern_with_digits_and_delimiter)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@number, @byte, @date, @password, @integer, @int32, @int64, @float, @double, @string, @binary, @date_time, @uuid, @pattern_with_digits, @pattern_with_digits_and_delimiter)
   end
 end
