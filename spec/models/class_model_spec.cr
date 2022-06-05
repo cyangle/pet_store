@@ -16,7 +16,7 @@ describe PetStore::ClassModel do
   describe "test an instance of ClassModel" do
     it "should create an instance of ClassModel" do
       # instance = PetStore::ClassModel.new
-      # expect(instance).to be_instance_of(PetStore::ClassModel)
+      # (instance).should be_a(PetStore::ClassModel)
     end
   end
 

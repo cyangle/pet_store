@@ -16,7 +16,7 @@ describe PetStore::ModelReturn do
   describe "test an instance of ModelReturn" do
     it "should create an instance of ModelReturn" do
       # instance = PetStore::ModelReturn.new
-      # expect(instance).to be_instance_of(PetStore::ModelReturn)
+      # (instance).should be_a(PetStore::ModelReturn)
     end
   end
 

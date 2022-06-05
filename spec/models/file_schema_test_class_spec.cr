@@ -16,7 +16,7 @@ describe PetStore::FileSchemaTestClass do
   describe "test an instance of FileSchemaTestClass" do
     it "should create an instance of FileSchemaTestClass" do
       # instance = PetStore::FileSchemaTestClass.new
-      # expect(instance).to be_instance_of(PetStore::FileSchemaTestClass)
+      # (instance).should be_a(PetStore::FileSchemaTestClass)
     end
   end
 

@@ -16,7 +16,13 @@ describe PetStore::CatAllOf do
   describe "test an instance of CatAllOf" do
     it "should create an instance of CatAllOf" do
       # instance = PetStore::CatAllOf.new
-      # expect(instance).to be_instance_of(PetStore::CatAllOf)
+      # (instance).should be_a(PetStore::CatAllOf)
+    end
+  end
+
+  describe "test attribute 'name'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
 

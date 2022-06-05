@@ -16,7 +16,7 @@ describe PetStore::AppleReq do
   describe "test an instance of AppleReq" do
     it "should create an instance of AppleReq" do
       # instance = PetStore::AppleReq.new
-      # expect(instance).to be_instance_of(PetStore::AppleReq)
+      # (instance).should be_a(PetStore::AppleReq)
     end
   end
 

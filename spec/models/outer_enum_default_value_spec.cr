@@ -16,7 +16,7 @@ describe PetStore::OuterEnumDefaultValue do
   describe "test an instance of OuterEnumDefaultValue" do
     it "should create an instance of OuterEnumDefaultValue" do
       # instance = PetStore::OuterEnumDefaultValue.new
-      # expect(instance).to be_instance_of(PetStore::OuterEnumDefaultValue)
+      # (instance).should be_a(PetStore::OuterEnumDefaultValue)
     end
   end
 end

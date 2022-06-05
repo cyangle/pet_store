@@ -16,7 +16,7 @@ describe PetStore::Category do
   describe "test an instance of Category" do
     it "should create an instance of Category" do
       # instance = PetStore::Category.new
-      # expect(instance).to be_instance_of(PetStore::Category)
+      # (instance).should be_a(PetStore::Category)
     end
   end
 

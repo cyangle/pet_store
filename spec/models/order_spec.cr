@@ -16,7 +16,7 @@ describe PetStore::Order do
   describe "test an instance of Order" do
     it "should create an instance of Order" do
       # instance = PetStore::Order.new
-      # expect(instance).to be_instance_of(PetStore::Order)
+      # (instance).should be_a(PetStore::Order)
     end
   end
 
@@ -47,9 +47,9 @@ describe PetStore::Order do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["placed", "approved", "delivered"])
+      # validator = PetStore::Order::ENUM_VALIDATOR_FOR_STATUS
       # validator.allowable_values.each do |value|
-      #   expect { instance.status = value }.not_to raise_error
+      #   instance.status = value.as(String)
       # end
     end
   end

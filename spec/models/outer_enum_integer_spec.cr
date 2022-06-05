@@ -16,7 +16,7 @@ describe PetStore::OuterEnumInteger do
   describe "test an instance of OuterEnumInteger" do
     it "should create an instance of OuterEnumInteger" do
       # instance = PetStore::OuterEnumInteger.new
-      # expect(instance).to be_instance_of(PetStore::OuterEnumInteger)
+      # (instance).should be_a(PetStore::OuterEnumInteger)
     end
   end
 end

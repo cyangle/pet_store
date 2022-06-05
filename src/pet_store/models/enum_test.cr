@@ -25,7 +25,7 @@ module PetStore
     ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED = EnumValidator.new("enum_string_required", "String", ["UPPER", "lower", ""])
 
     @[JSON::Field(key: "outerEnumRquired", type: OuterEnumRquired)]
-    property outer_enum_rquired : OuterEnumRquired
+    getter outer_enum_rquired : OuterEnumRquired
 
     # Optional properties
 
@@ -70,25 +70,25 @@ module PetStore
     ENUM_VALIDATOR_FOR_ENUM_DOUBLE = EnumValidator.new("enum_double", "Float64", ["1.1", "-1.2"])
 
     @[JSON::Field(key: "outerEnum", type: OuterEnum?, presence: true, ignore_serialize: outer_enum.nil? && !outer_enum_present?)]
-    property outer_enum : OuterEnum?
+    getter outer_enum : OuterEnum?
 
     @[JSON::Field(ignore: true)]
     property? outer_enum_present : Bool = false
 
     @[JSON::Field(key: "outerEnumInteger", type: OuterEnumInteger?, presence: true, ignore_serialize: outer_enum_integer.nil? && !outer_enum_integer_present?)]
-    property outer_enum_integer : OuterEnumInteger?
+    getter outer_enum_integer : OuterEnumInteger?
 
     @[JSON::Field(ignore: true)]
     property? outer_enum_integer_present : Bool = false
 
     @[JSON::Field(key: "outerEnumDefaultValue", type: OuterEnumDefaultValue?, default: "placed", presence: true, ignore_serialize: outer_enum_default_value.nil? && !outer_enum_default_value_present?)]
-    property outer_enum_default_value : OuterEnumDefaultValue?
+    getter outer_enum_default_value : OuterEnumDefaultValue?
 
     @[JSON::Field(ignore: true)]
     property? outer_enum_default_value_present : Bool = false
 
     @[JSON::Field(key: "outerEnumIntegerDefaultValue", type: OuterEnumIntegerDefaultValue?, default: 0, presence: true, ignore_serialize: outer_enum_integer_default_value.nil? && !outer_enum_integer_default_value_present?)]
-    property outer_enum_integer_default_value : OuterEnumIntegerDefaultValue?
+    getter outer_enum_integer_default_value : OuterEnumIntegerDefaultValue?
 
     @[JSON::Field(ignore: true)]
     property? outer_enum_integer_default_value_present : Bool = false
@@ -169,38 +169,73 @@ module PetStore
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] outer_enum_rquired Object to be assigned
+    def outer_enum_rquired=(outer_enum_rquired : OuterEnumRquired)
+      outer_enum_rquired.valid!
+      @outer_enum_rquired = outer_enum_rquired
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enum_string Object to be assigned
-    def enum_string=(enum_string : String)
+    def enum_string=(enum_string : String?)
       ENUM_VALIDATOR_FOR_ENUM_STRING.valid!(enum_string)
       @enum_string = enum_string
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enum_int32 Object to be assigned
-    def enum_int32=(enum_int32 : Int32)
+    def enum_int32=(enum_int32 : Int32?)
       ENUM_VALIDATOR_FOR_ENUM_INT32.valid!(enum_int32)
       @enum_int32 = enum_int32
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enum_int64 Object to be assigned
-    def enum_int64=(enum_int64 : Int64)
+    def enum_int64=(enum_int64 : Int64?)
       ENUM_VALIDATOR_FOR_ENUM_INT64.valid!(enum_int64)
       @enum_int64 = enum_int64
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enum_float Object to be assigned
-    def enum_float=(enum_float : Float32)
+    def enum_float=(enum_float : Float32?)
       ENUM_VALIDATOR_FOR_ENUM_FLOAT.valid!(enum_float)
       @enum_float = enum_float
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enum_double Object to be assigned
-    def enum_double=(enum_double : Float64)
+    def enum_double=(enum_double : Float64?)
       ENUM_VALIDATOR_FOR_ENUM_DOUBLE.valid!(enum_double)
       @enum_double = enum_double
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] outer_enum Object to be assigned
+    def outer_enum=(outer_enum : OuterEnum?)
+      outer_enum.try(&.valid!)
+      @outer_enum = outer_enum
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] outer_enum_integer Object to be assigned
+    def outer_enum_integer=(outer_enum_integer : OuterEnumInteger?)
+      outer_enum_integer.try(&.valid!)
+      @outer_enum_integer = outer_enum_integer
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] outer_enum_default_value Object to be assigned
+    def outer_enum_default_value=(outer_enum_default_value : OuterEnumDefaultValue?)
+      outer_enum_default_value.try(&.valid!)
+      @outer_enum_default_value = outer_enum_default_value
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] outer_enum_integer_default_value Object to be assigned
+    def outer_enum_integer_default_value=(outer_enum_integer_default_value : OuterEnumIntegerDefaultValue?)
+      outer_enum_integer_default_value.try(&.valid!)
+      @outer_enum_integer_default_value = outer_enum_integer_default_value
     end
 
     # @see the `==` method

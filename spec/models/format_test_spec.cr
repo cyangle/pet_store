@@ -16,7 +16,7 @@ describe PetStore::FormatTest do
   describe "test an instance of FormatTest" do
     it "should create an instance of FormatTest" do
       # instance = PetStore::FormatTest.new
-      # expect(instance).to be_instance_of(PetStore::FormatTest)
+      # (instance).should be_a(PetStore::FormatTest)
     end
   end
 

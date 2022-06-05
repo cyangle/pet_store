@@ -16,7 +16,7 @@ describe PetStore::OuterComposite do
   describe "test an instance of OuterComposite" do
     it "should create an instance of OuterComposite" do
       # instance = PetStore::OuterComposite.new
-      # expect(instance).to be_instance_of(PetStore::OuterComposite)
+      # (instance).should be_a(PetStore::OuterComposite)
     end
   end
 

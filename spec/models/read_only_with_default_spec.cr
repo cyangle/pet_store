@@ -16,7 +16,7 @@ describe PetStore::ReadOnlyWithDefault do
   describe "test an instance of ReadOnlyWithDefault" do
     it "should create an instance of ReadOnlyWithDefault" do
       # instance = PetStore::ReadOnlyWithDefault.new
-      # expect(instance).to be_instance_of(PetStore::ReadOnlyWithDefault)
+      # (instance).should be_a(PetStore::ReadOnlyWithDefault)
     end
   end
 

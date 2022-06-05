@@ -16,7 +16,7 @@ describe PetStore::MapTest do
   describe "test an instance of MapTest" do
     it "should create an instance of MapTest" do
       # instance = PetStore::MapTest.new
-      # expect(instance).to be_instance_of(PetStore::MapTest)
+      # (instance).should be_a(PetStore::MapTest)
     end
   end
 
@@ -29,9 +29,9 @@ describe PetStore::MapTest do
   describe "test attribute 'map_of_enum_string'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("Hash(String, String)", ["UPPER", "lower"])
+      # validator = PetStore::MapTest::ENUM_VALIDATOR_FOR_MAP_OF_ENUM_STRING
       # validator.allowable_values.each do |value|
-      #   expect { instance.map_of_enum_string = value }.not_to raise_error
+      #   instance.map_of_enum_string = value.as(Hash(String, String))
       # end
     end
   end

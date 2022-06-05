@@ -16,7 +16,7 @@ describe PetStore::NullableClass do
   describe "test an instance of NullableClass" do
     it "should create an instance of NullableClass" do
       # instance = PetStore::NullableClass.new
-      # expect(instance).to be_instance_of(PetStore::NullableClass)
+      # (instance).should be_a(PetStore::NullableClass)
     end
   end
 

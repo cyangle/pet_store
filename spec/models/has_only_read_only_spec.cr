@@ -16,7 +16,7 @@ describe PetStore::HasOnlyReadOnly do
   describe "test an instance of HasOnlyReadOnly" do
     it "should create an instance of HasOnlyReadOnly" do
       # instance = PetStore::HasOnlyReadOnly.new
-      # expect(instance).to be_instance_of(PetStore::HasOnlyReadOnly)
+      # (instance).should be_a(PetStore::HasOnlyReadOnly)
     end
   end
 

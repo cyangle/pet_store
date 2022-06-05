@@ -75,6 +75,27 @@ describe PetStore::EnumTest do
       instance.list_invalid_properties.should_not be_empty
       (instance.to_json).should eq(json)
     end
+
+    context "sets outer_enum with invalid value" do
+      it "raises error" do
+        expect_raises(ArgumentError, /must be one of/) do
+          json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress"})
+          instance = PetStore::EnumTest.from_json(json)
+          (instance.outer_enum).should be_nil
+          instance.outer_enum = PetStore::OuterEnum.new("invalid")
+        end
+      end
+    end
+
+    context "sets outer_enum to nil" do
+      it "sets the value" do
+        json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress","outerEnum":"placed"})
+        instance = PetStore::EnumTest.from_json(json)
+        (instance.outer_enum.not_nil!.data).should eq("placed")
+        instance.outer_enum = nil
+        (instance.outer_enum).should be_nil
+      end
+    end
   end
 
   describe "test attribute 'outer_enum_integer'" do

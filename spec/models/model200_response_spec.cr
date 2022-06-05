@@ -16,7 +16,7 @@ describe PetStore::Model200Response do
   describe "test an instance of Model200Response" do
     it "should create an instance of Model200Response" do
       # instance = PetStore::Model200Response.new
-      # expect(instance).to be_instance_of(PetStore::Model200Response)
+      # (instance).should be_a(PetStore::Model200Response)
     end
   end
 

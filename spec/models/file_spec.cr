@@ -16,7 +16,7 @@ describe PetStore::File do
   describe "test an instance of File" do
     it "should create an instance of File" do
       # instance = PetStore::File.new
-      # expect(instance).to be_instance_of(PetStore::File)
+      # (instance).should be_a(PetStore::File)
     end
   end
 

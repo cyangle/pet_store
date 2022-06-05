@@ -16,7 +16,7 @@ describe PetStore::MixedPropertiesAndAdditionalPropertiesClass do
   describe "test an instance of MixedPropertiesAndAdditionalPropertiesClass" do
     it "should create an instance of MixedPropertiesAndAdditionalPropertiesClass" do
       # instance = PetStore::MixedPropertiesAndAdditionalPropertiesClass.new
-      # expect(instance).to be_instance_of(PetStore::MixedPropertiesAndAdditionalPropertiesClass)
+      # (instance).should be_a(PetStore::MixedPropertiesAndAdditionalPropertiesClass)
     end
   end
 

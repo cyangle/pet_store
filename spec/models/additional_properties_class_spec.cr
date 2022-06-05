@@ -16,7 +16,7 @@ describe PetStore::AdditionalPropertiesClass do
   describe "test an instance of AdditionalPropertiesClass" do
     it "should create an instance of AdditionalPropertiesClass" do
       # instance = PetStore::AdditionalPropertiesClass.new
-      # expect(instance).to be_instance_of(PetStore::AdditionalPropertiesClass)
+      # (instance).should be_a(PetStore::AdditionalPropertiesClass)
     end
   end
 

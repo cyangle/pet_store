@@ -16,7 +16,7 @@ describe PetStore::FooGetDefaultResponse do
   describe "test an instance of FooGetDefaultResponse" do
     it "should create an instance of FooGetDefaultResponse" do
       # instance = PetStore::FooGetDefaultResponse.new
-      # expect(instance).to be_instance_of(PetStore::FooGetDefaultResponse)
+      # (instance).should be_a(PetStore::FooGetDefaultResponse)
     end
   end
 

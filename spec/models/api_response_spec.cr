@@ -16,7 +16,7 @@ describe PetStore::ApiResponse do
   describe "test an instance of ApiResponse" do
     it "should create an instance of ApiResponse" do
       # instance = PetStore::ApiResponse.new
-      # expect(instance).to be_instance_of(PetStore::ApiResponse)
+      # (instance).should be_a(PetStore::ApiResponse)
     end
   end
 

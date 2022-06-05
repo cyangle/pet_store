@@ -16,7 +16,7 @@ describe PetStore::Capitalization do
   describe "test an instance of Capitalization" do
     it "should create an instance of Capitalization" do
       # instance = PetStore::Capitalization.new
-      # expect(instance).to be_instance_of(PetStore::Capitalization)
+      # (instance).should be_a(PetStore::Capitalization)
     end
   end
 

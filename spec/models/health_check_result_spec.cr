@@ -16,7 +16,7 @@ describe PetStore::HealthCheckResult do
   describe "test an instance of HealthCheckResult" do
     it "should create an instance of HealthCheckResult" do
       # instance = PetStore::HealthCheckResult.new
-      # expect(instance).to be_instance_of(PetStore::HealthCheckResult)
+      # (instance).should be_a(PetStore::HealthCheckResult)
     end
   end
 

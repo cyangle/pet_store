@@ -16,7 +16,7 @@ describe PetStore::ArrayTest do
   describe "test an instance of ArrayTest" do
     it "should create an instance of ArrayTest" do
       # instance = PetStore::ArrayTest.new
-      # expect(instance).to be_instance_of(PetStore::ArrayTest)
+      # (instance).should be_a(PetStore::ArrayTest)
     end
   end
 

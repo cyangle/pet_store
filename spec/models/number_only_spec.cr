@@ -16,7 +16,7 @@ describe PetStore::NumberOnly do
   describe "test an instance of NumberOnly" do
     it "should create an instance of NumberOnly" do
       # instance = PetStore::NumberOnly.new
-      # expect(instance).to be_instance_of(PetStore::NumberOnly)
+      # (instance).should be_a(PetStore::NumberOnly)
     end
   end
 

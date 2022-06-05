@@ -16,7 +16,7 @@ describe PetStore::EnumClass do
   describe "test an instance of EnumClass" do
     it "should create an instance of EnumClass" do
       # instance = PetStore::EnumClass.new
-      # expect(instance).to be_instance_of(PetStore::EnumClass)
+      # (instance).should be_a(PetStore::EnumClass)
     end
   end
 end

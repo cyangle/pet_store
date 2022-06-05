@@ -16,7 +16,7 @@ describe PetStore::ArrayOfArrayOfNumberOnly do
   describe "test an instance of ArrayOfArrayOfNumberOnly" do
     it "should create an instance of ArrayOfArrayOfNumberOnly" do
       # instance = PetStore::ArrayOfArrayOfNumberOnly.new
-      # expect(instance).to be_instance_of(PetStore::ArrayOfArrayOfNumberOnly)
+      # (instance).should be_a(PetStore::ArrayOfArrayOfNumberOnly)
     end
   end
 

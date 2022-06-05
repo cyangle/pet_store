@@ -16,7 +16,7 @@ describe PetStore::BananaReq do
   describe "test an instance of BananaReq" do
     it "should create an instance of BananaReq" do
       # instance = PetStore::BananaReq.new
-      # expect(instance).to be_instance_of(PetStore::BananaReq)
+      # (instance).should be_a(PetStore::BananaReq)
     end
   end
 

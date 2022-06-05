@@ -16,16 +16,16 @@ describe PetStore::Zebra do
   describe "test an instance of Zebra" do
     it "should create an instance of Zebra" do
       # instance = PetStore::Zebra.new
-      # expect(instance).to be_instance_of(PetStore::Zebra)
+      # (instance).should be_a(PetStore::Zebra)
     end
   end
 
   describe "test attribute '_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["plains", "mountain", "grevys"])
+      # validator = PetStore::Zebra::ENUM_VALIDATOR_FOR__TYPE
       # validator.allowable_values.each do |value|
-      #   expect { instance._type = value }.not_to raise_error
+      #   instance._type = value.as(String)
       # end
     end
   end
