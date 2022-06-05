@@ -12,19 +12,19 @@ require "time"
 require "log"
 
 module PetStore
-  class OuterEnumDefaultValue
+  class OuterEnumRquired
     property value : String
 
-    ENUM_VALIDATOR = EnumValidator.new("OuterEnumDefaultValue", "String", ["placed", "approved", "delivered"])
+    ENUM_VALIDATOR = EnumValidator.new("outerEnumRquired", "String", ["started", "in_progress", "completed"])
 
     delegate to_json_object_key, to: @value
     delegate error_message, to: ENUM_VALIDATOR
 
-    def self.from_json(value : JSON::PullParser) : OuterEnumDefaultValue
+    def self.from_json(value : JSON::PullParser) : OuterEnumRquired
       new(value)
     end
 
-    def self.to_json(value : OuterEnumDefaultValue, json : JSON::Builder) : Nil
+    def self.to_json(value : OuterEnumRquired, json : JSON::Builder) : Nil
       value.to_json(json)
     end
 

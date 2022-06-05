@@ -54,6 +54,8 @@ module PetStore
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ARRAY_ENUM.error_message) unless ENUM_VALIDATOR_FOR_ARRAY_ENUM.all_valid?(@array_enum)
 
+      invalid_properties.push(@array_enum.not_nil!.error_message) if !@array_enum.nil? && !@array_enum.not_nil!.valid?
+
       invalid_properties
     end
 
@@ -62,20 +64,21 @@ module PetStore
     def valid?
       return false unless ENUM_VALIDATOR_FOR_JUST_SYMBOL.valid?(@just_symbol)
       return false unless ENUM_VALIDATOR_FOR_ARRAY_ENUM.all_valid?(@array_enum)
+      return false if !@array_enum.nil? && !@array_enum.not_nil!.valid?
 
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] just_symbol Object to be assigned
-    def just_symbol=(just_symbol)
+    def just_symbol=(just_symbol : String)
       ENUM_VALIDATOR_FOR_JUST_SYMBOL.valid!(just_symbol)
       @just_symbol = just_symbol
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] array_enum Object to be assigned
-    def array_enum=(array_enum)
+    def array_enum=(array_enum : Array(String))
       ENUM_VALIDATOR_FOR_ARRAY_ENUM.all_valid!(array_enum)
       @array_enum = array_enum
     end

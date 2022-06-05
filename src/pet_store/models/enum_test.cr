@@ -24,6 +24,9 @@ module PetStore
 
     ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED = EnumValidator.new("enum_string_required", "String", ["UPPER", "lower", ""])
 
+    @[JSON::Field(key: "outerEnumRquired", type: OuterEnumRquired)]
+    property outer_enum_rquired : OuterEnumRquired
+
     # Optional properties
 
     @[JSON::Field(key: "enum_string", type: String?, presence: true, ignore_serialize: enum_string.nil? && !enum_string_present?)]
@@ -34,21 +37,37 @@ module PetStore
 
     ENUM_VALIDATOR_FOR_ENUM_STRING = EnumValidator.new("enum_string", "String", ["UPPER", "lower", ""])
 
-    @[JSON::Field(key: "enum_integer", type: Int32?, presence: true, ignore_serialize: enum_integer.nil? && !enum_integer_present?)]
-    getter enum_integer : Int32?
+    @[JSON::Field(key: "enum_int32", type: Int32?, presence: true, ignore_serialize: enum_int32.nil? && !enum_int32_present?)]
+    getter enum_int32 : Int32?
 
     @[JSON::Field(ignore: true)]
-    property? enum_integer_present : Bool = false
+    property? enum_int32_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_ENUM_INTEGER = EnumValidator.new("enum_integer", "Int32", ["1", "-1"])
+    ENUM_VALIDATOR_FOR_ENUM_INT32 = EnumValidator.new("enum_int32", "Int32", ["1", "-1"])
 
-    @[JSON::Field(key: "enum_number", type: Float64?, presence: true, ignore_serialize: enum_number.nil? && !enum_number_present?)]
-    getter enum_number : Float64?
+    @[JSON::Field(key: "enum_int64", type: Int64?, presence: true, ignore_serialize: enum_int64.nil? && !enum_int64_present?)]
+    getter enum_int64 : Int64?
 
     @[JSON::Field(ignore: true)]
-    property? enum_number_present : Bool = false
+    property? enum_int64_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_ENUM_NUMBER = EnumValidator.new("enum_number", "Float64", ["1.1", "-1.2"])
+    ENUM_VALIDATOR_FOR_ENUM_INT64 = EnumValidator.new("enum_int64", "Int64", ["1", "-1"])
+
+    @[JSON::Field(key: "enum_float", type: Float32?, presence: true, ignore_serialize: enum_float.nil? && !enum_float_present?)]
+    getter enum_float : Float32?
+
+    @[JSON::Field(ignore: true)]
+    property? enum_float_present : Bool = false
+
+    ENUM_VALIDATOR_FOR_ENUM_FLOAT = EnumValidator.new("enum_float", "Float32", ["1.1", "-1.2"])
+
+    @[JSON::Field(key: "enum_double", type: Float64?, presence: true, ignore_serialize: enum_double.nil? && !enum_double_present?)]
+    getter enum_double : Float64?
+
+    @[JSON::Field(ignore: true)]
+    property? enum_double_present : Bool = false
+
+    ENUM_VALIDATOR_FOR_ENUM_DOUBLE = EnumValidator.new("enum_double", "Float64", ["1.1", "-1.2"])
 
     @[JSON::Field(key: "outerEnum", type: OuterEnum?, presence: true, ignore_serialize: outer_enum.nil? && !outer_enum_present?)]
     property outer_enum : OuterEnum?
@@ -80,10 +99,13 @@ module PetStore
       *,
       # Required properties
       @enum_string_required : String,
+      @outer_enum_rquired : OuterEnumRquired,
       # Optional properties
       @enum_string : String? = nil,
-      @enum_integer : Int32? = nil,
-      @enum_number : Float64? = nil,
+      @enum_int32 : Int32? = nil,
+      @enum_int64 : Int64? = nil,
+      @enum_float : Float32? = nil,
+      @enum_double : Float64? = nil,
       @outer_enum : OuterEnum? = nil,
       @outer_enum_integer : OuterEnumInteger? = nil,
       @outer_enum_default_value : OuterEnumDefaultValue? = "placed",
@@ -98,11 +120,25 @@ module PetStore
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.error_message) unless ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.valid?(@enum_string_required, false)
 
+      invalid_properties.push(@outer_enum_rquired.not_nil!.error_message) if !@outer_enum_rquired.nil? && !@outer_enum_rquired.not_nil!.valid?
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_STRING.error_message) unless ENUM_VALIDATOR_FOR_ENUM_STRING.valid?(@enum_string)
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_INTEGER.error_message) unless ENUM_VALIDATOR_FOR_ENUM_INTEGER.valid?(@enum_integer)
+      invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_INT32.error_message) unless ENUM_VALIDATOR_FOR_ENUM_INT32.valid?(@enum_int32)
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_NUMBER.error_message) unless ENUM_VALIDATOR_FOR_ENUM_NUMBER.valid?(@enum_number)
+      invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_INT64.error_message) unless ENUM_VALIDATOR_FOR_ENUM_INT64.valid?(@enum_int64)
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_FLOAT.error_message) unless ENUM_VALIDATOR_FOR_ENUM_FLOAT.valid?(@enum_float)
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_DOUBLE.error_message) unless ENUM_VALIDATOR_FOR_ENUM_DOUBLE.valid?(@enum_double)
+
+      invalid_properties.push(@outer_enum.not_nil!.error_message) if !@outer_enum.nil? && !@outer_enum.not_nil!.valid?
+
+      invalid_properties.push(@outer_enum_integer.not_nil!.error_message) if !@outer_enum_integer.nil? && !@outer_enum_integer.not_nil!.valid?
+
+      invalid_properties.push(@outer_enum_default_value.not_nil!.error_message) if !@outer_enum_default_value.nil? && !@outer_enum_default_value.not_nil!.valid?
+
+      invalid_properties.push(@outer_enum_integer_default_value.not_nil!.error_message) if !@outer_enum_integer_default_value.nil? && !@outer_enum_integer_default_value.not_nil!.valid?
 
       invalid_properties
     end
@@ -111,39 +147,60 @@ module PetStore
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.valid?(@enum_string_required, false)
+      return false if !@outer_enum_rquired.nil? && !@outer_enum_rquired.not_nil!.valid?
       return false unless ENUM_VALIDATOR_FOR_ENUM_STRING.valid?(@enum_string)
-      return false unless ENUM_VALIDATOR_FOR_ENUM_INTEGER.valid?(@enum_integer)
-      return false unless ENUM_VALIDATOR_FOR_ENUM_NUMBER.valid?(@enum_number)
+      return false unless ENUM_VALIDATOR_FOR_ENUM_INT32.valid?(@enum_int32)
+      return false unless ENUM_VALIDATOR_FOR_ENUM_INT64.valid?(@enum_int64)
+      return false unless ENUM_VALIDATOR_FOR_ENUM_FLOAT.valid?(@enum_float)
+      return false unless ENUM_VALIDATOR_FOR_ENUM_DOUBLE.valid?(@enum_double)
+      return false if !@outer_enum.nil? && !@outer_enum.not_nil!.valid?
+      return false if !@outer_enum_integer.nil? && !@outer_enum_integer.not_nil!.valid?
+      return false if !@outer_enum_default_value.nil? && !@outer_enum_default_value.not_nil!.valid?
+      return false if !@outer_enum_integer_default_value.nil? && !@outer_enum_integer_default_value.not_nil!.valid?
 
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enum_string_required Object to be assigned
-    def enum_string_required=(enum_string_required)
+    def enum_string_required=(enum_string_required : String)
       ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.valid!(enum_string_required, false)
       @enum_string_required = enum_string_required
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enum_string Object to be assigned
-    def enum_string=(enum_string)
+    def enum_string=(enum_string : String)
       ENUM_VALIDATOR_FOR_ENUM_STRING.valid!(enum_string)
       @enum_string = enum_string
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] enum_integer Object to be assigned
-    def enum_integer=(enum_integer)
-      ENUM_VALIDATOR_FOR_ENUM_INTEGER.valid!(enum_integer)
-      @enum_integer = enum_integer
+    # @param [Object] enum_int32 Object to be assigned
+    def enum_int32=(enum_int32 : Int32)
+      ENUM_VALIDATOR_FOR_ENUM_INT32.valid!(enum_int32)
+      @enum_int32 = enum_int32
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] enum_number Object to be assigned
-    def enum_number=(enum_number)
-      ENUM_VALIDATOR_FOR_ENUM_NUMBER.valid!(enum_number)
-      @enum_number = enum_number
+    # @param [Object] enum_int64 Object to be assigned
+    def enum_int64=(enum_int64 : Int64)
+      ENUM_VALIDATOR_FOR_ENUM_INT64.valid!(enum_int64)
+      @enum_int64 = enum_int64
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] enum_float Object to be assigned
+    def enum_float=(enum_float : Float32)
+      ENUM_VALIDATOR_FOR_ENUM_FLOAT.valid!(enum_float)
+      @enum_float = enum_float
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] enum_double Object to be assigned
+    def enum_double=(enum_double : Float64)
+      ENUM_VALIDATOR_FOR_ENUM_DOUBLE.valid!(enum_double)
+      @enum_double = enum_double
     end
 
     # @see the `==` method
@@ -156,6 +213,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@enum_string_required, @enum_string, @enum_integer, @enum_number, @outer_enum, @outer_enum_integer, @outer_enum_default_value, @outer_enum_integer_default_value)
+    def_equals_and_hash(@enum_string_required, @outer_enum_rquired, @enum_string, @enum_int32, @enum_int64, @enum_float, @enum_double, @outer_enum, @outer_enum_integer, @outer_enum_default_value, @outer_enum_integer_default_value)
   end
 end

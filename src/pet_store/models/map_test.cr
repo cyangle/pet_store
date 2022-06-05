@@ -64,6 +64,8 @@ module PetStore
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_MAP_OF_ENUM_STRING.error_message) unless ENUM_VALIDATOR_FOR_MAP_OF_ENUM_STRING.all_valid?(@map_of_enum_string)
 
+      invalid_properties.push(@map_of_enum_string.not_nil!.error_message) if !@map_of_enum_string.nil? && !@map_of_enum_string.not_nil!.valid?
+
       invalid_properties
     end
 
@@ -71,13 +73,14 @@ module PetStore
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_MAP_OF_ENUM_STRING.all_valid?(@map_of_enum_string)
+      return false if !@map_of_enum_string.nil? && !@map_of_enum_string.not_nil!.valid?
 
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] map_of_enum_string Object to be assigned
-    def map_of_enum_string=(map_of_enum_string)
+    def map_of_enum_string=(map_of_enum_string : Hash(String, String))
       ENUM_VALIDATOR_FOR_MAP_OF_ENUM_STRING.all_valid!(map_of_enum_string)
       @map_of_enum_string = map_of_enum_string
     end

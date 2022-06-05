@@ -15,8 +15,14 @@ require "../spec_helper"
 describe PetStore::EnumTest do
   describe "test an instance of EnumTest" do
     it "should create an instance of EnumTest" do
-      # instance = PetStore::EnumTest.new
-      # expect(instance).to be_instance_of(PetStore::EnumTest)
+      json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress"})
+      instance = PetStore::EnumTest.from_json(json)
+      (instance).should be_a(PetStore::EnumTest)
+      (instance.list_invalid_properties).should be_empty
+      (instance.outer_enum_rquired.value).should eq("in_progress")
+      (instance.valid?).should be_true
+      (instance.outer_enum).should be_nil
+      (instance.to_json).should eq(json)
     end
   end
 
@@ -32,11 +38,13 @@ describe PetStore::EnumTest do
 
   describe "test attribute 'enum_string_required'" do
     it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["UPPER", "lower", ""])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.enum_string_required = value }.not_to raise_error
-      # end
+      json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress"})
+      instance = PetStore::EnumTest.from_json(json)
+      (instance.to_json).should eq(json)
+      validator = PetStore::EnumTest::ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED
+      validator.allowable_values.each do |value|
+        instance.enum_string_required = value.as(String)
+      end
     end
   end
 
@@ -62,7 +70,10 @@ describe PetStore::EnumTest do
 
   describe "test attribute 'outer_enum'" do
     it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress","outerEnum":"invalid"})
+      instance = PetStore::EnumTest.from_json(json)
+      instance.list_invalid_properties.should_not be_empty
+      (instance.to_json).should eq(json)
     end
   end
 

@@ -64,6 +64,7 @@ src/pet_store/models/outer_enum.cr
 src/pet_store/models/outer_enum_default_value.cr
 src/pet_store/models/outer_enum_integer.cr
 src/pet_store/models/outer_enum_integer_default_value.cr
+src/pet_store/models/outer_enum_rquired.cr
 src/pet_store/models/pet.cr
 src/pet_store/models/read_only_first.cr
 src/pet_store/models/read_only_with_default.cr

@@ -13,33 +13,44 @@ require "log"
 
 module PetStore
   class OuterEnumInteger
-    N0 = "0"
+    property value : Int32
 
-    N1 = "1"
+    ENUM_VALIDATOR = EnumValidator.new("OuterEnumInteger", "Int32", ["0", "1", "2"])
 
-    N2 = "2"
+    delegate to_json_object_key, to: @value
+    delegate error_message, to: ENUM_VALIDATOR
 
-    # Builds the enum from string
-    # @param [String] The enum value in the form of the string
-    # @return [String] The enum value
-    def self.build_from_hash(value)
-      new.build_from_hash(value)
+    def self.from_json(value : JSON::PullParser) : OuterEnumInteger
+      new(value)
     end
 
-    # Builds the enum from string
-    # @param [String] The enum value in the form of the string
-    # @return [String] The enum value
-    def build_from_hash(value)
-      case value
-      when "0"
-        N0
-      when "1"
-        N1
-      when "2"
-        N2
-      else
-        raise "Invalid ENUM value #{value} for class #OuterEnumInteger"
-      end
+    def self.to_json(value : OuterEnumInteger, json : JSON::Builder) : Nil
+      value.to_json(json)
     end
+
+    def self.new(pull : JSON::PullParser)
+      new(Int32.new(pull))
+    end
+
+    def self.from_json_object_key?(key : String)
+      Int32.from_json_object_key?(key)
+    end
+
+    def initialize(@value)
+    end
+
+    def valid?
+      ENUM_VALIDATOR.valid?(@value, false)
+    end
+
+    def valid!
+      ENUM_VALIDATOR.valid!(@value, false)
+    end
+
+    def to_json(json : JSON::Builder) : Nil
+      value.to_json(json)
+    end
+
+    def_equals_and_hash(@value)
   end
 end

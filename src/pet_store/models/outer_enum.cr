@@ -13,33 +13,44 @@ require "log"
 
 module PetStore
   class OuterEnum
-    PLACED = "placed"
+    property value : String
 
-    APPROVED = "approved"
+    ENUM_VALIDATOR = EnumValidator.new("OuterEnum", "String", ["placed", "approved", "delivered"])
 
-    DELIVERED = "delivered"
+    delegate to_json_object_key, to: @value
+    delegate error_message, to: ENUM_VALIDATOR
 
-    # Builds the enum from string
-    # @param [String] The enum value in the form of the string
-    # @return [String] The enum value
-    def self.build_from_hash(value)
-      new.build_from_hash(value)
+    def self.from_json(value : JSON::PullParser) : OuterEnum
+      new(value)
     end
 
-    # Builds the enum from string
-    # @param [String] The enum value in the form of the string
-    # @return [String] The enum value
-    def build_from_hash(value)
-      case value
-      when "placed"
-        PLACED
-      when "approved"
-        APPROVED
-      when "delivered"
-        DELIVERED
-      else
-        raise "Invalid ENUM value #{value} for class #OuterEnum"
-      end
+    def self.to_json(value : OuterEnum, json : JSON::Builder) : Nil
+      value.to_json(json)
     end
+
+    def self.new(pull : JSON::PullParser)
+      new(String.new(pull))
+    end
+
+    def self.from_json_object_key?(key : String)
+      String.from_json_object_key?(key)
+    end
+
+    def initialize(@value)
+    end
+
+    def valid?
+      ENUM_VALIDATOR.valid?(@value, false)
+    end
+
+    def valid!
+      ENUM_VALIDATOR.valid!(@value, false)
+    end
+
+    def to_json(json : JSON::Builder) : Nil
+      value.to_json(json)
+    end
+
+    def_equals_and_hash(@value)
   end
 end
