@@ -55,38 +55,38 @@ module PetStore
     @[JSON::Field(ignore: true)]
     property? datetime_prop_present : Bool = false
 
-    @[JSON::Field(key: "array_nullable_prop", type: Array(Object)?, presence: true, ignore_serialize: array_nullable_prop.nil? && !array_nullable_prop_present?)]
-    property array_nullable_prop : Array(Object)?
+    @[JSON::Field(key: "array_nullable_prop", type: Array(JSON::Any)?, presence: true, ignore_serialize: array_nullable_prop.nil? && !array_nullable_prop_present?)]
+    property array_nullable_prop : Array(JSON::Any)?
 
     @[JSON::Field(ignore: true)]
     property? array_nullable_prop_present : Bool = false
 
-    @[JSON::Field(key: "array_and_items_nullable_prop", type: Array(Object)?, presence: true, ignore_serialize: array_and_items_nullable_prop.nil? && !array_and_items_nullable_prop_present?)]
-    property array_and_items_nullable_prop : Array(Object)?
+    @[JSON::Field(key: "array_and_items_nullable_prop", type: Array(JSON::Any)?, presence: true, ignore_serialize: array_and_items_nullable_prop.nil? && !array_and_items_nullable_prop_present?)]
+    property array_and_items_nullable_prop : Array(JSON::Any)?
 
     @[JSON::Field(ignore: true)]
     property? array_and_items_nullable_prop_present : Bool = false
 
-    @[JSON::Field(key: "array_items_nullable", type: Array(Object)?, presence: true, ignore_serialize: array_items_nullable.nil? && !array_items_nullable_present?)]
-    property array_items_nullable : Array(Object)?
+    @[JSON::Field(key: "array_items_nullable", type: Array(JSON::Any)?, presence: true, ignore_serialize: array_items_nullable.nil? && !array_items_nullable_present?)]
+    property array_items_nullable : Array(JSON::Any)?
 
     @[JSON::Field(ignore: true)]
     property? array_items_nullable_present : Bool = false
 
-    @[JSON::Field(key: "object_nullable_prop", type: Hash(String, Object)?, presence: true, ignore_serialize: object_nullable_prop.nil? && !object_nullable_prop_present?)]
-    property object_nullable_prop : Hash(String, Object)?
+    @[JSON::Field(key: "object_nullable_prop", type: Hash(String, JSON::Any)?, presence: true, ignore_serialize: object_nullable_prop.nil? && !object_nullable_prop_present?)]
+    property object_nullable_prop : Hash(String, JSON::Any)?
 
     @[JSON::Field(ignore: true)]
     property? object_nullable_prop_present : Bool = false
 
-    @[JSON::Field(key: "object_and_items_nullable_prop", type: Hash(String, Object)?, presence: true, ignore_serialize: object_and_items_nullable_prop.nil? && !object_and_items_nullable_prop_present?)]
-    property object_and_items_nullable_prop : Hash(String, Object)?
+    @[JSON::Field(key: "object_and_items_nullable_prop", type: Hash(String, JSON::Any)?, presence: true, ignore_serialize: object_and_items_nullable_prop.nil? && !object_and_items_nullable_prop_present?)]
+    property object_and_items_nullable_prop : Hash(String, JSON::Any)?
 
     @[JSON::Field(ignore: true)]
     property? object_and_items_nullable_prop_present : Bool = false
 
-    @[JSON::Field(key: "object_items_nullable", type: Hash(String, Object)?, presence: true, ignore_serialize: object_items_nullable.nil? && !object_items_nullable_present?)]
-    property object_items_nullable : Hash(String, Object)?
+    @[JSON::Field(key: "object_items_nullable", type: Hash(String, JSON::Any)?, presence: true, ignore_serialize: object_items_nullable.nil? && !object_items_nullable_present?)]
+    property object_items_nullable : Hash(String, JSON::Any)?
 
     @[JSON::Field(ignore: true)]
     property? object_items_nullable_present : Bool = false
@@ -102,12 +102,12 @@ module PetStore
       @string_prop : String? = nil,
       @date_prop : Time? = nil,
       @datetime_prop : Time? = nil,
-      @array_nullable_prop : Array(Object)? = nil,
-      @array_and_items_nullable_prop : Array(Object)? = nil,
-      @array_items_nullable : Array(Object)? = nil,
-      @object_nullable_prop : Hash(String, Object)? = nil,
-      @object_and_items_nullable_prop : Hash(String, Object)? = nil,
-      @object_items_nullable : Hash(String, Object)? = nil
+      @array_nullable_prop : Array(JSON::Any)? = nil,
+      @array_and_items_nullable_prop : Array(JSON::Any)? = nil,
+      @array_items_nullable : Array(JSON::Any)? = nil,
+      @object_nullable_prop : Hash(String, JSON::Any)? = nil,
+      @object_and_items_nullable_prop : Hash(String, JSON::Any)? = nil,
+      @object_items_nullable : Hash(String, JSON::Any)? = nil
     )
     end
 

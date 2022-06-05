@@ -83,15 +83,15 @@ module PetStore
     property? arbitrary_nullable_object_present : Bool = false
 
     # test code generation for any type Value can be any type - string, number, boolean, array or object.
-    @[JSON::Field(key: "arbitraryTypeValue", type: JSON::Any?, presence: true, ignore_serialize: arbitrary_type_value.nil? && !arbitrary_type_value_present?)]
-    property arbitrary_type_value : JSON::Any?
+    @[JSON::Field(key: "arbitraryTypeValue", type: JSON::Any, presence: true, ignore_serialize: arbitrary_type_value.nil? && !arbitrary_type_value_present?)]
+    property arbitrary_type_value : JSON::Any
 
     @[JSON::Field(ignore: true)]
     property? arbitrary_type_value_present : Bool = false
 
     # test code generation for any type Value can be any type - string, number, boolean, array, object or the 'null' value.
-    @[JSON::Field(key: "arbitraryNullableTypeValue", type: JSON::Any?, presence: true, ignore_serialize: arbitrary_nullable_type_value.nil? && !arbitrary_nullable_type_value_present?)]
-    property arbitrary_nullable_type_value : JSON::Any?
+    @[JSON::Field(key: "arbitraryNullableTypeValue", type: JSON::Any, presence: true, ignore_serialize: arbitrary_nullable_type_value.nil? && !arbitrary_nullable_type_value_present?)]
+    property arbitrary_nullable_type_value : JSON::Any
 
     @[JSON::Field(ignore: true)]
     property? arbitrary_nullable_type_value_present : Bool = false
@@ -111,8 +111,8 @@ module PetStore
       @user_status : Int32? = nil,
       @arbitrary_object : Hash(String, String)? = nil,
       @arbitrary_nullable_object : Hash(String, String)? = nil,
-      @arbitrary_type_value : JSON::Any? = nil,
-      @arbitrary_nullable_type_value : JSON::Any? = nil
+      @arbitrary_type_value : JSON::Any = nil,
+      @arbitrary_nullable_type_value : JSON::Any = nil
     )
     end
 

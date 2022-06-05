@@ -4,9 +4,9 @@ tasks:
     changes:
       -
         name: 'Correct AnyType?'
-        pattern: 'AnyType?'
+        pattern: 'JSONAny\?'
         new_value: 'JSON::Any'
       -
-        name: 'Correct ??'
-        pattern: '\?+'
-        new_value: '?'
+        name: 'Correct AnyType?'
+        pattern: 'JSONAny'
+        new_value: 'JSON::Any'
