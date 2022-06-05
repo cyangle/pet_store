@@ -19,7 +19,7 @@ describe PetStore::EnumTest do
       instance = PetStore::EnumTest.from_json(json)
       (instance).should be_a(PetStore::EnumTest)
       (instance.list_invalid_properties).should be_empty
-      (instance.outer_enum_rquired.value).should eq("in_progress")
+      (instance.outer_enum_rquired.data).should eq("in_progress")
       (instance.valid?).should be_true
       (instance.outer_enum).should be_nil
       (instance.to_json).should eq(json)

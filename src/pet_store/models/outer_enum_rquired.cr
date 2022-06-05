@@ -13,11 +13,11 @@ require "log"
 
 module PetStore
   class OuterEnumRquired
-    property value : String
+    property data : String
 
     ENUM_VALIDATOR = EnumValidator.new("outerEnumRquired", "String", ["started", "in_progress", "completed"])
 
-    delegate to_json_object_key, to: @value
+    delegate to_json_object_key, to: @data
     delegate error_message, to: ENUM_VALIDATOR
 
     def self.from_json(value : JSON::PullParser) : OuterEnumRquired
@@ -36,21 +36,21 @@ module PetStore
       String.from_json_object_key?(key)
     end
 
-    def initialize(@value)
+    def initialize(@data)
     end
 
     def valid?
-      ENUM_VALIDATOR.valid?(@value, false)
+      ENUM_VALIDATOR.valid?(@data, false)
     end
 
     def valid!
-      ENUM_VALIDATOR.valid!(@value, false)
+      ENUM_VALIDATOR.valid!(@data, false)
     end
 
     def to_json(json : JSON::Builder) : Nil
-      value.to_json(json)
+      @data.to_json(json)
     end
 
-    def_equals_and_hash(@value)
+    def_equals_and_hash(@data)
   end
 end
