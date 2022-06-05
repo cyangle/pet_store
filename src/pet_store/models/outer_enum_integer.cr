@@ -36,7 +36,11 @@ module PetStore
       Int32.from_json_object_key?(key)
     end
 
-    def initialize(@data)
+    def self.new!(data : Int32)
+      new(data).tap(&.valid!)
+    end
+
+    def initialize(@data : Int32)
     end
 
     def valid?
