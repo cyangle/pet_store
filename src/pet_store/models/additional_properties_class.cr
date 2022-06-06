@@ -65,6 +65,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@map_property, @map_of_map_property)
+    def_equals_and_hash(@map_property, @map_property_present, @map_of_map_property, @map_of_map_property_present)
   end
 end

@@ -100,6 +100,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@prop1, @prop2, @prop3, @bool_prop1, @bool_prop2, @int_prop1, @int_prop2)
+    def_equals_and_hash(@prop1, @prop1_present, @prop2, @prop2_present, @prop3, @prop3_present, @bool_prop1, @bool_prop1_present, @bool_prop2, @bool_prop2_present, @int_prop1, @int_prop1_present, @int_prop2, @int_prop2_present)
   end
 end

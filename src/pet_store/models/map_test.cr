@@ -92,6 +92,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@map_map_of_string, @map_of_enum_string, @direct_map, @indirect_map)
+    def_equals_and_hash(@map_map_of_string, @map_map_of_string_present, @map_of_enum_string, @map_of_enum_string_present, @direct_map, @direct_map_present, @indirect_map, @indirect_map_present)
   end
 end

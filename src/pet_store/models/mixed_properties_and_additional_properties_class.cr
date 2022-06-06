@@ -72,6 +72,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@uuid, @date_time, @map)
+    def_equals_and_hash(@uuid, @uuid_present, @date_time, @date_time_present, @map, @map_present)
   end
 end

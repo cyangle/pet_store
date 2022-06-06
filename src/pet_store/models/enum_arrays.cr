@@ -90,6 +90,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@just_symbol, @array_enum)
+    def_equals_and_hash(@just_symbol, @just_symbol_present, @array_enum, @array_enum_present)
   end
 end

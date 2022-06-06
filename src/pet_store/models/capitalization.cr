@@ -94,6 +94,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@small_camel, @capital_camel, @small_snake, @capital_snake, @sca_eth_flow_points, @att_name)
+    def_equals_and_hash(@small_camel, @small_camel_present, @capital_camel, @capital_camel_present, @small_snake, @small_snake_present, @capital_snake, @capital_snake_present, @sca_eth_flow_points, @sca_eth_flow_points_present, @att_name, @att_name_present)
   end
 end

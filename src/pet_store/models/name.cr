@@ -80,6 +80,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@name, @snake_case, @property, @_123_number)
+    def_equals_and_hash(@name, @snake_case, @snake_case_present, @property, @property_present, @_123_number, @_123_number_present)
   end
 end

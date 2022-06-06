@@ -19,14 +19,23 @@ module PetStore
 
     # Required properties
 
-    @[JSON::Field(key: "color", type: String?)]
+    @[JSON::Field(key: "color", type: String?, presence: true, ignore_serialize: color.nil? && !color_present?)]
     property color : String?
 
-    @[JSON::Field(key: "cultivar", type: String?)]
+    @[JSON::Field(ignore: true)]
+    property? color_present : Bool = false
+
+    @[JSON::Field(key: "cultivar", type: String?, presence: true, ignore_serialize: cultivar.nil? && !cultivar_present?)]
     property cultivar : String?
 
-    @[JSON::Field(key: "lengthCm", type: Float64?)]
+    @[JSON::Field(ignore: true)]
+    property? cultivar_present : Bool = false
+
+    @[JSON::Field(key: "lengthCm", type: Float64?, presence: true, ignore_serialize: length_cm.nil? && !length_cm_present?)]
     property length_cm : Float64?
+
+    @[JSON::Field(ignore: true)]
+    property? length_cm_present : Bool = false
 
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
@@ -84,6 +93,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@color, @cultivar, @length_cm)
+    def_equals_and_hash(@color, @color_present, @cultivar, @cultivar_present, @length_cm, @length_cm_present)
   end
 end

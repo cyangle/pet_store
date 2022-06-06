@@ -20,6 +20,22 @@ describe PetStore::Animal do
     end
   end
 
+  describe "#hash" do
+    context "color_preset is different" do
+      it "returns false" do
+        json = %({"className":"animal","color":"red"})
+        animal1 = PetStore::Animal.from_json(json)
+        animal2 = PetStore::Animal.from_json(json)
+        (animal1 == animal2).should be_true
+        (animal1.hash).should eq(animal2.hash)
+        animal2.color_present = false
+        (animal1.color_present?).should_not eq(animal2.color_present?)
+        (animal1.hash).should_not eq(animal2.hash)
+        (animal1 == animal2).should be_false
+      end
+    end
+  end
+
   describe "test attribute 'class_name'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html

@@ -262,6 +262,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@enum_string_required, @outer_enum_rquired, @outer_enum_rquired_int64, @enum_string, @enum_int32, @enum_int64, @enum_float, @enum_double, @outer_enum, @outer_enum_integer, @outer_enum_default_value, @outer_enum_integer_default_value)
+    def_equals_and_hash(@enum_string_required, @outer_enum_rquired, @outer_enum_rquired_int64, @enum_string, @enum_string_present, @enum_int32, @enum_int32_present, @enum_int64, @enum_int64_present, @enum_float, @enum_float_present, @enum_double, @enum_double_present, @outer_enum, @outer_enum_present, @outer_enum_integer, @outer_enum_integer_present, @outer_enum_default_value, @outer_enum_default_value_present, @outer_enum_integer_default_value, @outer_enum_integer_default_value_present)
   end
 end

@@ -58,6 +58,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@special_property_name)
+    def_equals_and_hash(@special_property_name, @special_property_name_present)
   end
 end

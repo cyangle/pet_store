@@ -104,6 +104,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@name, @photo_urls, @id, @category, @tags, @status)
+    def_equals_and_hash(@name, @photo_urls, @id, @id_present, @category, @category_present, @tags, @tags_present, @status, @status_present)
   end
 end

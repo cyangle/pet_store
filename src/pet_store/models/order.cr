@@ -107,6 +107,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@id, @pet_id, @quantity, @ship_date, @status, @complete)
+    def_equals_and_hash(@id, @id_present, @pet_id, @pet_id_present, @quantity, @quantity_present, @ship_date, @ship_date_present, @status, @status_present, @complete, @complete_present)
   end
 end

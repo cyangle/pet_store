@@ -72,6 +72,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@my_number, @my_string, @my_boolean)
+    def_equals_and_hash(@my_number, @my_number_present, @my_string, @my_string_present, @my_boolean, @my_boolean_present)
   end
 end

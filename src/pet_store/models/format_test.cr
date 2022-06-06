@@ -345,6 +345,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@number, @byte, @date, @password, @integer, @int32, @int64, @float, @double, @string, @binary, @date_time, @uuid, @pattern_with_digits, @pattern_with_digits_and_delimiter)
+    def_equals_and_hash(@number, @byte, @date, @password, @integer, @integer_present, @int32, @int32_present, @int64, @int64_present, @float, @float_present, @double, @double_present, @string, @string_present, @binary, @binary_present, @date_time, @date_time_present, @uuid, @uuid_present, @pattern_with_digits, @pattern_with_digits_present, @pattern_with_digits_and_delimiter, @pattern_with_digits_and_delimiter_present)
   end
 end
