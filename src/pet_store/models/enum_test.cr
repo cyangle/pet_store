@@ -177,14 +177,14 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outer_enum_rquired Object to be assigned
-    def outer_enum_rquired=(outer_enum_rquired : OuterEnumRquired)
+    def outer_enum_rquired=(outer_enum_rquired : PetStore::OuterEnumRquired)
       outer_enum_rquired.valid!
       @outer_enum_rquired = outer_enum_rquired
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outer_enum_rquired_int64 Object to be assigned
-    def outer_enum_rquired_int64=(outer_enum_rquired_int64 : OuterEnumRquiredInt64)
+    def outer_enum_rquired_int64=(outer_enum_rquired_int64 : PetStore::OuterEnumRquiredInt64)
       outer_enum_rquired_int64.valid!
       @outer_enum_rquired_int64 = outer_enum_rquired_int64
     end
@@ -226,28 +226,28 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outer_enum Object to be assigned
-    def outer_enum=(outer_enum : OuterEnum?)
+    def outer_enum=(outer_enum : PetStore::OuterEnum?)
       outer_enum.try(&.valid!)
       @outer_enum = outer_enum
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outer_enum_integer Object to be assigned
-    def outer_enum_integer=(outer_enum_integer : OuterEnumInteger?)
+    def outer_enum_integer=(outer_enum_integer : PetStore::OuterEnumInteger?)
       outer_enum_integer.try(&.valid!)
       @outer_enum_integer = outer_enum_integer
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outer_enum_default_value Object to be assigned
-    def outer_enum_default_value=(outer_enum_default_value : OuterEnumDefaultValue?)
+    def outer_enum_default_value=(outer_enum_default_value : PetStore::OuterEnumDefaultValue?)
       outer_enum_default_value.try(&.valid!)
       @outer_enum_default_value = outer_enum_default_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outer_enum_integer_default_value Object to be assigned
-    def outer_enum_integer_default_value=(outer_enum_integer_default_value : OuterEnumIntegerDefaultValue?)
+    def outer_enum_integer_default_value=(outer_enum_integer_default_value : PetStore::OuterEnumIntegerDefaultValue?)
       outer_enum_integer_default_value.try(&.valid!)
       @outer_enum_integer_default_value = outer_enum_integer_default_value
     end

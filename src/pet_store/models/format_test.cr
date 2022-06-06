@@ -220,7 +220,7 @@ module PetStore
 
     # Custom attribute writer method with validation
     # @param [Object] number Value to be assigned
-    def number=(number)
+    def number=(number : Float64)
       if number > 543.2
         raise ArgumentError.new("invalid value for \"number\", must be smaller than or equal to 543.2.")
       end
@@ -234,7 +234,7 @@ module PetStore
 
     # Custom attribute writer method with validation
     # @param [Object] password Value to be assigned
-    def password=(password)
+    def password=(password : String)
       if password.to_s.size > 64
         raise ArgumentError.new("invalid value for \"password\", the character length must be smaller than or equal to 64.")
       end
@@ -248,7 +248,7 @@ module PetStore
 
     # Custom attribute writer method with validation
     # @param [Object] integer Value to be assigned
-    def integer=(integer)
+    def integer=(integer : Int32?)
       if !integer.nil? && integer > 100
         raise ArgumentError.new("invalid value for \"integer\", must be smaller than or equal to 100.")
       end
@@ -262,7 +262,7 @@ module PetStore
 
     # Custom attribute writer method with validation
     # @param [Object] int32 Value to be assigned
-    def int32=(int32)
+    def int32=(int32 : Int32?)
       if !int32.nil? && int32 > 200
         raise ArgumentError.new("invalid value for \"int32\", must be smaller than or equal to 200.")
       end
@@ -276,7 +276,7 @@ module PetStore
 
     # Custom attribute writer method with validation
     # @param [Object] float Value to be assigned
-    def float=(float)
+    def float=(float : Float32?)
       if !float.nil? && float > 987.6
         raise ArgumentError.new("invalid value for \"float\", must be smaller than or equal to 987.6.")
       end
@@ -290,7 +290,7 @@ module PetStore
 
     # Custom attribute writer method with validation
     # @param [Object] double Value to be assigned
-    def double=(double)
+    def double=(double : Float64?)
       if !double.nil? && double > 123.4
         raise ArgumentError.new("invalid value for \"double\", must be smaller than or equal to 123.4.")
       end
@@ -304,7 +304,7 @@ module PetStore
 
     # Custom attribute writer method with validation
     # @param [Object] string Value to be assigned
-    def string=(string)
+    def string=(string : String?)
       pattern = /[a-z]/i
       if !string.nil? && string !~ pattern
         raise ArgumentError.new("invalid value for \"string\", must conform to the pattern #{pattern}.")
@@ -315,7 +315,7 @@ module PetStore
 
     # Custom attribute writer method with validation
     # @param [Object] pattern_with_digits Value to be assigned
-    def pattern_with_digits=(pattern_with_digits)
+    def pattern_with_digits=(pattern_with_digits : String?)
       pattern = /^\d{10}$/
       if !pattern_with_digits.nil? && pattern_with_digits !~ pattern
         raise ArgumentError.new("invalid value for \"pattern_with_digits\", must conform to the pattern #{pattern}.")
@@ -326,7 +326,7 @@ module PetStore
 
     # Custom attribute writer method with validation
     # @param [Object] pattern_with_digits_and_delimiter Value to be assigned
-    def pattern_with_digits_and_delimiter=(pattern_with_digits_and_delimiter)
+    def pattern_with_digits_and_delimiter=(pattern_with_digits_and_delimiter : String?)
       pattern = /^image_\d{1,3}$/i
       if !pattern_with_digits_and_delimiter.nil? && pattern_with_digits_and_delimiter !~ pattern
         raise ArgumentError.new("invalid value for \"pattern_with_digits_and_delimiter\", must conform to the pattern #{pattern}.")

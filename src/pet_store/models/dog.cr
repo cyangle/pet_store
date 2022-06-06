@@ -80,7 +80,7 @@ module PetStore
 
     # Custom attribute writer method with validation
     # @param [Object] class_name Value to be assigned
-    def class_name=(class_name)
+    def class_name=(class_name : String)
       if class_name.to_s.size > 64
         raise ArgumentError.new("invalid value for \"class_name\", the character length must be smaller than or equal to 64.")
       end

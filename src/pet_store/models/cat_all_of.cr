@@ -63,7 +63,7 @@ module PetStore
 
     # Custom attribute writer method with validation
     # @param [Object] name Value to be assigned
-    def name=(name)
+    def name=(name : String)
       if name.to_s.size > 255
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 255.")
       end
