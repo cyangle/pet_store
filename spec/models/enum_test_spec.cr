@@ -14,8 +14,30 @@ require "../spec_helper"
 # Please update as you see appropriate
 describe PetStore::EnumTest do
   describe "test an instance of EnumTest" do
-    it "should create an instance of EnumTest" do
+    it "should create an instance of EnumTest with default values" do
+      json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress","outerEnumRquiredInt64":3,"outerEnumDefaultValue":"placed","outerEnumIntegerDefaultValue":0})
+      instance = PetStore::EnumTest.new(
+        enum_string_required: "lower",
+        outer_enum_rquired: PetStore::OuterEnumRquired.new("in_progress")
+      )
+      (instance.to_json).should eq(json)
+      (instance.outer_enum_rquired_int64.not_nil!.data).should eq(3i64)
+      (instance.outer_enum_default_value.not_nil!.data).should eq("placed")
+      (instance.outer_enum_integer_default_value.not_nil!.data).should eq(0)
+    end
+
+    it "should create an instance of EnumTest with default values" do
       json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress"})
+      json2 = %({"enum_string_required":"lower","outerEnumRquired":"in_progress","outerEnumRquiredInt64":3,"outerEnumDefaultValue":"placed","outerEnumIntegerDefaultValue":0})
+      instance = PetStore::EnumTest.from_json(json)
+      (instance.to_json).should eq(json2)
+      (instance.outer_enum_rquired_int64.not_nil!.data).should eq(3i64)
+      (instance.outer_enum_default_value.not_nil!.data).should eq("placed")
+      (instance.outer_enum_integer_default_value.not_nil!.data).should eq(0)
+    end
+
+    it "should create an instance of EnumTest" do
+      json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress","outerEnumRquiredInt64":3,"outerEnumDefaultValue":"placed","outerEnumIntegerDefaultValue":0})
       instance = PetStore::EnumTest.from_json(json)
       (instance.to_json).should eq(json)
       (instance).should be_a(PetStore::EnumTest)
@@ -145,7 +167,7 @@ describe PetStore::EnumTest do
 
   describe "test attribute 'outer_enum'" do
     it "should work" do
-      json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress","outerEnum":"invalid"})
+      json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress","outerEnumRquiredInt64":3,"outerEnum":"invalid","outerEnumDefaultValue":"placed","outerEnumIntegerDefaultValue":0})
       instance = PetStore::EnumTest.from_json(json)
       (instance.list_invalid_properties).should_not be_empty
       (instance.valid?).should be_false

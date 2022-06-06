@@ -24,8 +24,11 @@ module PetStore
 
     ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED = EnumValidator.new("enum_string_required", "String", ["UPPER", "lower", ""])
 
-    @[JSON::Field(key: "outerEnumRquired", type: OuterEnumRquired)]
-    getter outer_enum_rquired : OuterEnumRquired
+    @[JSON::Field(key: "outerEnumRquired", type: PetStore::OuterEnumRquired)]
+    getter outer_enum_rquired : PetStore::OuterEnumRquired
+
+    @[JSON::Field(key: "outerEnumRquiredInt64", type: PetStore::OuterEnumRquiredInt64, default: 3)]
+    getter outer_enum_rquired_int64 : PetStore::OuterEnumRquiredInt64 = PetStore::OuterEnumRquiredInt64.new(3)
 
     # Optional properties
 
@@ -69,26 +72,26 @@ module PetStore
 
     ENUM_VALIDATOR_FOR_ENUM_DOUBLE = EnumValidator.new("enum_double", "Float64", ["1.1", "-1.2"])
 
-    @[JSON::Field(key: "outerEnum", type: OuterEnum?, presence: true, ignore_serialize: outer_enum.nil? && !outer_enum_present?)]
-    getter outer_enum : OuterEnum?
+    @[JSON::Field(key: "outerEnum", type: PetStore::OuterEnum?, presence: true, ignore_serialize: outer_enum.nil? && !outer_enum_present?)]
+    getter outer_enum : PetStore::OuterEnum?
 
     @[JSON::Field(ignore: true)]
     property? outer_enum_present : Bool = false
 
-    @[JSON::Field(key: "outerEnumInteger", type: OuterEnumInteger?, presence: true, ignore_serialize: outer_enum_integer.nil? && !outer_enum_integer_present?)]
-    getter outer_enum_integer : OuterEnumInteger?
+    @[JSON::Field(key: "outerEnumInteger", type: PetStore::OuterEnumInteger?, presence: true, ignore_serialize: outer_enum_integer.nil? && !outer_enum_integer_present?)]
+    getter outer_enum_integer : PetStore::OuterEnumInteger?
 
     @[JSON::Field(ignore: true)]
     property? outer_enum_integer_present : Bool = false
 
-    @[JSON::Field(key: "outerEnumDefaultValue", type: OuterEnumDefaultValue?, default: "placed", presence: true, ignore_serialize: outer_enum_default_value.nil? && !outer_enum_default_value_present?)]
-    getter outer_enum_default_value : OuterEnumDefaultValue?
+    @[JSON::Field(key: "outerEnumDefaultValue", type: PetStore::OuterEnumDefaultValue?, default: "placed", presence: true, ignore_serialize: outer_enum_default_value.nil? && !outer_enum_default_value_present?)]
+    getter outer_enum_default_value : PetStore::OuterEnumDefaultValue? = PetStore::OuterEnumDefaultValue.new("placed")
 
     @[JSON::Field(ignore: true)]
     property? outer_enum_default_value_present : Bool = false
 
-    @[JSON::Field(key: "outerEnumIntegerDefaultValue", type: OuterEnumIntegerDefaultValue?, default: 0, presence: true, ignore_serialize: outer_enum_integer_default_value.nil? && !outer_enum_integer_default_value_present?)]
-    getter outer_enum_integer_default_value : OuterEnumIntegerDefaultValue?
+    @[JSON::Field(key: "outerEnumIntegerDefaultValue", type: PetStore::OuterEnumIntegerDefaultValue?, default: 0, presence: true, ignore_serialize: outer_enum_integer_default_value.nil? && !outer_enum_integer_default_value_present?)]
+    getter outer_enum_integer_default_value : PetStore::OuterEnumIntegerDefaultValue? = PetStore::OuterEnumIntegerDefaultValue.new(0)
 
     @[JSON::Field(ignore: true)]
     property? outer_enum_integer_default_value_present : Bool = false
@@ -99,17 +102,18 @@ module PetStore
       *,
       # Required properties
       @enum_string_required : String,
-      @outer_enum_rquired : OuterEnumRquired,
+      @outer_enum_rquired : PetStore::OuterEnumRquired,
+      @outer_enum_rquired_int64 : PetStore::OuterEnumRquiredInt64 = PetStore::OuterEnumRquiredInt64.new(3),
       # Optional properties
       @enum_string : String? = nil,
       @enum_int32 : Int32? = nil,
       @enum_int64 : Int64? = nil,
       @enum_float : Float32? = nil,
       @enum_double : Float64? = nil,
-      @outer_enum : OuterEnum? = nil,
-      @outer_enum_integer : OuterEnumInteger? = nil,
-      @outer_enum_default_value : OuterEnumDefaultValue? = "placed",
-      @outer_enum_integer_default_value : OuterEnumIntegerDefaultValue? = 0
+      @outer_enum : PetStore::OuterEnum? = nil,
+      @outer_enum_integer : PetStore::OuterEnumInteger? = nil,
+      @outer_enum_default_value : PetStore::OuterEnumDefaultValue? = PetStore::OuterEnumDefaultValue.new("placed"),
+      @outer_enum_integer_default_value : PetStore::OuterEnumIntegerDefaultValue? = PetStore::OuterEnumIntegerDefaultValue.new(0)
     )
     end
 
@@ -121,6 +125,8 @@ module PetStore
       invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.error_message) unless ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.valid?(@enum_string_required, false)
 
       invalid_properties.push(@outer_enum_rquired.not_nil!.error_message) if !@outer_enum_rquired.nil? && !@outer_enum_rquired.not_nil!.valid?
+
+      invalid_properties.push(@outer_enum_rquired_int64.not_nil!.error_message) if !@outer_enum_rquired_int64.nil? && !@outer_enum_rquired_int64.not_nil!.valid?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_STRING.error_message) unless ENUM_VALIDATOR_FOR_ENUM_STRING.valid?(@enum_string)
 
@@ -148,6 +154,7 @@ module PetStore
     def valid?
       return false unless ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.valid?(@enum_string_required, false)
       return false if !@outer_enum_rquired.nil? && !@outer_enum_rquired.not_nil!.valid?
+      return false if !@outer_enum_rquired_int64.nil? && !@outer_enum_rquired_int64.not_nil!.valid?
       return false unless ENUM_VALIDATOR_FOR_ENUM_STRING.valid?(@enum_string)
       return false unless ENUM_VALIDATOR_FOR_ENUM_INT32.valid?(@enum_int32)
       return false unless ENUM_VALIDATOR_FOR_ENUM_INT64.valid?(@enum_int64)
@@ -173,6 +180,13 @@ module PetStore
     def outer_enum_rquired=(outer_enum_rquired : OuterEnumRquired)
       outer_enum_rquired.valid!
       @outer_enum_rquired = outer_enum_rquired
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] outer_enum_rquired_int64 Object to be assigned
+    def outer_enum_rquired_int64=(outer_enum_rquired_int64 : OuterEnumRquiredInt64)
+      outer_enum_rquired_int64.valid!
+      @outer_enum_rquired_int64 = outer_enum_rquired_int64
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -248,6 +262,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@enum_string_required, @outer_enum_rquired, @enum_string, @enum_int32, @enum_int64, @enum_float, @enum_double, @outer_enum, @outer_enum_integer, @outer_enum_default_value, @outer_enum_integer_default_value)
+    def_equals_and_hash(@enum_string_required, @outer_enum_rquired, @outer_enum_rquired_int64, @enum_string, @enum_int32, @enum_int64, @enum_float, @enum_double, @outer_enum, @outer_enum_integer, @outer_enum_default_value, @outer_enum_integer_default_value)
   end
 end

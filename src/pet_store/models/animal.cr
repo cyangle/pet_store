@@ -27,7 +27,7 @@ module PetStore
 
     # The color of the pet
     @[JSON::Field(key: "color", type: String?, default: "red", presence: true, ignore_serialize: color.nil? && !color_present?)]
-    property color : String?
+    property color : String? = "red"
 
     @[JSON::Field(ignore: true)]
     property? color_present : Bool = false

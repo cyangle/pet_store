@@ -32,7 +32,7 @@ module PetStore
     property? number_prop_present : Bool = false
 
     @[JSON::Field(key: "boolean_prop", type: Bool?, default: false, presence: true, ignore_serialize: boolean_prop.nil? && !boolean_prop_present?)]
-    property boolean_prop : Bool?
+    property boolean_prop : Bool? = false
 
     @[JSON::Field(ignore: true)]
     property? boolean_prop_present : Bool = false

@@ -20,7 +20,7 @@ module PetStore
     # Required properties
 
     @[JSON::Field(key: "name", type: String, default: "default-name")]
-    property name : String
+    property name : String = "default-name"
 
     # Optional properties
 

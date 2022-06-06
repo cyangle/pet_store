@@ -20,7 +20,7 @@ module PetStore
     # Optional properties
 
     @[JSON::Field(key: "bar", type: String?, default: "bar", presence: true, ignore_serialize: bar.nil? && !bar_present?)]
-    property bar : String?
+    property bar : String? = "bar"
 
     @[JSON::Field(ignore: true)]
     property? bar_present : Bool = false

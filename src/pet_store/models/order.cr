@@ -53,7 +53,7 @@ module PetStore
     ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["placed", "approved", "delivered"])
 
     @[JSON::Field(key: "complete", type: Bool?, default: false, presence: true, ignore_serialize: complete.nil? && !complete_present?)]
-    property complete : Bool?
+    property complete : Bool? = false
 
     @[JSON::Field(ignore: true)]
     property? complete_present : Bool = false

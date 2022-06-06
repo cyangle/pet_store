@@ -26,37 +26,37 @@ module PetStore
     property? prop1_present : Bool = false
 
     @[JSON::Field(key: "prop2", type: String?, default: "defaultProp2", presence: true, ignore_serialize: prop2.nil? && !prop2_present?)]
-    property prop2 : String?
+    property prop2 : String? = "defaultProp2"
 
     @[JSON::Field(ignore: true)]
     property? prop2_present : Bool = false
 
     @[JSON::Field(key: "prop3", type: String?, default: "defaultProp3", presence: true, ignore_serialize: prop3.nil? && !prop3_present?)]
-    property prop3 : String?
+    property prop3 : String? = "defaultProp3"
 
     @[JSON::Field(ignore: true)]
     property? prop3_present : Bool = false
 
     @[JSON::Field(key: "boolProp1", type: Bool?, default: false, presence: true, ignore_serialize: bool_prop1.nil? && !bool_prop1_present?)]
-    property bool_prop1 : Bool?
+    property bool_prop1 : Bool? = false
 
     @[JSON::Field(ignore: true)]
     property? bool_prop1_present : Bool = false
 
     @[JSON::Field(key: "boolProp2", type: Bool?, default: true, presence: true, ignore_serialize: bool_prop2.nil? && !bool_prop2_present?)]
-    property bool_prop2 : Bool?
+    property bool_prop2 : Bool? = true
 
     @[JSON::Field(ignore: true)]
     property? bool_prop2_present : Bool = false
 
     @[JSON::Field(key: "intProp1", type: Float64?, default: 100, presence: true, ignore_serialize: int_prop1.nil? && !int_prop1_present?)]
-    property int_prop1 : Float64?
+    property int_prop1 : Float64? = 100
 
     @[JSON::Field(ignore: true)]
     property? int_prop1_present : Bool = false
 
     @[JSON::Field(key: "intProp2", type: Float64?, default: 120, presence: true, ignore_serialize: int_prop2.nil? && !int_prop2_present?)]
-    property int_prop2 : Float64?
+    property int_prop2 : Float64? = 120
 
     @[JSON::Field(ignore: true)]
     property? int_prop2_present : Bool = false
