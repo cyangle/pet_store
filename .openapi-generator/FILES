@@ -5,6 +5,7 @@ spec/spec_helper.cr
 spec/support/ext.cr
 spec/support/helpers.cr
 spec/support/vcr.cr
+src/ext/json/from_json.cr
 src/ext/json/serialization.cr
 src/ext/time.cr
 src/pet_store.cr
@@ -22,16 +23,19 @@ src/pet_store/models/additional_properties_class.cr
 src/pet_store/models/animal.cr
 src/pet_store/models/api_response.cr
 src/pet_store/models/apple.cr
+src/pet_store/models/apple_one_of.cr
 src/pet_store/models/apple_req.cr
 src/pet_store/models/array_of_array_of_number_only.cr
 src/pet_store/models/array_of_number_only.cr
 src/pet_store/models/array_test.cr
 src/pet_store/models/banana.cr
+src/pet_store/models/banana_one_of.cr
 src/pet_store/models/banana_req.cr
 src/pet_store/models/capitalization.cr
 src/pet_store/models/cat.cr
 src/pet_store/models/cat_all_of.cr
 src/pet_store/models/category.cr
+src/pet_store/models/child.cr
 src/pet_store/models/class_model.cr
 src/pet_store/models/client.cr
 src/pet_store/models/dog.cr
@@ -45,6 +49,7 @@ src/pet_store/models/foo.cr
 src/pet_store/models/foo_get_default_response.cr
 src/pet_store/models/format_test.cr
 src/pet_store/models/fruit.cr
+src/pet_store/models/fruit_one_of.cr
 src/pet_store/models/fruit_req.cr
 src/pet_store/models/gm_fruit.cr
 src/pet_store/models/has_only_read_only.cr
@@ -58,6 +63,7 @@ src/pet_store/models/model_return.cr
 src/pet_store/models/name.cr
 src/pet_store/models/nullable_class.cr
 src/pet_store/models/number_only.cr
+src/pet_store/models/one_of_primitive.cr
 src/pet_store/models/order.cr
 src/pet_store/models/outer_composite.cr
 src/pet_store/models/outer_enum.cr
@@ -66,6 +72,7 @@ src/pet_store/models/outer_enum_integer.cr
 src/pet_store/models/outer_enum_integer_default_value.cr
 src/pet_store/models/outer_enum_rquired.cr
 src/pet_store/models/outer_enum_rquired_int64.cr
+src/pet_store/models/parent.cr
 src/pet_store/models/pet.cr
 src/pet_store/models/read_only_first.cr
 src/pet_store/models/read_only_with_default.cr
