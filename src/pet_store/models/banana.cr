@@ -12,18 +12,14 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class Banana
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
 
-    @[JSON::Field(key: "lengthCm", type: Float64?, default: nil, presence: true, ignore_serialize: length_cm.nil? && !length_cm_present?)]
+    @[JSON::Field(key: "lengthCm", type: Float64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter length_cm : Float64? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? length_cm_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -70,6 +66,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@length_cm, @length_cm_present)
+    def_equals_and_hash(@length_cm)
   end
 end

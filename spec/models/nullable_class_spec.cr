@@ -20,6 +20,74 @@ describe PetStore::NullableClass do
     end
   end
 
+  describe "test attribute 'optional_nullable_prop'" do
+    context "is nil" do
+      it "is valid" do
+        obj = PetStore::NullableClass.new(required_non_nullable_prop: "test")
+        (obj.optional_nullable_prop).should be_nil
+        (obj.valid?).should be_true
+      end
+
+      context "optional_nullable_prop_present? controls wheather to emit null or omit key" do
+        context "optional_nullable_prop_present? is false" do
+          it "omits key in json" do
+            obj = PetStore::NullableClass.new(required_non_nullable_prop: "test")
+            (obj.optional_nullable_prop).should be_nil
+            (obj.optional_nullable_prop_present?).should be_false
+            (obj.valid?).should be_true
+            (obj.to_json).should eq(%({"required_nullable_prop":null,"required_non_nullable_prop":"test","boolean_prop":false}))
+          end
+        end
+
+        context "optional_nullable_prop_present? is true" do
+          it "is valid and emits null in json" do
+            obj = PetStore::NullableClass.new(required_non_nullable_prop: "test")
+            (obj.optional_nullable_prop).should be_nil
+            obj.optional_nullable_prop_present = true
+            (obj.optional_nullable_prop_present?).should be_true
+            (obj.valid?).should be_true
+            (obj.to_json).should eq(%({"required_nullable_prop":null,"required_non_nullable_prop":"test","optional_nullable_prop":null,"boolean_prop":false}))
+          end
+        end
+      end
+    end
+  end
+
+  describe "test attribute 'optional_non_nullable_prop'" do
+    context "is nil" do
+      it "is valid and omits key in json" do
+        obj = PetStore::NullableClass.new(required_non_nullable_prop: "test")
+        (obj.optional_non_nullable_prop).should be_nil
+        (obj.valid?).should be_true
+        (obj.to_json).should eq(%({"required_nullable_prop":null,"required_non_nullable_prop":"test","boolean_prop":false}))
+      end
+    end
+  end
+
+  describe "test attribute 'required_nullable_prop'" do
+    context "required_nullable_prop is nil" do
+      it "is valid and emits null in json" do
+        obj = PetStore::NullableClass.new(required_non_nullable_prop: "test")
+        (obj.required_nullable_prop).should be_nil
+        (obj.valid?).should be_true
+        (obj.to_json).should eq(%({"required_nullable_prop":null,"required_non_nullable_prop":"test","boolean_prop":false}))
+      end
+    end
+  end
+
+  describe "test attribute 'required_non_nullable_prop'" do
+    context "set it to nil" do
+      it "raises error" do
+        expect_raises(ArgumentError, /"required_non_nullable_prop" is required and cannot be null/) do
+          obj = PetStore::NullableClass.new(required_non_nullable_prop: "test")
+          (obj.required_non_nullable_prop).should eq("test")
+          (obj.valid?).should be_true
+          obj.required_non_nullable_prop = nil
+        end
+      end
+    end
+  end
+
   describe "test attribute 'integer_prop'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html

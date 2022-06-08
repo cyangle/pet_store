@@ -12,49 +12,30 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class Capitalization
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
 
-    @[JSON::Field(key: "smallCamel", type: String?, default: nil, presence: true, ignore_serialize: small_camel.nil? && !small_camel_present?)]
+    @[JSON::Field(key: "smallCamel", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter small_camel : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? small_camel_present : Bool = false
-
-    @[JSON::Field(key: "CapitalCamel", type: String?, default: nil, presence: true, ignore_serialize: capital_camel.nil? && !capital_camel_present?)]
+    @[JSON::Field(key: "CapitalCamel", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter capital_camel : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? capital_camel_present : Bool = false
-
-    @[JSON::Field(key: "small_Snake", type: String?, default: nil, presence: true, ignore_serialize: small_snake.nil? && !small_snake_present?)]
+    @[JSON::Field(key: "small_Snake", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter small_snake : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? small_snake_present : Bool = false
-
-    @[JSON::Field(key: "Capital_Snake", type: String?, default: nil, presence: true, ignore_serialize: capital_snake.nil? && !capital_snake_present?)]
+    @[JSON::Field(key: "Capital_Snake", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter capital_snake : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? capital_snake_present : Bool = false
-
-    @[JSON::Field(key: "SCA_ETH_Flow_Points", type: String?, default: nil, presence: true, ignore_serialize: sca_eth_flow_points.nil? && !sca_eth_flow_points_present?)]
+    @[JSON::Field(key: "SCA_ETH_Flow_Points", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter sca_eth_flow_points : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? sca_eth_flow_points_present : Bool = false
-
     # Name of the pet
-    @[JSON::Field(key: "ATT_NAME", type: String?, default: nil, presence: true, ignore_serialize: att_name.nil? && !att_name_present?)]
+    @[JSON::Field(key: "ATT_NAME", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter att_name : String? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? att_name_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -88,7 +69,6 @@ module PetStore
     # @param [Object] small_camel Object to be assigned
     def small_camel=(small_camel : String?)
       if small_camel.nil?
-        @small_camel_present = false
         return @small_camel = nil
       end
       @small_camel = small_camel
@@ -96,7 +76,6 @@ module PetStore
     # @param [Object] capital_camel Object to be assigned
     def capital_camel=(capital_camel : String?)
       if capital_camel.nil?
-        @capital_camel_present = false
         return @capital_camel = nil
       end
       @capital_camel = capital_camel
@@ -104,7 +83,6 @@ module PetStore
     # @param [Object] small_snake Object to be assigned
     def small_snake=(small_snake : String?)
       if small_snake.nil?
-        @small_snake_present = false
         return @small_snake = nil
       end
       @small_snake = small_snake
@@ -112,7 +90,6 @@ module PetStore
     # @param [Object] capital_snake Object to be assigned
     def capital_snake=(capital_snake : String?)
       if capital_snake.nil?
-        @capital_snake_present = false
         return @capital_snake = nil
       end
       @capital_snake = capital_snake
@@ -120,7 +97,6 @@ module PetStore
     # @param [Object] sca_eth_flow_points Object to be assigned
     def sca_eth_flow_points=(sca_eth_flow_points : String?)
       if sca_eth_flow_points.nil?
-        @sca_eth_flow_points_present = false
         return @sca_eth_flow_points = nil
       end
       @sca_eth_flow_points = sca_eth_flow_points
@@ -128,7 +104,6 @@ module PetStore
     # @param [Object] att_name Object to be assigned
     def att_name=(att_name : String?)
       if att_name.nil?
-        @att_name_present = false
         return @att_name = nil
       end
       @att_name = att_name
@@ -144,6 +119,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@small_camel, @small_camel_present, @capital_camel, @capital_camel_present, @small_snake, @small_snake_present, @capital_snake, @capital_snake_present, @sca_eth_flow_points, @sca_eth_flow_points_present, @att_name, @att_name_present)
+    def_equals_and_hash(@small_camel, @capital_camel, @small_snake, @capital_snake, @sca_eth_flow_points, @att_name)
   end
 end

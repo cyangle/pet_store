@@ -12,98 +12,64 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class EnumTest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
 
-    @[JSON::Field(key: "enum_string_required", type: String?, default: nil, presence: true, ignore_serialize: enum_string_required.nil? && !enum_string_required_present?)]
+    @[JSON::Field(key: "enum_string_required", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter enum_string_required : String? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? enum_string_required_present : Bool = false
 
     ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED = EnumValidator.new("enum_string_required", "String", ["UPPER", "lower", ""])
 
-    @[JSON::Field(key: "outerEnumRquired", type: PetStore::OuterEnumRquired?, default: nil, presence: true, ignore_serialize: outer_enum_rquired.nil? && !outer_enum_rquired_present?)]
+    @[JSON::Field(key: "outerEnumRquired", type: PetStore::OuterEnumRquired?, default: nil, required: true, nullable: false, emit_null: false)]
     getter outer_enum_rquired : PetStore::OuterEnumRquired? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? outer_enum_rquired_present : Bool = false
-
-    @[JSON::Field(key: "outerEnumRquiredInt64", type: PetStore::OuterEnumRquiredInt64?, default: PetStore::OuterEnumRquiredInt64.new(3), presence: true, ignore_serialize: outer_enum_rquired_int64.nil? && !outer_enum_rquired_int64_present?)]
+    @[JSON::Field(key: "outerEnumRquiredInt64", type: PetStore::OuterEnumRquiredInt64?, default: PetStore::OuterEnumRquiredInt64.new(3), required: true, nullable: false, emit_null: false)]
     getter outer_enum_rquired_int64 : PetStore::OuterEnumRquiredInt64? = PetStore::OuterEnumRquiredInt64.new(3)
-
-    @[JSON::Field(ignore: true)]
-    property? outer_enum_rquired_int64_present : Bool = false
 
     # Optional properties
 
-    @[JSON::Field(key: "enum_string", type: String?, default: nil, presence: true, ignore_serialize: enum_string.nil? && !enum_string_present?)]
+    @[JSON::Field(key: "enum_string", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter enum_string : String? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? enum_string_present : Bool = false
 
     ENUM_VALIDATOR_FOR_ENUM_STRING = EnumValidator.new("enum_string", "String", ["UPPER", "lower", ""])
 
-    @[JSON::Field(key: "enum_int32", type: Int32?, default: nil, presence: true, ignore_serialize: enum_int32.nil? && !enum_int32_present?)]
+    @[JSON::Field(key: "enum_int32", type: Int32?, default: nil, required: false, nullable: false, emit_null: false)]
     getter enum_int32 : Int32? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? enum_int32_present : Bool = false
 
     ENUM_VALIDATOR_FOR_ENUM_INT32 = EnumValidator.new("enum_int32", "Int32", ["1", "-1"])
 
-    @[JSON::Field(key: "enum_int64", type: Int64?, default: nil, presence: true, ignore_serialize: enum_int64.nil? && !enum_int64_present?)]
+    @[JSON::Field(key: "enum_int64", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter enum_int64 : Int64? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? enum_int64_present : Bool = false
 
     ENUM_VALIDATOR_FOR_ENUM_INT64 = EnumValidator.new("enum_int64", "Int64", ["1", "-1"])
 
-    @[JSON::Field(key: "enum_float", type: Float32?, default: nil, presence: true, ignore_serialize: enum_float.nil? && !enum_float_present?)]
+    @[JSON::Field(key: "enum_float", type: Float32?, default: nil, required: false, nullable: false, emit_null: false)]
     getter enum_float : Float32? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? enum_float_present : Bool = false
 
     ENUM_VALIDATOR_FOR_ENUM_FLOAT = EnumValidator.new("enum_float", "Float32", ["1.1", "-1.2"])
 
-    @[JSON::Field(key: "enum_double", type: Float64?, default: nil, presence: true, ignore_serialize: enum_double.nil? && !enum_double_present?)]
+    @[JSON::Field(key: "enum_double", type: Float64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter enum_double : Float64? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? enum_double_present : Bool = false
 
     ENUM_VALIDATOR_FOR_ENUM_DOUBLE = EnumValidator.new("enum_double", "Float64", ["1.1", "-1.2"])
 
-    @[JSON::Field(key: "outerEnum", type: PetStore::OuterEnum?, default: nil, presence: true, ignore_serialize: outer_enum.nil? && !outer_enum_present?)]
+    @[JSON::Field(key: "outerEnum", type: PetStore::OuterEnum?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: outer_enum.nil? && !outer_enum_present?)]
     getter outer_enum : PetStore::OuterEnum? = nil
 
     @[JSON::Field(ignore: true)]
     property? outer_enum_present : Bool = false
 
-    @[JSON::Field(key: "outerEnumInteger", type: PetStore::OuterEnumInteger?, default: nil, presence: true, ignore_serialize: outer_enum_integer.nil? && !outer_enum_integer_present?)]
+    @[JSON::Field(key: "outerEnumInteger", type: PetStore::OuterEnumInteger?, default: nil, required: false, nullable: false, emit_null: false)]
     getter outer_enum_integer : PetStore::OuterEnumInteger? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? outer_enum_integer_present : Bool = false
-
-    @[JSON::Field(key: "outerEnumDefaultValue", type: PetStore::OuterEnumDefaultValue?, default: PetStore::OuterEnumDefaultValue.new("placed"), presence: true, ignore_serialize: outer_enum_default_value.nil? && !outer_enum_default_value_present?)]
+    @[JSON::Field(key: "outerEnumDefaultValue", type: PetStore::OuterEnumDefaultValue?, default: PetStore::OuterEnumDefaultValue.new("placed"), required: false, nullable: false, emit_null: false)]
     getter outer_enum_default_value : PetStore::OuterEnumDefaultValue? = PetStore::OuterEnumDefaultValue.new("placed")
 
-    @[JSON::Field(ignore: true)]
-    property? outer_enum_default_value_present : Bool = false
-
-    @[JSON::Field(key: "outerEnumIntegerDefaultValue", type: PetStore::OuterEnumIntegerDefaultValue?, default: PetStore::OuterEnumIntegerDefaultValue.new(0), presence: true, ignore_serialize: outer_enum_integer_default_value.nil? && !outer_enum_integer_default_value_present?)]
+    @[JSON::Field(key: "outerEnumIntegerDefaultValue", type: PetStore::OuterEnumIntegerDefaultValue?, default: PetStore::OuterEnumIntegerDefaultValue.new(0), required: false, nullable: false, emit_null: false)]
     getter outer_enum_integer_default_value : PetStore::OuterEnumIntegerDefaultValue? = PetStore::OuterEnumIntegerDefaultValue.new(0)
-
-    @[JSON::Field(ignore: true)]
-    property? outer_enum_integer_default_value_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -210,7 +176,6 @@ module PetStore
     # @param [Object] enum_string Object to be assigned
     def enum_string=(enum_string : String?)
       if enum_string.nil?
-        @enum_string_present = false
         return @enum_string = nil
       end
       _enum_string = enum_string.not_nil!
@@ -220,7 +185,6 @@ module PetStore
     # @param [Object] enum_int32 Object to be assigned
     def enum_int32=(enum_int32 : Int32?)
       if enum_int32.nil?
-        @enum_int32_present = false
         return @enum_int32 = nil
       end
       _enum_int32 = enum_int32.not_nil!
@@ -230,7 +194,6 @@ module PetStore
     # @param [Object] enum_int64 Object to be assigned
     def enum_int64=(enum_int64 : Int64?)
       if enum_int64.nil?
-        @enum_int64_present = false
         return @enum_int64 = nil
       end
       _enum_int64 = enum_int64.not_nil!
@@ -240,7 +203,6 @@ module PetStore
     # @param [Object] enum_float Object to be assigned
     def enum_float=(enum_float : Float32?)
       if enum_float.nil?
-        @enum_float_present = false
         return @enum_float = nil
       end
       _enum_float = enum_float.not_nil!
@@ -250,7 +212,6 @@ module PetStore
     # @param [Object] enum_double Object to be assigned
     def enum_double=(enum_double : Float64?)
       if enum_double.nil?
-        @enum_double_present = false
         return @enum_double = nil
       end
       _enum_double = enum_double.not_nil!
@@ -260,7 +221,6 @@ module PetStore
     # @param [Object] outer_enum Object to be assigned
     def outer_enum=(outer_enum : PetStore::OuterEnum?)
       if outer_enum.nil?
-        @outer_enum_present = false
         return @outer_enum = nil
       end
       outer_enum.not_nil!.valid!
@@ -269,7 +229,6 @@ module PetStore
     # @param [Object] outer_enum_integer Object to be assigned
     def outer_enum_integer=(outer_enum_integer : PetStore::OuterEnumInteger?)
       if outer_enum_integer.nil?
-        @outer_enum_integer_present = false
         return @outer_enum_integer = nil
       end
       outer_enum_integer.not_nil!.valid!
@@ -278,7 +237,6 @@ module PetStore
     # @param [Object] outer_enum_default_value Object to be assigned
     def outer_enum_default_value=(outer_enum_default_value : PetStore::OuterEnumDefaultValue?)
       if outer_enum_default_value.nil?
-        @outer_enum_default_value_present = false
         return @outer_enum_default_value = nil
       end
       outer_enum_default_value.not_nil!.valid!
@@ -287,7 +245,6 @@ module PetStore
     # @param [Object] outer_enum_integer_default_value Object to be assigned
     def outer_enum_integer_default_value=(outer_enum_integer_default_value : PetStore::OuterEnumIntegerDefaultValue?)
       if outer_enum_integer_default_value.nil?
-        @outer_enum_integer_default_value_present = false
         return @outer_enum_integer_default_value = nil
       end
       outer_enum_integer_default_value.not_nil!.valid!
@@ -304,6 +261,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@enum_string_required, @enum_string_required_present, @outer_enum_rquired, @outer_enum_rquired_present, @outer_enum_rquired_int64, @outer_enum_rquired_int64_present, @enum_string, @enum_string_present, @enum_int32, @enum_int32_present, @enum_int64, @enum_int64_present, @enum_float, @enum_float_present, @enum_double, @enum_double_present, @outer_enum, @outer_enum_present, @outer_enum_integer, @outer_enum_integer_present, @outer_enum_default_value, @outer_enum_default_value_present, @outer_enum_integer_default_value, @outer_enum_integer_default_value_present)
+    def_equals_and_hash(@enum_string_required, @outer_enum_rquired, @outer_enum_rquired_int64, @enum_string, @enum_int32, @enum_int64, @enum_float, @enum_double, @outer_enum, @outer_enum_present, @outer_enum_integer, @outer_enum_default_value, @outer_enum_integer_default_value)
   end
 end

@@ -13,7 +13,6 @@ require "log"
 
 module PetStore
   # Must be named `File` for test.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class File
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -21,11 +20,8 @@ module PetStore
     # Optional properties
 
     # Test capitalization
-    @[JSON::Field(key: "sourceURI", type: String?, default: nil, presence: true, ignore_serialize: source_uri.nil? && !source_uri_present?)]
+    @[JSON::Field(key: "sourceURI", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter source_uri : String? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? source_uri_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -54,7 +50,6 @@ module PetStore
     # @param [Object] source_uri Object to be assigned
     def source_uri=(source_uri : String?)
       if source_uri.nil?
-        @source_uri_present = false
         return @source_uri = nil
       end
       @source_uri = source_uri
@@ -70,6 +65,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@source_uri, @source_uri_present)
+    def_equals_and_hash(@source_uri)
   end
 end

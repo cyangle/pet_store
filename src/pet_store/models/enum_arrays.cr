@@ -12,26 +12,19 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class EnumArrays
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
 
-    @[JSON::Field(key: "just_symbol", type: String?, default: nil, presence: true, ignore_serialize: just_symbol.nil? && !just_symbol_present?)]
+    @[JSON::Field(key: "just_symbol", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter just_symbol : String? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? just_symbol_present : Bool = false
 
     ENUM_VALIDATOR_FOR_JUST_SYMBOL = EnumValidator.new("just_symbol", "String", [">=", "$"])
 
-    @[JSON::Field(key: "array_enum", type: Array(String)?, default: nil, presence: true, ignore_serialize: array_enum.nil? && !array_enum_present?)]
+    @[JSON::Field(key: "array_enum", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter array_enum : Array(String)? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? array_enum_present : Bool = false
 
     ENUM_VALIDATOR_FOR_ARRAY_ENUM = EnumValidator.new("array_enum", "Array(String)", ["fish", "crab"])
 
@@ -70,7 +63,6 @@ module PetStore
     # @param [Object] just_symbol Object to be assigned
     def just_symbol=(just_symbol : String?)
       if just_symbol.nil?
-        @just_symbol_present = false
         return @just_symbol = nil
       end
       _just_symbol = just_symbol.not_nil!
@@ -80,7 +72,6 @@ module PetStore
     # @param [Object] array_enum Object to be assigned
     def array_enum=(array_enum : Array(String)?)
       if array_enum.nil?
-        @array_enum_present = false
         return @array_enum = nil
       end
       _array_enum = array_enum.not_nil!
@@ -98,6 +89,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@just_symbol, @just_symbol_present, @array_enum, @array_enum_present)
+    def_equals_and_hash(@just_symbol, @array_enum)
   end
 end

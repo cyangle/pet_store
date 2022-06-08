@@ -13,18 +13,14 @@ require "log"
 
 module PetStore
   # Model for testing reserved words
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class ModelReturn
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
 
-    @[JSON::Field(key: "return", type: Int32?, default: nil, presence: true, ignore_serialize: _return.nil? && !_return_present?)]
+    @[JSON::Field(key: "return", type: Int32?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _return : Int32? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? _return_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -53,7 +49,6 @@ module PetStore
     # @param [Object] _return Object to be assigned
     def _return=(_return : Int32?)
       if _return.nil?
-        @_return_present = false
         return @_return = nil
       end
       @_return = _return
@@ -69,6 +64,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@_return, @_return_present)
+    def_equals_and_hash(@_return)
   end
 end

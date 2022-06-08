@@ -12,54 +12,32 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class ReadOnlyWithDefault
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
 
-    @[JSON::Field(key: "prop1", type: String?, default: nil, presence: true, ignore_serialize: prop1.nil? && !prop1_present?)]
+    @[JSON::Field(key: "prop1", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter prop1 : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? prop1_present : Bool = false
-
-    @[JSON::Field(key: "prop2", type: String?, default: "defaultProp2", presence: true, ignore_serialize: prop2.nil? && !prop2_present?)]
+    @[JSON::Field(key: "prop2", type: String?, default: "defaultProp2", required: false, nullable: false, emit_null: false)]
     getter prop2 : String? = "defaultProp2"
 
-    @[JSON::Field(ignore: true)]
-    property? prop2_present : Bool = false
-
-    @[JSON::Field(key: "prop3", type: String?, default: "defaultProp3", presence: true, ignore_serialize: prop3.nil? && !prop3_present?)]
+    @[JSON::Field(key: "prop3", type: String?, default: "defaultProp3", required: false, nullable: false, emit_null: false)]
     getter prop3 : String? = "defaultProp3"
 
-    @[JSON::Field(ignore: true)]
-    property? prop3_present : Bool = false
-
-    @[JSON::Field(key: "boolProp1", type: Bool?, default: false, presence: true, ignore_serialize: bool_prop1.nil? && !bool_prop1_present?)]
+    @[JSON::Field(key: "boolProp1", type: Bool?, default: false, required: false, nullable: false, emit_null: false)]
     getter bool_prop1 : Bool? = false
 
-    @[JSON::Field(ignore: true)]
-    property? bool_prop1_present : Bool = false
-
-    @[JSON::Field(key: "boolProp2", type: Bool?, default: true, presence: true, ignore_serialize: bool_prop2.nil? && !bool_prop2_present?)]
+    @[JSON::Field(key: "boolProp2", type: Bool?, default: true, required: false, nullable: false, emit_null: false)]
     getter bool_prop2 : Bool? = true
 
-    @[JSON::Field(ignore: true)]
-    property? bool_prop2_present : Bool = false
-
-    @[JSON::Field(key: "intProp1", type: Float64?, default: 100, presence: true, ignore_serialize: int_prop1.nil? && !int_prop1_present?)]
+    @[JSON::Field(key: "intProp1", type: Float64?, default: 100, required: false, nullable: false, emit_null: false)]
     getter int_prop1 : Float64? = 100
 
-    @[JSON::Field(ignore: true)]
-    property? int_prop1_present : Bool = false
-
-    @[JSON::Field(key: "intProp2", type: Float64?, default: 120, presence: true, ignore_serialize: int_prop2.nil? && !int_prop2_present?)]
+    @[JSON::Field(key: "intProp2", type: Float64?, default: 120, required: false, nullable: false, emit_null: false)]
     getter int_prop2 : Float64? = 120
-
-    @[JSON::Field(ignore: true)]
-    property? int_prop2_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -94,7 +72,6 @@ module PetStore
     # @param [Object] prop1 Object to be assigned
     def prop1=(prop1 : String?)
       if prop1.nil?
-        @prop1_present = false
         return @prop1 = nil
       end
       @prop1 = prop1
@@ -102,7 +79,6 @@ module PetStore
     # @param [Object] prop2 Object to be assigned
     def prop2=(prop2 : String?)
       if prop2.nil?
-        @prop2_present = false
         return @prop2 = nil
       end
       @prop2 = prop2
@@ -110,7 +86,6 @@ module PetStore
     # @param [Object] prop3 Object to be assigned
     def prop3=(prop3 : String?)
       if prop3.nil?
-        @prop3_present = false
         return @prop3 = nil
       end
       @prop3 = prop3
@@ -118,7 +93,6 @@ module PetStore
     # @param [Object] bool_prop1 Object to be assigned
     def bool_prop1=(bool_prop1 : Bool?)
       if bool_prop1.nil?
-        @bool_prop1_present = false
         return @bool_prop1 = nil
       end
       @bool_prop1 = bool_prop1
@@ -126,7 +100,6 @@ module PetStore
     # @param [Object] bool_prop2 Object to be assigned
     def bool_prop2=(bool_prop2 : Bool?)
       if bool_prop2.nil?
-        @bool_prop2_present = false
         return @bool_prop2 = nil
       end
       @bool_prop2 = bool_prop2
@@ -134,7 +107,6 @@ module PetStore
     # @param [Object] int_prop1 Object to be assigned
     def int_prop1=(int_prop1 : Float64?)
       if int_prop1.nil?
-        @int_prop1_present = false
         return @int_prop1 = nil
       end
       @int_prop1 = int_prop1
@@ -142,7 +114,6 @@ module PetStore
     # @param [Object] int_prop2 Object to be assigned
     def int_prop2=(int_prop2 : Float64?)
       if int_prop2.nil?
-        @int_prop2_present = false
         return @int_prop2 = nil
       end
       @int_prop2 = int_prop2
@@ -158,6 +129,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@prop1, @prop1_present, @prop2, @prop2_present, @prop3, @prop3_present, @bool_prop1, @bool_prop1_present, @bool_prop2, @bool_prop2_present, @int_prop1, @int_prop1_present, @int_prop2, @int_prop2_present)
+    def_equals_and_hash(@prop1, @prop2, @prop3, @bool_prop1, @bool_prop2, @int_prop1, @int_prop2)
   end
 end

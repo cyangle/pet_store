@@ -12,51 +12,32 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class Order
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
 
-    @[JSON::Field(key: "id", type: Int64?, default: nil, presence: true, ignore_serialize: id.nil? && !id_present?)]
+    @[JSON::Field(key: "id", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter id : Int64? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? id_present : Bool = false
-
-    @[JSON::Field(key: "petId", type: Int64?, default: nil, presence: true, ignore_serialize: pet_id.nil? && !pet_id_present?)]
+    @[JSON::Field(key: "petId", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter pet_id : Int64? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? pet_id_present : Bool = false
-
-    @[JSON::Field(key: "quantity", type: Int32?, default: nil, presence: true, ignore_serialize: quantity.nil? && !quantity_present?)]
+    @[JSON::Field(key: "quantity", type: Int32?, default: nil, required: false, nullable: false, emit_null: false)]
     getter quantity : Int32? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? quantity_present : Bool = false
-
-    @[JSON::Field(key: "shipDate", type: Time?, default: nil, presence: true, ignore_serialize: ship_date.nil? && !ship_date_present?, converter: Time::RFC3339Converter)]
+    @[JSON::Field(key: "shipDate", type: Time?, default: nil, required: false, nullable: false, emit_null: false, converter: Time::RFC3339Converter)]
     getter ship_date : Time? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? ship_date_present : Bool = false
-
     # Order Status
-    @[JSON::Field(key: "status", type: String?, default: nil, presence: true, ignore_serialize: status.nil? && !status_present?)]
+    @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter status : String? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? status_present : Bool = false
 
     ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["placed", "approved", "delivered"])
 
-    @[JSON::Field(key: "complete", type: Bool?, default: false, presence: true, ignore_serialize: complete.nil? && !complete_present?)]
+    @[JSON::Field(key: "complete", type: Bool?, default: false, required: false, nullable: false, emit_null: false)]
     getter complete : Bool? = false
-
-    @[JSON::Field(ignore: true)]
-    property? complete_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -94,7 +75,6 @@ module PetStore
     # @param [Object] id Object to be assigned
     def id=(id : Int64?)
       if id.nil?
-        @id_present = false
         return @id = nil
       end
       @id = id
@@ -102,7 +82,6 @@ module PetStore
     # @param [Object] pet_id Object to be assigned
     def pet_id=(pet_id : Int64?)
       if pet_id.nil?
-        @pet_id_present = false
         return @pet_id = nil
       end
       @pet_id = pet_id
@@ -110,7 +89,6 @@ module PetStore
     # @param [Object] quantity Object to be assigned
     def quantity=(quantity : Int32?)
       if quantity.nil?
-        @quantity_present = false
         return @quantity = nil
       end
       @quantity = quantity
@@ -118,7 +96,6 @@ module PetStore
     # @param [Object] ship_date Object to be assigned
     def ship_date=(ship_date : Time?)
       if ship_date.nil?
-        @ship_date_present = false
         return @ship_date = nil
       end
       @ship_date = ship_date
@@ -126,7 +103,6 @@ module PetStore
     # @param [Object] status Object to be assigned
     def status=(status : String?)
       if status.nil?
-        @status_present = false
         return @status = nil
       end
       _status = status.not_nil!
@@ -136,7 +112,6 @@ module PetStore
     # @param [Object] complete Object to be assigned
     def complete=(complete : Bool?)
       if complete.nil?
-        @complete_present = false
         return @complete = nil
       end
       @complete = complete
@@ -152,6 +127,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@id, @id_present, @pet_id, @pet_id_present, @quantity, @quantity_present, @ship_date, @ship_date_present, @status, @status_present, @complete, @complete_present)
+    def_equals_and_hash(@id, @pet_id, @quantity, @ship_date, @status, @complete)
   end
 end

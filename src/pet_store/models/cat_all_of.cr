@@ -12,26 +12,19 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class CatAllOf
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
 
-    @[JSON::Field(key: "name", type: String?, default: nil, presence: true, ignore_serialize: name.nil? && !name_present?)]
+    @[JSON::Field(key: "name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter name : String? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? name_present : Bool = false
 
     # Optional properties
 
-    @[JSON::Field(key: "declawed", type: Bool?, default: nil, presence: true, ignore_serialize: declawed.nil? && !declawed_present?)]
+    @[JSON::Field(key: "declawed", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter declawed : Bool? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? declawed_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -85,7 +78,6 @@ module PetStore
     # @param [Object] declawed Object to be assigned
     def declawed=(declawed : Bool?)
       if declawed.nil?
-        @declawed_present = false
         return @declawed = nil
       end
       @declawed = declawed
@@ -101,6 +93,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@name, @name_present, @declawed, @declawed_present)
+    def_equals_and_hash(@name, @declawed)
   end
 end

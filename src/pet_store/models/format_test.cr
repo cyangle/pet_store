@@ -12,106 +12,60 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class FormatTest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
 
-    @[JSON::Field(key: "number", type: Float64?, default: nil, presence: true, ignore_serialize: number.nil? && !number_present?)]
+    @[JSON::Field(key: "number", type: Float64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter number : Float64? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? number_present : Bool = false
-
-    @[JSON::Field(key: "byte", type: String?, default: nil, presence: true, ignore_serialize: byte.nil? && !byte_present?)]
+    @[JSON::Field(key: "byte", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter byte : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? byte_present : Bool = false
-
-    @[JSON::Field(key: "date", type: Time?, default: nil, presence: true, ignore_serialize: date.nil? && !date_present?, converter: Time::ISO8601DateConverter)]
+    @[JSON::Field(key: "date", type: Time?, default: nil, required: true, nullable: false, emit_null: false, converter: Time::ISO8601DateConverter)]
     getter date : Time? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? date_present : Bool = false
-
-    @[JSON::Field(key: "password", type: String?, default: nil, presence: true, ignore_serialize: password.nil? && !password_present?)]
+    @[JSON::Field(key: "password", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter password : String? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? password_present : Bool = false
 
     # Optional properties
 
-    @[JSON::Field(key: "integer", type: Int32?, default: nil, presence: true, ignore_serialize: integer.nil? && !integer_present?)]
+    @[JSON::Field(key: "integer", type: Int32?, default: nil, required: false, nullable: false, emit_null: false)]
     getter integer : Int32? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? integer_present : Bool = false
-
-    @[JSON::Field(key: "int32", type: Int32?, default: nil, presence: true, ignore_serialize: int32.nil? && !int32_present?)]
+    @[JSON::Field(key: "int32", type: Int32?, default: nil, required: false, nullable: false, emit_null: false)]
     getter int32 : Int32? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? int32_present : Bool = false
-
-    @[JSON::Field(key: "int64", type: Int64?, default: nil, presence: true, ignore_serialize: int64.nil? && !int64_present?)]
+    @[JSON::Field(key: "int64", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter int64 : Int64? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? int64_present : Bool = false
-
-    @[JSON::Field(key: "float", type: Float32?, default: nil, presence: true, ignore_serialize: float.nil? && !float_present?)]
+    @[JSON::Field(key: "float", type: Float32?, default: nil, required: false, nullable: false, emit_null: false)]
     getter float : Float32? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? float_present : Bool = false
-
-    @[JSON::Field(key: "double", type: Float64?, default: nil, presence: true, ignore_serialize: double.nil? && !double_present?)]
+    @[JSON::Field(key: "double", type: Float64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter double : Float64? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? double_present : Bool = false
-
-    @[JSON::Field(key: "string", type: String?, default: nil, presence: true, ignore_serialize: string.nil? && !string_present?)]
+    @[JSON::Field(key: "string", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter string : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? string_present : Bool = false
-
-    @[JSON::Field(key: "binary", type: ::File?, default: nil, presence: true, ignore_serialize: binary.nil? && !binary_present?)]
+    @[JSON::Field(key: "binary", type: ::File?, default: nil, required: false, nullable: false, emit_null: false)]
     getter binary : ::File? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? binary_present : Bool = false
-
-    @[JSON::Field(key: "dateTime", type: Time?, default: nil, presence: true, ignore_serialize: date_time.nil? && !date_time_present?, converter: Time::RFC3339Converter)]
+    @[JSON::Field(key: "dateTime", type: Time?, default: nil, required: false, nullable: false, emit_null: false, converter: Time::RFC3339Converter)]
     getter date_time : Time? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? date_time_present : Bool = false
-
-    @[JSON::Field(key: "uuid", type: String?, default: nil, presence: true, ignore_serialize: uuid.nil? && !uuid_present?)]
+    @[JSON::Field(key: "uuid", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter uuid : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? uuid_present : Bool = false
-
     # A string that is a 10 digit number. Can have leading zeros.
-    @[JSON::Field(key: "pattern_with_digits", type: String?, default: nil, presence: true, ignore_serialize: pattern_with_digits.nil? && !pattern_with_digits_present?)]
+    @[JSON::Field(key: "pattern_with_digits", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter pattern_with_digits : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? pattern_with_digits_present : Bool = false
-
     # A string starting with 'image_' (case insensitive) and one to three digits following i.e. Image_01.
-    @[JSON::Field(key: "pattern_with_digits_and_delimiter", type: String?, default: nil, presence: true, ignore_serialize: pattern_with_digits_and_delimiter.nil? && !pattern_with_digits_and_delimiter_present?)]
+    @[JSON::Field(key: "pattern_with_digits_and_delimiter", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter pattern_with_digits_and_delimiter : String? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? pattern_with_digits_and_delimiter_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -315,7 +269,6 @@ module PetStore
     # @param [Object] integer Object to be assigned
     def integer=(integer : Int32?)
       if integer.nil?
-        @integer_present = false
         return @integer = nil
       end
       _integer = integer.not_nil!
@@ -332,7 +285,6 @@ module PetStore
     # @param [Object] int32 Object to be assigned
     def int32=(int32 : Int32?)
       if int32.nil?
-        @int32_present = false
         return @int32 = nil
       end
       _int32 = int32.not_nil!
@@ -349,7 +301,6 @@ module PetStore
     # @param [Object] int64 Object to be assigned
     def int64=(int64 : Int64?)
       if int64.nil?
-        @int64_present = false
         return @int64 = nil
       end
       @int64 = int64
@@ -357,7 +308,6 @@ module PetStore
     # @param [Object] float Object to be assigned
     def float=(float : Float32?)
       if float.nil?
-        @float_present = false
         return @float = nil
       end
       _float = float.not_nil!
@@ -374,7 +324,6 @@ module PetStore
     # @param [Object] double Object to be assigned
     def double=(double : Float64?)
       if double.nil?
-        @double_present = false
         return @double = nil
       end
       _double = double.not_nil!
@@ -391,7 +340,6 @@ module PetStore
     # @param [Object] string Object to be assigned
     def string=(string : String?)
       if string.nil?
-        @string_present = false
         return @string = nil
       end
       _string = string.not_nil!
@@ -405,7 +353,6 @@ module PetStore
     # @param [Object] binary Object to be assigned
     def binary=(binary : ::File?)
       if binary.nil?
-        @binary_present = false
         return @binary = nil
       end
       @binary = binary
@@ -413,7 +360,6 @@ module PetStore
     # @param [Object] date_time Object to be assigned
     def date_time=(date_time : Time?)
       if date_time.nil?
-        @date_time_present = false
         return @date_time = nil
       end
       @date_time = date_time
@@ -421,7 +367,6 @@ module PetStore
     # @param [Object] uuid Object to be assigned
     def uuid=(uuid : String?)
       if uuid.nil?
-        @uuid_present = false
         return @uuid = nil
       end
       @uuid = uuid
@@ -429,7 +374,6 @@ module PetStore
     # @param [Object] pattern_with_digits Object to be assigned
     def pattern_with_digits=(pattern_with_digits : String?)
       if pattern_with_digits.nil?
-        @pattern_with_digits_present = false
         return @pattern_with_digits = nil
       end
       _pattern_with_digits = pattern_with_digits.not_nil!
@@ -443,7 +387,6 @@ module PetStore
     # @param [Object] pattern_with_digits_and_delimiter Object to be assigned
     def pattern_with_digits_and_delimiter=(pattern_with_digits_and_delimiter : String?)
       if pattern_with_digits_and_delimiter.nil?
-        @pattern_with_digits_and_delimiter_present = false
         return @pattern_with_digits_and_delimiter = nil
       end
       _pattern_with_digits_and_delimiter = pattern_with_digits_and_delimiter.not_nil!
@@ -465,6 +408,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@number, @number_present, @byte, @byte_present, @date, @date_present, @password, @password_present, @integer, @integer_present, @int32, @int32_present, @int64, @int64_present, @float, @float_present, @double, @double_present, @string, @string_present, @binary, @binary_present, @date_time, @date_time_present, @uuid, @uuid_present, @pattern_with_digits, @pattern_with_digits_present, @pattern_with_digits_and_delimiter, @pattern_with_digits_and_delimiter_present)
+    def_equals_and_hash(@number, @byte, @date, @password, @integer, @int32, @int64, @float, @double, @string, @binary, @date_time, @uuid, @pattern_with_digits, @pattern_with_digits_and_delimiter)
   end
 end

@@ -12,24 +12,17 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class AdditionalPropertiesClass
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
 
-    @[JSON::Field(key: "map_property", type: Hash(String, String)?, default: nil, presence: true, ignore_serialize: map_property.nil? && !map_property_present?)]
+    @[JSON::Field(key: "map_property", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter map_property : Hash(String, String)? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? map_property_present : Bool = false
-
-    @[JSON::Field(key: "map_of_map_property", type: Hash(String, Hash(String, String))?, default: nil, presence: true, ignore_serialize: map_of_map_property.nil? && !map_of_map_property_present?)]
+    @[JSON::Field(key: "map_of_map_property", type: Hash(String, Hash(String, String))?, default: nil, required: false, nullable: false, emit_null: false)]
     getter map_of_map_property : Hash(String, Hash(String, String))? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? map_of_map_property_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -59,7 +52,6 @@ module PetStore
     # @param [Object] map_property Object to be assigned
     def map_property=(map_property : Hash(String, String)?)
       if map_property.nil?
-        @map_property_present = false
         return @map_property = nil
       end
       @map_property = map_property
@@ -67,7 +59,6 @@ module PetStore
     # @param [Object] map_of_map_property Object to be assigned
     def map_of_map_property=(map_of_map_property : Hash(String, Hash(String, String))?)
       if map_of_map_property.nil?
-        @map_of_map_property_present = false
         return @map_of_map_property = nil
       end
       @map_of_map_property = map_of_map_property
@@ -83,6 +74,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@map_property, @map_property_present, @map_of_map_property, @map_of_map_property_present)
+    def_equals_and_hash(@map_property, @map_of_map_property)
   end
 end

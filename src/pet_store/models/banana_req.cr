@@ -12,26 +12,19 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class BananaReq
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
 
-    @[JSON::Field(key: "lengthCm", type: Float64?, default: nil, presence: true, ignore_serialize: length_cm.nil? && !length_cm_present?)]
+    @[JSON::Field(key: "lengthCm", type: Float64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter length_cm : Float64? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? length_cm_present : Bool = false
 
     # Optional properties
 
-    @[JSON::Field(key: "sweet", type: Bool?, default: nil, presence: true, ignore_serialize: sweet.nil? && !sweet_present?)]
+    @[JSON::Field(key: "sweet", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter sweet : Bool? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? sweet_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -72,7 +65,6 @@ module PetStore
     # @param [Object] sweet Object to be assigned
     def sweet=(sweet : Bool?)
       if sweet.nil?
-        @sweet_present = false
         return @sweet = nil
       end
       @sweet = sweet
@@ -88,6 +80,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@length_cm, @length_cm_present, @sweet, @sweet_present)
+    def_equals_and_hash(@length_cm, @sweet)
   end
 end

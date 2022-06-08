@@ -12,30 +12,20 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class OuterComposite
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
 
-    @[JSON::Field(key: "my_number", type: Float64?, default: nil, presence: true, ignore_serialize: my_number.nil? && !my_number_present?)]
+    @[JSON::Field(key: "my_number", type: Float64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter my_number : Float64? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? my_number_present : Bool = false
-
-    @[JSON::Field(key: "my_string", type: String?, default: nil, presence: true, ignore_serialize: my_string.nil? && !my_string_present?)]
+    @[JSON::Field(key: "my_string", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter my_string : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? my_string_present : Bool = false
-
-    @[JSON::Field(key: "my_boolean", type: Bool?, default: nil, presence: true, ignore_serialize: my_boolean.nil? && !my_boolean_present?)]
+    @[JSON::Field(key: "my_boolean", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter my_boolean : Bool? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? my_boolean_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -66,7 +56,6 @@ module PetStore
     # @param [Object] my_number Object to be assigned
     def my_number=(my_number : Float64?)
       if my_number.nil?
-        @my_number_present = false
         return @my_number = nil
       end
       @my_number = my_number
@@ -74,7 +63,6 @@ module PetStore
     # @param [Object] my_string Object to be assigned
     def my_string=(my_string : String?)
       if my_string.nil?
-        @my_string_present = false
         return @my_string = nil
       end
       @my_string = my_string
@@ -82,7 +70,6 @@ module PetStore
     # @param [Object] my_boolean Object to be assigned
     def my_boolean=(my_boolean : Bool?)
       if my_boolean.nil?
-        @my_boolean_present = false
         return @my_boolean = nil
       end
       @my_boolean = my_boolean
@@ -98,6 +85,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@my_number, @my_number_present, @my_string, @my_string_present, @my_boolean, @my_boolean_present)
+    def_equals_and_hash(@my_number, @my_string, @my_boolean)
   end
 end

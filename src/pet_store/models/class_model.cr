@@ -13,18 +13,14 @@ require "log"
 
 module PetStore
   # Model for testing model with \"_class\" property
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class ClassModel
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
 
-    @[JSON::Field(key: "_class", type: String?, default: nil, presence: true, ignore_serialize: _class.nil? && !_class_present?)]
+    @[JSON::Field(key: "_class", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _class : String? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? _class_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -53,7 +49,6 @@ module PetStore
     # @param [Object] _class Object to be assigned
     def _class=(_class : String?)
       if _class.nil?
-        @_class_present = false
         return @_class = nil
       end
       @_class = _class
@@ -69,6 +64,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@_class, @_class_present)
+    def_equals_and_hash(@_class)
   end
 end

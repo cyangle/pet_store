@@ -25,4 +25,24 @@ describe PetStore::HealthCheckResult do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
+
+  describe "#hash" do
+    context "nullable_message_present is different" do
+      it "returns false" do
+        json = %({"NullableMessage":null})
+        result1 = PetStore::HealthCheckResult.from_json(json)
+        result2 = PetStore::HealthCheckResult.from_json(json)
+        (result1.nullable_message_present?).should be_true
+        (result2.nullable_message_present?).should be_true
+        (result1.nullable_message_present?).should eq(result2.nullable_message_present?)
+        (result1 == result2).should be_true
+        (result1.hash).should eq(result2.hash)
+        result2.nullable_message_present = false
+        (result2.nullable_message_present?).should be_false
+        (result1.nullable_message_present?).should_not eq(result2.nullable_message_present?)
+        (result1.hash).should_not eq(result2.hash)
+        (result1 == result2).should be_false
+      end
+    end
+  end
 end

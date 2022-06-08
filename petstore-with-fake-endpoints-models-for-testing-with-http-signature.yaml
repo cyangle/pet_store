@@ -1842,7 +1842,22 @@ components:
       description: Just a string to inform instance is up and running. Make it nullable in hope to get it as pointer in generated model.
     NullableClass:
       type: object
+      required:
+        - required_nullable_prop
+        - required_non_nullable_prop
       properties:
+        optional_nullable_prop:
+          type: string
+          nullable: true
+        optional_non_nullable_prop:
+          type: string
+          nullable: false
+        required_nullable_prop:
+          type: string
+          nullable: true
+        required_non_nullable_prop:
+          type: string
+          nullable: false
         integer_prop:
           type: integer
           nullable: true

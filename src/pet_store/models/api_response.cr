@@ -12,30 +12,20 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class ApiResponse
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
 
-    @[JSON::Field(key: "code", type: Int32?, default: nil, presence: true, ignore_serialize: code.nil? && !code_present?)]
+    @[JSON::Field(key: "code", type: Int32?, default: nil, required: false, nullable: false, emit_null: false)]
     getter code : Int32? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? code_present : Bool = false
-
-    @[JSON::Field(key: "type", type: String?, default: nil, presence: true, ignore_serialize: _type.nil? && !_type_present?)]
+    @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? _type_present : Bool = false
-
-    @[JSON::Field(key: "message", type: String?, default: nil, presence: true, ignore_serialize: message.nil? && !message_present?)]
+    @[JSON::Field(key: "message", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter message : String? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? message_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -66,7 +56,6 @@ module PetStore
     # @param [Object] code Object to be assigned
     def code=(code : Int32?)
       if code.nil?
-        @code_present = false
         return @code = nil
       end
       @code = code
@@ -74,7 +63,6 @@ module PetStore
     # @param [Object] _type Object to be assigned
     def _type=(_type : String?)
       if _type.nil?
-        @_type_present = false
         return @_type = nil
       end
       @_type = _type
@@ -82,7 +70,6 @@ module PetStore
     # @param [Object] message Object to be assigned
     def message=(message : String?)
       if message.nil?
-        @message_present = false
         return @message = nil
       end
       @message = message
@@ -98,6 +85,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@code, @code_present, @_type, @_type_present, @message, @message_present)
+    def_equals_and_hash(@code, @_type, @message)
   end
 end

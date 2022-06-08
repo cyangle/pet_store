@@ -12,18 +12,14 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class Apple
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
 
-    @[JSON::Field(key: "cultivar", type: String?, default: nil, presence: true, ignore_serialize: cultivar.nil? && !cultivar_present?)]
+    @[JSON::Field(key: "cultivar", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter cultivar : String? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? cultivar_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -70,6 +66,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@cultivar, @cultivar_present)
+    def_equals_and_hash(@cultivar)
   end
 end

@@ -13,14 +13,13 @@ require "log"
 
 module PetStore
   # Just a string to inform instance is up and running. Make it nullable in hope to get it as pointer in generated model.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class HealthCheckResult
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
 
-    @[JSON::Field(key: "NullableMessage", type: String?, default: nil, presence: true, ignore_serialize: nullable_message.nil? && !nullable_message_present?)]
+    @[JSON::Field(key: "NullableMessage", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: nullable_message.nil? && !nullable_message_present?)]
     getter nullable_message : String? = nil
 
     @[JSON::Field(ignore: true)]
@@ -53,7 +52,6 @@ module PetStore
     # @param [Object] nullable_message Object to be assigned
     def nullable_message=(nullable_message : String?)
       if nullable_message.nil?
-        @nullable_message_present = false
         return @nullable_message = nil
       end
       @nullable_message = nullable_message

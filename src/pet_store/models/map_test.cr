@@ -12,38 +12,25 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class MapTest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
 
-    @[JSON::Field(key: "map_map_of_string", type: Hash(String, Hash(String, String))?, default: nil, presence: true, ignore_serialize: map_map_of_string.nil? && !map_map_of_string_present?)]
+    @[JSON::Field(key: "map_map_of_string", type: Hash(String, Hash(String, String))?, default: nil, required: false, nullable: false, emit_null: false)]
     getter map_map_of_string : Hash(String, Hash(String, String))? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? map_map_of_string_present : Bool = false
-
-    @[JSON::Field(key: "map_of_enum_string", type: Hash(String, String)?, default: nil, presence: true, ignore_serialize: map_of_enum_string.nil? && !map_of_enum_string_present?)]
+    @[JSON::Field(key: "map_of_enum_string", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter map_of_enum_string : Hash(String, String)? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? map_of_enum_string_present : Bool = false
 
     ENUM_VALIDATOR_FOR_MAP_OF_ENUM_STRING = EnumValidator.new("map_of_enum_string", "Hash(String, String)", ["UPPER", "lower"])
 
-    @[JSON::Field(key: "direct_map", type: Hash(String, Bool)?, default: nil, presence: true, ignore_serialize: direct_map.nil? && !direct_map_present?)]
+    @[JSON::Field(key: "direct_map", type: Hash(String, Bool)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter direct_map : Hash(String, Bool)? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? direct_map_present : Bool = false
-
-    @[JSON::Field(key: "indirect_map", type: Hash(String, Bool)?, default: nil, presence: true, ignore_serialize: indirect_map.nil? && !indirect_map_present?)]
+    @[JSON::Field(key: "indirect_map", type: Hash(String, Bool)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter indirect_map : Hash(String, Bool)? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? indirect_map_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -79,7 +66,6 @@ module PetStore
     # @param [Object] map_map_of_string Object to be assigned
     def map_map_of_string=(map_map_of_string : Hash(String, Hash(String, String))?)
       if map_map_of_string.nil?
-        @map_map_of_string_present = false
         return @map_map_of_string = nil
       end
       @map_map_of_string = map_map_of_string
@@ -87,7 +73,6 @@ module PetStore
     # @param [Object] map_of_enum_string Object to be assigned
     def map_of_enum_string=(map_of_enum_string : Hash(String, String)?)
       if map_of_enum_string.nil?
-        @map_of_enum_string_present = false
         return @map_of_enum_string = nil
       end
       _map_of_enum_string = map_of_enum_string.not_nil!
@@ -97,7 +82,6 @@ module PetStore
     # @param [Object] direct_map Object to be assigned
     def direct_map=(direct_map : Hash(String, Bool)?)
       if direct_map.nil?
-        @direct_map_present = false
         return @direct_map = nil
       end
       @direct_map = direct_map
@@ -105,7 +89,6 @@ module PetStore
     # @param [Object] indirect_map Object to be assigned
     def indirect_map=(indirect_map : Hash(String, Bool)?)
       if indirect_map.nil?
-        @indirect_map_present = false
         return @indirect_map = nil
       end
       @indirect_map = indirect_map
@@ -121,6 +104,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@map_map_of_string, @map_map_of_string_present, @map_of_enum_string, @map_of_enum_string_present, @direct_map, @direct_map_present, @indirect_map, @indirect_map_present)
+    def_equals_and_hash(@map_map_of_string, @map_of_enum_string, @direct_map, @indirect_map)
   end
 end

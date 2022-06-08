@@ -12,24 +12,17 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class ReadOnlyFirst
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
 
-    @[JSON::Field(key: "bar", type: String?, default: nil, presence: true, ignore_serialize: bar.nil? && !bar_present?)]
+    @[JSON::Field(key: "bar", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter bar : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? bar_present : Bool = false
-
-    @[JSON::Field(key: "baz", type: String?, default: nil, presence: true, ignore_serialize: baz.nil? && !baz_present?)]
+    @[JSON::Field(key: "baz", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter baz : String? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? baz_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -59,7 +52,6 @@ module PetStore
     # @param [Object] bar Object to be assigned
     def bar=(bar : String?)
       if bar.nil?
-        @bar_present = false
         return @bar = nil
       end
       @bar = bar
@@ -67,7 +59,6 @@ module PetStore
     # @param [Object] baz Object to be assigned
     def baz=(baz : String?)
       if baz.nil?
-        @baz_present = false
         return @baz = nil
       end
       @baz = baz
@@ -83,6 +74,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@bar, @bar_present, @baz, @baz_present)
+    def_equals_and_hash(@bar, @baz)
   end
 end

@@ -13,24 +13,17 @@ require "log"
 
 module PetStore
   # Model for testing model name starting with number
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class Model200Response
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
 
-    @[JSON::Field(key: "name", type: Int32?, default: nil, presence: true, ignore_serialize: name.nil? && !name_present?)]
+    @[JSON::Field(key: "name", type: Int32?, default: nil, required: false, nullable: false, emit_null: false)]
     getter name : Int32? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? name_present : Bool = false
-
-    @[JSON::Field(key: "class", type: String?, default: nil, presence: true, ignore_serialize: _class.nil? && !_class_present?)]
+    @[JSON::Field(key: "class", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _class : String? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? _class_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -60,7 +53,6 @@ module PetStore
     # @param [Object] name Object to be assigned
     def name=(name : Int32?)
       if name.nil?
-        @name_present = false
         return @name = nil
       end
       @name = name
@@ -68,7 +60,6 @@ module PetStore
     # @param [Object] _class Object to be assigned
     def _class=(_class : String?)
       if _class.nil?
-        @_class_present = false
         return @_class = nil
       end
       @_class = _class
@@ -84,6 +75,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@name, @name_present, @_class, @_class_present)
+    def_equals_and_hash(@name, @_class)
   end
 end

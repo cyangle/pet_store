@@ -12,30 +12,20 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class ArrayTest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
 
-    @[JSON::Field(key: "array_of_string", type: Array(String)?, default: nil, presence: true, ignore_serialize: array_of_string.nil? && !array_of_string_present?)]
+    @[JSON::Field(key: "array_of_string", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter array_of_string : Array(String)? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? array_of_string_present : Bool = false
-
-    @[JSON::Field(key: "array_array_of_integer", type: Array(Array(Int64))?, default: nil, presence: true, ignore_serialize: array_array_of_integer.nil? && !array_array_of_integer_present?)]
+    @[JSON::Field(key: "array_array_of_integer", type: Array(Array(Int64))?, default: nil, required: false, nullable: false, emit_null: false)]
     getter array_array_of_integer : Array(Array(Int64))? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? array_array_of_integer_present : Bool = false
-
-    @[JSON::Field(key: "array_array_of_model", type: Array(Array(ReadOnlyFirst))?, default: nil, presence: true, ignore_serialize: array_array_of_model.nil? && !array_array_of_model_present?)]
+    @[JSON::Field(key: "array_array_of_model", type: Array(Array(ReadOnlyFirst))?, default: nil, required: false, nullable: false, emit_null: false)]
     getter array_array_of_model : Array(Array(ReadOnlyFirst))? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? array_array_of_model_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -66,7 +56,6 @@ module PetStore
     # @param [Object] array_of_string Object to be assigned
     def array_of_string=(array_of_string : Array(String)?)
       if array_of_string.nil?
-        @array_of_string_present = false
         return @array_of_string = nil
       end
       @array_of_string = array_of_string
@@ -74,7 +63,6 @@ module PetStore
     # @param [Object] array_array_of_integer Object to be assigned
     def array_array_of_integer=(array_array_of_integer : Array(Array(Int64))?)
       if array_array_of_integer.nil?
-        @array_array_of_integer_present = false
         return @array_array_of_integer = nil
       end
       @array_array_of_integer = array_array_of_integer
@@ -82,7 +70,6 @@ module PetStore
     # @param [Object] array_array_of_model Object to be assigned
     def array_array_of_model=(array_array_of_model : Array(Array(ReadOnlyFirst))?)
       if array_array_of_model.nil?
-        @array_array_of_model_present = false
         return @array_array_of_model = nil
       end
       @array_array_of_model = array_array_of_model
@@ -98,6 +85,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@array_of_string, @array_of_string_present, @array_array_of_integer, @array_array_of_integer_present, @array_array_of_model, @array_array_of_model_present)
+    def_equals_and_hash(@array_of_string, @array_array_of_integer, @array_array_of_model)
   end
 end

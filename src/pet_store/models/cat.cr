@@ -12,40 +12,27 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class Cat
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
 
-    @[JSON::Field(key: "name", type: String?, default: nil, presence: true, ignore_serialize: name.nil? && !name_present?)]
+    @[JSON::Field(key: "name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter name : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? name_present : Bool = false
-
     # This is the name of the class
-    @[JSON::Field(key: "className", type: String?, default: nil, presence: true, ignore_serialize: class_name.nil? && !class_name_present?)]
+    @[JSON::Field(key: "className", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter class_name : String? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? class_name_present : Bool = false
 
     # Optional properties
 
-    @[JSON::Field(key: "declawed", type: Bool?, default: nil, presence: true, ignore_serialize: declawed.nil? && !declawed_present?)]
+    @[JSON::Field(key: "declawed", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter declawed : Bool? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? declawed_present : Bool = false
-
     # The color of the pet
-    @[JSON::Field(key: "color", type: String?, default: "red", presence: true, ignore_serialize: color.nil? && !color_present?)]
+    @[JSON::Field(key: "color", type: String?, default: "red", required: false, nullable: false, emit_null: false)]
     getter color : String? = "red"
-
-    @[JSON::Field(ignore: true)]
-    property? color_present : Bool = false
 
     # List of class defined in allOf (OpenAPI v3)
     def self.openapi_all_of
@@ -131,7 +118,6 @@ module PetStore
     # @param [Object] declawed Object to be assigned
     def declawed=(declawed : Bool?)
       if declawed.nil?
-        @declawed_present = false
         return @declawed = nil
       end
       @declawed = declawed
@@ -139,7 +125,6 @@ module PetStore
     # @param [Object] color Object to be assigned
     def color=(color : String?)
       if color.nil?
-        @color_present = false
         return @color = nil
       end
       @color = color
@@ -155,6 +140,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@name, @name_present, @class_name, @class_name_present, @declawed, @declawed_present, @color, @color_present)
+    def_equals_and_hash(@name, @class_name, @declawed, @color)
   end
 end

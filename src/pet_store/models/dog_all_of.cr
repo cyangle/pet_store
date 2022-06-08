@@ -12,18 +12,14 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class DogAllOf
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
 
-    @[JSON::Field(key: "breed", type: String?, default: nil, presence: true, ignore_serialize: breed.nil? && !breed_present?)]
+    @[JSON::Field(key: "breed", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter breed : String? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? breed_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -52,7 +48,6 @@ module PetStore
     # @param [Object] breed Object to be assigned
     def breed=(breed : String?)
       if breed.nil?
-        @breed_present = false
         return @breed = nil
       end
       @breed = breed
@@ -68,6 +63,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@breed, @breed_present)
+    def_equals_and_hash(@breed)
   end
 end

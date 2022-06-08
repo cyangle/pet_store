@@ -12,18 +12,14 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class NumberOnly
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
 
-    @[JSON::Field(key: "JustNumber", type: Float64?, default: nil, presence: true, ignore_serialize: just_number.nil? && !just_number_present?)]
+    @[JSON::Field(key: "JustNumber", type: Float64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter just_number : Float64? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? just_number_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -52,7 +48,6 @@ module PetStore
     # @param [Object] just_number Object to be assigned
     def just_number=(just_number : Float64?)
       if just_number.nil?
-        @just_number_present = false
         return @just_number = nil
       end
       @just_number = just_number
@@ -68,6 +63,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@just_number, @just_number_present)
+    def_equals_and_hash(@just_number)
   end
 end

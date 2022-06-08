@@ -12,18 +12,14 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class SpecialModelName
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
 
-    @[JSON::Field(key: "$special[property.name]", type: Int64?, default: nil, presence: true, ignore_serialize: special_property_name.nil? && !special_property_name_present?)]
+    @[JSON::Field(key: "$special[property.name]", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter special_property_name : Int64? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? special_property_name_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -52,7 +48,6 @@ module PetStore
     # @param [Object] special_property_name Object to be assigned
     def special_property_name=(special_property_name : Int64?)
       if special_property_name.nil?
-        @special_property_name_present = false
         return @special_property_name = nil
       end
       @special_property_name = special_property_name
@@ -68,6 +63,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@special_property_name, @special_property_name_present)
+    def_equals_and_hash(@special_property_name)
   end
 end

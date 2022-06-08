@@ -12,30 +12,20 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class MixedPropertiesAndAdditionalPropertiesClass
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
 
-    @[JSON::Field(key: "uuid", type: String?, default: nil, presence: true, ignore_serialize: uuid.nil? && !uuid_present?)]
+    @[JSON::Field(key: "uuid", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter uuid : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? uuid_present : Bool = false
-
-    @[JSON::Field(key: "dateTime", type: Time?, default: nil, presence: true, ignore_serialize: date_time.nil? && !date_time_present?, converter: Time::RFC3339Converter)]
+    @[JSON::Field(key: "dateTime", type: Time?, default: nil, required: false, nullable: false, emit_null: false, converter: Time::RFC3339Converter)]
     getter date_time : Time? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? date_time_present : Bool = false
-
-    @[JSON::Field(key: "map", type: Hash(String, Animal)?, default: nil, presence: true, ignore_serialize: map.nil? && !map_present?)]
+    @[JSON::Field(key: "map", type: Hash(String, Animal)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter map : Hash(String, Animal)? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? map_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -66,7 +56,6 @@ module PetStore
     # @param [Object] uuid Object to be assigned
     def uuid=(uuid : String?)
       if uuid.nil?
-        @uuid_present = false
         return @uuid = nil
       end
       @uuid = uuid
@@ -74,7 +63,6 @@ module PetStore
     # @param [Object] date_time Object to be assigned
     def date_time=(date_time : Time?)
       if date_time.nil?
-        @date_time_present = false
         return @date_time = nil
       end
       @date_time = date_time
@@ -82,7 +70,6 @@ module PetStore
     # @param [Object] map Object to be assigned
     def map=(map : Hash(String, Animal)?)
       if map.nil?
-        @map_present = false
         return @map = nil
       end
       @map = map
@@ -98,6 +85,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@uuid, @uuid_present, @date_time, @date_time_present, @map, @map_present)
+    def_equals_and_hash(@uuid, @date_time, @map)
   end
 end

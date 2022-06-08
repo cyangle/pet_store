@@ -12,24 +12,17 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class FileSchemaTestClass
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
 
-    @[JSON::Field(key: "file", type: File?, default: nil, presence: true, ignore_serialize: file.nil? && !file_present?)]
+    @[JSON::Field(key: "file", type: File?, default: nil, required: false, nullable: false, emit_null: false)]
     getter file : File? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? file_present : Bool = false
-
-    @[JSON::Field(key: "files", type: Array(File)?, default: nil, presence: true, ignore_serialize: files.nil? && !files_present?)]
+    @[JSON::Field(key: "files", type: Array(File)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter files : Array(File)? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? files_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -59,7 +52,6 @@ module PetStore
     # @param [Object] file Object to be assigned
     def file=(file : File?)
       if file.nil?
-        @file_present = false
         return @file = nil
       end
       @file = file
@@ -67,7 +59,6 @@ module PetStore
     # @param [Object] files Object to be assigned
     def files=(files : Array(File)?)
       if files.nil?
-        @files_present = false
         return @files = nil
       end
       @files = files
@@ -83,6 +74,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@file, @file_present, @files, @files_present)
+    def_equals_and_hash(@file, @files)
   end
 end

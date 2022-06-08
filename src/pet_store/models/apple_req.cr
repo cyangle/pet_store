@@ -12,26 +12,19 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class AppleReq
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
 
-    @[JSON::Field(key: "cultivar", type: String?, default: nil, presence: true, ignore_serialize: cultivar.nil? && !cultivar_present?)]
+    @[JSON::Field(key: "cultivar", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter cultivar : String? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? cultivar_present : Bool = false
 
     # Optional properties
 
-    @[JSON::Field(key: "mealy", type: Bool?, default: nil, presence: true, ignore_serialize: mealy.nil? && !mealy_present?)]
+    @[JSON::Field(key: "mealy", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter mealy : Bool? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? mealy_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -72,7 +65,6 @@ module PetStore
     # @param [Object] mealy Object to be assigned
     def mealy=(mealy : Bool?)
       if mealy.nil?
-        @mealy_present = false
         return @mealy = nil
       end
       @mealy = mealy
@@ -88,6 +80,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@cultivar, @cultivar_present, @mealy, @mealy_present)
+    def_equals_and_hash(@cultivar, @mealy)
   end
 end

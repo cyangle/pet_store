@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class Animal
     include JSON::Serializable
     include JSON::Serializable::Unmapped
@@ -20,20 +19,14 @@ module PetStore
     # Required properties
 
     # This is the name of the class
-    @[JSON::Field(key: "className", type: String?, default: nil, presence: true, ignore_serialize: class_name.nil? && !class_name_present?)]
+    @[JSON::Field(key: "className", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter class_name : String? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? class_name_present : Bool = false
 
     # Optional properties
 
     # The color of the pet
-    @[JSON::Field(key: "color", type: String?, default: "red", presence: true, ignore_serialize: color.nil? && !color_present?)]
+    @[JSON::Field(key: "color", type: String?, default: "red", required: false, nullable: false, emit_null: false)]
     getter color : String? = "red"
-
-    @[JSON::Field(ignore: true)]
-    property? color_present : Bool = false
 
     # discriminator's property name in OpenAPI v3
     def self.openapi_discriminator_name
@@ -92,7 +85,6 @@ module PetStore
     # @param [Object] color Object to be assigned
     def color=(color : String?)
       if color.nil?
-        @color_present = false
         return @color = nil
       end
       @color = color
@@ -108,6 +100,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@class_name, @class_name_present, @color, @color_present)
+    def_equals_and_hash(@class_name, @color)
   end
 end

@@ -12,18 +12,14 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class Client
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
 
-    @[JSON::Field(key: "client", type: String?, default: nil, presence: true, ignore_serialize: client.nil? && !client_present?)]
+    @[JSON::Field(key: "client", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter client : String? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? client_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -52,7 +48,6 @@ module PetStore
     # @param [Object] client Object to be assigned
     def client=(client : String?)
       if client.nil?
-        @client_present = false
         return @client = nil
       end
       @client = client
@@ -68,6 +63,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@client, @client_present)
+    def_equals_and_hash(@client)
   end
 end

@@ -12,26 +12,19 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class Category
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
 
-    @[JSON::Field(key: "name", type: String?, default: "default-name", presence: true, ignore_serialize: name.nil? && !name_present?)]
+    @[JSON::Field(key: "name", type: String?, default: "default-name", required: true, nullable: false, emit_null: false)]
     getter name : String? = "default-name"
-
-    @[JSON::Field(ignore: true)]
-    property? name_present : Bool = false
 
     # Optional properties
 
-    @[JSON::Field(key: "id", type: Int64?, default: nil, presence: true, ignore_serialize: id.nil? && !id_present?)]
+    @[JSON::Field(key: "id", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter id : Int64? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? id_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -72,7 +65,6 @@ module PetStore
     # @param [Object] id Object to be assigned
     def id=(id : Int64?)
       if id.nil?
-        @id_present = false
         return @id = nil
       end
       @id = id
@@ -88,6 +80,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@name, @name_present, @id, @id_present)
+    def_equals_and_hash(@name, @id)
   end
 end

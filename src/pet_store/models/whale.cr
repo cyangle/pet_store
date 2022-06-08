@@ -12,32 +12,22 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class Whale
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
 
-    @[JSON::Field(key: "className", type: String?, default: nil, presence: true, ignore_serialize: class_name.nil? && !class_name_present?)]
+    @[JSON::Field(key: "className", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter class_name : String? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? class_name_present : Bool = false
 
     # Optional properties
 
-    @[JSON::Field(key: "hasBaleen", type: Bool?, default: nil, presence: true, ignore_serialize: has_baleen.nil? && !has_baleen_present?)]
+    @[JSON::Field(key: "hasBaleen", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter has_baleen : Bool? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? has_baleen_present : Bool = false
-
-    @[JSON::Field(key: "hasTeeth", type: Bool?, default: nil, presence: true, ignore_serialize: has_teeth.nil? && !has_teeth_present?)]
+    @[JSON::Field(key: "hasTeeth", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter has_teeth : Bool? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? has_teeth_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -79,7 +69,6 @@ module PetStore
     # @param [Object] has_baleen Object to be assigned
     def has_baleen=(has_baleen : Bool?)
       if has_baleen.nil?
-        @has_baleen_present = false
         return @has_baleen = nil
       end
       @has_baleen = has_baleen
@@ -87,7 +76,6 @@ module PetStore
     # @param [Object] has_teeth Object to be assigned
     def has_teeth=(has_teeth : Bool?)
       if has_teeth.nil?
-        @has_teeth_present = false
         return @has_teeth = nil
       end
       @has_teeth = has_teeth
@@ -103,6 +91,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@class_name, @class_name_present, @has_baleen, @has_baleen_present, @has_teeth, @has_teeth_present)
+    def_equals_and_hash(@class_name, @has_baleen, @has_teeth)
   end
 end

@@ -13,38 +13,25 @@ require "log"
 
 module PetStore
   # Model for testing model name same as property name
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class Name
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
 
-    @[JSON::Field(key: "name", type: Int32?, default: nil, presence: true, ignore_serialize: name.nil? && !name_present?)]
+    @[JSON::Field(key: "name", type: Int32?, default: nil, required: true, nullable: false, emit_null: false)]
     getter name : Int32? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? name_present : Bool = false
 
     # Optional properties
 
-    @[JSON::Field(key: "snake_case", type: Int32?, default: nil, presence: true, ignore_serialize: snake_case.nil? && !snake_case_present?)]
+    @[JSON::Field(key: "snake_case", type: Int32?, default: nil, required: false, nullable: false, emit_null: false)]
     getter snake_case : Int32? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? snake_case_present : Bool = false
-
-    @[JSON::Field(key: "property", type: String?, default: nil, presence: true, ignore_serialize: property.nil? && !property_present?)]
+    @[JSON::Field(key: "property", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter property : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? property_present : Bool = false
-
-    @[JSON::Field(key: "123Number", type: Int32?, default: nil, presence: true, ignore_serialize: _123_number.nil? && !_123_number_present?)]
+    @[JSON::Field(key: "123Number", type: Int32?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _123_number : Int32? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? _123_number_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -87,7 +74,6 @@ module PetStore
     # @param [Object] snake_case Object to be assigned
     def snake_case=(snake_case : Int32?)
       if snake_case.nil?
-        @snake_case_present = false
         return @snake_case = nil
       end
       @snake_case = snake_case
@@ -95,7 +81,6 @@ module PetStore
     # @param [Object] property Object to be assigned
     def property=(property : String?)
       if property.nil?
-        @property_present = false
         return @property = nil
       end
       @property = property
@@ -103,7 +88,6 @@ module PetStore
     # @param [Object] _123_number Object to be assigned
     def _123_number=(_123_number : Int32?)
       if _123_number.nil?
-        @_123_number_present = false
         return @_123_number = nil
       end
       @_123_number = _123_number
@@ -119,6 +103,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@name, @name_present, @snake_case, @snake_case_present, @property, @property_present, @_123_number, @_123_number_present)
+    def_equals_and_hash(@name, @snake_case, @property, @_123_number)
   end
 end

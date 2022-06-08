@@ -12,90 +12,105 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class NullableClass
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+    # Required properties
+
+    @[JSON::Field(key: "required_nullable_prop", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
+    getter required_nullable_prop : String? = nil
+
+    @[JSON::Field(key: "required_non_nullable_prop", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter required_non_nullable_prop : String? = nil
+
     # Optional properties
 
-    @[JSON::Field(key: "integer_prop", type: Int32?, default: nil, presence: true, ignore_serialize: integer_prop.nil? && !integer_prop_present?)]
+    @[JSON::Field(key: "optional_nullable_prop", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: optional_nullable_prop.nil? && !optional_nullable_prop_present?)]
+    getter optional_nullable_prop : String? = nil
+
+    @[JSON::Field(ignore: true)]
+    property? optional_nullable_prop_present : Bool = false
+
+    @[JSON::Field(key: "optional_non_nullable_prop", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter optional_non_nullable_prop : String? = nil
+
+    @[JSON::Field(key: "integer_prop", type: Int32?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: integer_prop.nil? && !integer_prop_present?)]
     getter integer_prop : Int32? = nil
 
     @[JSON::Field(ignore: true)]
     property? integer_prop_present : Bool = false
 
-    @[JSON::Field(key: "number_prop", type: Float64?, default: nil, presence: true, ignore_serialize: number_prop.nil? && !number_prop_present?)]
+    @[JSON::Field(key: "number_prop", type: Float64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: number_prop.nil? && !number_prop_present?)]
     getter number_prop : Float64? = nil
 
     @[JSON::Field(ignore: true)]
     property? number_prop_present : Bool = false
 
-    @[JSON::Field(key: "boolean_prop", type: Bool?, default: false, presence: true, ignore_serialize: boolean_prop.nil? && !boolean_prop_present?)]
+    @[JSON::Field(key: "boolean_prop", type: Bool?, default: false, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: boolean_prop.nil? && !boolean_prop_present?)]
     getter boolean_prop : Bool? = false
 
     @[JSON::Field(ignore: true)]
     property? boolean_prop_present : Bool = false
 
-    @[JSON::Field(key: "string_prop", type: String?, default: nil, presence: true, ignore_serialize: string_prop.nil? && !string_prop_present?)]
+    @[JSON::Field(key: "string_prop", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: string_prop.nil? && !string_prop_present?)]
     getter string_prop : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? string_prop_present : Bool = false
 
-    @[JSON::Field(key: "date_prop", type: Time?, default: nil, presence: true, ignore_serialize: date_prop.nil? && !date_prop_present?, converter: Time::ISO8601DateConverter)]
+    @[JSON::Field(key: "date_prop", type: Time?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: date_prop.nil? && !date_prop_present?, converter: Time::ISO8601DateConverter)]
     getter date_prop : Time? = nil
 
     @[JSON::Field(ignore: true)]
     property? date_prop_present : Bool = false
 
-    @[JSON::Field(key: "datetime_prop", type: Time?, default: nil, presence: true, ignore_serialize: datetime_prop.nil? && !datetime_prop_present?, converter: Time::RFC3339Converter)]
+    @[JSON::Field(key: "datetime_prop", type: Time?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: datetime_prop.nil? && !datetime_prop_present?, converter: Time::RFC3339Converter)]
     getter datetime_prop : Time? = nil
 
     @[JSON::Field(ignore: true)]
     property? datetime_prop_present : Bool = false
 
-    @[JSON::Field(key: "array_nullable_prop", type: Array(JSON::Any)?, default: nil, presence: true, ignore_serialize: array_nullable_prop.nil? && !array_nullable_prop_present?)]
+    @[JSON::Field(key: "array_nullable_prop", type: Array(JSON::Any)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: array_nullable_prop.nil? && !array_nullable_prop_present?)]
     getter array_nullable_prop : Array(JSON::Any)? = nil
 
     @[JSON::Field(ignore: true)]
     property? array_nullable_prop_present : Bool = false
 
-    @[JSON::Field(key: "array_and_items_nullable_prop", type: Array(JSON::Any)?, default: nil, presence: true, ignore_serialize: array_and_items_nullable_prop.nil? && !array_and_items_nullable_prop_present?)]
+    @[JSON::Field(key: "array_and_items_nullable_prop", type: Array(JSON::Any)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: array_and_items_nullable_prop.nil? && !array_and_items_nullable_prop_present?)]
     getter array_and_items_nullable_prop : Array(JSON::Any)? = nil
 
     @[JSON::Field(ignore: true)]
     property? array_and_items_nullable_prop_present : Bool = false
 
-    @[JSON::Field(key: "array_items_nullable", type: Array(JSON::Any)?, default: nil, presence: true, ignore_serialize: array_items_nullable.nil? && !array_items_nullable_present?)]
+    @[JSON::Field(key: "array_items_nullable", type: Array(JSON::Any)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter array_items_nullable : Array(JSON::Any)? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? array_items_nullable_present : Bool = false
-
-    @[JSON::Field(key: "object_nullable_prop", type: Hash(String, JSON::Any)?, default: nil, presence: true, ignore_serialize: object_nullable_prop.nil? && !object_nullable_prop_present?)]
+    @[JSON::Field(key: "object_nullable_prop", type: Hash(String, JSON::Any)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: object_nullable_prop.nil? && !object_nullable_prop_present?)]
     getter object_nullable_prop : Hash(String, JSON::Any)? = nil
 
     @[JSON::Field(ignore: true)]
     property? object_nullable_prop_present : Bool = false
 
-    @[JSON::Field(key: "object_and_items_nullable_prop", type: Hash(String, JSON::Any)?, default: nil, presence: true, ignore_serialize: object_and_items_nullable_prop.nil? && !object_and_items_nullable_prop_present?)]
+    @[JSON::Field(key: "object_and_items_nullable_prop", type: Hash(String, JSON::Any)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: object_and_items_nullable_prop.nil? && !object_and_items_nullable_prop_present?)]
     getter object_and_items_nullable_prop : Hash(String, JSON::Any)? = nil
 
     @[JSON::Field(ignore: true)]
     property? object_and_items_nullable_prop_present : Bool = false
 
-    @[JSON::Field(key: "object_items_nullable", type: Hash(String, JSON::Any)?, default: nil, presence: true, ignore_serialize: object_items_nullable.nil? && !object_items_nullable_present?)]
+    @[JSON::Field(key: "object_items_nullable", type: Hash(String, JSON::Any)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter object_items_nullable : Hash(String, JSON::Any)? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? object_items_nullable_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
+      # Required properties
+      @required_nullable_prop : String? = nil,
+      @required_non_nullable_prop : String? = nil,
       # Optional properties
+      @optional_nullable_prop : String? = nil,
+      @optional_non_nullable_prop : String? = nil,
       @integer_prop : Int32? = nil,
       @number_prop : Float64? = nil,
       @boolean_prop : Bool? = false,
@@ -115,6 +130,7 @@ module PetStore
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+      invalid_properties.push("\"required_non_nullable_prop\" is required and cannot be null") if @required_non_nullable_prop.nil?
 
       invalid_properties
     end
@@ -122,14 +138,43 @@ module PetStore
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @required_non_nullable_prop.nil?
+
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] required_nullable_prop Object to be assigned
+    def required_nullable_prop=(required_nullable_prop : String?)
+      if required_nullable_prop.nil?
+        return @required_nullable_prop = nil
+      end
+      @required_nullable_prop = required_nullable_prop
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] required_non_nullable_prop Object to be assigned
+    def required_non_nullable_prop=(required_non_nullable_prop : String?)
+      if required_non_nullable_prop.nil?
+        raise ArgumentError.new("\"required_non_nullable_prop\" is required and cannot be null")
+      end
+      @required_non_nullable_prop = required_non_nullable_prop
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] optional_nullable_prop Object to be assigned
+    def optional_nullable_prop=(optional_nullable_prop : String?)
+      if optional_nullable_prop.nil?
+        return @optional_nullable_prop = nil
+      end
+      @optional_nullable_prop = optional_nullable_prop
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] optional_non_nullable_prop Object to be assigned
+    def optional_non_nullable_prop=(optional_non_nullable_prop : String?)
+      if optional_non_nullable_prop.nil?
+        return @optional_non_nullable_prop = nil
+      end
+      @optional_non_nullable_prop = optional_non_nullable_prop
+    end # Custom attribute writer method checking allowed values (enum).
     # @param [Object] integer_prop Object to be assigned
     def integer_prop=(integer_prop : Int32?)
       if integer_prop.nil?
-        @integer_prop_present = false
         return @integer_prop = nil
       end
       @integer_prop = integer_prop
@@ -137,7 +182,6 @@ module PetStore
     # @param [Object] number_prop Object to be assigned
     def number_prop=(number_prop : Float64?)
       if number_prop.nil?
-        @number_prop_present = false
         return @number_prop = nil
       end
       @number_prop = number_prop
@@ -145,7 +189,6 @@ module PetStore
     # @param [Object] boolean_prop Object to be assigned
     def boolean_prop=(boolean_prop : Bool?)
       if boolean_prop.nil?
-        @boolean_prop_present = false
         return @boolean_prop = nil
       end
       @boolean_prop = boolean_prop
@@ -153,7 +196,6 @@ module PetStore
     # @param [Object] string_prop Object to be assigned
     def string_prop=(string_prop : String?)
       if string_prop.nil?
-        @string_prop_present = false
         return @string_prop = nil
       end
       @string_prop = string_prop
@@ -161,7 +203,6 @@ module PetStore
     # @param [Object] date_prop Object to be assigned
     def date_prop=(date_prop : Time?)
       if date_prop.nil?
-        @date_prop_present = false
         return @date_prop = nil
       end
       @date_prop = date_prop
@@ -169,7 +210,6 @@ module PetStore
     # @param [Object] datetime_prop Object to be assigned
     def datetime_prop=(datetime_prop : Time?)
       if datetime_prop.nil?
-        @datetime_prop_present = false
         return @datetime_prop = nil
       end
       @datetime_prop = datetime_prop
@@ -177,7 +217,6 @@ module PetStore
     # @param [Object] array_nullable_prop Object to be assigned
     def array_nullable_prop=(array_nullable_prop : Array(JSON::Any)?)
       if array_nullable_prop.nil?
-        @array_nullable_prop_present = false
         return @array_nullable_prop = nil
       end
       @array_nullable_prop = array_nullable_prop
@@ -185,7 +224,6 @@ module PetStore
     # @param [Object] array_and_items_nullable_prop Object to be assigned
     def array_and_items_nullable_prop=(array_and_items_nullable_prop : Array(JSON::Any)?)
       if array_and_items_nullable_prop.nil?
-        @array_and_items_nullable_prop_present = false
         return @array_and_items_nullable_prop = nil
       end
       @array_and_items_nullable_prop = array_and_items_nullable_prop
@@ -193,7 +231,6 @@ module PetStore
     # @param [Object] array_items_nullable Object to be assigned
     def array_items_nullable=(array_items_nullable : Array(JSON::Any)?)
       if array_items_nullable.nil?
-        @array_items_nullable_present = false
         return @array_items_nullable = nil
       end
       @array_items_nullable = array_items_nullable
@@ -201,7 +238,6 @@ module PetStore
     # @param [Object] object_nullable_prop Object to be assigned
     def object_nullable_prop=(object_nullable_prop : Hash(String, JSON::Any)?)
       if object_nullable_prop.nil?
-        @object_nullable_prop_present = false
         return @object_nullable_prop = nil
       end
       @object_nullable_prop = object_nullable_prop
@@ -209,7 +245,6 @@ module PetStore
     # @param [Object] object_and_items_nullable_prop Object to be assigned
     def object_and_items_nullable_prop=(object_and_items_nullable_prop : Hash(String, JSON::Any)?)
       if object_and_items_nullable_prop.nil?
-        @object_and_items_nullable_prop_present = false
         return @object_and_items_nullable_prop = nil
       end
       @object_and_items_nullable_prop = object_and_items_nullable_prop
@@ -217,7 +252,6 @@ module PetStore
     # @param [Object] object_items_nullable Object to be assigned
     def object_items_nullable=(object_items_nullable : Hash(String, JSON::Any)?)
       if object_items_nullable.nil?
-        @object_items_nullable_present = false
         return @object_items_nullable = nil
       end
       @object_items_nullable = object_items_nullable
@@ -233,6 +267,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@integer_prop, @integer_prop_present, @number_prop, @number_prop_present, @boolean_prop, @boolean_prop_present, @string_prop, @string_prop_present, @date_prop, @date_prop_present, @datetime_prop, @datetime_prop_present, @array_nullable_prop, @array_nullable_prop_present, @array_and_items_nullable_prop, @array_and_items_nullable_prop_present, @array_items_nullable, @array_items_nullable_present, @object_nullable_prop, @object_nullable_prop_present, @object_and_items_nullable_prop, @object_and_items_nullable_prop_present, @object_items_nullable, @object_items_nullable_present)
+    def_equals_and_hash(@required_nullable_prop, @required_non_nullable_prop, @optional_nullable_prop, @optional_nullable_prop_present, @optional_non_nullable_prop, @integer_prop, @integer_prop_present, @number_prop, @number_prop_present, @boolean_prop, @boolean_prop_present, @string_prop, @string_prop_present, @date_prop, @date_prop_present, @datetime_prop, @datetime_prop_present, @array_nullable_prop, @array_nullable_prop_present, @array_and_items_nullable_prop, @array_and_items_nullable_prop_present, @array_items_nullable, @object_nullable_prop, @object_nullable_prop_present, @object_and_items_nullable_prop, @object_and_items_nullable_prop_present, @object_items_nullable)
   end
 end

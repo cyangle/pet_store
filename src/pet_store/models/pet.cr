@@ -12,51 +12,32 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class Pet
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
 
-    @[JSON::Field(key: "name", type: String?, default: nil, presence: true, ignore_serialize: name.nil? && !name_present?)]
+    @[JSON::Field(key: "name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter name : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? name_present : Bool = false
-
-    @[JSON::Field(key: "photoUrls", type: Array(String)?, default: nil, presence: true, ignore_serialize: photo_urls.nil? && !photo_urls_present?)]
+    @[JSON::Field(key: "photoUrls", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter photo_urls : Array(String)? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? photo_urls_present : Bool = false
 
     # Optional properties
 
-    @[JSON::Field(key: "id", type: Int64?, default: nil, presence: true, ignore_serialize: id.nil? && !id_present?)]
+    @[JSON::Field(key: "id", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter id : Int64? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? id_present : Bool = false
-
-    @[JSON::Field(key: "category", type: Category?, default: nil, presence: true, ignore_serialize: category.nil? && !category_present?)]
+    @[JSON::Field(key: "category", type: Category?, default: nil, required: false, nullable: false, emit_null: false)]
     getter category : Category? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? category_present : Bool = false
-
-    @[JSON::Field(key: "tags", type: Array(Tag)?, default: nil, presence: true, ignore_serialize: tags.nil? && !tags_present?)]
+    @[JSON::Field(key: "tags", type: Array(Tag)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tags : Array(Tag)? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? tags_present : Bool = false
-
     # pet status in the store
-    @[JSON::Field(key: "status", type: String?, default: nil, presence: true, ignore_serialize: status.nil? && !status_present?)]
+    @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter status : String? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? status_present : Bool = false
 
     ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["available", "pending", "sold"])
 
@@ -115,7 +96,6 @@ module PetStore
     # @param [Object] id Object to be assigned
     def id=(id : Int64?)
       if id.nil?
-        @id_present = false
         return @id = nil
       end
       @id = id
@@ -123,7 +103,6 @@ module PetStore
     # @param [Object] category Object to be assigned
     def category=(category : Category?)
       if category.nil?
-        @category_present = false
         return @category = nil
       end
       @category = category
@@ -131,7 +110,6 @@ module PetStore
     # @param [Object] tags Object to be assigned
     def tags=(tags : Array(Tag)?)
       if tags.nil?
-        @tags_present = false
         return @tags = nil
       end
       @tags = tags
@@ -139,7 +117,6 @@ module PetStore
     # @param [Object] status Object to be assigned
     def status=(status : String?)
       if status.nil?
-        @status_present = false
         return @status = nil
       end
       _status = status.not_nil!
@@ -157,6 +134,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@name, @name_present, @photo_urls, @photo_urls_present, @id, @id_present, @category, @category_present, @tags, @tags_present, @status, @status_present)
+    def_equals_and_hash(@name, @photo_urls, @id, @category, @tags, @status)
   end
 end

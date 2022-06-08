@@ -12,30 +12,20 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class GmFruit
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
 
-    @[JSON::Field(key: "color", type: String?, default: nil, presence: true, ignore_serialize: color.nil? && !color_present?)]
+    @[JSON::Field(key: "color", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     property color : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? color_present : Bool = false
-
-    @[JSON::Field(key: "cultivar", type: String?, default: nil, presence: true, ignore_serialize: cultivar.nil? && !cultivar_present?)]
+    @[JSON::Field(key: "cultivar", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     property cultivar : String? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? cultivar_present : Bool = false
-
-    @[JSON::Field(key: "lengthCm", type: Float64?, default: nil, presence: true, ignore_serialize: length_cm.nil? && !length_cm_present?)]
+    @[JSON::Field(key: "lengthCm", type: Float64?, default: nil, required: true, nullable: false, emit_null: false)]
     property length_cm : Float64? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? length_cm_present : Bool = false
 
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
@@ -92,6 +82,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@color, @color_present, @cultivar, @cultivar_present, @length_cm, @length_cm_present)
+    def_equals_and_hash(@color, @cultivar, @length_cm)
   end
 end

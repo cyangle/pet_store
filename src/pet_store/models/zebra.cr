@@ -12,26 +12,19 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class Zebra
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
 
-    @[JSON::Field(key: "className", type: String?, default: nil, presence: true, ignore_serialize: class_name.nil? && !class_name_present?)]
+    @[JSON::Field(key: "className", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter class_name : String? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? class_name_present : Bool = false
 
     # Optional properties
 
-    @[JSON::Field(key: "type", type: String?, default: nil, presence: true, ignore_serialize: _type.nil? && !_type_present?)]
+    @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? _type_present : Bool = false
 
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["plains", "mountain", "grevys"])
 
@@ -77,7 +70,6 @@ module PetStore
     # @param [Object] _type Object to be assigned
     def _type=(_type : String?)
       if _type.nil?
-        @_type_present = false
         return @_type = nil
       end
       __type = _type.not_nil!
@@ -95,6 +87,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@class_name, @class_name_present, @_type, @_type_present)
+    def_equals_and_hash(@class_name, @_type)
   end
 end

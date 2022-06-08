@@ -12,18 +12,14 @@ require "time"
 require "log"
 
 module PetStore
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class ArrayOfArrayOfNumberOnly
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
 
-    @[JSON::Field(key: "ArrayArrayNumber", type: Array(Array(Float64))?, default: nil, presence: true, ignore_serialize: array_array_number.nil? && !array_array_number_present?)]
+    @[JSON::Field(key: "ArrayArrayNumber", type: Array(Array(Float64))?, default: nil, required: false, nullable: false, emit_null: false)]
     getter array_array_number : Array(Array(Float64))? = nil
-
-    @[JSON::Field(ignore: true)]
-    property? array_array_number_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -52,7 +48,6 @@ module PetStore
     # @param [Object] array_array_number Object to be assigned
     def array_array_number=(array_array_number : Array(Array(Float64))?)
       if array_array_number.nil?
-        @array_array_number_present = false
         return @array_array_number = nil
       end
       @array_array_number = array_array_number
@@ -68,6 +63,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@array_array_number, @array_array_number_present)
+    def_equals_and_hash(@array_array_number)
   end
 end
