@@ -19,13 +19,16 @@ module PetStore
 
     # Required properties
 
-    @[JSON::Field(key: "className", type: String)]
-    property class_name : String
+    @[JSON::Field(key: "className", type: String?, default: nil, presence: true, ignore_serialize: class_name.nil? && !class_name_present?)]
+    getter class_name : String? = nil
+
+    @[JSON::Field(ignore: true)]
+    property? class_name_present : Bool = false
 
     # Optional properties
 
-    @[JSON::Field(key: "type", type: String?, presence: true, ignore_serialize: _type.nil? && !_type_present?)]
-    getter _type : String?
+    @[JSON::Field(key: "type", type: String?, default: nil, presence: true, ignore_serialize: _type.nil? && !_type_present?)]
+    getter _type : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? _type_present : Bool = false
@@ -37,7 +40,7 @@ module PetStore
     def initialize(
       *,
       # Required properties
-      @class_name : String,
+      @class_name : String? = nil,
       # Optional properties
       @_type : String? = nil
     )
@@ -47,6 +50,7 @@ module PetStore
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+      invalid_properties.push("\"class_name\" is required and cannot be null") if @class_name.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
 
@@ -56,15 +60,28 @@ module PetStore
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @class_name.nil?
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
 
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] class_name Object to be assigned
+    def class_name=(class_name : String?)
+      if class_name.nil?
+        raise ArgumentError.new("\"class_name\" is required and cannot be null")
+      end
+      @class_name = class_name
+    end # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
     def _type=(_type : String?)
-      ENUM_VALIDATOR_FOR__TYPE.valid!(_type)
+      if _type.nil?
+        @_type_present = false
+        return @_type = nil
+      end
+      __type = _type.not_nil!
+      ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
       @_type = _type
     end
 
@@ -78,6 +95,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@class_name, @_type, @_type_present)
+    def_equals_and_hash(@class_name, @class_name_present, @_type, @_type_present)
   end
 end

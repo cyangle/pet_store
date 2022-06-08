@@ -19,20 +19,20 @@ module PetStore
 
     # Optional properties
 
-    @[JSON::Field(key: "my_number", type: Float64?, presence: true, ignore_serialize: my_number.nil? && !my_number_present?)]
-    property my_number : Float64?
+    @[JSON::Field(key: "my_number", type: Float64?, default: nil, presence: true, ignore_serialize: my_number.nil? && !my_number_present?)]
+    getter my_number : Float64? = nil
 
     @[JSON::Field(ignore: true)]
     property? my_number_present : Bool = false
 
-    @[JSON::Field(key: "my_string", type: String?, presence: true, ignore_serialize: my_string.nil? && !my_string_present?)]
-    property my_string : String?
+    @[JSON::Field(key: "my_string", type: String?, default: nil, presence: true, ignore_serialize: my_string.nil? && !my_string_present?)]
+    getter my_string : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? my_string_present : Bool = false
 
-    @[JSON::Field(key: "my_boolean", type: Bool?, presence: true, ignore_serialize: my_boolean.nil? && !my_boolean_present?)]
-    property my_boolean : Bool?
+    @[JSON::Field(key: "my_boolean", type: Bool?, default: nil, presence: true, ignore_serialize: my_boolean.nil? && !my_boolean_present?)]
+    getter my_boolean : Bool? = nil
 
     @[JSON::Field(ignore: true)]
     property? my_boolean_present : Bool = false
@@ -60,6 +60,32 @@ module PetStore
     # @return true if the model is valid
     def valid?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] my_number Object to be assigned
+    def my_number=(my_number : Float64?)
+      if my_number.nil?
+        @my_number_present = false
+        return @my_number = nil
+      end
+      @my_number = my_number
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] my_string Object to be assigned
+    def my_string=(my_string : String?)
+      if my_string.nil?
+        @my_string_present = false
+        return @my_string = nil
+      end
+      @my_string = my_string
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] my_boolean Object to be assigned
+    def my_boolean=(my_boolean : Bool?)
+      if my_boolean.nil?
+        @my_boolean_present = false
+        return @my_boolean = nil
+      end
+      @my_boolean = my_boolean
     end
 
     # @see the `==` method

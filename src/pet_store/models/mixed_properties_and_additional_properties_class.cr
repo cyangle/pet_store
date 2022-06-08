@@ -19,20 +19,20 @@ module PetStore
 
     # Optional properties
 
-    @[JSON::Field(key: "uuid", type: String?, presence: true, ignore_serialize: uuid.nil? && !uuid_present?)]
-    property uuid : String?
+    @[JSON::Field(key: "uuid", type: String?, default: nil, presence: true, ignore_serialize: uuid.nil? && !uuid_present?)]
+    getter uuid : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? uuid_present : Bool = false
 
-    @[JSON::Field(key: "dateTime", type: Time?, converter: Time::RFC3339Converter, presence: true, ignore_serialize: date_time.nil? && !date_time_present?)]
-    property date_time : Time?
+    @[JSON::Field(key: "dateTime", type: Time?, default: nil, presence: true, ignore_serialize: date_time.nil? && !date_time_present?, converter: Time::RFC3339Converter)]
+    getter date_time : Time? = nil
 
     @[JSON::Field(ignore: true)]
     property? date_time_present : Bool = false
 
-    @[JSON::Field(key: "map", type: Hash(String, Animal)?, presence: true, ignore_serialize: map.nil? && !map_present?)]
-    property map : Hash(String, Animal)?
+    @[JSON::Field(key: "map", type: Hash(String, Animal)?, default: nil, presence: true, ignore_serialize: map.nil? && !map_present?)]
+    getter map : Hash(String, Animal)? = nil
 
     @[JSON::Field(ignore: true)]
     property? map_present : Bool = false
@@ -60,6 +60,32 @@ module PetStore
     # @return true if the model is valid
     def valid?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] uuid Object to be assigned
+    def uuid=(uuid : String?)
+      if uuid.nil?
+        @uuid_present = false
+        return @uuid = nil
+      end
+      @uuid = uuid
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] date_time Object to be assigned
+    def date_time=(date_time : Time?)
+      if date_time.nil?
+        @date_time_present = false
+        return @date_time = nil
+      end
+      @date_time = date_time
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] map Object to be assigned
+    def map=(map : Hash(String, Animal)?)
+      if map.nil?
+        @map_present = false
+        return @map = nil
+      end
+      @map = map
     end
 
     # @see the `==` method

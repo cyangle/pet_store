@@ -19,14 +19,14 @@ module PetStore
 
     # Optional properties
 
-    @[JSON::Field(key: "map_property", type: Hash(String, String)?, presence: true, ignore_serialize: map_property.nil? && !map_property_present?)]
-    property map_property : Hash(String, String)?
+    @[JSON::Field(key: "map_property", type: Hash(String, String)?, default: nil, presence: true, ignore_serialize: map_property.nil? && !map_property_present?)]
+    getter map_property : Hash(String, String)? = nil
 
     @[JSON::Field(ignore: true)]
     property? map_property_present : Bool = false
 
-    @[JSON::Field(key: "map_of_map_property", type: Hash(String, Hash(String, String))?, presence: true, ignore_serialize: map_of_map_property.nil? && !map_of_map_property_present?)]
-    property map_of_map_property : Hash(String, Hash(String, String))?
+    @[JSON::Field(key: "map_of_map_property", type: Hash(String, Hash(String, String))?, default: nil, presence: true, ignore_serialize: map_of_map_property.nil? && !map_of_map_property_present?)]
+    getter map_of_map_property : Hash(String, Hash(String, String))? = nil
 
     @[JSON::Field(ignore: true)]
     property? map_of_map_property_present : Bool = false
@@ -53,6 +53,24 @@ module PetStore
     # @return true if the model is valid
     def valid?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] map_property Object to be assigned
+    def map_property=(map_property : Hash(String, String)?)
+      if map_property.nil?
+        @map_property_present = false
+        return @map_property = nil
+      end
+      @map_property = map_property
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] map_of_map_property Object to be assigned
+    def map_of_map_property=(map_of_map_property : Hash(String, Hash(String, String))?)
+      if map_of_map_property.nil?
+        @map_of_map_property_present = false
+        return @map_of_map_property = nil
+      end
+      @map_of_map_property = map_of_map_property
     end
 
     # @see the `==` method

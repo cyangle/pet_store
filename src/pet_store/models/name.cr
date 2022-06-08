@@ -20,25 +20,28 @@ module PetStore
 
     # Required properties
 
-    @[JSON::Field(key: "name", type: Int32)]
-    property name : Int32
+    @[JSON::Field(key: "name", type: Int32?, default: nil, presence: true, ignore_serialize: name.nil? && !name_present?)]
+    getter name : Int32? = nil
+
+    @[JSON::Field(ignore: true)]
+    property? name_present : Bool = false
 
     # Optional properties
 
-    @[JSON::Field(key: "snake_case", type: Int32?, presence: true, ignore_serialize: snake_case.nil? && !snake_case_present?)]
-    property snake_case : Int32?
+    @[JSON::Field(key: "snake_case", type: Int32?, default: nil, presence: true, ignore_serialize: snake_case.nil? && !snake_case_present?)]
+    getter snake_case : Int32? = nil
 
     @[JSON::Field(ignore: true)]
     property? snake_case_present : Bool = false
 
-    @[JSON::Field(key: "property", type: String?, presence: true, ignore_serialize: property.nil? && !property_present?)]
-    property property : String?
+    @[JSON::Field(key: "property", type: String?, default: nil, presence: true, ignore_serialize: property.nil? && !property_present?)]
+    getter property : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? property_present : Bool = false
 
-    @[JSON::Field(key: "123Number", type: Int32?, presence: true, ignore_serialize: _123_number.nil? && !_123_number_present?)]
-    property _123_number : Int32?
+    @[JSON::Field(key: "123Number", type: Int32?, default: nil, presence: true, ignore_serialize: _123_number.nil? && !_123_number_present?)]
+    getter _123_number : Int32? = nil
 
     @[JSON::Field(ignore: true)]
     property? _123_number_present : Bool = false
@@ -48,7 +51,7 @@ module PetStore
     def initialize(
       *,
       # Required properties
-      @name : Int32,
+      @name : Int32? = nil,
       # Optional properties
       @snake_case : Int32? = nil,
       @property : String? = nil,
@@ -60,6 +63,7 @@ module PetStore
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+      invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
 
       invalid_properties
     end
@@ -67,7 +71,42 @@ module PetStore
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @name.nil?
+
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] name Object to be assigned
+    def name=(name : Int32?)
+      if name.nil?
+        raise ArgumentError.new("\"name\" is required and cannot be null")
+      end
+      @name = name
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] snake_case Object to be assigned
+    def snake_case=(snake_case : Int32?)
+      if snake_case.nil?
+        @snake_case_present = false
+        return @snake_case = nil
+      end
+      @snake_case = snake_case
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] property Object to be assigned
+    def property=(property : String?)
+      if property.nil?
+        @property_present = false
+        return @property = nil
+      end
+      @property = property
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] _123_number Object to be assigned
+    def _123_number=(_123_number : Int32?)
+      if _123_number.nil?
+        @_123_number_present = false
+        return @_123_number = nil
+      end
+      @_123_number = _123_number
     end
 
     # @see the `==` method
@@ -80,6 +119,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@name, @snake_case, @snake_case_present, @property, @property_present, @_123_number, @_123_number_present)
+    def_equals_and_hash(@name, @name_present, @snake_case, @snake_case_present, @property, @property_present, @_123_number, @_123_number_present)
   end
 end

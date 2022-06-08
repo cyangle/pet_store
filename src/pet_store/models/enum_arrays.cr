@@ -19,21 +19,21 @@ module PetStore
 
     # Optional properties
 
-    @[JSON::Field(key: "just_symbol", type: String?, presence: true, ignore_serialize: just_symbol.nil? && !just_symbol_present?)]
-    getter just_symbol : String?
+    @[JSON::Field(key: "just_symbol", type: String?, default: nil, presence: true, ignore_serialize: just_symbol.nil? && !just_symbol_present?)]
+    getter just_symbol : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? just_symbol_present : Bool = false
 
     ENUM_VALIDATOR_FOR_JUST_SYMBOL = EnumValidator.new("just_symbol", "String", [">=", "$"])
 
-    @[JSON::Field(key: "array_enum", type: Array(String)?, presence: true, ignore_serialize: array_enum.nil? && !array_enum_present?)]
-    getter array_enum : Array(String)?
+    @[JSON::Field(key: "array_enum", type: Array(String)?, default: nil, presence: true, ignore_serialize: array_enum.nil? && !array_enum_present?)]
+    getter array_enum : Array(String)? = nil
 
     @[JSON::Field(ignore: true)]
     property? array_enum_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_ARRAY_ENUM = EnumValidator.new("array_enum", "String", ["fish", "crab"])
+    ENUM_VALIDATOR_FOR_ARRAY_ENUM = EnumValidator.new("array_enum", "Array(String)", ["fish", "crab"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -69,14 +69,22 @@ module PetStore
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] just_symbol Object to be assigned
     def just_symbol=(just_symbol : String?)
-      ENUM_VALIDATOR_FOR_JUST_SYMBOL.valid!(just_symbol)
+      if just_symbol.nil?
+        @just_symbol_present = false
+        return @just_symbol = nil
+      end
+      _just_symbol = just_symbol.not_nil!
+      ENUM_VALIDATOR_FOR_JUST_SYMBOL.valid!(_just_symbol)
       @just_symbol = just_symbol
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
+    end # Custom attribute writer method checking allowed values (enum).
     # @param [Object] array_enum Object to be assigned
     def array_enum=(array_enum : Array(String)?)
-      ENUM_VALIDATOR_FOR_ARRAY_ENUM.all_valid!(array_enum)
+      if array_enum.nil?
+        @array_enum_present = false
+        return @array_enum = nil
+      end
+      _array_enum = array_enum.not_nil!
+      ENUM_VALIDATOR_FOR_ARRAY_ENUM.all_valid!(_array_enum)
       @array_enum = array_enum
     end
 

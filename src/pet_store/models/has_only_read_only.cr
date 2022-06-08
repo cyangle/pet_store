@@ -19,14 +19,14 @@ module PetStore
 
     # Optional properties
 
-    @[JSON::Field(key: "bar", type: String?, presence: true, ignore_serialize: bar.nil? && !bar_present?)]
-    property bar : String?
+    @[JSON::Field(key: "bar", type: String?, default: nil, presence: true, ignore_serialize: bar.nil? && !bar_present?)]
+    getter bar : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? bar_present : Bool = false
 
-    @[JSON::Field(key: "foo", type: String?, presence: true, ignore_serialize: foo.nil? && !foo_present?)]
-    property foo : String?
+    @[JSON::Field(key: "foo", type: String?, default: nil, presence: true, ignore_serialize: foo.nil? && !foo_present?)]
+    getter foo : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? foo_present : Bool = false
@@ -53,6 +53,24 @@ module PetStore
     # @return true if the model is valid
     def valid?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] bar Object to be assigned
+    def bar=(bar : String?)
+      if bar.nil?
+        @bar_present = false
+        return @bar = nil
+      end
+      @bar = bar
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] foo Object to be assigned
+    def foo=(foo : String?)
+      if foo.nil?
+        @foo_present = false
+        return @foo = nil
+      end
+      @foo = foo
     end
 
     # @see the `==` method

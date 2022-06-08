@@ -19,84 +19,96 @@ module PetStore
 
     # Required properties
 
-    @[JSON::Field(key: "number", type: Float64)]
-    getter number : Float64
+    @[JSON::Field(key: "number", type: Float64?, default: nil, presence: true, ignore_serialize: number.nil? && !number_present?)]
+    getter number : Float64? = nil
 
-    @[JSON::Field(key: "byte", type: String)]
-    property byte : String
+    @[JSON::Field(ignore: true)]
+    property? number_present : Bool = false
 
-    @[JSON::Field(key: "date", type: Time, converter: Time::ISO8601DateConverter)]
-    property date : Time
+    @[JSON::Field(key: "byte", type: String?, default: nil, presence: true, ignore_serialize: byte.nil? && !byte_present?)]
+    getter byte : String? = nil
 
-    @[JSON::Field(key: "password", type: String)]
-    getter password : String
+    @[JSON::Field(ignore: true)]
+    property? byte_present : Bool = false
+
+    @[JSON::Field(key: "date", type: Time?, default: nil, presence: true, ignore_serialize: date.nil? && !date_present?, converter: Time::ISO8601DateConverter)]
+    getter date : Time? = nil
+
+    @[JSON::Field(ignore: true)]
+    property? date_present : Bool = false
+
+    @[JSON::Field(key: "password", type: String?, default: nil, presence: true, ignore_serialize: password.nil? && !password_present?)]
+    getter password : String? = nil
+
+    @[JSON::Field(ignore: true)]
+    property? password_present : Bool = false
 
     # Optional properties
 
-    @[JSON::Field(key: "integer", type: Int32?, presence: true, ignore_serialize: integer.nil? && !integer_present?)]
-    getter integer : Int32?
+    @[JSON::Field(key: "integer", type: Int32?, default: nil, presence: true, ignore_serialize: integer.nil? && !integer_present?)]
+    getter integer : Int32? = nil
 
     @[JSON::Field(ignore: true)]
     property? integer_present : Bool = false
 
-    @[JSON::Field(key: "int32", type: Int32?, presence: true, ignore_serialize: int32.nil? && !int32_present?)]
-    getter int32 : Int32?
+    @[JSON::Field(key: "int32", type: Int32?, default: nil, presence: true, ignore_serialize: int32.nil? && !int32_present?)]
+    getter int32 : Int32? = nil
 
     @[JSON::Field(ignore: true)]
     property? int32_present : Bool = false
 
-    @[JSON::Field(key: "int64", type: Int64?, presence: true, ignore_serialize: int64.nil? && !int64_present?)]
-    property int64 : Int64?
+    @[JSON::Field(key: "int64", type: Int64?, default: nil, presence: true, ignore_serialize: int64.nil? && !int64_present?)]
+    getter int64 : Int64? = nil
 
     @[JSON::Field(ignore: true)]
     property? int64_present : Bool = false
 
-    @[JSON::Field(key: "float", type: Float32?, presence: true, ignore_serialize: float.nil? && !float_present?)]
-    getter float : Float32?
+    @[JSON::Field(key: "float", type: Float32?, default: nil, presence: true, ignore_serialize: float.nil? && !float_present?)]
+    getter float : Float32? = nil
 
     @[JSON::Field(ignore: true)]
     property? float_present : Bool = false
 
-    @[JSON::Field(key: "double", type: Float64?, presence: true, ignore_serialize: double.nil? && !double_present?)]
-    getter double : Float64?
+    @[JSON::Field(key: "double", type: Float64?, default: nil, presence: true, ignore_serialize: double.nil? && !double_present?)]
+    getter double : Float64? = nil
 
     @[JSON::Field(ignore: true)]
     property? double_present : Bool = false
 
-    @[JSON::Field(key: "string", type: String?, presence: true, ignore_serialize: string.nil? && !string_present?)]
-    getter string : String?
+    @[JSON::Field(key: "string", type: String?, default: nil, presence: true, ignore_serialize: string.nil? && !string_present?)]
+    getter string : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? string_present : Bool = false
 
-    @[JSON::Field(key: "binary", type: ::File?, presence: true, ignore_serialize: binary.nil? && !binary_present?)]
-    property binary : ::File?
+    @[JSON::Field(key: "binary", type: ::File?, default: nil, presence: true, ignore_serialize: binary.nil? && !binary_present?)]
+    getter binary : ::File? = nil
 
     @[JSON::Field(ignore: true)]
     property? binary_present : Bool = false
 
-    @[JSON::Field(key: "dateTime", type: Time?, converter: Time::RFC3339Converter, presence: true, ignore_serialize: date_time.nil? && !date_time_present?)]
-    property date_time : Time?
+    @[JSON::Field(key: "dateTime", type: Time?, default: nil, presence: true, ignore_serialize: date_time.nil? && !date_time_present?, converter: Time::RFC3339Converter)]
+    getter date_time : Time? = nil
 
     @[JSON::Field(ignore: true)]
     property? date_time_present : Bool = false
 
-    @[JSON::Field(key: "uuid", type: String?, presence: true, ignore_serialize: uuid.nil? && !uuid_present?)]
-    property uuid : String?
+    @[JSON::Field(key: "uuid", type: String?, default: nil, presence: true, ignore_serialize: uuid.nil? && !uuid_present?)]
+    getter uuid : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? uuid_present : Bool = false
 
     # A string that is a 10 digit number. Can have leading zeros.
-    @[JSON::Field(key: "pattern_with_digits", type: String?, presence: true, ignore_serialize: pattern_with_digits.nil? && !pattern_with_digits_present?)]
-    getter pattern_with_digits : String?
+    @[JSON::Field(key: "pattern_with_digits", type: String?, default: nil, presence: true, ignore_serialize: pattern_with_digits.nil? && !pattern_with_digits_present?)]
+    getter pattern_with_digits : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? pattern_with_digits_present : Bool = false
 
     # A string starting with 'image_' (case insensitive) and one to three digits following i.e. Image_01.
-    @[JSON::Field(key: "pattern_with_digits_and_delimiter", type: String?, presence: true, ignore_serialize: pattern_with_digits_and_delimiter.nil? && !pattern_with_digits_and_delimiter_present?)]
-    getter pattern_with_digits_and_delimiter : String?
+    @[JSON::Field(key: "pattern_with_digits_and_delimiter", type: String?, default: nil, presence: true, ignore_serialize: pattern_with_digits_and_delimiter.nil? && !pattern_with_digits_and_delimiter_present?)]
+    getter pattern_with_digits_and_delimiter : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? pattern_with_digits_and_delimiter_present : Bool = false
@@ -106,10 +118,10 @@ module PetStore
     def initialize(
       *,
       # Required properties
-      @number : Float64,
-      @byte : String,
-      @date : Time,
-      @password : String,
+      @number : Float64? = nil,
+      @byte : String? = nil,
+      @date : Time? = nil,
+      @password : String? = nil,
       # Optional properties
       @integer : Int32? = nil,
       @int32 : Int32? = nil,
@@ -129,68 +141,81 @@ module PetStore
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+      invalid_properties.push("\"number\" is required and cannot be null") if @number.nil?
+      if _number = @number
+        if _number > 543.2
+          invalid_properties.push("invalid value for \"number\", must be smaller than or equal to 543.2.")
+        end
 
-      if @number > 543.2
-        invalid_properties.push("invalid value for \"number\", must be smaller than or equal to 543.2.")
+        if _number < 32.1
+          invalid_properties.push("invalid value for \"number\", must be greater than or equal to 32.1.")
+        end
       end
+      invalid_properties.push("\"byte\" is required and cannot be null") if @byte.nil?
+      invalid_properties.push("\"date\" is required and cannot be null") if @date.nil?
+      invalid_properties.push("\"password\" is required and cannot be null") if @password.nil?
+      if _password = @password
+        if _password.to_s.size > 64
+          invalid_properties.push("invalid value for \"password\", the character length must be smaller than or equal to 64.")
+        end
 
-      if @number < 32.1
-        invalid_properties.push("invalid value for \"number\", must be greater than or equal to 32.1.")
+        if _password.to_s.size < 10
+          invalid_properties.push("invalid value for \"password\", the character length must be great than or equal to 10.")
+        end
       end
+      if _integer = @integer
+        if _integer > 100
+          invalid_properties.push("invalid value for \"integer\", must be smaller than or equal to 100.")
+        end
 
-      if @password.to_s.size > 64
-        invalid_properties.push("invalid value for \"password\", the character length must be smaller than or equal to 64.")
+        if _integer < 10
+          invalid_properties.push("invalid value for \"integer\", must be greater than or equal to 10.")
+        end
       end
+      if _int32 = @int32
+        if _int32 > 200
+          invalid_properties.push("invalid value for \"int32\", must be smaller than or equal to 200.")
+        end
 
-      if @password.to_s.size < 10
-        invalid_properties.push("invalid value for \"password\", the character length must be great than or equal to 10.")
+        if _int32 < 20
+          invalid_properties.push("invalid value for \"int32\", must be greater than or equal to 20.")
+        end
       end
+      if _float = @float
+        if _float > 987.6
+          invalid_properties.push("invalid value for \"float\", must be smaller than or equal to 987.6.")
+        end
 
-      if !@integer.nil? && @integer > 100
-        invalid_properties.push("invalid value for \"integer\", must be smaller than or equal to 100.")
+        if _float < 54.3
+          invalid_properties.push("invalid value for \"float\", must be greater than or equal to 54.3.")
+        end
       end
+      if _double = @double
+        if _double > 123.4
+          invalid_properties.push("invalid value for \"double\", must be smaller than or equal to 123.4.")
+        end
 
-      if !@integer.nil? && @integer < 10
-        invalid_properties.push("invalid value for \"integer\", must be greater than or equal to 10.")
+        if _double < 67.8
+          invalid_properties.push("invalid value for \"double\", must be greater than or equal to 67.8.")
+        end
       end
-
-      if !@int32.nil? && @int32 > 200
-        invalid_properties.push("invalid value for \"int32\", must be smaller than or equal to 200.")
+      if _string = @string
+        pattern = /[a-z]/i
+        if _string !~ pattern
+          invalid_properties.push("invalid value for \"string\", must conform to the pattern #{pattern}.")
+        end
       end
-
-      if !@int32.nil? && @int32 < 20
-        invalid_properties.push("invalid value for \"int32\", must be greater than or equal to 20.")
+      if _pattern_with_digits = @pattern_with_digits
+        pattern = /^\d{10}$/
+        if _pattern_with_digits !~ pattern
+          invalid_properties.push("invalid value for \"pattern_with_digits\", must conform to the pattern #{pattern}.")
+        end
       end
-
-      if !@float.nil? && @float > 987.6
-        invalid_properties.push("invalid value for \"float\", must be smaller than or equal to 987.6.")
-      end
-
-      if !@float.nil? && @float < 54.3
-        invalid_properties.push("invalid value for \"float\", must be greater than or equal to 54.3.")
-      end
-
-      if !@double.nil? && @double > 123.4
-        invalid_properties.push("invalid value for \"double\", must be smaller than or equal to 123.4.")
-      end
-
-      if !@double.nil? && @double < 67.8
-        invalid_properties.push("invalid value for \"double\", must be greater than or equal to 67.8.")
-      end
-
-      pattern = /[a-z]/i
-      if !@string.nil? && @string !~ pattern
-        invalid_properties.push("invalid value for \"string\", must conform to the pattern #{pattern}.")
-      end
-
-      pattern = /^\d{10}$/
-      if !@pattern_with_digits.nil? && @pattern_with_digits !~ pattern
-        invalid_properties.push("invalid value for \"pattern_with_digits\", must conform to the pattern #{pattern}.")
-      end
-
-      pattern = /^image_\d{1,3}$/i
-      if !@pattern_with_digits_and_delimiter.nil? && @pattern_with_digits_and_delimiter !~ pattern
-        invalid_properties.push("invalid value for \"pattern_with_digits_and_delimiter\", must conform to the pattern #{pattern}.")
+      if _pattern_with_digits_and_delimiter = @pattern_with_digits_and_delimiter
+        pattern = /^image_\d{1,3}$/i
+        if _pattern_with_digits_and_delimiter !~ pattern
+          invalid_properties.push("invalid value for \"pattern_with_digits_and_delimiter\", must conform to the pattern #{pattern}.")
+        end
       end
 
       invalid_properties
@@ -199,136 +224,231 @@ module PetStore
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @number > 543.2
-      return false if @number < 32.1
-      return false if @password.to_s.size > 64
-      return false if @password.to_s.size < 10
-      return false if !@integer.nil? && @integer > 100
-      return false if !@integer.nil? && @integer < 10
-      return false if !@int32.nil? && @int32 > 200
-      return false if !@int32.nil? && @int32 < 20
-      return false if !@float.nil? && @float > 987.6
-      return false if !@float.nil? && @float < 54.3
-      return false if !@double.nil? && @double > 123.4
-      return false if !@double.nil? && @double < 67.8
-      return false if !@string.nil? && @string !~ /[a-z]/i
-      return false if !@pattern_with_digits.nil? && @pattern_with_digits !~ /^\d{10}$/
-      return false if !@pattern_with_digits_and_delimiter.nil? && @pattern_with_digits_and_delimiter !~ /^image_\d{1,3}$/i
+      return false if @number.nil?
+      if _number = @number
+        return false if _number > 543.2
+        return false if _number < 32.1
+      end
+      return false if @byte.nil?
+      return false if @date.nil?
+      return false if @password.nil?
+      if _password = @password
+        return false if _password.to_s.size > 64
+        return false if _password.to_s.size < 10
+      end
+      if _integer = @integer
+        return false if _integer > 100
+        return false if _integer < 10
+      end
+      if _int32 = @int32
+        return false if _int32 > 200
+        return false if _int32 < 20
+      end
+      if _float = @float
+        return false if _float > 987.6
+        return false if _float < 54.3
+      end
+      if _double = @double
+        return false if _double > 123.4
+        return false if _double < 67.8
+      end
+      if _string = @string
+        return false if _string !~ /[a-z]/i
+      end
+      if _pattern_with_digits = @pattern_with_digits
+        return false if _pattern_with_digits !~ /^\d{10}$/
+      end
+      if _pattern_with_digits_and_delimiter = @pattern_with_digits_and_delimiter
+        return false if _pattern_with_digits_and_delimiter !~ /^image_\d{1,3}$/i
+      end
 
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] number Value to be assigned
-    def number=(number : Float64)
-      if number > 543.2
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] number Object to be assigned
+    def number=(number : Float64?)
+      if number.nil?
+        raise ArgumentError.new("\"number\" is required and cannot be null")
+      end
+      _number = number.not_nil!
+      if _number > 543.2
         raise ArgumentError.new("invalid value for \"number\", must be smaller than or equal to 543.2.")
       end
 
-      if number < 32.1
+      if _number < 32.1
         raise ArgumentError.new("invalid value for \"number\", must be greater than or equal to 32.1.")
       end
 
       @number = number
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] password Value to be assigned
-    def password=(password : String)
-      if password.to_s.size > 64
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] byte Object to be assigned
+    def byte=(byte : String?)
+      if byte.nil?
+        raise ArgumentError.new("\"byte\" is required and cannot be null")
+      end
+      @byte = byte
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] date Object to be assigned
+    def date=(date : Time?)
+      if date.nil?
+        raise ArgumentError.new("\"date\" is required and cannot be null")
+      end
+      @date = date
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] password Object to be assigned
+    def password=(password : String?)
+      if password.nil?
+        raise ArgumentError.new("\"password\" is required and cannot be null")
+      end
+      _password = password.not_nil!
+      if _password.to_s.size > 64
         raise ArgumentError.new("invalid value for \"password\", the character length must be smaller than or equal to 64.")
       end
 
-      if password.to_s.size < 10
+      if _password.to_s.size < 10
         raise ArgumentError.new("invalid value for \"password\", the character length must be great than or equal to 10.")
       end
 
       @password = password
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] integer Value to be assigned
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] integer Object to be assigned
     def integer=(integer : Int32?)
-      if !integer.nil? && integer > 100
+      if integer.nil?
+        @integer_present = false
+        return @integer = nil
+      end
+      _integer = integer.not_nil!
+      if _integer > 100
         raise ArgumentError.new("invalid value for \"integer\", must be smaller than or equal to 100.")
       end
 
-      if !integer.nil? && integer < 10
+      if _integer < 10
         raise ArgumentError.new("invalid value for \"integer\", must be greater than or equal to 10.")
       end
 
       @integer = integer
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] int32 Value to be assigned
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] int32 Object to be assigned
     def int32=(int32 : Int32?)
-      if !int32.nil? && int32 > 200
+      if int32.nil?
+        @int32_present = false
+        return @int32 = nil
+      end
+      _int32 = int32.not_nil!
+      if _int32 > 200
         raise ArgumentError.new("invalid value for \"int32\", must be smaller than or equal to 200.")
       end
 
-      if !int32.nil? && int32 < 20
+      if _int32 < 20
         raise ArgumentError.new("invalid value for \"int32\", must be greater than or equal to 20.")
       end
 
       @int32 = int32
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] float Value to be assigned
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] int64 Object to be assigned
+    def int64=(int64 : Int64?)
+      if int64.nil?
+        @int64_present = false
+        return @int64 = nil
+      end
+      @int64 = int64
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] float Object to be assigned
     def float=(float : Float32?)
-      if !float.nil? && float > 987.6
+      if float.nil?
+        @float_present = false
+        return @float = nil
+      end
+      _float = float.not_nil!
+      if _float > 987.6
         raise ArgumentError.new("invalid value for \"float\", must be smaller than or equal to 987.6.")
       end
 
-      if !float.nil? && float < 54.3
+      if _float < 54.3
         raise ArgumentError.new("invalid value for \"float\", must be greater than or equal to 54.3.")
       end
 
       @float = float
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] double Value to be assigned
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] double Object to be assigned
     def double=(double : Float64?)
-      if !double.nil? && double > 123.4
+      if double.nil?
+        @double_present = false
+        return @double = nil
+      end
+      _double = double.not_nil!
+      if _double > 123.4
         raise ArgumentError.new("invalid value for \"double\", must be smaller than or equal to 123.4.")
       end
 
-      if !double.nil? && double < 67.8
+      if _double < 67.8
         raise ArgumentError.new("invalid value for \"double\", must be greater than or equal to 67.8.")
       end
 
       @double = double
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] string Value to be assigned
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] string Object to be assigned
     def string=(string : String?)
+      if string.nil?
+        @string_present = false
+        return @string = nil
+      end
+      _string = string.not_nil!
       pattern = /[a-z]/i
-      if !string.nil? && string !~ pattern
+      if _string !~ pattern
         raise ArgumentError.new("invalid value for \"string\", must conform to the pattern #{pattern}.")
       end
 
       @string = string
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] pattern_with_digits Value to be assigned
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] binary Object to be assigned
+    def binary=(binary : ::File?)
+      if binary.nil?
+        @binary_present = false
+        return @binary = nil
+      end
+      @binary = binary
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] date_time Object to be assigned
+    def date_time=(date_time : Time?)
+      if date_time.nil?
+        @date_time_present = false
+        return @date_time = nil
+      end
+      @date_time = date_time
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] uuid Object to be assigned
+    def uuid=(uuid : String?)
+      if uuid.nil?
+        @uuid_present = false
+        return @uuid = nil
+      end
+      @uuid = uuid
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] pattern_with_digits Object to be assigned
     def pattern_with_digits=(pattern_with_digits : String?)
+      if pattern_with_digits.nil?
+        @pattern_with_digits_present = false
+        return @pattern_with_digits = nil
+      end
+      _pattern_with_digits = pattern_with_digits.not_nil!
       pattern = /^\d{10}$/
-      if !pattern_with_digits.nil? && pattern_with_digits !~ pattern
+      if _pattern_with_digits !~ pattern
         raise ArgumentError.new("invalid value for \"pattern_with_digits\", must conform to the pattern #{pattern}.")
       end
 
       @pattern_with_digits = pattern_with_digits
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] pattern_with_digits_and_delimiter Value to be assigned
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] pattern_with_digits_and_delimiter Object to be assigned
     def pattern_with_digits_and_delimiter=(pattern_with_digits_and_delimiter : String?)
+      if pattern_with_digits_and_delimiter.nil?
+        @pattern_with_digits_and_delimiter_present = false
+        return @pattern_with_digits_and_delimiter = nil
+      end
+      _pattern_with_digits_and_delimiter = pattern_with_digits_and_delimiter.not_nil!
       pattern = /^image_\d{1,3}$/i
-      if !pattern_with_digits_and_delimiter.nil? && pattern_with_digits_and_delimiter !~ pattern
+      if _pattern_with_digits_and_delimiter !~ pattern
         raise ArgumentError.new("invalid value for \"pattern_with_digits_and_delimiter\", must conform to the pattern #{pattern}.")
       end
 
@@ -345,6 +465,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@number, @byte, @date, @password, @integer, @integer_present, @int32, @int32_present, @int64, @int64_present, @float, @float_present, @double, @double_present, @string, @string_present, @binary, @binary_present, @date_time, @date_time_present, @uuid, @uuid_present, @pattern_with_digits, @pattern_with_digits_present, @pattern_with_digits_and_delimiter, @pattern_with_digits_and_delimiter_present)
+    def_equals_and_hash(@number, @number_present, @byte, @byte_present, @date, @date_present, @password, @password_present, @integer, @integer_present, @int32, @int32_present, @int64, @int64_present, @float, @float_present, @double, @double_present, @string, @string_present, @binary, @binary_present, @date_time, @date_time_present, @uuid, @uuid_present, @pattern_with_digits, @pattern_with_digits_present, @pattern_with_digits_and_delimiter, @pattern_with_digits_and_delimiter_present)
   end
 end

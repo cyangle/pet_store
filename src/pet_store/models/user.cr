@@ -19,79 +19,79 @@ module PetStore
 
     # Optional properties
 
-    @[JSON::Field(key: "id", type: Int64?, presence: true, ignore_serialize: id.nil? && !id_present?)]
-    property id : Int64?
+    @[JSON::Field(key: "id", type: Int64?, default: nil, presence: true, ignore_serialize: id.nil? && !id_present?)]
+    getter id : Int64? = nil
 
     @[JSON::Field(ignore: true)]
     property? id_present : Bool = false
 
-    @[JSON::Field(key: "username", type: String?, presence: true, ignore_serialize: username.nil? && !username_present?)]
-    property username : String?
+    @[JSON::Field(key: "username", type: String?, default: nil, presence: true, ignore_serialize: username.nil? && !username_present?)]
+    getter username : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? username_present : Bool = false
 
-    @[JSON::Field(key: "firstName", type: String?, presence: true, ignore_serialize: first_name.nil? && !first_name_present?)]
-    property first_name : String?
+    @[JSON::Field(key: "firstName", type: String?, default: nil, presence: true, ignore_serialize: first_name.nil? && !first_name_present?)]
+    getter first_name : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? first_name_present : Bool = false
 
-    @[JSON::Field(key: "lastName", type: String?, presence: true, ignore_serialize: last_name.nil? && !last_name_present?)]
-    property last_name : String?
+    @[JSON::Field(key: "lastName", type: String?, default: nil, presence: true, ignore_serialize: last_name.nil? && !last_name_present?)]
+    getter last_name : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? last_name_present : Bool = false
 
-    @[JSON::Field(key: "email", type: String?, presence: true, ignore_serialize: email.nil? && !email_present?)]
-    property email : String?
+    @[JSON::Field(key: "email", type: String?, default: nil, presence: true, ignore_serialize: email.nil? && !email_present?)]
+    getter email : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? email_present : Bool = false
 
-    @[JSON::Field(key: "password", type: String?, presence: true, ignore_serialize: password.nil? && !password_present?)]
-    property password : String?
+    @[JSON::Field(key: "password", type: String?, default: nil, presence: true, ignore_serialize: password.nil? && !password_present?)]
+    getter password : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? password_present : Bool = false
 
-    @[JSON::Field(key: "phone", type: String?, presence: true, ignore_serialize: phone.nil? && !phone_present?)]
-    property phone : String?
+    @[JSON::Field(key: "phone", type: String?, default: nil, presence: true, ignore_serialize: phone.nil? && !phone_present?)]
+    getter phone : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? phone_present : Bool = false
 
     # User Status
-    @[JSON::Field(key: "userStatus", type: Int32?, presence: true, ignore_serialize: user_status.nil? && !user_status_present?)]
-    property user_status : Int32?
+    @[JSON::Field(key: "userStatus", type: Int32?, default: nil, presence: true, ignore_serialize: user_status.nil? && !user_status_present?)]
+    getter user_status : Int32? = nil
 
     @[JSON::Field(ignore: true)]
     property? user_status_present : Bool = false
 
     # test code generation for objects Value must be a map of strings to values. It cannot be the 'null' value.
-    @[JSON::Field(key: "arbitraryObject", type: Hash(String, String)?, presence: true, ignore_serialize: arbitrary_object.nil? && !arbitrary_object_present?)]
-    property arbitrary_object : Hash(String, String)?
+    @[JSON::Field(key: "arbitraryObject", type: Hash(String, String)?, default: nil, presence: true, ignore_serialize: arbitrary_object.nil? && !arbitrary_object_present?)]
+    getter arbitrary_object : Hash(String, String)? = nil
 
     @[JSON::Field(ignore: true)]
     property? arbitrary_object_present : Bool = false
 
     # test code generation for nullable objects. Value must be a map of strings to values or the 'null' value.
-    @[JSON::Field(key: "arbitraryNullableObject", type: Hash(String, String)?, presence: true, ignore_serialize: arbitrary_nullable_object.nil? && !arbitrary_nullable_object_present?)]
-    property arbitrary_nullable_object : Hash(String, String)?
+    @[JSON::Field(key: "arbitraryNullableObject", type: Hash(String, String)?, default: nil, presence: true, ignore_serialize: arbitrary_nullable_object.nil? && !arbitrary_nullable_object_present?)]
+    getter arbitrary_nullable_object : Hash(String, String)? = nil
 
     @[JSON::Field(ignore: true)]
     property? arbitrary_nullable_object_present : Bool = false
 
     # test code generation for any type Value can be any type - string, number, boolean, array or object.
-    @[JSON::Field(key: "arbitraryTypeValue", type: JSON::Any, presence: true, ignore_serialize: arbitrary_type_value.nil? && !arbitrary_type_value_present?)]
-    property arbitrary_type_value : JSON::Any
+    @[JSON::Field(key: "arbitraryTypeValue", type: JSON::Any?, default: nil, presence: true, ignore_serialize: arbitrary_type_value.nil? && !arbitrary_type_value_present?)]
+    getter arbitrary_type_value : JSON::Any? = nil
 
     @[JSON::Field(ignore: true)]
     property? arbitrary_type_value_present : Bool = false
 
     # test code generation for any type Value can be any type - string, number, boolean, array, object or the 'null' value.
-    @[JSON::Field(key: "arbitraryNullableTypeValue", type: JSON::Any, presence: true, ignore_serialize: arbitrary_nullable_type_value.nil? && !arbitrary_nullable_type_value_present?)]
-    property arbitrary_nullable_type_value : JSON::Any
+    @[JSON::Field(key: "arbitraryNullableTypeValue", type: JSON::Any?, default: nil, presence: true, ignore_serialize: arbitrary_nullable_type_value.nil? && !arbitrary_nullable_type_value_present?)]
+    getter arbitrary_nullable_type_value : JSON::Any? = nil
 
     @[JSON::Field(ignore: true)]
     property? arbitrary_nullable_type_value_present : Bool = false
@@ -111,8 +111,8 @@ module PetStore
       @user_status : Int32? = nil,
       @arbitrary_object : Hash(String, String)? = nil,
       @arbitrary_nullable_object : Hash(String, String)? = nil,
-      @arbitrary_type_value : JSON::Any = nil,
-      @arbitrary_nullable_type_value : JSON::Any = nil
+      @arbitrary_type_value : JSON::Any? = nil,
+      @arbitrary_nullable_type_value : JSON::Any? = nil
     )
     end
 
@@ -128,6 +128,104 @@ module PetStore
     # @return true if the model is valid
     def valid?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] id Object to be assigned
+    def id=(id : Int64?)
+      if id.nil?
+        @id_present = false
+        return @id = nil
+      end
+      @id = id
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] username Object to be assigned
+    def username=(username : String?)
+      if username.nil?
+        @username_present = false
+        return @username = nil
+      end
+      @username = username
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] first_name Object to be assigned
+    def first_name=(first_name : String?)
+      if first_name.nil?
+        @first_name_present = false
+        return @first_name = nil
+      end
+      @first_name = first_name
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] last_name Object to be assigned
+    def last_name=(last_name : String?)
+      if last_name.nil?
+        @last_name_present = false
+        return @last_name = nil
+      end
+      @last_name = last_name
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] email Object to be assigned
+    def email=(email : String?)
+      if email.nil?
+        @email_present = false
+        return @email = nil
+      end
+      @email = email
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] password Object to be assigned
+    def password=(password : String?)
+      if password.nil?
+        @password_present = false
+        return @password = nil
+      end
+      @password = password
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] phone Object to be assigned
+    def phone=(phone : String?)
+      if phone.nil?
+        @phone_present = false
+        return @phone = nil
+      end
+      @phone = phone
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] user_status Object to be assigned
+    def user_status=(user_status : Int32?)
+      if user_status.nil?
+        @user_status_present = false
+        return @user_status = nil
+      end
+      @user_status = user_status
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] arbitrary_object Object to be assigned
+    def arbitrary_object=(arbitrary_object : Hash(String, String)?)
+      if arbitrary_object.nil?
+        @arbitrary_object_present = false
+        return @arbitrary_object = nil
+      end
+      @arbitrary_object = arbitrary_object
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] arbitrary_nullable_object Object to be assigned
+    def arbitrary_nullable_object=(arbitrary_nullable_object : Hash(String, String)?)
+      if arbitrary_nullable_object.nil?
+        @arbitrary_nullable_object_present = false
+        return @arbitrary_nullable_object = nil
+      end
+      @arbitrary_nullable_object = arbitrary_nullable_object
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] arbitrary_type_value Object to be assigned
+    def arbitrary_type_value=(arbitrary_type_value : JSON::Any?)
+      if arbitrary_type_value.nil?
+        @arbitrary_type_value_present = false
+        return @arbitrary_type_value = nil
+      end
+      @arbitrary_type_value = arbitrary_type_value
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] arbitrary_nullable_type_value Object to be assigned
+    def arbitrary_nullable_type_value=(arbitrary_nullable_type_value : JSON::Any?)
+      if arbitrary_nullable_type_value.nil?
+        @arbitrary_nullable_type_value_present = false
+        return @arbitrary_nullable_type_value = nil
+      end
+      @arbitrary_nullable_type_value = arbitrary_nullable_type_value
     end
 
     # @see the `==` method

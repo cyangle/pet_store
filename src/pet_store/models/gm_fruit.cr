@@ -19,20 +19,20 @@ module PetStore
 
     # Required properties
 
-    @[JSON::Field(key: "color", type: String?, presence: true, ignore_serialize: color.nil? && !color_present?)]
-    property color : String?
+    @[JSON::Field(key: "color", type: String?, default: nil, presence: true, ignore_serialize: color.nil? && !color_present?)]
+    property color : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? color_present : Bool = false
 
-    @[JSON::Field(key: "cultivar", type: String?, presence: true, ignore_serialize: cultivar.nil? && !cultivar_present?)]
-    property cultivar : String?
+    @[JSON::Field(key: "cultivar", type: String?, default: nil, presence: true, ignore_serialize: cultivar.nil? && !cultivar_present?)]
+    property cultivar : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? cultivar_present : Bool = false
 
-    @[JSON::Field(key: "lengthCm", type: Float64?, presence: true, ignore_serialize: length_cm.nil? && !length_cm_present?)]
-    property length_cm : Float64?
+    @[JSON::Field(key: "lengthCm", type: Float64?, default: nil, presence: true, ignore_serialize: length_cm.nil? && !length_cm_present?)]
+    property length_cm : Float64? = nil
 
     @[JSON::Field(ignore: true)]
     property? length_cm_present : Bool = false
@@ -60,7 +60,6 @@ module PetStore
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
       invalid_properties
     end
 

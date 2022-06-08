@@ -19,13 +19,16 @@ module PetStore
 
     # Required properties
 
-    @[JSON::Field(key: "name", type: String)]
-    getter name : String
+    @[JSON::Field(key: "name", type: String?, default: nil, presence: true, ignore_serialize: name.nil? && !name_present?)]
+    getter name : String? = nil
+
+    @[JSON::Field(ignore: true)]
+    property? name_present : Bool = false
 
     # Optional properties
 
-    @[JSON::Field(key: "declawed", type: Bool?, presence: true, ignore_serialize: declawed.nil? && !declawed_present?)]
-    property declawed : Bool?
+    @[JSON::Field(key: "declawed", type: Bool?, default: nil, presence: true, ignore_serialize: declawed.nil? && !declawed_present?)]
+    getter declawed : Bool? = nil
 
     @[JSON::Field(ignore: true)]
     property? declawed_present : Bool = false
@@ -35,7 +38,7 @@ module PetStore
     def initialize(
       *,
       # Required properties
-      @name : String,
+      @name : String? = nil,
       # Optional properties
       @declawed : Bool? = nil
     )
@@ -45,9 +48,11 @@ module PetStore
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if @name.to_s.size > 255
-        invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 255.")
+      invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
+      if _name = @name
+        if _name.to_s.size > 255
+          invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 255.")
+        end
       end
 
       invalid_properties
@@ -56,19 +61,34 @@ module PetStore
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @name.to_s.size > 255
+      return false if @name.nil?
+      if _name = @name
+        return false if _name.to_s.size > 255
+      end
 
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name : String)
-      if name.to_s.size > 255
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] name Object to be assigned
+    def name=(name : String?)
+      if name.nil?
+        raise ArgumentError.new("\"name\" is required and cannot be null")
+      end
+      _name = name.not_nil!
+      if _name.to_s.size > 255
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 255.")
       end
 
       @name = name
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] declawed Object to be assigned
+    def declawed=(declawed : Bool?)
+      if declawed.nil?
+        @declawed_present = false
+        return @declawed = nil
+      end
+      @declawed = declawed
     end
 
     # @see the `==` method
@@ -81,6 +101,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@name, @declawed, @declawed_present)
+    def_equals_and_hash(@name, @name_present, @declawed, @declawed_present)
   end
 end

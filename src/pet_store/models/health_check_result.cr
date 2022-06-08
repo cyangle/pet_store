@@ -20,8 +20,8 @@ module PetStore
 
     # Optional properties
 
-    @[JSON::Field(key: "NullableMessage", type: String?, presence: true, ignore_serialize: nullable_message.nil? && !nullable_message_present?)]
-    property nullable_message : String?
+    @[JSON::Field(key: "NullableMessage", type: String?, default: nil, presence: true, ignore_serialize: nullable_message.nil? && !nullable_message_present?)]
+    getter nullable_message : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? nullable_message_present : Bool = false
@@ -47,6 +47,16 @@ module PetStore
     # @return true if the model is valid
     def valid?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] nullable_message Object to be assigned
+    def nullable_message=(nullable_message : String?)
+      if nullable_message.nil?
+        @nullable_message_present = false
+        return @nullable_message = nil
+      end
+      @nullable_message = nullable_message
     end
 
     # @see the `==` method

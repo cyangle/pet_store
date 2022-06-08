@@ -19,8 +19,8 @@ module PetStore
 
     # Optional properties
 
-    @[JSON::Field(key: "ArrayArrayNumber", type: Array(Array(Float64))?, presence: true, ignore_serialize: array_array_number.nil? && !array_array_number_present?)]
-    property array_array_number : Array(Array(Float64))?
+    @[JSON::Field(key: "ArrayArrayNumber", type: Array(Array(Float64))?, default: nil, presence: true, ignore_serialize: array_array_number.nil? && !array_array_number_present?)]
+    getter array_array_number : Array(Array(Float64))? = nil
 
     @[JSON::Field(ignore: true)]
     property? array_array_number_present : Bool = false
@@ -46,6 +46,16 @@ module PetStore
     # @return true if the model is valid
     def valid?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] array_array_number Object to be assigned
+    def array_array_number=(array_array_number : Array(Array(Float64))?)
+      if array_array_number.nil?
+        @array_array_number_present = false
+        return @array_array_number = nil
+      end
+      @array_array_number = array_array_number
     end
 
     # @see the `==` method

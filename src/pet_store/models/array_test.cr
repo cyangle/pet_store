@@ -19,20 +19,20 @@ module PetStore
 
     # Optional properties
 
-    @[JSON::Field(key: "array_of_string", type: Array(String)?, presence: true, ignore_serialize: array_of_string.nil? && !array_of_string_present?)]
-    property array_of_string : Array(String)?
+    @[JSON::Field(key: "array_of_string", type: Array(String)?, default: nil, presence: true, ignore_serialize: array_of_string.nil? && !array_of_string_present?)]
+    getter array_of_string : Array(String)? = nil
 
     @[JSON::Field(ignore: true)]
     property? array_of_string_present : Bool = false
 
-    @[JSON::Field(key: "array_array_of_integer", type: Array(Array(Int64))?, presence: true, ignore_serialize: array_array_of_integer.nil? && !array_array_of_integer_present?)]
-    property array_array_of_integer : Array(Array(Int64))?
+    @[JSON::Field(key: "array_array_of_integer", type: Array(Array(Int64))?, default: nil, presence: true, ignore_serialize: array_array_of_integer.nil? && !array_array_of_integer_present?)]
+    getter array_array_of_integer : Array(Array(Int64))? = nil
 
     @[JSON::Field(ignore: true)]
     property? array_array_of_integer_present : Bool = false
 
-    @[JSON::Field(key: "array_array_of_model", type: Array(Array(ReadOnlyFirst))?, presence: true, ignore_serialize: array_array_of_model.nil? && !array_array_of_model_present?)]
-    property array_array_of_model : Array(Array(ReadOnlyFirst))?
+    @[JSON::Field(key: "array_array_of_model", type: Array(Array(ReadOnlyFirst))?, default: nil, presence: true, ignore_serialize: array_array_of_model.nil? && !array_array_of_model_present?)]
+    getter array_array_of_model : Array(Array(ReadOnlyFirst))? = nil
 
     @[JSON::Field(ignore: true)]
     property? array_array_of_model_present : Bool = false
@@ -60,6 +60,32 @@ module PetStore
     # @return true if the model is valid
     def valid?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] array_of_string Object to be assigned
+    def array_of_string=(array_of_string : Array(String)?)
+      if array_of_string.nil?
+        @array_of_string_present = false
+        return @array_of_string = nil
+      end
+      @array_of_string = array_of_string
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] array_array_of_integer Object to be assigned
+    def array_array_of_integer=(array_array_of_integer : Array(Array(Int64))?)
+      if array_array_of_integer.nil?
+        @array_array_of_integer_present = false
+        return @array_array_of_integer = nil
+      end
+      @array_array_of_integer = array_array_of_integer
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] array_array_of_model Object to be assigned
+    def array_array_of_model=(array_array_of_model : Array(Array(ReadOnlyFirst))?)
+      if array_array_of_model.nil?
+        @array_array_of_model_present = false
+        return @array_array_of_model = nil
+      end
+      @array_array_of_model = array_array_of_model
     end
 
     # @see the `==` method

@@ -19,20 +19,20 @@ module PetStore
 
     # Optional properties
 
-    @[JSON::Field(key: "code", type: Int32?, presence: true, ignore_serialize: code.nil? && !code_present?)]
-    property code : Int32?
+    @[JSON::Field(key: "code", type: Int32?, default: nil, presence: true, ignore_serialize: code.nil? && !code_present?)]
+    getter code : Int32? = nil
 
     @[JSON::Field(ignore: true)]
     property? code_present : Bool = false
 
-    @[JSON::Field(key: "type", type: String?, presence: true, ignore_serialize: _type.nil? && !_type_present?)]
-    property _type : String?
+    @[JSON::Field(key: "type", type: String?, default: nil, presence: true, ignore_serialize: _type.nil? && !_type_present?)]
+    getter _type : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? _type_present : Bool = false
 
-    @[JSON::Field(key: "message", type: String?, presence: true, ignore_serialize: message.nil? && !message_present?)]
-    property message : String?
+    @[JSON::Field(key: "message", type: String?, default: nil, presence: true, ignore_serialize: message.nil? && !message_present?)]
+    getter message : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? message_present : Bool = false
@@ -60,6 +60,32 @@ module PetStore
     # @return true if the model is valid
     def valid?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] code Object to be assigned
+    def code=(code : Int32?)
+      if code.nil?
+        @code_present = false
+        return @code = nil
+      end
+      @code = code
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] _type Object to be assigned
+    def _type=(_type : String?)
+      if _type.nil?
+        @_type_present = false
+        return @_type = nil
+      end
+      @_type = _type
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] message Object to be assigned
+    def message=(message : String?)
+      if message.nil?
+        @message_present = false
+        return @message = nil
+      end
+      @message = message
     end
 
     # @see the `==` method

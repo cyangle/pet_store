@@ -52,12 +52,11 @@ describe PetStore::GmFruit do
       it "returns false" do
         gm_fruit = PetStore::GmFruit.new(color: "orange")
         json_string = gm_fruit.to_json
-        expect_raises(JSON::SerializableError) do
-          PetStore::Banana.from_json(json_string)
-        end
-        expect_raises(JSON::SerializableError) do
-          PetStore::Apple.from_json(json_string)
-        end
+        apple = PetStore::Apple.from_json(json_string)
+        banana = PetStore::Banana.from_json(json_string)
+        (gm_fruit.valid?).should be_false
+        (apple.valid?).should be_false
+        (banana.valid?).should be_false
       end
     end
   end

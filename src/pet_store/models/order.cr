@@ -19,33 +19,33 @@ module PetStore
 
     # Optional properties
 
-    @[JSON::Field(key: "id", type: Int64?, presence: true, ignore_serialize: id.nil? && !id_present?)]
-    property id : Int64?
+    @[JSON::Field(key: "id", type: Int64?, default: nil, presence: true, ignore_serialize: id.nil? && !id_present?)]
+    getter id : Int64? = nil
 
     @[JSON::Field(ignore: true)]
     property? id_present : Bool = false
 
-    @[JSON::Field(key: "petId", type: Int64?, presence: true, ignore_serialize: pet_id.nil? && !pet_id_present?)]
-    property pet_id : Int64?
+    @[JSON::Field(key: "petId", type: Int64?, default: nil, presence: true, ignore_serialize: pet_id.nil? && !pet_id_present?)]
+    getter pet_id : Int64? = nil
 
     @[JSON::Field(ignore: true)]
     property? pet_id_present : Bool = false
 
-    @[JSON::Field(key: "quantity", type: Int32?, presence: true, ignore_serialize: quantity.nil? && !quantity_present?)]
-    property quantity : Int32?
+    @[JSON::Field(key: "quantity", type: Int32?, default: nil, presence: true, ignore_serialize: quantity.nil? && !quantity_present?)]
+    getter quantity : Int32? = nil
 
     @[JSON::Field(ignore: true)]
     property? quantity_present : Bool = false
 
-    @[JSON::Field(key: "shipDate", type: Time?, converter: Time::RFC3339Converter, presence: true, ignore_serialize: ship_date.nil? && !ship_date_present?)]
-    property ship_date : Time?
+    @[JSON::Field(key: "shipDate", type: Time?, default: nil, presence: true, ignore_serialize: ship_date.nil? && !ship_date_present?, converter: Time::RFC3339Converter)]
+    getter ship_date : Time? = nil
 
     @[JSON::Field(ignore: true)]
     property? ship_date_present : Bool = false
 
     # Order Status
-    @[JSON::Field(key: "status", type: String?, presence: true, ignore_serialize: status.nil? && !status_present?)]
-    getter status : String?
+    @[JSON::Field(key: "status", type: String?, default: nil, presence: true, ignore_serialize: status.nil? && !status_present?)]
+    getter status : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? status_present : Bool = false
@@ -53,7 +53,7 @@ module PetStore
     ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["placed", "approved", "delivered"])
 
     @[JSON::Field(key: "complete", type: Bool?, default: false, presence: true, ignore_serialize: complete.nil? && !complete_present?)]
-    property complete : Bool? = false
+    getter complete : Bool? = false
 
     @[JSON::Field(ignore: true)]
     property? complete_present : Bool = false
@@ -91,10 +91,55 @@ module PetStore
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] id Object to be assigned
+    def id=(id : Int64?)
+      if id.nil?
+        @id_present = false
+        return @id = nil
+      end
+      @id = id
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] pet_id Object to be assigned
+    def pet_id=(pet_id : Int64?)
+      if pet_id.nil?
+        @pet_id_present = false
+        return @pet_id = nil
+      end
+      @pet_id = pet_id
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] quantity Object to be assigned
+    def quantity=(quantity : Int32?)
+      if quantity.nil?
+        @quantity_present = false
+        return @quantity = nil
+      end
+      @quantity = quantity
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] ship_date Object to be assigned
+    def ship_date=(ship_date : Time?)
+      if ship_date.nil?
+        @ship_date_present = false
+        return @ship_date = nil
+      end
+      @ship_date = ship_date
+    end # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status : String?)
-      ENUM_VALIDATOR_FOR_STATUS.valid!(status)
+      if status.nil?
+        @status_present = false
+        return @status = nil
+      end
+      _status = status.not_nil!
+      ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
       @status = status
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] complete Object to be assigned
+    def complete=(complete : Bool?)
+      if complete.nil?
+        @complete_present = false
+        return @complete = nil
+      end
+      @complete = complete
     end
 
     # @see the `==` method

@@ -20,8 +20,8 @@ module PetStore
 
     # Optional properties
 
-    @[JSON::Field(key: "_class", type: String?, presence: true, ignore_serialize: _class.nil? && !_class_present?)]
-    property _class : String?
+    @[JSON::Field(key: "_class", type: String?, default: nil, presence: true, ignore_serialize: _class.nil? && !_class_present?)]
+    getter _class : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? _class_present : Bool = false
@@ -47,6 +47,16 @@ module PetStore
     # @return true if the model is valid
     def valid?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] _class Object to be assigned
+    def _class=(_class : String?)
+      if _class.nil?
+        @_class_present = false
+        return @_class = nil
+      end
+      @_class = _class
     end
 
     # @see the `==` method

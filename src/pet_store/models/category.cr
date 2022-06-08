@@ -19,13 +19,16 @@ module PetStore
 
     # Required properties
 
-    @[JSON::Field(key: "name", type: String, default: "default-name")]
-    property name : String = "default-name"
+    @[JSON::Field(key: "name", type: String?, default: "default-name", presence: true, ignore_serialize: name.nil? && !name_present?)]
+    getter name : String? = "default-name"
+
+    @[JSON::Field(ignore: true)]
+    property? name_present : Bool = false
 
     # Optional properties
 
-    @[JSON::Field(key: "id", type: Int64?, presence: true, ignore_serialize: id.nil? && !id_present?)]
-    property id : Int64?
+    @[JSON::Field(key: "id", type: Int64?, default: nil, presence: true, ignore_serialize: id.nil? && !id_present?)]
+    getter id : Int64? = nil
 
     @[JSON::Field(ignore: true)]
     property? id_present : Bool = false
@@ -35,7 +38,7 @@ module PetStore
     def initialize(
       *,
       # Required properties
-      @name : String = "default-name",
+      @name : String? = "default-name",
       # Optional properties
       @id : Int64? = nil
     )
@@ -45,6 +48,7 @@ module PetStore
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+      invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
 
       invalid_properties
     end
@@ -52,7 +56,26 @@ module PetStore
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @name.nil?
+
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] name Object to be assigned
+    def name=(name : String?)
+      if name.nil?
+        raise ArgumentError.new("\"name\" is required and cannot be null")
+      end
+      @name = name
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] id Object to be assigned
+    def id=(id : Int64?)
+      if id.nil?
+        @id_present = false
+        return @id = nil
+      end
+      @id = id
     end
 
     # @see the `==` method
@@ -65,6 +88,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@name, @id, @id_present)
+    def_equals_and_hash(@name, @name_present, @id, @id_present)
   end
 end

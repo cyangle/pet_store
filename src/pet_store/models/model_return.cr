@@ -20,8 +20,8 @@ module PetStore
 
     # Optional properties
 
-    @[JSON::Field(key: "return", type: Int32?, presence: true, ignore_serialize: _return.nil? && !_return_present?)]
-    property _return : Int32?
+    @[JSON::Field(key: "return", type: Int32?, default: nil, presence: true, ignore_serialize: _return.nil? && !_return_present?)]
+    getter _return : Int32? = nil
 
     @[JSON::Field(ignore: true)]
     property? _return_present : Bool = false
@@ -47,6 +47,16 @@ module PetStore
     # @return true if the model is valid
     def valid?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] _return Object to be assigned
+    def _return=(_return : Int32?)
+      if _return.nil?
+        @_return_present = false
+        return @_return = nil
+      end
+      @_return = _return
     end
 
     # @see the `==` method

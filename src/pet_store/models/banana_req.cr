@@ -19,13 +19,16 @@ module PetStore
 
     # Required properties
 
-    @[JSON::Field(key: "lengthCm", type: Float64)]
-    property length_cm : Float64
+    @[JSON::Field(key: "lengthCm", type: Float64?, default: nil, presence: true, ignore_serialize: length_cm.nil? && !length_cm_present?)]
+    getter length_cm : Float64? = nil
+
+    @[JSON::Field(ignore: true)]
+    property? length_cm_present : Bool = false
 
     # Optional properties
 
-    @[JSON::Field(key: "sweet", type: Bool?, presence: true, ignore_serialize: sweet.nil? && !sweet_present?)]
-    property sweet : Bool?
+    @[JSON::Field(key: "sweet", type: Bool?, default: nil, presence: true, ignore_serialize: sweet.nil? && !sweet_present?)]
+    getter sweet : Bool? = nil
 
     @[JSON::Field(ignore: true)]
     property? sweet_present : Bool = false
@@ -35,7 +38,7 @@ module PetStore
     def initialize(
       *,
       # Required properties
-      @length_cm : Float64,
+      @length_cm : Float64? = nil,
       # Optional properties
       @sweet : Bool? = nil
     )
@@ -45,6 +48,7 @@ module PetStore
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+      invalid_properties.push("\"length_cm\" is required and cannot be null") if @length_cm.nil?
 
       invalid_properties
     end
@@ -52,7 +56,26 @@ module PetStore
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @length_cm.nil?
+
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] length_cm Object to be assigned
+    def length_cm=(length_cm : Float64?)
+      if length_cm.nil?
+        raise ArgumentError.new("\"length_cm\" is required and cannot be null")
+      end
+      @length_cm = length_cm
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] sweet Object to be assigned
+    def sweet=(sweet : Bool?)
+      if sweet.nil?
+        @sweet_present = false
+        return @sweet = nil
+      end
+      @sweet = sweet
     end
 
     # @see the `==` method
@@ -65,6 +88,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@length_cm, @sweet, @sweet_present)
+    def_equals_and_hash(@length_cm, @length_cm_present, @sweet, @sweet_present)
   end
 end

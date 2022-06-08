@@ -19,13 +19,16 @@ module PetStore
 
     # Required properties
 
-    @[JSON::Field(key: "cultivar", type: String)]
-    property cultivar : String
+    @[JSON::Field(key: "cultivar", type: String?, default: nil, presence: true, ignore_serialize: cultivar.nil? && !cultivar_present?)]
+    getter cultivar : String? = nil
+
+    @[JSON::Field(ignore: true)]
+    property? cultivar_present : Bool = false
 
     # Optional properties
 
-    @[JSON::Field(key: "mealy", type: Bool?, presence: true, ignore_serialize: mealy.nil? && !mealy_present?)]
-    property mealy : Bool?
+    @[JSON::Field(key: "mealy", type: Bool?, default: nil, presence: true, ignore_serialize: mealy.nil? && !mealy_present?)]
+    getter mealy : Bool? = nil
 
     @[JSON::Field(ignore: true)]
     property? mealy_present : Bool = false
@@ -35,7 +38,7 @@ module PetStore
     def initialize(
       *,
       # Required properties
-      @cultivar : String,
+      @cultivar : String? = nil,
       # Optional properties
       @mealy : Bool? = nil
     )
@@ -45,6 +48,7 @@ module PetStore
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+      invalid_properties.push("\"cultivar\" is required and cannot be null") if @cultivar.nil?
 
       invalid_properties
     end
@@ -52,7 +56,26 @@ module PetStore
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @cultivar.nil?
+
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] cultivar Object to be assigned
+    def cultivar=(cultivar : String?)
+      if cultivar.nil?
+        raise ArgumentError.new("\"cultivar\" is required and cannot be null")
+      end
+      @cultivar = cultivar
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] mealy Object to be assigned
+    def mealy=(mealy : Bool?)
+      if mealy.nil?
+        @mealy_present = false
+        return @mealy = nil
+      end
+      @mealy = mealy
     end
 
     # @see the `==` method
@@ -65,6 +88,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@cultivar, @mealy, @mealy_present)
+    def_equals_and_hash(@cultivar, @cultivar_present, @mealy, @mealy_present)
   end
 end

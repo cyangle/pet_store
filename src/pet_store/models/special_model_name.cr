@@ -19,8 +19,8 @@ module PetStore
 
     # Optional properties
 
-    @[JSON::Field(key: "$special[property.name]", type: Int64?, presence: true, ignore_serialize: special_property_name.nil? && !special_property_name_present?)]
-    property special_property_name : Int64?
+    @[JSON::Field(key: "$special[property.name]", type: Int64?, default: nil, presence: true, ignore_serialize: special_property_name.nil? && !special_property_name_present?)]
+    getter special_property_name : Int64? = nil
 
     @[JSON::Field(ignore: true)]
     property? special_property_name_present : Bool = false
@@ -46,6 +46,16 @@ module PetStore
     # @return true if the model is valid
     def valid?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] special_property_name Object to be assigned
+    def special_property_name=(special_property_name : Int64?)
+      if special_property_name.nil?
+        @special_property_name_present = false
+        return @special_property_name = nil
+      end
+      @special_property_name = special_property_name
     end
 
     # @see the `==` method

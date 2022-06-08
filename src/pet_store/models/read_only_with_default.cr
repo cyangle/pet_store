@@ -19,44 +19,44 @@ module PetStore
 
     # Optional properties
 
-    @[JSON::Field(key: "prop1", type: String?, presence: true, ignore_serialize: prop1.nil? && !prop1_present?)]
-    property prop1 : String?
+    @[JSON::Field(key: "prop1", type: String?, default: nil, presence: true, ignore_serialize: prop1.nil? && !prop1_present?)]
+    getter prop1 : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? prop1_present : Bool = false
 
     @[JSON::Field(key: "prop2", type: String?, default: "defaultProp2", presence: true, ignore_serialize: prop2.nil? && !prop2_present?)]
-    property prop2 : String? = "defaultProp2"
+    getter prop2 : String? = "defaultProp2"
 
     @[JSON::Field(ignore: true)]
     property? prop2_present : Bool = false
 
     @[JSON::Field(key: "prop3", type: String?, default: "defaultProp3", presence: true, ignore_serialize: prop3.nil? && !prop3_present?)]
-    property prop3 : String? = "defaultProp3"
+    getter prop3 : String? = "defaultProp3"
 
     @[JSON::Field(ignore: true)]
     property? prop3_present : Bool = false
 
     @[JSON::Field(key: "boolProp1", type: Bool?, default: false, presence: true, ignore_serialize: bool_prop1.nil? && !bool_prop1_present?)]
-    property bool_prop1 : Bool? = false
+    getter bool_prop1 : Bool? = false
 
     @[JSON::Field(ignore: true)]
     property? bool_prop1_present : Bool = false
 
     @[JSON::Field(key: "boolProp2", type: Bool?, default: true, presence: true, ignore_serialize: bool_prop2.nil? && !bool_prop2_present?)]
-    property bool_prop2 : Bool? = true
+    getter bool_prop2 : Bool? = true
 
     @[JSON::Field(ignore: true)]
     property? bool_prop2_present : Bool = false
 
     @[JSON::Field(key: "intProp1", type: Float64?, default: 100, presence: true, ignore_serialize: int_prop1.nil? && !int_prop1_present?)]
-    property int_prop1 : Float64? = 100
+    getter int_prop1 : Float64? = 100
 
     @[JSON::Field(ignore: true)]
     property? int_prop1_present : Bool = false
 
     @[JSON::Field(key: "intProp2", type: Float64?, default: 120, presence: true, ignore_serialize: int_prop2.nil? && !int_prop2_present?)]
-    property int_prop2 : Float64? = 120
+    getter int_prop2 : Float64? = 120
 
     @[JSON::Field(ignore: true)]
     property? int_prop2_present : Bool = false
@@ -88,6 +88,64 @@ module PetStore
     # @return true if the model is valid
     def valid?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] prop1 Object to be assigned
+    def prop1=(prop1 : String?)
+      if prop1.nil?
+        @prop1_present = false
+        return @prop1 = nil
+      end
+      @prop1 = prop1
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] prop2 Object to be assigned
+    def prop2=(prop2 : String?)
+      if prop2.nil?
+        @prop2_present = false
+        return @prop2 = nil
+      end
+      @prop2 = prop2
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] prop3 Object to be assigned
+    def prop3=(prop3 : String?)
+      if prop3.nil?
+        @prop3_present = false
+        return @prop3 = nil
+      end
+      @prop3 = prop3
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] bool_prop1 Object to be assigned
+    def bool_prop1=(bool_prop1 : Bool?)
+      if bool_prop1.nil?
+        @bool_prop1_present = false
+        return @bool_prop1 = nil
+      end
+      @bool_prop1 = bool_prop1
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] bool_prop2 Object to be assigned
+    def bool_prop2=(bool_prop2 : Bool?)
+      if bool_prop2.nil?
+        @bool_prop2_present = false
+        return @bool_prop2 = nil
+      end
+      @bool_prop2 = bool_prop2
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] int_prop1 Object to be assigned
+    def int_prop1=(int_prop1 : Float64?)
+      if int_prop1.nil?
+        @int_prop1_present = false
+        return @int_prop1 = nil
+      end
+      @int_prop1 = int_prop1
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] int_prop2 Object to be assigned
+    def int_prop2=(int_prop2 : Float64?)
+      if int_prop2.nil?
+        @int_prop2_present = false
+        return @int_prop2 = nil
+      end
+      @int_prop2 = int_prop2
     end
 
     # @see the `==` method

@@ -19,19 +19,22 @@ module PetStore
 
     # Required properties
 
-    @[JSON::Field(key: "className", type: String)]
-    property class_name : String
+    @[JSON::Field(key: "className", type: String?, default: nil, presence: true, ignore_serialize: class_name.nil? && !class_name_present?)]
+    getter class_name : String? = nil
+
+    @[JSON::Field(ignore: true)]
+    property? class_name_present : Bool = false
 
     # Optional properties
 
-    @[JSON::Field(key: "hasBaleen", type: Bool?, presence: true, ignore_serialize: has_baleen.nil? && !has_baleen_present?)]
-    property has_baleen : Bool?
+    @[JSON::Field(key: "hasBaleen", type: Bool?, default: nil, presence: true, ignore_serialize: has_baleen.nil? && !has_baleen_present?)]
+    getter has_baleen : Bool? = nil
 
     @[JSON::Field(ignore: true)]
     property? has_baleen_present : Bool = false
 
-    @[JSON::Field(key: "hasTeeth", type: Bool?, presence: true, ignore_serialize: has_teeth.nil? && !has_teeth_present?)]
-    property has_teeth : Bool?
+    @[JSON::Field(key: "hasTeeth", type: Bool?, default: nil, presence: true, ignore_serialize: has_teeth.nil? && !has_teeth_present?)]
+    getter has_teeth : Bool? = nil
 
     @[JSON::Field(ignore: true)]
     property? has_teeth_present : Bool = false
@@ -41,7 +44,7 @@ module PetStore
     def initialize(
       *,
       # Required properties
-      @class_name : String,
+      @class_name : String? = nil,
       # Optional properties
       @has_baleen : Bool? = nil,
       @has_teeth : Bool? = nil
@@ -52,6 +55,7 @@ module PetStore
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+      invalid_properties.push("\"class_name\" is required and cannot be null") if @class_name.nil?
 
       invalid_properties
     end
@@ -59,7 +63,34 @@ module PetStore
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @class_name.nil?
+
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] class_name Object to be assigned
+    def class_name=(class_name : String?)
+      if class_name.nil?
+        raise ArgumentError.new("\"class_name\" is required and cannot be null")
+      end
+      @class_name = class_name
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] has_baleen Object to be assigned
+    def has_baleen=(has_baleen : Bool?)
+      if has_baleen.nil?
+        @has_baleen_present = false
+        return @has_baleen = nil
+      end
+      @has_baleen = has_baleen
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] has_teeth Object to be assigned
+    def has_teeth=(has_teeth : Bool?)
+      if has_teeth.nil?
+        @has_teeth_present = false
+        return @has_teeth = nil
+      end
+      @has_teeth = has_teeth
     end
 
     # @see the `==` method
@@ -72,6 +103,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@class_name, @has_baleen, @has_baleen_present, @has_teeth, @has_teeth_present)
+    def_equals_and_hash(@class_name, @class_name_present, @has_baleen, @has_baleen_present, @has_teeth, @has_teeth_present)
   end
 end

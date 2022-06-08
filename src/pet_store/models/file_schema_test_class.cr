@@ -19,14 +19,14 @@ module PetStore
 
     # Optional properties
 
-    @[JSON::Field(key: "file", type: File?, presence: true, ignore_serialize: file.nil? && !file_present?)]
-    property file : File?
+    @[JSON::Field(key: "file", type: File?, default: nil, presence: true, ignore_serialize: file.nil? && !file_present?)]
+    getter file : File? = nil
 
     @[JSON::Field(ignore: true)]
     property? file_present : Bool = false
 
-    @[JSON::Field(key: "files", type: Array(File)?, presence: true, ignore_serialize: files.nil? && !files_present?)]
-    property files : Array(File)?
+    @[JSON::Field(key: "files", type: Array(File)?, default: nil, presence: true, ignore_serialize: files.nil? && !files_present?)]
+    getter files : Array(File)? = nil
 
     @[JSON::Field(ignore: true)]
     property? files_present : Bool = false
@@ -53,6 +53,24 @@ module PetStore
     # @return true if the model is valid
     def valid?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] file Object to be assigned
+    def file=(file : File?)
+      if file.nil?
+        @file_present = false
+        return @file = nil
+      end
+      @file = file
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] files Object to be assigned
+    def files=(files : Array(File)?)
+      if files.nil?
+        @files_present = false
+        return @files = nil
+      end
+      @files = files
     end
 
     # @see the `==` method

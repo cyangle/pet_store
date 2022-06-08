@@ -19,8 +19,8 @@ module PetStore
 
     # Optional properties
 
-    @[JSON::Field(key: "JustNumber", type: Float64?, presence: true, ignore_serialize: just_number.nil? && !just_number_present?)]
-    property just_number : Float64?
+    @[JSON::Field(key: "JustNumber", type: Float64?, default: nil, presence: true, ignore_serialize: just_number.nil? && !just_number_present?)]
+    getter just_number : Float64? = nil
 
     @[JSON::Field(ignore: true)]
     property? just_number_present : Bool = false
@@ -46,6 +46,16 @@ module PetStore
     # @return true if the model is valid
     def valid?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] just_number Object to be assigned
+    def just_number=(just_number : Float64?)
+      if just_number.nil?
+        @just_number_present = false
+        return @just_number = nil
+      end
+      @just_number = just_number
     end
 
     # @see the `==` method

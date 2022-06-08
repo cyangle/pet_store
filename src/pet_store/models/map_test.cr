@@ -19,28 +19,28 @@ module PetStore
 
     # Optional properties
 
-    @[JSON::Field(key: "map_map_of_string", type: Hash(String, Hash(String, String))?, presence: true, ignore_serialize: map_map_of_string.nil? && !map_map_of_string_present?)]
-    property map_map_of_string : Hash(String, Hash(String, String))?
+    @[JSON::Field(key: "map_map_of_string", type: Hash(String, Hash(String, String))?, default: nil, presence: true, ignore_serialize: map_map_of_string.nil? && !map_map_of_string_present?)]
+    getter map_map_of_string : Hash(String, Hash(String, String))? = nil
 
     @[JSON::Field(ignore: true)]
     property? map_map_of_string_present : Bool = false
 
-    @[JSON::Field(key: "map_of_enum_string", type: Hash(String, String)?, presence: true, ignore_serialize: map_of_enum_string.nil? && !map_of_enum_string_present?)]
-    getter map_of_enum_string : Hash(String, String)?
+    @[JSON::Field(key: "map_of_enum_string", type: Hash(String, String)?, default: nil, presence: true, ignore_serialize: map_of_enum_string.nil? && !map_of_enum_string_present?)]
+    getter map_of_enum_string : Hash(String, String)? = nil
 
     @[JSON::Field(ignore: true)]
     property? map_of_enum_string_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_MAP_OF_ENUM_STRING = EnumValidator.new("map_of_enum_string", "String", ["UPPER", "lower"])
+    ENUM_VALIDATOR_FOR_MAP_OF_ENUM_STRING = EnumValidator.new("map_of_enum_string", "Hash(String, String)", ["UPPER", "lower"])
 
-    @[JSON::Field(key: "direct_map", type: Hash(String, Bool)?, presence: true, ignore_serialize: direct_map.nil? && !direct_map_present?)]
-    property direct_map : Hash(String, Bool)?
+    @[JSON::Field(key: "direct_map", type: Hash(String, Bool)?, default: nil, presence: true, ignore_serialize: direct_map.nil? && !direct_map_present?)]
+    getter direct_map : Hash(String, Bool)? = nil
 
     @[JSON::Field(ignore: true)]
     property? direct_map_present : Bool = false
 
-    @[JSON::Field(key: "indirect_map", type: Hash(String, Bool)?, presence: true, ignore_serialize: indirect_map.nil? && !indirect_map_present?)]
-    property indirect_map : Hash(String, Bool)?
+    @[JSON::Field(key: "indirect_map", type: Hash(String, Bool)?, default: nil, presence: true, ignore_serialize: indirect_map.nil? && !indirect_map_present?)]
+    getter indirect_map : Hash(String, Bool)? = nil
 
     @[JSON::Field(ignore: true)]
     property? indirect_map_present : Bool = false
@@ -76,10 +76,39 @@ module PetStore
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] map_map_of_string Object to be assigned
+    def map_map_of_string=(map_map_of_string : Hash(String, Hash(String, String))?)
+      if map_map_of_string.nil?
+        @map_map_of_string_present = false
+        return @map_map_of_string = nil
+      end
+      @map_map_of_string = map_map_of_string
+    end # Custom attribute writer method checking allowed values (enum).
     # @param [Object] map_of_enum_string Object to be assigned
     def map_of_enum_string=(map_of_enum_string : Hash(String, String)?)
-      ENUM_VALIDATOR_FOR_MAP_OF_ENUM_STRING.all_valid!(map_of_enum_string.try(&.values))
+      if map_of_enum_string.nil?
+        @map_of_enum_string_present = false
+        return @map_of_enum_string = nil
+      end
+      _map_of_enum_string = map_of_enum_string.not_nil!
+      ENUM_VALIDATOR_FOR_MAP_OF_ENUM_STRING.all_valid!(_map_of_enum_string.values)
       @map_of_enum_string = map_of_enum_string
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] direct_map Object to be assigned
+    def direct_map=(direct_map : Hash(String, Bool)?)
+      if direct_map.nil?
+        @direct_map_present = false
+        return @direct_map = nil
+      end
+      @direct_map = direct_map
+    end # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] indirect_map Object to be assigned
+    def indirect_map=(indirect_map : Hash(String, Bool)?)
+      if indirect_map.nil?
+        @indirect_map_present = false
+        return @indirect_map = nil
+      end
+      @indirect_map = indirect_map
     end
 
     # @see the `==` method
