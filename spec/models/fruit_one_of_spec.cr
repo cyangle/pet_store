@@ -28,4 +28,13 @@ describe PetStore::FruitOneOf do
       (fruit_one_of.is_a?(PetStore::BananaOneOf)).should be_true
     end
   end
+
+  context "json is not AppleOneOf nor BananaOneOf" do
+    it "raises an error" do
+      expect_raises(JSON::ParseException, /Couldn't parse/) do
+        json = "{}"
+        PetStore::FruitOneOf.from_json(json)
+      end
+    end
+  end
 end

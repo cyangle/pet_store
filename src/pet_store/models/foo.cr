@@ -15,6 +15,7 @@ module PetStore
   class Foo
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Optional properties
 

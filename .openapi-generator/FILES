@@ -5,8 +5,7 @@ spec/spec_helper.cr
 spec/support/ext.cr
 spec/support/helpers.cr
 spec/support/vcr.cr
-src/ext/json/from_json.cr
-src/ext/json/serialization.cr
+src/ext/open_api/json.cr
 src/ext/time.cr
 src/pet_store.cr
 src/pet_store/api/another_fake_api.cr

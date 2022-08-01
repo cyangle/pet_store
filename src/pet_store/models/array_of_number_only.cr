@@ -15,6 +15,7 @@ module PetStore
   class ArrayOfNumberOnly
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Optional properties
 

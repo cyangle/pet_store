@@ -13,6 +13,8 @@ require "log"
 
 module PetStore
   class OuterEnumRquiredInt64
+    include OpenApi::Json
+
     property data : Int64
 
     ENUM_VALIDATOR = EnumValidator.new("outerEnumRquiredInt64", "Int64", ["1", "2", "3"])

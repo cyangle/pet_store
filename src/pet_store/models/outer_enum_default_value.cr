@@ -13,6 +13,8 @@ require "log"
 
 module PetStore
   class OuterEnumDefaultValue
+    include OpenApi::Json
+
     property data : String
 
     ENUM_VALIDATOR = EnumValidator.new("OuterEnumDefaultValue", "String", ["placed", "approved", "delivered"])

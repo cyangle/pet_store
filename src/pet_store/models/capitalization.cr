@@ -15,6 +15,7 @@ module PetStore
   class Capitalization
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Optional properties
 

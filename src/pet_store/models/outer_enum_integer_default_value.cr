@@ -13,6 +13,8 @@ require "log"
 
 module PetStore
   class OuterEnumIntegerDefaultValue
+    include OpenApi::Json
+
     property data : Int32
 
     ENUM_VALIDATOR = EnumValidator.new("OuterEnumIntegerDefaultValue", "Int32", ["0", "1", "2"])

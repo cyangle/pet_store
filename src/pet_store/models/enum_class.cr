@@ -13,6 +13,8 @@ require "log"
 
 module PetStore
   class EnumClass
+    include OpenApi::Json
+
     property data : String
 
     ENUM_VALIDATOR = EnumValidator.new("EnumClass", "String", ["_abc", "-efg", "(xyz)"])

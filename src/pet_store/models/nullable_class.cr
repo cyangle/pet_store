@@ -15,6 +15,7 @@ module PetStore
   class NullableClass
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Required properties
 

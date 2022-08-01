@@ -15,6 +15,7 @@ module PetStore
   class Cat
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Required properties
 

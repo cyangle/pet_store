@@ -166,12 +166,11 @@ describe PetStore::EnumTest do
   end
 
   describe "test attribute 'outer_enum'" do
-    it "should work" do
-      json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress","outerEnumRquiredInt64":3,"outerEnum":"invalid","outerEnumDefaultValue":"placed","outerEnumIntegerDefaultValue":0})
-      instance = PetStore::EnumTest.from_json(json)
-      (instance.list_invalid_properties).should_not be_empty
-      (instance.valid?).should be_false
-      (instance.to_json).should eq(json)
+    it "raises error" do
+      expect_raises(JSON::ParseException, /Validation failed/) do
+        json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress","outerEnumRquiredInt64":3,"outerEnum":"invalid","outerEnumDefaultValue":"placed","outerEnumIntegerDefaultValue":0})
+        PetStore::EnumTest.from_json(json)
+      end
     end
 
     context "sets outer_enum with invalid value" do

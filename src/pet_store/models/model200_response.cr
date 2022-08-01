@@ -16,6 +16,7 @@ module PetStore
   class Model200Response
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Optional properties
 

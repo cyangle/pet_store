@@ -6,3 +6,11 @@ tasks:
         name: 'Correct AnyType?'
         pattern: 'JSONAny'
         new_value: 'JSON::Any'
+      -
+        name: 'Correct AnyType?'
+        pattern: 'JSONType?'
+        new_value: 'JSON::Type'
+      -
+        name: 'Correct AnyType?'
+        pattern: 'JSONType'
+        new_value: 'JSON::Type'

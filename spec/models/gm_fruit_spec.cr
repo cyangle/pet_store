@@ -48,15 +48,35 @@ describe PetStore::GmFruit do
       end
     end
 
-    context "is not apple or banana" do
-      it "returns false" do
-        gm_fruit = PetStore::GmFruit.new(color: "orange")
-        json_string = gm_fruit.to_json
-        apple = PetStore::Apple.from_json(json_string)
-        banana = PetStore::Banana.from_json(json_string)
-        (gm_fruit.valid?).should be_false
-        (apple.valid?).should be_false
-        (banana.valid?).should be_false
+    context "is not apple nor banana" do
+      context "deserialize to gm_fruit" do
+        it "raises error" do
+          expect_raises(JSON::ParseException, /Validation failed/) do
+            gm_fruit = PetStore::GmFruit.new(color: "orange")
+            json_string = gm_fruit.to_json
+            PetStore::GmFruit.from_json(json_string)
+          end
+        end
+      end
+
+      context "deserialize to apple" do
+        it "raises error" do
+          expect_raises(JSON::ParseException, /Validation failed/) do
+            gm_fruit = PetStore::GmFruit.new(color: "orange")
+            json_string = gm_fruit.to_json
+            PetStore::Apple.from_json(json_string)
+          end
+        end
+      end
+
+      context "deserialize to banana" do
+        it "raises error" do
+          expect_raises(JSON::ParseException, /Validation failed/) do
+            gm_fruit = PetStore::GmFruit.new(color: "orange")
+            json_string = gm_fruit.to_json
+            PetStore::Banana.from_json(json_string)
+          end
+        end
       end
     end
   end
