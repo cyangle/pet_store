@@ -62,7 +62,9 @@ module PetStore
         raise ArgumentError.new("\"cultivar\" is required and cannot be null")
       end
       @cultivar = cultivar
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mealy Object to be assigned
     def mealy=(mealy : Bool?)
       if mealy.nil?

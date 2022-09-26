@@ -75,7 +75,9 @@ module PetStore
       end
 
       @name = name
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] declawed Object to be assigned
     def declawed=(declawed : Bool?)
       if declawed.nil?

@@ -82,7 +82,9 @@ module PetStore
       end
 
       @class_name = class_name
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] color Object to be assigned
     def color=(color : String?)
       if color.nil?

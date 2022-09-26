@@ -70,7 +70,9 @@ module PetStore
         return @map_map_of_string = nil
       end
       @map_map_of_string = map_map_of_string
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] map_of_enum_string Object to be assigned
     def map_of_enum_string=(map_of_enum_string : Hash(String, String)?)
       if map_of_enum_string.nil?
@@ -79,14 +81,18 @@ module PetStore
       _map_of_enum_string = map_of_enum_string.not_nil!
       ENUM_VALIDATOR_FOR_MAP_OF_ENUM_STRING.all_valid!(_map_of_enum_string.values)
       @map_of_enum_string = map_of_enum_string
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] direct_map Object to be assigned
     def direct_map=(direct_map : Hash(String, Bool)?)
       if direct_map.nil?
         return @direct_map = nil
       end
       @direct_map = direct_map
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] indirect_map Object to be assigned
     def indirect_map=(indirect_map : Hash(String, Bool)?)
       if indirect_map.nil?

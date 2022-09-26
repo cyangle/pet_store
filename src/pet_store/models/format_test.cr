@@ -236,21 +236,27 @@ module PetStore
       end
 
       @number = number
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] byte Object to be assigned
     def byte=(byte : String?)
       if byte.nil?
         raise ArgumentError.new("\"byte\" is required and cannot be null")
       end
       @byte = byte
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] date Object to be assigned
     def date=(date : Time?)
       if date.nil?
         raise ArgumentError.new("\"date\" is required and cannot be null")
       end
       @date = date
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] password Object to be assigned
     def password=(password : String?)
       if password.nil?
@@ -266,7 +272,9 @@ module PetStore
       end
 
       @password = password
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] integer Object to be assigned
     def integer=(integer : Int32?)
       if integer.nil?
@@ -282,7 +290,9 @@ module PetStore
       end
 
       @integer = integer
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] int32 Object to be assigned
     def int32=(int32 : Int32?)
       if int32.nil?
@@ -298,14 +308,18 @@ module PetStore
       end
 
       @int32 = int32
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] int64 Object to be assigned
     def int64=(int64 : Int64?)
       if int64.nil?
         return @int64 = nil
       end
       @int64 = int64
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] float Object to be assigned
     def float=(float : Float32?)
       if float.nil?
@@ -321,7 +335,9 @@ module PetStore
       end
 
       @float = float
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] double Object to be assigned
     def double=(double : Float64?)
       if double.nil?
@@ -337,7 +353,9 @@ module PetStore
       end
 
       @double = double
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] string Object to be assigned
     def string=(string : String?)
       if string.nil?
@@ -350,28 +368,36 @@ module PetStore
       end
 
       @string = string
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] binary Object to be assigned
     def binary=(binary : ::File?)
       if binary.nil?
         return @binary = nil
       end
       @binary = binary
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] date_time Object to be assigned
     def date_time=(date_time : Time?)
       if date_time.nil?
         return @date_time = nil
       end
       @date_time = date_time
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] uuid Object to be assigned
     def uuid=(uuid : String?)
       if uuid.nil?
         return @uuid = nil
       end
       @uuid = uuid
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] pattern_with_digits Object to be assigned
     def pattern_with_digits=(pattern_with_digits : String?)
       if pattern_with_digits.nil?
@@ -384,7 +410,9 @@ module PetStore
       end
 
       @pattern_with_digits = pattern_with_digits
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] pattern_with_digits_and_delimiter Object to be assigned
     def pattern_with_digits_and_delimiter=(pattern_with_digits_and_delimiter : String?)
       if pattern_with_digits_and_delimiter.nil?

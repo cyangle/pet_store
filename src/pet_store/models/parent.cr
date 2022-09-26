@@ -19,15 +19,15 @@ module PetStore
 
     # Optional properties
 
-    @[JSON::Field(key: "kids", type: Array(OneOfPrimitive)?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter kids : Array(OneOfPrimitive)? = nil
+    @[JSON::Field(key: "kids", type: Array(PetStore::OneOfPrimitive)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter kids : Array(PetStore::OneOfPrimitive)? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @kids : Array(OneOfPrimitive)? = nil
+      @kids : Array(PetStore::OneOfPrimitive)? = nil
     )
     end
 
@@ -35,6 +35,7 @@ module PetStore
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+      # Container kids array has values of PetStore::OneOfPrimitive
 
       invalid_properties
     end
@@ -47,7 +48,7 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] kids Object to be assigned
-    def kids=(kids : Array(OneOfPrimitive)?)
+    def kids=(kids : Array(PetStore::OneOfPrimitive)?)
       if kids.nil?
         return @kids = nil
       end

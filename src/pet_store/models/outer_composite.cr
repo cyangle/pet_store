@@ -60,14 +60,18 @@ module PetStore
         return @my_number = nil
       end
       @my_number = my_number
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] my_string Object to be assigned
     def my_string=(my_string : String?)
       if my_string.nil?
         return @my_string = nil
       end
       @my_string = my_string
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] my_boolean Object to be assigned
     def my_boolean=(my_boolean : Bool?)
       if my_boolean.nil?

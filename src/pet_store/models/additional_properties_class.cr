@@ -56,7 +56,9 @@ module PetStore
         return @map_property = nil
       end
       @map_property = map_property
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] map_of_map_property Object to be assigned
     def map_of_map_property=(map_of_map_property : Hash(String, Hash(String, String))?)
       if map_of_map_property.nil?

@@ -60,14 +60,18 @@ module PetStore
         return @code = nil
       end
       @code = code
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
     def _type=(_type : String?)
       if _type.nil?
         return @_type = nil
       end
       @_type = _type
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] message Object to be assigned
     def message=(message : String?)
       if message.nil?

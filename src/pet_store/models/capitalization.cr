@@ -73,35 +73,45 @@ module PetStore
         return @small_camel = nil
       end
       @small_camel = small_camel
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] capital_camel Object to be assigned
     def capital_camel=(capital_camel : String?)
       if capital_camel.nil?
         return @capital_camel = nil
       end
       @capital_camel = capital_camel
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] small_snake Object to be assigned
     def small_snake=(small_snake : String?)
       if small_snake.nil?
         return @small_snake = nil
       end
       @small_snake = small_snake
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] capital_snake Object to be assigned
     def capital_snake=(capital_snake : String?)
       if capital_snake.nil?
         return @capital_snake = nil
       end
       @capital_snake = capital_snake
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sca_eth_flow_points Object to be assigned
     def sca_eth_flow_points=(sca_eth_flow_points : String?)
       if sca_eth_flow_points.nil?
         return @sca_eth_flow_points = nil
       end
       @sca_eth_flow_points = sca_eth_flow_points
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] att_name Object to be assigned
     def att_name=(att_name : String?)
       if att_name.nil?

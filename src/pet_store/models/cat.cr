@@ -103,7 +103,9 @@ module PetStore
       end
 
       @name = name
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] class_name Object to be assigned
     def class_name=(class_name : String?)
       if class_name.nil?
@@ -115,14 +117,18 @@ module PetStore
       end
 
       @class_name = class_name
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] declawed Object to be assigned
     def declawed=(declawed : Bool?)
       if declawed.nil?
         return @declawed = nil
       end
       @declawed = declawed
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] color Object to be assigned
     def color=(color : String?)
       if color.nil?

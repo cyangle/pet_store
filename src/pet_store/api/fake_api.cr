@@ -82,6 +82,7 @@ module PetStore
     end
 
     # Test serialization of outer boolean types
+    # @optional @param body [Bool?] Input boolean as post body
     # @return [Bool]
     def fake_outer_boolean_serialize(*, body : Bool? = nil)
       data, _status_code, _headers = fake_outer_boolean_serialize_with_http_info(body: body)
@@ -89,6 +90,7 @@ module PetStore
     end
 
     # Test serialization of outer boolean types
+    # @optional @param body [Bool?] Input boolean as post body
     # @return [Array<(Bool, Integer, Hash)>] Bool data, response status code and response headers
     def fake_outer_boolean_serialize_with_http_info(*, body : Bool? = nil)
       request = build_api_request_for_fake_outer_boolean_serialize(body: body)
@@ -103,6 +105,7 @@ module PetStore
     end
 
     # Test serialization of outer boolean types
+    # @optional @param body [Bool?] Input boolean as post body
     # @return nil
     def fake_outer_boolean_serialize(*, body : Bool? = nil, &block : Crest::Response ->)
       build_api_request_for_fake_outer_boolean_serialize(body: body).execute(&block)
@@ -148,6 +151,7 @@ module PetStore
     end
 
     # Test serialization of object with outer number type
+    # @optional @param outer_composite [OuterComposite?] Input composite as post body
     # @return [OuterComposite]
     def fake_outer_composite_serialize(*, outer_composite : OuterComposite? = nil)
       data, _status_code, _headers = fake_outer_composite_serialize_with_http_info(outer_composite: outer_composite)
@@ -155,6 +159,7 @@ module PetStore
     end
 
     # Test serialization of object with outer number type
+    # @optional @param outer_composite [OuterComposite?] Input composite as post body
     # @return [Array<(OuterComposite, Integer, Hash)>] OuterComposite data, response status code and response headers
     def fake_outer_composite_serialize_with_http_info(*, outer_composite : OuterComposite? = nil)
       request = build_api_request_for_fake_outer_composite_serialize(outer_composite: outer_composite)
@@ -169,6 +174,7 @@ module PetStore
     end
 
     # Test serialization of object with outer number type
+    # @optional @param outer_composite [OuterComposite?] Input composite as post body
     # @return nil
     def fake_outer_composite_serialize(*, outer_composite : OuterComposite? = nil, &block : Crest::Response ->)
       build_api_request_for_fake_outer_composite_serialize(outer_composite: outer_composite).execute(&block)
@@ -214,6 +220,7 @@ module PetStore
     end
 
     # Test serialization of outer number types
+    # @optional @param body [Float64?] Input number as post body
     # @return [Float64]
     def fake_outer_number_serialize(*, body : Float64? = nil)
       data, _status_code, _headers = fake_outer_number_serialize_with_http_info(body: body)
@@ -221,6 +228,7 @@ module PetStore
     end
 
     # Test serialization of outer number types
+    # @optional @param body [Float64?] Input number as post body
     # @return [Array<(Float64, Integer, Hash)>] Float64 data, response status code and response headers
     def fake_outer_number_serialize_with_http_info(*, body : Float64? = nil)
       request = build_api_request_for_fake_outer_number_serialize(body: body)
@@ -235,6 +243,7 @@ module PetStore
     end
 
     # Test serialization of outer number types
+    # @optional @param body [Float64?] Input number as post body
     # @return nil
     def fake_outer_number_serialize(*, body : Float64? = nil, &block : Crest::Response ->)
       build_api_request_for_fake_outer_number_serialize(body: body).execute(&block)
@@ -280,6 +289,7 @@ module PetStore
     end
 
     # Test serialization of outer string types
+    # @optional @param body [String?] Input string as post body
     # @return [String]
     def fake_outer_string_serialize(*, body : String? = nil)
       data, _status_code, _headers = fake_outer_string_serialize_with_http_info(body: body)
@@ -287,6 +297,7 @@ module PetStore
     end
 
     # Test serialization of outer string types
+    # @optional @param body [String?] Input string as post body
     # @return [Array<(String, Integer, Hash)>] String data, response status code and response headers
     def fake_outer_string_serialize_with_http_info(*, body : String? = nil)
       request = build_api_request_for_fake_outer_string_serialize(body: body)
@@ -301,6 +312,7 @@ module PetStore
     end
 
     # Test serialization of outer string types
+    # @optional @param body [String?] Input string as post body
     # @return nil
     def fake_outer_string_serialize(*, body : String? = nil, &block : Crest::Response ->)
       build_api_request_for_fake_outer_string_serialize(body: body).execute(&block)
@@ -558,6 +570,16 @@ module PetStore
     # @param double [Float64] None
     # @param pattern_without_delimiter [String] None
     # @param byte [String] None
+    # @optional @param integer [Int32?] None
+    # @optional @param int32 [Int32?] None
+    # @optional @param int64 [Int64?] None
+    # @optional @param float [Float32?] None
+    # @optional @param string [String?] None
+    # @optional @param binary [::File?] None
+    # @optional @param date [Time?] None
+    # @optional @param date_time [Time?] None
+    # @optional @param password [String?] None
+    # @optional @param callback [String?] None
     # @return [nil]
     def test_endpoint_parameters(*, number : Float64, double : Float64, pattern_without_delimiter : String, byte : String, integer : Int32? = nil, int32 : Int32? = nil, int64 : Int64? = nil, float : Float32? = nil, string : String? = nil, binary : ::File? = nil, date : Time? = nil, date_time : Time? = nil, password : String? = nil, callback : String? = nil)
       test_endpoint_parameters_with_http_info(number: number, double: double, pattern_without_delimiter: pattern_without_delimiter, byte: byte, integer: integer, int32: int32, int64: int64, float: float, string: string, binary: binary, date: date, date_time: date_time, password: password, callback: callback)
@@ -570,6 +592,16 @@ module PetStore
     # @param double [Float64] None
     # @param pattern_without_delimiter [String] None
     # @param byte [String] None
+    # @optional @param integer [Int32?] None
+    # @optional @param int32 [Int32?] None
+    # @optional @param int64 [Int64?] None
+    # @optional @param float [Float32?] None
+    # @optional @param string [String?] None
+    # @optional @param binary [::File?] None
+    # @optional @param date [Time?] None
+    # @optional @param date_time [Time?] None
+    # @optional @param password [String?] None
+    # @optional @param callback [String?] None
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def test_endpoint_parameters_with_http_info(*, number : Float64, double : Float64, pattern_without_delimiter : String, byte : String, integer : Int32? = nil, int32 : Int32? = nil, int64 : Int64? = nil, float : Float32? = nil, string : String? = nil, binary : ::File? = nil, date : Time? = nil, date_time : Time? = nil, password : String? = nil, callback : String? = nil)
       request = build_api_request_for_test_endpoint_parameters(number: number, double: double, pattern_without_delimiter: pattern_without_delimiter, byte: byte, integer: integer, int32: int32, int64: int64, float: float, string: string, binary: binary, date: date, date_time: date_time, password: password, callback: callback)
@@ -589,6 +621,16 @@ module PetStore
     # @param double [Float64] None
     # @param pattern_without_delimiter [String] None
     # @param byte [String] None
+    # @optional @param integer [Int32?] None
+    # @optional @param int32 [Int32?] None
+    # @optional @param int64 [Int64?] None
+    # @optional @param float [Float32?] None
+    # @optional @param string [String?] None
+    # @optional @param binary [::File?] None
+    # @optional @param date [Time?] None
+    # @optional @param date_time [Time?] None
+    # @optional @param password [String?] None
+    # @optional @param callback [String?] None
     # @return nil
     def test_endpoint_parameters(*, number : Float64, double : Float64, pattern_without_delimiter : String, byte : String, integer : Int32? = nil, int32 : Int32? = nil, int64 : Int64? = nil, float : Float32? = nil, string : String? = nil, binary : ::File? = nil, date : Time? = nil, date_time : Time? = nil, password : String? = nil, callback : String? = nil, &block : Crest::Response ->)
       build_api_request_for_test_endpoint_parameters(number: number, double: double, pattern_without_delimiter: pattern_without_delimiter, byte: byte, integer: integer, int32: int32, int64: int64, float: float, string: string, binary: binary, date: date, date_time: date_time, password: password, callback: callback).execute(&block)
@@ -701,6 +743,14 @@ module PetStore
 
     # To test enum parameters
     # To test enum parameters
+    # @optional @param enum_header_string_array [Array(String)?] Header parameter enum test (string array)
+    # @optional @param enum_header_string [String?] Header parameter enum test (string)
+    # @optional @param enum_query_string_array [Array(String)?] Query parameter enum test (string array)
+    # @optional @param enum_query_string [String?] Query parameter enum test (string)
+    # @optional @param enum_query_integer [Int32?] Query parameter enum test (double)
+    # @optional @param enum_query_double [Float64?] Query parameter enum test (double)
+    # @optional @param enum_form_string_array [Array(String)?] Form parameter enum test (string array)
+    # @optional @param enum_form_string [String?] Form parameter enum test (string)
     # @return [nil]
     def test_enum_parameters(*, enum_header_string_array : Array(String)? = nil, enum_header_string : String? = "-efg", enum_query_string_array : Array(String)? = nil, enum_query_string : String? = "-efg", enum_query_integer : Int32? = nil, enum_query_double : Float64? = nil, enum_form_string_array : Array(String)? = "$", enum_form_string : String? = "-efg")
       test_enum_parameters_with_http_info(enum_header_string_array: enum_header_string_array, enum_header_string: enum_header_string, enum_query_string_array: enum_query_string_array, enum_query_string: enum_query_string, enum_query_integer: enum_query_integer, enum_query_double: enum_query_double, enum_form_string_array: enum_form_string_array, enum_form_string: enum_form_string)
@@ -709,6 +759,14 @@ module PetStore
 
     # To test enum parameters
     # To test enum parameters
+    # @optional @param enum_header_string_array [Array(String)?] Header parameter enum test (string array)
+    # @optional @param enum_header_string [String?] Header parameter enum test (string)
+    # @optional @param enum_query_string_array [Array(String)?] Query parameter enum test (string array)
+    # @optional @param enum_query_string [String?] Query parameter enum test (string)
+    # @optional @param enum_query_integer [Int32?] Query parameter enum test (double)
+    # @optional @param enum_query_double [Float64?] Query parameter enum test (double)
+    # @optional @param enum_form_string_array [Array(String)?] Form parameter enum test (string array)
+    # @optional @param enum_form_string [String?] Form parameter enum test (string)
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def test_enum_parameters_with_http_info(*, enum_header_string_array : Array(String)? = nil, enum_header_string : String? = "-efg", enum_query_string_array : Array(String)? = nil, enum_query_string : String? = "-efg", enum_query_integer : Int32? = nil, enum_query_double : Float64? = nil, enum_form_string_array : Array(String)? = "$", enum_form_string : String? = "-efg")
       request = build_api_request_for_test_enum_parameters(enum_header_string_array: enum_header_string_array, enum_header_string: enum_header_string, enum_query_string_array: enum_query_string_array, enum_query_string: enum_query_string, enum_query_integer: enum_query_integer, enum_query_double: enum_query_double, enum_form_string_array: enum_form_string_array, enum_form_string: enum_form_string)
@@ -724,6 +782,14 @@ module PetStore
 
     # To test enum parameters
     # To test enum parameters
+    # @optional @param enum_header_string_array [Array(String)?] Header parameter enum test (string array)
+    # @optional @param enum_header_string [String?] Header parameter enum test (string)
+    # @optional @param enum_query_string_array [Array(String)?] Query parameter enum test (string array)
+    # @optional @param enum_query_string [String?] Query parameter enum test (string)
+    # @optional @param enum_query_integer [Int32?] Query parameter enum test (double)
+    # @optional @param enum_query_double [Float64?] Query parameter enum test (double)
+    # @optional @param enum_form_string_array [Array(String)?] Form parameter enum test (string array)
+    # @optional @param enum_form_string [String?] Form parameter enum test (string)
     # @return nil
     def test_enum_parameters(*, enum_header_string_array : Array(String)? = nil, enum_header_string : String? = "-efg", enum_query_string_array : Array(String)? = nil, enum_query_string : String? = "-efg", enum_query_integer : Int32? = nil, enum_query_double : Float64? = nil, enum_form_string_array : Array(String)? = "$", enum_form_string : String? = "-efg", &block : Crest::Response ->)
       build_api_request_for_test_enum_parameters(enum_header_string_array: enum_header_string_array, enum_header_string: enum_header_string, enum_query_string_array: enum_query_string_array, enum_query_string: enum_query_string, enum_query_integer: enum_query_integer, enum_query_double: enum_query_double, enum_form_string_array: enum_form_string_array, enum_form_string: enum_form_string).execute(&block)
@@ -811,6 +877,9 @@ module PetStore
     # @param required_string_group [Int32] Required String in group parameters
     # @param required_boolean_group [Bool] Required Boolean in group parameters
     # @param required_int64_group [Int64] Required Integer in group parameters
+    # @optional @param string_group [Int32?] String in group parameters
+    # @optional @param boolean_group [Bool?] Boolean in group parameters
+    # @optional @param int64_group [Int64?] Integer in group parameters
     # @return [nil]
     def test_group_parameters(*, required_string_group : Int32, required_boolean_group : Bool, required_int64_group : Int64, string_group : Int32? = nil, boolean_group : Bool? = nil, int64_group : Int64? = nil)
       test_group_parameters_with_http_info(required_string_group: required_string_group, required_boolean_group: required_boolean_group, required_int64_group: required_int64_group, string_group: string_group, boolean_group: boolean_group, int64_group: int64_group)
@@ -822,6 +891,9 @@ module PetStore
     # @param required_string_group [Int32] Required String in group parameters
     # @param required_boolean_group [Bool] Required Boolean in group parameters
     # @param required_int64_group [Int64] Required Integer in group parameters
+    # @optional @param string_group [Int32?] String in group parameters
+    # @optional @param boolean_group [Bool?] Boolean in group parameters
+    # @optional @param int64_group [Int64?] Integer in group parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def test_group_parameters_with_http_info(*, required_string_group : Int32, required_boolean_group : Bool, required_int64_group : Int64, string_group : Int32? = nil, boolean_group : Bool? = nil, int64_group : Int64? = nil)
       request = build_api_request_for_test_group_parameters(required_string_group: required_string_group, required_boolean_group: required_boolean_group, required_int64_group: required_int64_group, string_group: string_group, boolean_group: boolean_group, int64_group: int64_group)
@@ -840,6 +912,9 @@ module PetStore
     # @param required_string_group [Int32] Required String in group parameters
     # @param required_boolean_group [Bool] Required Boolean in group parameters
     # @param required_int64_group [Int64] Required Integer in group parameters
+    # @optional @param string_group [Int32?] String in group parameters
+    # @optional @param boolean_group [Bool?] Boolean in group parameters
+    # @optional @param int64_group [Int64?] Integer in group parameters
     # @return nil
     def test_group_parameters(*, required_string_group : Int32, required_boolean_group : Bool, required_int64_group : Int64, string_group : Int32? = nil, boolean_group : Bool? = nil, int64_group : Int64? = nil, &block : Crest::Response ->)
       build_api_request_for_test_group_parameters(required_string_group: required_string_group, required_boolean_group: required_boolean_group, required_int64_group: required_int64_group, string_group: string_group, boolean_group: boolean_group, int64_group: int64_group).execute(&block)

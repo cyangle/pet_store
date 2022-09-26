@@ -110,77 +110,99 @@ module PetStore
         return @id = nil
       end
       @id = id
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] username Object to be assigned
     def username=(username : String?)
       if username.nil?
         return @username = nil
       end
       @username = username
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] first_name Object to be assigned
     def first_name=(first_name : String?)
       if first_name.nil?
         return @first_name = nil
       end
       @first_name = first_name
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] last_name Object to be assigned
     def last_name=(last_name : String?)
       if last_name.nil?
         return @last_name = nil
       end
       @last_name = last_name
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] email Object to be assigned
     def email=(email : String?)
       if email.nil?
         return @email = nil
       end
       @email = email
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] password Object to be assigned
     def password=(password : String?)
       if password.nil?
         return @password = nil
       end
       @password = password
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] phone Object to be assigned
     def phone=(phone : String?)
       if phone.nil?
         return @phone = nil
       end
       @phone = phone
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] user_status Object to be assigned
     def user_status=(user_status : Int32?)
       if user_status.nil?
         return @user_status = nil
       end
       @user_status = user_status
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] arbitrary_object Object to be assigned
     def arbitrary_object=(arbitrary_object : Hash(String, String)?)
       if arbitrary_object.nil?
         return @arbitrary_object = nil
       end
       @arbitrary_object = arbitrary_object
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] arbitrary_nullable_object Object to be assigned
     def arbitrary_nullable_object=(arbitrary_nullable_object : Hash(String, String)?)
       if arbitrary_nullable_object.nil?
         return @arbitrary_nullable_object = nil
       end
       @arbitrary_nullable_object = arbitrary_nullable_object
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] arbitrary_type_value Object to be assigned
     def arbitrary_type_value=(arbitrary_type_value : JSON::Any?)
       if arbitrary_type_value.nil?
         return @arbitrary_type_value = nil
       end
       @arbitrary_type_value = arbitrary_type_value
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] arbitrary_nullable_type_value Object to be assigned
     def arbitrary_nullable_type_value=(arbitrary_nullable_type_value : JSON::Any?)
       if arbitrary_nullable_type_value.nil?

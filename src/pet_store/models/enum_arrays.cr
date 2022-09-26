@@ -69,7 +69,9 @@ module PetStore
       _just_symbol = just_symbol.not_nil!
       ENUM_VALIDATOR_FOR_JUST_SYMBOL.valid!(_just_symbol)
       @just_symbol = just_symbol
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] array_enum Object to be assigned
     def array_enum=(array_enum : Array(String)?)
       if array_enum.nil?

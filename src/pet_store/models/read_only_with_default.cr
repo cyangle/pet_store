@@ -76,42 +76,54 @@ module PetStore
         return @prop1 = nil
       end
       @prop1 = prop1
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] prop2 Object to be assigned
     def prop2=(prop2 : String?)
       if prop2.nil?
         return @prop2 = nil
       end
       @prop2 = prop2
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] prop3 Object to be assigned
     def prop3=(prop3 : String?)
       if prop3.nil?
         return @prop3 = nil
       end
       @prop3 = prop3
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bool_prop1 Object to be assigned
     def bool_prop1=(bool_prop1 : Bool?)
       if bool_prop1.nil?
         return @bool_prop1 = nil
       end
       @bool_prop1 = bool_prop1
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bool_prop2 Object to be assigned
     def bool_prop2=(bool_prop2 : Bool?)
       if bool_prop2.nil?
         return @bool_prop2 = nil
       end
       @bool_prop2 = bool_prop2
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] int_prop1 Object to be assigned
     def int_prop1=(int_prop1 : Float64?)
       if int_prop1.nil?
         return @int_prop1 = nil
       end
       @int_prop1 = int_prop1
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] int_prop2 Object to be assigned
     def int_prop2=(int_prop2 : Float64?)
       if int_prop2.nil?

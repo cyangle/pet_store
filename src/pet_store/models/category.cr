@@ -62,7 +62,9 @@ module PetStore
         raise ArgumentError.new("\"name\" is required and cannot be null")
       end
       @name = name
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
     def id=(id : Int64?)
       if id.nil?

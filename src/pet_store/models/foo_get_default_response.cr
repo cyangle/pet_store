@@ -19,15 +19,15 @@ module PetStore
 
     # Optional properties
 
-    @[JSON::Field(key: "string", type: Foo?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter string : Foo? = nil
+    @[JSON::Field(key: "string", type: PetStore::Foo?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter string : PetStore::Foo? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @string : Foo? = nil
+      @string : PetStore::Foo? = nil
     )
     end
 
@@ -35,6 +35,7 @@ module PetStore
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+      # This is a model string : PetStore::Foo?
 
       invalid_properties
     end
@@ -47,7 +48,7 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] string Object to be assigned
-    def string=(string : Foo?)
+    def string=(string : PetStore::Foo?)
       if string.nil?
         return @string = nil
       end

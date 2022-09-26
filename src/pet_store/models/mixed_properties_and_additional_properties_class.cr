@@ -25,8 +25,8 @@ module PetStore
     @[JSON::Field(key: "dateTime", type: Time?, default: nil, required: false, nullable: false, emit_null: false, converter: Time::RFC3339Converter)]
     getter date_time : Time? = nil
 
-    @[JSON::Field(key: "map", type: Hash(String, Animal)?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter map : Hash(String, Animal)? = nil
+    @[JSON::Field(key: "map", type: Hash(String, PetStore::Animal)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter map : Hash(String, PetStore::Animal)? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -35,7 +35,7 @@ module PetStore
       # Optional properties
       @uuid : String? = nil,
       @date_time : Time? = nil,
-      @map : Hash(String, Animal)? = nil
+      @map : Hash(String, PetStore::Animal)? = nil
     )
     end
 
@@ -43,6 +43,7 @@ module PetStore
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+      # Container map map has values of PetStore::Animal
 
       invalid_properties
     end
@@ -60,16 +61,20 @@ module PetStore
         return @uuid = nil
       end
       @uuid = uuid
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] date_time Object to be assigned
     def date_time=(date_time : Time?)
       if date_time.nil?
         return @date_time = nil
       end
       @date_time = date_time
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] map Object to be assigned
-    def map=(map : Hash(String, Animal)?)
+    def map=(map : Hash(String, PetStore::Animal)?)
       if map.nil?
         return @map = nil
       end

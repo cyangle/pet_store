@@ -62,7 +62,9 @@ module PetStore
         raise ArgumentError.new("\"length_cm\" is required and cannot be null")
       end
       @length_cm = length_cm
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sweet Object to be assigned
     def sweet=(sweet : Bool?)
       if sweet.nil?

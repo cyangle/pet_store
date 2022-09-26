@@ -79,28 +79,36 @@ module PetStore
         return @id = nil
       end
       @id = id
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] pet_id Object to be assigned
     def pet_id=(pet_id : Int64?)
       if pet_id.nil?
         return @pet_id = nil
       end
       @pet_id = pet_id
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] quantity Object to be assigned
     def quantity=(quantity : Int32?)
       if quantity.nil?
         return @quantity = nil
       end
       @quantity = quantity
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ship_date Object to be assigned
     def ship_date=(ship_date : Time?)
       if ship_date.nil?
         return @ship_date = nil
       end
       @ship_date = ship_date
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status : String?)
       if status.nil?
@@ -109,7 +117,9 @@ module PetStore
       _status = status.not_nil!
       ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
       @status = status
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] complete Object to be assigned
     def complete=(complete : Bool?)
       if complete.nil?

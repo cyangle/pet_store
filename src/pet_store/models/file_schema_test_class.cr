@@ -19,19 +19,19 @@ module PetStore
 
     # Optional properties
 
-    @[JSON::Field(key: "file", type: File?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter file : File? = nil
+    @[JSON::Field(key: "file", type: PetStore::File?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter file : PetStore::File? = nil
 
-    @[JSON::Field(key: "files", type: Array(File)?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter files : Array(File)? = nil
+    @[JSON::Field(key: "files", type: Array(PetStore::File)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter files : Array(PetStore::File)? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @file : File? = nil,
-      @files : Array(File)? = nil
+      @file : PetStore::File? = nil,
+      @files : Array(PetStore::File)? = nil
     )
     end
 
@@ -39,6 +39,8 @@ module PetStore
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+      # This is a model file : PetStore::File?
+      # Container files array has values of PetStore::File
 
       invalid_properties
     end
@@ -51,14 +53,16 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] file Object to be assigned
-    def file=(file : File?)
+    def file=(file : PetStore::File?)
       if file.nil?
         return @file = nil
       end
       @file = file
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] files Object to be assigned
-    def files=(files : Array(File)?)
+    def files=(files : Array(PetStore::File)?)
       if files.nil?
         return @files = nil
       end

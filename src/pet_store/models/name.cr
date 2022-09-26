@@ -71,21 +71,27 @@ module PetStore
         raise ArgumentError.new("\"name\" is required and cannot be null")
       end
       @name = name
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] snake_case Object to be assigned
     def snake_case=(snake_case : Int32?)
       if snake_case.nil?
         return @snake_case = nil
       end
       @snake_case = snake_case
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] property Object to be assigned
     def property=(property : String?)
       if property.nil?
         return @property = nil
       end
       @property = property
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _123_number Object to be assigned
     def _123_number=(_123_number : Int32?)
       if _123_number.nil?

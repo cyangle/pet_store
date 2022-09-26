@@ -30,11 +30,11 @@ module PetStore
     @[JSON::Field(key: "id", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter id : Int64? = nil
 
-    @[JSON::Field(key: "category", type: Category?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter category : Category? = nil
+    @[JSON::Field(key: "category", type: PetStore::Category?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter category : PetStore::Category? = nil
 
-    @[JSON::Field(key: "tags", type: Array(Tag)?, default: nil, required: false, nullable: false, emit_null: false)]
-    getter tags : Array(Tag)? = nil
+    @[JSON::Field(key: "tags", type: Array(PetStore::Tag)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter tags : Array(PetStore::Tag)? = nil
 
     # pet status in the store
     @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -51,8 +51,8 @@ module PetStore
       @photo_urls : Array(String)? = nil,
       # Optional properties
       @id : Int64? = nil,
-      @category : Category? = nil,
-      @tags : Array(Tag)? = nil,
+      @category : PetStore::Category? = nil,
+      @tags : Array(PetStore::Tag)? = nil,
       @status : String? = nil
     )
     end
@@ -63,6 +63,8 @@ module PetStore
       invalid_properties = Array(String).new
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
       invalid_properties.push("\"photo_urls\" is required and cannot be null") if @photo_urls.nil?
+      # This is a model category : PetStore::Category?
+      # Container tags array has values of PetStore::Tag
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
 
@@ -86,35 +88,45 @@ module PetStore
         raise ArgumentError.new("\"name\" is required and cannot be null")
       end
       @name = name
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] photo_urls Object to be assigned
     def photo_urls=(photo_urls : Array(String)?)
       if photo_urls.nil?
         raise ArgumentError.new("\"photo_urls\" is required and cannot be null")
       end
       @photo_urls = photo_urls
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
     def id=(id : Int64?)
       if id.nil?
         return @id = nil
       end
       @id = id
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] category Object to be assigned
-    def category=(category : Category?)
+    def category=(category : PetStore::Category?)
       if category.nil?
         return @category = nil
       end
       @category = category
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tags Object to be assigned
-    def tags=(tags : Array(Tag)?)
+    def tags=(tags : Array(PetStore::Tag)?)
       if tags.nil?
         return @tags = nil
       end
       @tags = tags
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status : String?)
       if status.nil?

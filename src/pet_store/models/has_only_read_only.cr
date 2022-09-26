@@ -56,7 +56,9 @@ module PetStore
         return @bar = nil
       end
       @bar = bar
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] foo Object to be assigned
     def foo=(foo : String?)
       if foo.nil?

@@ -66,14 +66,18 @@ module PetStore
         raise ArgumentError.new("\"class_name\" is required and cannot be null")
       end
       @class_name = class_name
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] has_baleen Object to be assigned
     def has_baleen=(has_baleen : Bool?)
       if has_baleen.nil?
         return @has_baleen = nil
       end
       @has_baleen = has_baleen
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] has_teeth Object to be assigned
     def has_teeth=(has_teeth : Bool?)
       if has_teeth.nil?

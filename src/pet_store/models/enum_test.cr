@@ -157,7 +157,9 @@ module PetStore
       _enum_string_required = enum_string_required.not_nil!
       ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.valid!(_enum_string_required)
       @enum_string_required = enum_string_required
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outer_enum_rquired Object to be assigned
     def outer_enum_rquired=(outer_enum_rquired : PetStore::OuterEnumRquired?)
       if outer_enum_rquired.nil?
@@ -165,7 +167,9 @@ module PetStore
       end
       outer_enum_rquired.not_nil!.valid!
       @outer_enum_rquired = outer_enum_rquired
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outer_enum_rquired_int64 Object to be assigned
     def outer_enum_rquired_int64=(outer_enum_rquired_int64 : PetStore::OuterEnumRquiredInt64?)
       if outer_enum_rquired_int64.nil?
@@ -173,7 +177,9 @@ module PetStore
       end
       outer_enum_rquired_int64.not_nil!.valid!
       @outer_enum_rquired_int64 = outer_enum_rquired_int64
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enum_string Object to be assigned
     def enum_string=(enum_string : String?)
       if enum_string.nil?
@@ -182,7 +188,9 @@ module PetStore
       _enum_string = enum_string.not_nil!
       ENUM_VALIDATOR_FOR_ENUM_STRING.valid!(_enum_string)
       @enum_string = enum_string
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enum_int32 Object to be assigned
     def enum_int32=(enum_int32 : Int32?)
       if enum_int32.nil?
@@ -191,7 +199,9 @@ module PetStore
       _enum_int32 = enum_int32.not_nil!
       ENUM_VALIDATOR_FOR_ENUM_INT32.valid!(_enum_int32)
       @enum_int32 = enum_int32
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enum_int64 Object to be assigned
     def enum_int64=(enum_int64 : Int64?)
       if enum_int64.nil?
@@ -200,7 +210,9 @@ module PetStore
       _enum_int64 = enum_int64.not_nil!
       ENUM_VALIDATOR_FOR_ENUM_INT64.valid!(_enum_int64)
       @enum_int64 = enum_int64
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enum_float Object to be assigned
     def enum_float=(enum_float : Float32?)
       if enum_float.nil?
@@ -209,7 +221,9 @@ module PetStore
       _enum_float = enum_float.not_nil!
       ENUM_VALIDATOR_FOR_ENUM_FLOAT.valid!(_enum_float)
       @enum_float = enum_float
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enum_double Object to be assigned
     def enum_double=(enum_double : Float64?)
       if enum_double.nil?
@@ -218,7 +232,9 @@ module PetStore
       _enum_double = enum_double.not_nil!
       ENUM_VALIDATOR_FOR_ENUM_DOUBLE.valid!(_enum_double)
       @enum_double = enum_double
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outer_enum Object to be assigned
     def outer_enum=(outer_enum : PetStore::OuterEnum?)
       if outer_enum.nil?
@@ -226,7 +242,9 @@ module PetStore
       end
       outer_enum.not_nil!.valid!
       @outer_enum = outer_enum
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outer_enum_integer Object to be assigned
     def outer_enum_integer=(outer_enum_integer : PetStore::OuterEnumInteger?)
       if outer_enum_integer.nil?
@@ -234,7 +252,9 @@ module PetStore
       end
       outer_enum_integer.not_nil!.valid!
       @outer_enum_integer = outer_enum_integer
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outer_enum_default_value Object to be assigned
     def outer_enum_default_value=(outer_enum_default_value : PetStore::OuterEnumDefaultValue?)
       if outer_enum_default_value.nil?
@@ -242,7 +262,9 @@ module PetStore
       end
       outer_enum_default_value.not_nil!.valid!
       @outer_enum_default_value = outer_enum_default_value
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outer_enum_integer_default_value Object to be assigned
     def outer_enum_integer_default_value=(outer_enum_integer_default_value : PetStore::OuterEnumIntegerDefaultValue?)
       if outer_enum_integer_default_value.nil?

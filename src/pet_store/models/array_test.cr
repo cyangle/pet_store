@@ -60,14 +60,18 @@ module PetStore
         return @array_of_string = nil
       end
       @array_of_string = array_of_string
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] array_array_of_integer Object to be assigned
     def array_array_of_integer=(array_array_of_integer : Array(Array(Int64))?)
       if array_array_of_integer.nil?
         return @array_array_of_integer = nil
       end
       @array_array_of_integer = array_array_of_integer
-    end # Custom attribute writer method checking allowed values (enum).
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] array_array_of_model Object to be assigned
     def array_array_of_model=(array_array_of_model : Array(Array(ReadOnlyFirst))?)
       if array_array_of_model.nil?

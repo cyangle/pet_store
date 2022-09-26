@@ -90,6 +90,7 @@ module PetStore
     # Deletes a pet
     #
     # @param pet_id [Int64] Pet id to delete
+    # @optional @param api_key [String?]
     # @return [nil]
     def delete_pet(*, pet_id : Int64, api_key : String? = nil)
       delete_pet_with_http_info(pet_id: pet_id, api_key: api_key)
@@ -99,6 +100,7 @@ module PetStore
     # Deletes a pet
     #
     # @param pet_id [Int64] Pet id to delete
+    # @optional @param api_key [String?]
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def delete_pet_with_http_info(*, pet_id : Int64, api_key : String? = nil)
       request = build_api_request_for_delete_pet(pet_id: pet_id, api_key: api_key)
@@ -115,6 +117,7 @@ module PetStore
     # Deletes a pet
     #
     # @param pet_id [Int64] Pet id to delete
+    # @optional @param api_key [String?]
     # @return nil
     def delete_pet(*, pet_id : Int64, api_key : String? = nil, &block : Crest::Response ->)
       build_api_request_for_delete_pet(pet_id: pet_id, api_key: api_key).execute(&block)
@@ -445,6 +448,8 @@ module PetStore
     # Updates a pet in the store with form data
     #
     # @param pet_id [Int64] ID of pet that needs to be updated
+    # @optional @param name [String?] Updated name of the pet
+    # @optional @param status [String?] Updated status of the pet
     # @return [nil]
     def update_pet_with_form(*, pet_id : Int64, name : String? = nil, status : String? = nil)
       update_pet_with_form_with_http_info(pet_id: pet_id, name: name, status: status)
@@ -454,6 +459,8 @@ module PetStore
     # Updates a pet in the store with form data
     #
     # @param pet_id [Int64] ID of pet that needs to be updated
+    # @optional @param name [String?] Updated name of the pet
+    # @optional @param status [String?] Updated status of the pet
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def update_pet_with_form_with_http_info(*, pet_id : Int64, name : String? = nil, status : String? = nil)
       request = build_api_request_for_update_pet_with_form(pet_id: pet_id, name: name, status: status)
@@ -470,6 +477,8 @@ module PetStore
     # Updates a pet in the store with form data
     #
     # @param pet_id [Int64] ID of pet that needs to be updated
+    # @optional @param name [String?] Updated name of the pet
+    # @optional @param status [String?] Updated status of the pet
     # @return nil
     def update_pet_with_form(*, pet_id : Int64, name : String? = nil, status : String? = nil, &block : Crest::Response ->)
       build_api_request_for_update_pet_with_form(pet_id: pet_id, name: name, status: status).execute(&block)
@@ -517,6 +526,8 @@ module PetStore
     # uploads an image
     #
     # @param pet_id [Int64] ID of pet to update
+    # @optional @param additional_metadata [String?] Additional data to pass to server
+    # @optional @param file [::File?] file to upload
     # @return [ApiResponse]
     def upload_file(*, pet_id : Int64, additional_metadata : String? = nil, file : ::File? = nil)
       data, _status_code, _headers = upload_file_with_http_info(pet_id: pet_id, additional_metadata: additional_metadata, file: file)
@@ -526,6 +537,8 @@ module PetStore
     # uploads an image
     #
     # @param pet_id [Int64] ID of pet to update
+    # @optional @param additional_metadata [String?] Additional data to pass to server
+    # @optional @param file [::File?] file to upload
     # @return [Array<(ApiResponse, Integer, Hash)>] ApiResponse data, response status code and response headers
     def upload_file_with_http_info(*, pet_id : Int64, additional_metadata : String? = nil, file : ::File? = nil)
       request = build_api_request_for_upload_file(pet_id: pet_id, additional_metadata: additional_metadata, file: file)
@@ -542,6 +555,8 @@ module PetStore
     # uploads an image
     #
     # @param pet_id [Int64] ID of pet to update
+    # @optional @param additional_metadata [String?] Additional data to pass to server
+    # @optional @param file [::File?] file to upload
     # @return nil
     def upload_file(*, pet_id : Int64, additional_metadata : String? = nil, file : ::File? = nil, &block : Crest::Response ->)
       build_api_request_for_upload_file(pet_id: pet_id, additional_metadata: additional_metadata, file: file).execute(&block)
@@ -592,6 +607,7 @@ module PetStore
     #
     # @param pet_id [Int64] ID of pet to update
     # @param required_file [::File] file to upload
+    # @optional @param additional_metadata [String?] Additional data to pass to server
     # @return [ApiResponse]
     def upload_file_with_required_file(*, pet_id : Int64, required_file : ::File, additional_metadata : String? = nil)
       data, _status_code, _headers = upload_file_with_required_file_with_http_info(pet_id: pet_id, required_file: required_file, additional_metadata: additional_metadata)
@@ -602,6 +618,7 @@ module PetStore
     #
     # @param pet_id [Int64] ID of pet to update
     # @param required_file [::File] file to upload
+    # @optional @param additional_metadata [String?] Additional data to pass to server
     # @return [Array<(ApiResponse, Integer, Hash)>] ApiResponse data, response status code and response headers
     def upload_file_with_required_file_with_http_info(*, pet_id : Int64, required_file : ::File, additional_metadata : String? = nil)
       request = build_api_request_for_upload_file_with_required_file(pet_id: pet_id, required_file: required_file, additional_metadata: additional_metadata)
@@ -619,6 +636,7 @@ module PetStore
     #
     # @param pet_id [Int64] ID of pet to update
     # @param required_file [::File] file to upload
+    # @optional @param additional_metadata [String?] Additional data to pass to server
     # @return nil
     def upload_file_with_required_file(*, pet_id : Int64, required_file : ::File, additional_metadata : String? = nil, &block : Crest::Response ->)
       build_api_request_for_upload_file_with_required_file(pet_id: pet_id, required_file: required_file, additional_metadata: additional_metadata).execute(&block)
