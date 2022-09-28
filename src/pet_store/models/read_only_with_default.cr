@@ -15,6 +15,7 @@ module PetStore
   class ReadOnlyWithDefault
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -57,7 +58,7 @@ module PetStore
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -65,7 +66,7 @@ module PetStore
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -75,7 +76,8 @@ module PetStore
       if prop1.nil?
         return @prop1 = nil
       end
-      @prop1 = prop1
+      _prop1 = prop1.not_nil!
+      @prop1 = _prop1
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -84,7 +86,8 @@ module PetStore
       if prop2.nil?
         return @prop2 = nil
       end
-      @prop2 = prop2
+      _prop2 = prop2.not_nil!
+      @prop2 = _prop2
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -93,7 +96,8 @@ module PetStore
       if prop3.nil?
         return @prop3 = nil
       end
-      @prop3 = prop3
+      _prop3 = prop3.not_nil!
+      @prop3 = _prop3
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -102,7 +106,8 @@ module PetStore
       if bool_prop1.nil?
         return @bool_prop1 = nil
       end
-      @bool_prop1 = bool_prop1
+      _bool_prop1 = bool_prop1.not_nil!
+      @bool_prop1 = _bool_prop1
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -111,7 +116,8 @@ module PetStore
       if bool_prop2.nil?
         return @bool_prop2 = nil
       end
-      @bool_prop2 = bool_prop2
+      _bool_prop2 = bool_prop2.not_nil!
+      @bool_prop2 = _bool_prop2
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -120,7 +126,8 @@ module PetStore
       if int_prop1.nil?
         return @int_prop1 = nil
       end
-      @int_prop1 = int_prop1
+      _int_prop1 = int_prop1.not_nil!
+      @int_prop1 = _int_prop1
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -129,13 +136,8 @@ module PetStore
       if int_prop2.nil?
         return @int_prop2 = nil
       end
-      @int_prop2 = int_prop2
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _int_prop2 = int_prop2.not_nil!
+      @int_prop2 = _int_prop2
     end
 
     # Generates #hash and #== methods from all fields

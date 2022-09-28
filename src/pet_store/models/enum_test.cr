@@ -15,6 +15,7 @@ module PetStore
   class EnumTest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -95,7 +96,7 @@ module PetStore
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.error_message) unless ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.valid?(@enum_string_required, false)
@@ -129,7 +130,7 @@ module PetStore
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.valid?(@enum_string_required, false)
       return false if @outer_enum_rquired.nil?
       return false if !@outer_enum_rquired.nil? && !@outer_enum_rquired.not_nil!.valid?
@@ -156,7 +157,7 @@ module PetStore
       end
       _enum_string_required = enum_string_required.not_nil!
       ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.valid!(_enum_string_required)
-      @enum_string_required = enum_string_required
+      @enum_string_required = _enum_string_required
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -165,8 +166,9 @@ module PetStore
       if outer_enum_rquired.nil?
         raise ArgumentError.new("\"outer_enum_rquired\" is required and cannot be null")
       end
-      outer_enum_rquired.not_nil!.valid!
-      @outer_enum_rquired = outer_enum_rquired
+      _outer_enum_rquired = outer_enum_rquired.not_nil!
+      _outer_enum_rquired.valid!
+      @outer_enum_rquired = _outer_enum_rquired
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -175,8 +177,9 @@ module PetStore
       if outer_enum_rquired_int64.nil?
         raise ArgumentError.new("\"outer_enum_rquired_int64\" is required and cannot be null")
       end
-      outer_enum_rquired_int64.not_nil!.valid!
-      @outer_enum_rquired_int64 = outer_enum_rquired_int64
+      _outer_enum_rquired_int64 = outer_enum_rquired_int64.not_nil!
+      _outer_enum_rquired_int64.valid!
+      @outer_enum_rquired_int64 = _outer_enum_rquired_int64
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -187,7 +190,7 @@ module PetStore
       end
       _enum_string = enum_string.not_nil!
       ENUM_VALIDATOR_FOR_ENUM_STRING.valid!(_enum_string)
-      @enum_string = enum_string
+      @enum_string = _enum_string
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -198,7 +201,7 @@ module PetStore
       end
       _enum_int32 = enum_int32.not_nil!
       ENUM_VALIDATOR_FOR_ENUM_INT32.valid!(_enum_int32)
-      @enum_int32 = enum_int32
+      @enum_int32 = _enum_int32
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -209,7 +212,7 @@ module PetStore
       end
       _enum_int64 = enum_int64.not_nil!
       ENUM_VALIDATOR_FOR_ENUM_INT64.valid!(_enum_int64)
-      @enum_int64 = enum_int64
+      @enum_int64 = _enum_int64
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -220,7 +223,7 @@ module PetStore
       end
       _enum_float = enum_float.not_nil!
       ENUM_VALIDATOR_FOR_ENUM_FLOAT.valid!(_enum_float)
-      @enum_float = enum_float
+      @enum_float = _enum_float
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -231,7 +234,7 @@ module PetStore
       end
       _enum_double = enum_double.not_nil!
       ENUM_VALIDATOR_FOR_ENUM_DOUBLE.valid!(_enum_double)
-      @enum_double = enum_double
+      @enum_double = _enum_double
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -240,8 +243,9 @@ module PetStore
       if outer_enum.nil?
         return @outer_enum = nil
       end
-      outer_enum.not_nil!.valid!
-      @outer_enum = outer_enum
+      _outer_enum = outer_enum.not_nil!
+      _outer_enum.valid!
+      @outer_enum = _outer_enum
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -250,8 +254,9 @@ module PetStore
       if outer_enum_integer.nil?
         return @outer_enum_integer = nil
       end
-      outer_enum_integer.not_nil!.valid!
-      @outer_enum_integer = outer_enum_integer
+      _outer_enum_integer = outer_enum_integer.not_nil!
+      _outer_enum_integer.valid!
+      @outer_enum_integer = _outer_enum_integer
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -260,8 +265,9 @@ module PetStore
       if outer_enum_default_value.nil?
         return @outer_enum_default_value = nil
       end
-      outer_enum_default_value.not_nil!.valid!
-      @outer_enum_default_value = outer_enum_default_value
+      _outer_enum_default_value = outer_enum_default_value.not_nil!
+      _outer_enum_default_value.valid!
+      @outer_enum_default_value = _outer_enum_default_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -270,14 +276,9 @@ module PetStore
       if outer_enum_integer_default_value.nil?
         return @outer_enum_integer_default_value = nil
       end
-      outer_enum_integer_default_value.not_nil!.valid!
-      @outer_enum_integer_default_value = outer_enum_integer_default_value
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _outer_enum_integer_default_value = outer_enum_integer_default_value.not_nil!
+      _outer_enum_integer_default_value.valid!
+      @outer_enum_integer_default_value = _outer_enum_integer_default_value
     end
 
     # Generates #hash and #== methods from all fields

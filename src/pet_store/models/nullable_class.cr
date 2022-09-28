@@ -15,6 +15,7 @@ module PetStore
   class NullableClass
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -129,8 +130,9 @@ module PetStore
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"required_non_nullable_prop\" is required and cannot be null") if @required_non_nullable_prop.nil?
 
       invalid_properties
@@ -138,7 +140,7 @@ module PetStore
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @required_non_nullable_prop.nil?
 
       true
@@ -150,7 +152,8 @@ module PetStore
       if required_nullable_prop.nil?
         return @required_nullable_prop = nil
       end
-      @required_nullable_prop = required_nullable_prop
+      _required_nullable_prop = required_nullable_prop.not_nil!
+      @required_nullable_prop = _required_nullable_prop
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -159,7 +162,8 @@ module PetStore
       if required_non_nullable_prop.nil?
         raise ArgumentError.new("\"required_non_nullable_prop\" is required and cannot be null")
       end
-      @required_non_nullable_prop = required_non_nullable_prop
+      _required_non_nullable_prop = required_non_nullable_prop.not_nil!
+      @required_non_nullable_prop = _required_non_nullable_prop
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -168,7 +172,8 @@ module PetStore
       if optional_nullable_prop.nil?
         return @optional_nullable_prop = nil
       end
-      @optional_nullable_prop = optional_nullable_prop
+      _optional_nullable_prop = optional_nullable_prop.not_nil!
+      @optional_nullable_prop = _optional_nullable_prop
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -177,7 +182,8 @@ module PetStore
       if optional_non_nullable_prop.nil?
         return @optional_non_nullable_prop = nil
       end
-      @optional_non_nullable_prop = optional_non_nullable_prop
+      _optional_non_nullable_prop = optional_non_nullable_prop.not_nil!
+      @optional_non_nullable_prop = _optional_non_nullable_prop
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -186,7 +192,8 @@ module PetStore
       if integer_prop.nil?
         return @integer_prop = nil
       end
-      @integer_prop = integer_prop
+      _integer_prop = integer_prop.not_nil!
+      @integer_prop = _integer_prop
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -195,7 +202,8 @@ module PetStore
       if number_prop.nil?
         return @number_prop = nil
       end
-      @number_prop = number_prop
+      _number_prop = number_prop.not_nil!
+      @number_prop = _number_prop
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -204,7 +212,8 @@ module PetStore
       if boolean_prop.nil?
         return @boolean_prop = nil
       end
-      @boolean_prop = boolean_prop
+      _boolean_prop = boolean_prop.not_nil!
+      @boolean_prop = _boolean_prop
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -213,7 +222,8 @@ module PetStore
       if string_prop.nil?
         return @string_prop = nil
       end
-      @string_prop = string_prop
+      _string_prop = string_prop.not_nil!
+      @string_prop = _string_prop
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -222,7 +232,8 @@ module PetStore
       if date_prop.nil?
         return @date_prop = nil
       end
-      @date_prop = date_prop
+      _date_prop = date_prop.not_nil!
+      @date_prop = _date_prop
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -231,7 +242,8 @@ module PetStore
       if datetime_prop.nil?
         return @datetime_prop = nil
       end
-      @datetime_prop = datetime_prop
+      _datetime_prop = datetime_prop.not_nil!
+      @datetime_prop = _datetime_prop
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -240,7 +252,8 @@ module PetStore
       if array_nullable_prop.nil?
         return @array_nullable_prop = nil
       end
-      @array_nullable_prop = array_nullable_prop
+      _array_nullable_prop = array_nullable_prop.not_nil!
+      @array_nullable_prop = _array_nullable_prop
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -249,7 +262,8 @@ module PetStore
       if array_and_items_nullable_prop.nil?
         return @array_and_items_nullable_prop = nil
       end
-      @array_and_items_nullable_prop = array_and_items_nullable_prop
+      _array_and_items_nullable_prop = array_and_items_nullable_prop.not_nil!
+      @array_and_items_nullable_prop = _array_and_items_nullable_prop
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -258,7 +272,8 @@ module PetStore
       if array_items_nullable.nil?
         return @array_items_nullable = nil
       end
-      @array_items_nullable = array_items_nullable
+      _array_items_nullable = array_items_nullable.not_nil!
+      @array_items_nullable = _array_items_nullable
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -267,7 +282,8 @@ module PetStore
       if object_nullable_prop.nil?
         return @object_nullable_prop = nil
       end
-      @object_nullable_prop = object_nullable_prop
+      _object_nullable_prop = object_nullable_prop.not_nil!
+      @object_nullable_prop = _object_nullable_prop
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -276,7 +292,8 @@ module PetStore
       if object_and_items_nullable_prop.nil?
         return @object_and_items_nullable_prop = nil
       end
-      @object_and_items_nullable_prop = object_and_items_nullable_prop
+      _object_and_items_nullable_prop = object_and_items_nullable_prop.not_nil!
+      @object_and_items_nullable_prop = _object_and_items_nullable_prop
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -285,13 +302,8 @@ module PetStore
       if object_items_nullable.nil?
         return @object_items_nullable = nil
       end
-      @object_items_nullable = object_items_nullable
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _object_items_nullable = object_items_nullable.not_nil!
+      @object_items_nullable = _object_items_nullable
     end
 
     # Generates #hash and #== methods from all fields

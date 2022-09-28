@@ -15,6 +15,7 @@ module PetStore
   class EnumArrays
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -41,7 +42,7 @@ module PetStore
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_JUST_SYMBOL.error_message) unless ENUM_VALIDATOR_FOR_JUST_SYMBOL.valid?(@just_symbol)
@@ -53,7 +54,7 @@ module PetStore
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_JUST_SYMBOL.valid?(@just_symbol)
       return false unless ENUM_VALIDATOR_FOR_ARRAY_ENUM.all_valid?(@array_enum)
 
@@ -68,7 +69,7 @@ module PetStore
       end
       _just_symbol = just_symbol.not_nil!
       ENUM_VALIDATOR_FOR_JUST_SYMBOL.valid!(_just_symbol)
-      @just_symbol = just_symbol
+      @just_symbol = _just_symbol
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -79,13 +80,7 @@ module PetStore
       end
       _array_enum = array_enum.not_nil!
       ENUM_VALIDATOR_FOR_ARRAY_ENUM.all_valid!(_array_enum)
-      @array_enum = array_enum
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @array_enum = _array_enum
     end
 
     # Generates #hash and #== methods from all fields

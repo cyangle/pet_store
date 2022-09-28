@@ -15,6 +15,7 @@ module PetStore
   class GmFruit
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -49,14 +50,14 @@ module PetStore
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -71,12 +72,6 @@ module PetStore
       return false if !_any_of_found
 
       true
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
     end
 
     # Generates #hash and #== methods from all fields

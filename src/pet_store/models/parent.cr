@@ -15,6 +15,7 @@ module PetStore
   class Parent
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -33,16 +34,34 @@ module PetStore
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # Container kids array has values of PetStore::OneOfPrimitive
+      if _kids = @kids
+        if _kids.is_a?(Array)
+          _kids.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("kids"))
+            end
+          end
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _kids = @kids
+        if _kids.is_a?(Array)
+          _kids.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
+
       true
     end
 
@@ -52,13 +71,15 @@ module PetStore
       if kids.nil?
         return @kids = nil
       end
-      @kids = kids
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _kids = kids.not_nil!
+      if _kids.is_a?(Array)
+        _kids.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @kids = _kids
     end
 
     # Generates #hash and #== methods from all fields

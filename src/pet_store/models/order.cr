@@ -15,6 +15,7 @@ module PetStore
   class Order
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -56,7 +57,7 @@ module PetStore
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
@@ -66,7 +67,7 @@ module PetStore
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
 
       true
@@ -78,7 +79,8 @@ module PetStore
       if id.nil?
         return @id = nil
       end
-      @id = id
+      _id = id.not_nil!
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -87,7 +89,8 @@ module PetStore
       if pet_id.nil?
         return @pet_id = nil
       end
-      @pet_id = pet_id
+      _pet_id = pet_id.not_nil!
+      @pet_id = _pet_id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -96,7 +99,8 @@ module PetStore
       if quantity.nil?
         return @quantity = nil
       end
-      @quantity = quantity
+      _quantity = quantity.not_nil!
+      @quantity = _quantity
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -105,7 +109,8 @@ module PetStore
       if ship_date.nil?
         return @ship_date = nil
       end
-      @ship_date = ship_date
+      _ship_date = ship_date.not_nil!
+      @ship_date = _ship_date
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -116,7 +121,7 @@ module PetStore
       end
       _status = status.not_nil!
       ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
-      @status = status
+      @status = _status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -125,13 +130,8 @@ module PetStore
       if complete.nil?
         return @complete = nil
       end
-      @complete = complete
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _complete = complete.not_nil!
+      @complete = _complete
     end
 
     # Generates #hash and #== methods from all fields

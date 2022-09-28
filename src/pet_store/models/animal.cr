@@ -15,6 +15,7 @@ module PetStore
   class Animal
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -47,7 +48,7 @@ module PetStore
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"class_name\" is required and cannot be null") if @class_name.nil?
       if _class_name = @class_name
@@ -61,7 +62,7 @@ module PetStore
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @class_name.nil?
       if _class_name = @class_name
         return false if _class_name.to_s.size > 64
@@ -81,7 +82,7 @@ module PetStore
         raise ArgumentError.new("invalid value for \"class_name\", the character length must be smaller than or equal to 64.")
       end
 
-      @class_name = class_name
+      @class_name = _class_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -90,13 +91,8 @@ module PetStore
       if color.nil?
         return @color = nil
       end
-      @color = color
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _color = color.not_nil!
+      @color = _color
     end
 
     # Generates #hash and #== methods from all fields

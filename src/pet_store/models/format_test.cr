@@ -15,6 +15,7 @@ module PetStore
   class FormatTest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -94,7 +95,7 @@ module PetStore
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"number\" is required and cannot be null") if @number.nil?
       if _number = @number
@@ -107,7 +108,9 @@ module PetStore
         end
       end
       invalid_properties.push("\"byte\" is required and cannot be null") if @byte.nil?
+
       invalid_properties.push("\"date\" is required and cannot be null") if @date.nil?
+
       invalid_properties.push("\"password\" is required and cannot be null") if @password.nil?
       if _password = @password
         if _password.to_s.size > 64
@@ -136,6 +139,7 @@ module PetStore
           invalid_properties.push("invalid value for \"int32\", must be greater than or equal to 20.")
         end
       end
+
       if _float = @float
         if _float > 987.6
           invalid_properties.push("invalid value for \"float\", must be smaller than or equal to 987.6.")
@@ -160,6 +164,7 @@ module PetStore
           invalid_properties.push("invalid value for \"string\", must conform to the pattern #{pattern}.")
         end
       end
+
       if _pattern_with_digits = @pattern_with_digits
         pattern = /^\d{10}$/
         if _pattern_with_digits !~ pattern
@@ -178,14 +183,16 @@ module PetStore
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @number.nil?
       if _number = @number
         return false if _number > 543.2
         return false if _number < 32.1
       end
       return false if @byte.nil?
+
       return false if @date.nil?
+
       return false if @password.nil?
       if _password = @password
         return false if _password.to_s.size > 64
@@ -199,6 +206,7 @@ module PetStore
         return false if _int32 > 200
         return false if _int32 < 20
       end
+
       if _float = @float
         return false if _float > 987.6
         return false if _float < 54.3
@@ -210,6 +218,7 @@ module PetStore
       if _string = @string
         return false if _string !~ /[a-z]/i
       end
+
       if _pattern_with_digits = @pattern_with_digits
         return false if _pattern_with_digits !~ /^\d{10}$/
       end
@@ -235,7 +244,7 @@ module PetStore
         raise ArgumentError.new("invalid value for \"number\", must be greater than or equal to 32.1.")
       end
 
-      @number = number
+      @number = _number
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -244,7 +253,8 @@ module PetStore
       if byte.nil?
         raise ArgumentError.new("\"byte\" is required and cannot be null")
       end
-      @byte = byte
+      _byte = byte.not_nil!
+      @byte = _byte
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -253,7 +263,8 @@ module PetStore
       if date.nil?
         raise ArgumentError.new("\"date\" is required and cannot be null")
       end
-      @date = date
+      _date = date.not_nil!
+      @date = _date
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -271,7 +282,7 @@ module PetStore
         raise ArgumentError.new("invalid value for \"password\", the character length must be great than or equal to 10.")
       end
 
-      @password = password
+      @password = _password
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -289,7 +300,7 @@ module PetStore
         raise ArgumentError.new("invalid value for \"integer\", must be greater than or equal to 10.")
       end
 
-      @integer = integer
+      @integer = _integer
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -307,7 +318,7 @@ module PetStore
         raise ArgumentError.new("invalid value for \"int32\", must be greater than or equal to 20.")
       end
 
-      @int32 = int32
+      @int32 = _int32
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -316,7 +327,8 @@ module PetStore
       if int64.nil?
         return @int64 = nil
       end
-      @int64 = int64
+      _int64 = int64.not_nil!
+      @int64 = _int64
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -334,7 +346,7 @@ module PetStore
         raise ArgumentError.new("invalid value for \"float\", must be greater than or equal to 54.3.")
       end
 
-      @float = float
+      @float = _float
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -352,7 +364,7 @@ module PetStore
         raise ArgumentError.new("invalid value for \"double\", must be greater than or equal to 67.8.")
       end
 
-      @double = double
+      @double = _double
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -367,7 +379,7 @@ module PetStore
         raise ArgumentError.new("invalid value for \"string\", must conform to the pattern #{pattern}.")
       end
 
-      @string = string
+      @string = _string
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -376,7 +388,8 @@ module PetStore
       if binary.nil?
         return @binary = nil
       end
-      @binary = binary
+      _binary = binary.not_nil!
+      @binary = _binary
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -385,7 +398,8 @@ module PetStore
       if date_time.nil?
         return @date_time = nil
       end
-      @date_time = date_time
+      _date_time = date_time.not_nil!
+      @date_time = _date_time
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -394,7 +408,8 @@ module PetStore
       if uuid.nil?
         return @uuid = nil
       end
-      @uuid = uuid
+      _uuid = uuid.not_nil!
+      @uuid = _uuid
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -409,7 +424,7 @@ module PetStore
         raise ArgumentError.new("invalid value for \"pattern_with_digits\", must conform to the pattern #{pattern}.")
       end
 
-      @pattern_with_digits = pattern_with_digits
+      @pattern_with_digits = _pattern_with_digits
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -424,13 +439,7 @@ module PetStore
         raise ArgumentError.new("invalid value for \"pattern_with_digits_and_delimiter\", must conform to the pattern #{pattern}.")
       end
 
-      @pattern_with_digits_and_delimiter = pattern_with_digits_and_delimiter
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @pattern_with_digits_and_delimiter = _pattern_with_digits_and_delimiter
     end
 
     # Generates #hash and #== methods from all fields

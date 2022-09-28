@@ -15,6 +15,7 @@ module PetStore
   class Pet
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -59,12 +60,26 @@ module PetStore
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
+
       invalid_properties.push("\"photo_urls\" is required and cannot be null") if @photo_urls.nil?
-      # This is a model category : PetStore::Category?
-      # Container tags array has values of PetStore::Tag
+
+      if _category = @category
+        if _category.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_category.list_invalid_properties_for("category"))
+        end
+      end
+      if _tags = @tags
+        if _tags.is_a?(Array)
+          _tags.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("tags"))
+            end
+          end
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
 
@@ -73,9 +88,25 @@ module PetStore
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @name.nil?
+
       return false if @photo_urls.nil?
+
+      if _category = @category
+        if _category.is_a?(OpenApi::Validatable)
+          return false unless _category.valid?
+        end
+      end
+      if _tags = @tags
+        if _tags.is_a?(Array)
+          _tags.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
 
       true
@@ -87,7 +118,8 @@ module PetStore
       if name.nil?
         raise ArgumentError.new("\"name\" is required and cannot be null")
       end
-      @name = name
+      _name = name.not_nil!
+      @name = _name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -96,7 +128,8 @@ module PetStore
       if photo_urls.nil?
         raise ArgumentError.new("\"photo_urls\" is required and cannot be null")
       end
-      @photo_urls = photo_urls
+      _photo_urls = photo_urls.not_nil!
+      @photo_urls = _photo_urls
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -105,7 +138,8 @@ module PetStore
       if id.nil?
         return @id = nil
       end
-      @id = id
+      _id = id.not_nil!
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -114,7 +148,11 @@ module PetStore
       if category.nil?
         return @category = nil
       end
-      @category = category
+      _category = category.not_nil!
+      if _category.is_a?(OpenApi::Validatable)
+        _category.validate
+      end
+      @category = _category
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -123,7 +161,15 @@ module PetStore
       if tags.nil?
         return @tags = nil
       end
-      @tags = tags
+      _tags = tags.not_nil!
+      if _tags.is_a?(Array)
+        _tags.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @tags = _tags
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -134,13 +180,7 @@ module PetStore
       end
       _status = status.not_nil!
       ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
-      @status = status
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @status = _status
     end
 
     # Generates #hash and #== methods from all fields

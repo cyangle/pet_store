@@ -33,8 +33,18 @@ describe PetStore::MixedPropertiesAndAdditionalPropertiesClass do
   end
 
   describe "test attribute 'map'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    it "validates attribute 'map'" do
+      animal = PetStore::Animal.new
+      map = {"dog" => animal}
+      parent = PetStore::MixedPropertiesAndAdditionalPropertiesClass.new
+      parent.valid?.should be_true
+      parent.list_invalid_properties.empty?.should be_true
+      expect_raises(Exception, "PetStore::Animal is invalid") do
+        parent.map = map
+      end
+      parent2 = PetStore::MixedPropertiesAndAdditionalPropertiesClass.new(map: map)
+      parent2.valid?.should be_false
+      parent2.list_invalid_properties.should eq(["map: \"class_name\" is required and cannot be null"])
     end
   end
 end

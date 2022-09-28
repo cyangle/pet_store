@@ -27,8 +27,17 @@ describe PetStore::Pet do
   end
 
   describe "test attribute 'category'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    it "list invalid properties from attribute 'category'" do
+      category = PetStore::Category.new(name: nil)
+      pet = PetStore::Pet.new(name: "pet", photo_urls: Array(String).new)
+      pet.valid?.should eq(true)
+      pet.list_invalid_properties.empty?.should eq(true)
+      expect_raises(Exception, "PetStore::Category is invalid") do
+        pet.category = category
+      end
+      pet2 = PetStore::Pet.new(name: "pet", photo_urls: Array(String).new, category: category)
+      pet2.valid?.should eq(false)
+      pet2.list_invalid_properties.should eq(["category: \"name\" is required and cannot be null"])
     end
   end
 
@@ -45,8 +54,22 @@ describe PetStore::Pet do
   end
 
   describe "test attribute 'tags'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    it "list invalid properties from attribute 'tags'" do
+      tag1 = PetStore::Tag.new(id: -1)
+      tag2 = PetStore::Tag.new(name: "test")
+      tags = [tag1, tag2]
+      pet = PetStore::Pet.new(name: "pet", photo_urls: Array(String).new)
+      pet.valid?.should be_true
+      pet.list_invalid_properties.empty?.should be_true
+      expect_raises(Exception, "PetStore::Tag is invalid") do
+        pet.tags = tags
+      end
+      pet2 = PetStore::Pet.new(name: "pet", photo_urls: Array(String).new, tags: tags)
+      pet2.valid?.should be_false
+      pet2.list_invalid_properties.should eq([
+        "tags: invalid value for \"id\", must be greater than or equal to 0.",
+        "tags: invalid value for \"name\", the character length must be great than or equal to 5.",
+      ])
     end
   end
 

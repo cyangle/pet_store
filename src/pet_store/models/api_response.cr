@@ -15,6 +15,7 @@ module PetStore
   class ApiResponse
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -41,7 +42,7 @@ module PetStore
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -49,7 +50,7 @@ module PetStore
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -59,7 +60,8 @@ module PetStore
       if code.nil?
         return @code = nil
       end
-      @code = code
+      _code = code.not_nil!
+      @code = _code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -68,7 +70,8 @@ module PetStore
       if _type.nil?
         return @_type = nil
       end
-      @_type = _type
+      __type = _type.not_nil!
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -77,13 +80,8 @@ module PetStore
       if message.nil?
         return @message = nil
       end
-      @message = message
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _message = message.not_nil!
+      @message = _message
     end
 
     # Generates #hash and #== methods from all fields

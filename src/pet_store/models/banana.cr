@@ -15,6 +15,7 @@ module PetStore
   class Banana
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -33,7 +34,7 @@ module PetStore
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"length_cm\" is required and cannot be null") if @length_cm.nil?
 
@@ -42,7 +43,7 @@ module PetStore
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @length_cm.nil?
 
       true
@@ -54,13 +55,8 @@ module PetStore
       if length_cm.nil?
         raise ArgumentError.new("\"length_cm\" is required and cannot be null")
       end
-      @length_cm = length_cm
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _length_cm = length_cm.not_nil!
+      @length_cm = _length_cm
     end
 
     # Generates #hash and #== methods from all fields

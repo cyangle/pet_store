@@ -15,6 +15,7 @@ module PetStore
   class Capitalization
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -54,7 +55,7 @@ module PetStore
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -62,7 +63,7 @@ module PetStore
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -72,7 +73,8 @@ module PetStore
       if small_camel.nil?
         return @small_camel = nil
       end
-      @small_camel = small_camel
+      _small_camel = small_camel.not_nil!
+      @small_camel = _small_camel
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -81,7 +83,8 @@ module PetStore
       if capital_camel.nil?
         return @capital_camel = nil
       end
-      @capital_camel = capital_camel
+      _capital_camel = capital_camel.not_nil!
+      @capital_camel = _capital_camel
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -90,7 +93,8 @@ module PetStore
       if small_snake.nil?
         return @small_snake = nil
       end
-      @small_snake = small_snake
+      _small_snake = small_snake.not_nil!
+      @small_snake = _small_snake
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -99,7 +103,8 @@ module PetStore
       if capital_snake.nil?
         return @capital_snake = nil
       end
-      @capital_snake = capital_snake
+      _capital_snake = capital_snake.not_nil!
+      @capital_snake = _capital_snake
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -108,7 +113,8 @@ module PetStore
       if sca_eth_flow_points.nil?
         return @sca_eth_flow_points = nil
       end
-      @sca_eth_flow_points = sca_eth_flow_points
+      _sca_eth_flow_points = sca_eth_flow_points.not_nil!
+      @sca_eth_flow_points = _sca_eth_flow_points
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -117,13 +123,8 @@ module PetStore
       if att_name.nil?
         return @att_name = nil
       end
-      @att_name = att_name
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _att_name = att_name.not_nil!
+      @att_name = _att_name
     end
 
     # Generates #hash and #== methods from all fields

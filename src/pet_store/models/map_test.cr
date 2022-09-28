@@ -15,6 +15,7 @@ module PetStore
   class MapTest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -47,7 +48,7 @@ module PetStore
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_MAP_OF_ENUM_STRING.error_message) unless ENUM_VALIDATOR_FOR_MAP_OF_ENUM_STRING.all_valid?(@map_of_enum_string.try(&.values))
@@ -57,7 +58,7 @@ module PetStore
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_MAP_OF_ENUM_STRING.all_valid?(@map_of_enum_string.try(&.values))
 
       true
@@ -69,7 +70,8 @@ module PetStore
       if map_map_of_string.nil?
         return @map_map_of_string = nil
       end
-      @map_map_of_string = map_map_of_string
+      _map_map_of_string = map_map_of_string.not_nil!
+      @map_map_of_string = _map_map_of_string
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -80,7 +82,7 @@ module PetStore
       end
       _map_of_enum_string = map_of_enum_string.not_nil!
       ENUM_VALIDATOR_FOR_MAP_OF_ENUM_STRING.all_valid!(_map_of_enum_string.values)
-      @map_of_enum_string = map_of_enum_string
+      @map_of_enum_string = _map_of_enum_string
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -89,7 +91,8 @@ module PetStore
       if direct_map.nil?
         return @direct_map = nil
       end
-      @direct_map = direct_map
+      _direct_map = direct_map.not_nil!
+      @direct_map = _direct_map
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -98,13 +101,8 @@ module PetStore
       if indirect_map.nil?
         return @indirect_map = nil
       end
-      @indirect_map = indirect_map
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _indirect_map = indirect_map.not_nil!
+      @indirect_map = _indirect_map
     end
 
     # Generates #hash and #== methods from all fields

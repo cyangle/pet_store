@@ -15,6 +15,7 @@ module PetStore
   class Zebra
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -42,7 +43,7 @@ module PetStore
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"class_name\" is required and cannot be null") if @class_name.nil?
 
@@ -53,8 +54,9 @@ module PetStore
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @class_name.nil?
+
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
 
       true
@@ -66,7 +68,8 @@ module PetStore
       if class_name.nil?
         raise ArgumentError.new("\"class_name\" is required and cannot be null")
       end
-      @class_name = class_name
+      _class_name = class_name.not_nil!
+      @class_name = _class_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -77,13 +80,7 @@ module PetStore
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @_type = __type
     end
 
     # Generates #hash and #== methods from all fields

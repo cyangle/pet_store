@@ -14,3 +14,8 @@ tasks:
         name: 'Correct AnyType?'
         pattern: 'JSONType'
         new_value: 'JSON::Type'
+      -
+        name: "Remove empty if blocks"
+        pattern: '^\s+if _[^\s]+ = [^\s]+$\n^\s+end$'
+        new_value: ''
+        multi_line: true

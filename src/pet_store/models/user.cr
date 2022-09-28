@@ -15,6 +15,7 @@ module PetStore
   class User
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -91,7 +92,7 @@ module PetStore
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -99,7 +100,7 @@ module PetStore
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -109,7 +110,8 @@ module PetStore
       if id.nil?
         return @id = nil
       end
-      @id = id
+      _id = id.not_nil!
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -118,7 +120,8 @@ module PetStore
       if username.nil?
         return @username = nil
       end
-      @username = username
+      _username = username.not_nil!
+      @username = _username
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -127,7 +130,8 @@ module PetStore
       if first_name.nil?
         return @first_name = nil
       end
-      @first_name = first_name
+      _first_name = first_name.not_nil!
+      @first_name = _first_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -136,7 +140,8 @@ module PetStore
       if last_name.nil?
         return @last_name = nil
       end
-      @last_name = last_name
+      _last_name = last_name.not_nil!
+      @last_name = _last_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -145,7 +150,8 @@ module PetStore
       if email.nil?
         return @email = nil
       end
-      @email = email
+      _email = email.not_nil!
+      @email = _email
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -154,7 +160,8 @@ module PetStore
       if password.nil?
         return @password = nil
       end
-      @password = password
+      _password = password.not_nil!
+      @password = _password
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -163,7 +170,8 @@ module PetStore
       if phone.nil?
         return @phone = nil
       end
-      @phone = phone
+      _phone = phone.not_nil!
+      @phone = _phone
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -172,7 +180,8 @@ module PetStore
       if user_status.nil?
         return @user_status = nil
       end
-      @user_status = user_status
+      _user_status = user_status.not_nil!
+      @user_status = _user_status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -181,7 +190,8 @@ module PetStore
       if arbitrary_object.nil?
         return @arbitrary_object = nil
       end
-      @arbitrary_object = arbitrary_object
+      _arbitrary_object = arbitrary_object.not_nil!
+      @arbitrary_object = _arbitrary_object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -190,7 +200,8 @@ module PetStore
       if arbitrary_nullable_object.nil?
         return @arbitrary_nullable_object = nil
       end
-      @arbitrary_nullable_object = arbitrary_nullable_object
+      _arbitrary_nullable_object = arbitrary_nullable_object.not_nil!
+      @arbitrary_nullable_object = _arbitrary_nullable_object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -199,7 +210,8 @@ module PetStore
       if arbitrary_type_value.nil?
         return @arbitrary_type_value = nil
       end
-      @arbitrary_type_value = arbitrary_type_value
+      _arbitrary_type_value = arbitrary_type_value.not_nil!
+      @arbitrary_type_value = _arbitrary_type_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -208,13 +220,8 @@ module PetStore
       if arbitrary_nullable_type_value.nil?
         return @arbitrary_nullable_type_value = nil
       end
-      @arbitrary_nullable_type_value = arbitrary_nullable_type_value
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _arbitrary_nullable_type_value = arbitrary_nullable_type_value.not_nil!
+      @arbitrary_nullable_type_value = _arbitrary_nullable_type_value
     end
 
     # Generates #hash and #== methods from all fields

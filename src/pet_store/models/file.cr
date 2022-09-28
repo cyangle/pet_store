@@ -16,6 +16,7 @@ module PetStore
   class File
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -35,7 +36,7 @@ module PetStore
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -43,7 +44,7 @@ module PetStore
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -53,13 +54,8 @@ module PetStore
       if source_uri.nil?
         return @source_uri = nil
       end
-      @source_uri = source_uri
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _source_uri = source_uri.not_nil!
+      @source_uri = _source_uri
     end
 
     # Generates #hash and #== methods from all fields

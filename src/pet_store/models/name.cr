@@ -16,6 +16,7 @@ module PetStore
   class Name
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -49,7 +50,7 @@ module PetStore
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
 
@@ -58,7 +59,7 @@ module PetStore
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @name.nil?
 
       true
@@ -70,7 +71,8 @@ module PetStore
       if name.nil?
         raise ArgumentError.new("\"name\" is required and cannot be null")
       end
-      @name = name
+      _name = name.not_nil!
+      @name = _name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -79,7 +81,8 @@ module PetStore
       if snake_case.nil?
         return @snake_case = nil
       end
-      @snake_case = snake_case
+      _snake_case = snake_case.not_nil!
+      @snake_case = _snake_case
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -88,7 +91,8 @@ module PetStore
       if property.nil?
         return @property = nil
       end
-      @property = property
+      _property = property.not_nil!
+      @property = _property
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -97,13 +101,8 @@ module PetStore
       if _123_number.nil?
         return @_123_number = nil
       end
-      @_123_number = _123_number
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      __123_number = _123_number.not_nil!
+      @_123_number = __123_number
     end
 
     # Generates #hash and #== methods from all fields

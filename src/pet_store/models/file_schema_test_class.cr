@@ -15,6 +15,7 @@ module PetStore
   class FileSchemaTestClass
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -37,17 +38,44 @@ module PetStore
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model file : PetStore::File?
-      # Container files array has values of PetStore::File
+      if _file = @file
+        if _file.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_file.list_invalid_properties_for("file"))
+        end
+      end
+      if _files = @files
+        if _files.is_a?(Array)
+          _files.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("files"))
+            end
+          end
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _file = @file
+        if _file.is_a?(OpenApi::Validatable)
+          return false unless _file.valid?
+        end
+      end
+      if _files = @files
+        if _files.is_a?(Array)
+          _files.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
+
       true
     end
 
@@ -57,7 +85,11 @@ module PetStore
       if file.nil?
         return @file = nil
       end
-      @file = file
+      _file = file.not_nil!
+      if _file.is_a?(OpenApi::Validatable)
+        _file.validate
+      end
+      @file = _file
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -66,13 +98,15 @@ module PetStore
       if files.nil?
         return @files = nil
       end
-      @files = files
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _files = files.not_nil!
+      if _files.is_a?(Array)
+        _files.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @files = _files
     end
 
     # Generates #hash and #== methods from all fields

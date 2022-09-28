@@ -15,6 +15,7 @@ module PetStore
   class OuterComposite
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -41,7 +42,7 @@ module PetStore
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -49,7 +50,7 @@ module PetStore
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -59,7 +60,8 @@ module PetStore
       if my_number.nil?
         return @my_number = nil
       end
-      @my_number = my_number
+      _my_number = my_number.not_nil!
+      @my_number = _my_number
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -68,7 +70,8 @@ module PetStore
       if my_string.nil?
         return @my_string = nil
       end
-      @my_string = my_string
+      _my_string = my_string.not_nil!
+      @my_string = _my_string
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -77,13 +80,8 @@ module PetStore
       if my_boolean.nil?
         return @my_boolean = nil
       end
-      @my_boolean = my_boolean
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _my_boolean = my_boolean.not_nil!
+      @my_boolean = _my_boolean
     end
 
     # Generates #hash and #== methods from all fields

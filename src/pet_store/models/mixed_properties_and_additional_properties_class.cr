@@ -15,6 +15,7 @@ module PetStore
   class MixedPropertiesAndAdditionalPropertiesClass
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -41,16 +42,35 @@ module PetStore
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # Container map map has values of PetStore::Animal
+
+      if _map = @map
+        if _map.is_a?(Hash)
+          _map.each do |_key, value|
+            if value.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(value.list_invalid_properties_for("map"))
+            end
+          end
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _map = @map
+        if _map.is_a?(Hash)
+          _map.each do |_key, value|
+            if value.is_a?(OpenApi::Validatable)
+              return false unless value.valid?
+            end
+          end
+        end
+      end
+
       true
     end
 
@@ -60,7 +80,8 @@ module PetStore
       if uuid.nil?
         return @uuid = nil
       end
-      @uuid = uuid
+      _uuid = uuid.not_nil!
+      @uuid = _uuid
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -69,7 +90,8 @@ module PetStore
       if date_time.nil?
         return @date_time = nil
       end
-      @date_time = date_time
+      _date_time = date_time.not_nil!
+      @date_time = _date_time
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -78,13 +100,15 @@ module PetStore
       if map.nil?
         return @map = nil
       end
-      @map = map
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _map = map.not_nil!
+      if _map.is_a?(Hash)
+        _map.each do |_key, value|
+          if value.is_a?(OpenApi::Validatable)
+            value.validate
+          end
+        end
+      end
+      @map = _map
     end
 
     # Generates #hash and #== methods from all fields

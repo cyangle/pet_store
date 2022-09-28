@@ -15,6 +15,7 @@ module PetStore
   class Tag
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -37,15 +38,32 @@ module PetStore
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+      if _id = @id
+        if _id < 0
+          invalid_properties.push("invalid value for \"id\", must be greater than or equal to 0.")
+        end
+      end
+      if _name = @name
+        if _name.to_s.size < 5
+          invalid_properties.push("invalid value for \"name\", the character length must be great than or equal to 5.")
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _id = @id
+        return false if _id < 0
+      end
+      if _name = @name
+        return false if _name.to_s.size < 5
+      end
+
       true
     end
 
@@ -55,7 +73,12 @@ module PetStore
       if id.nil?
         return @id = nil
       end
-      @id = id
+      _id = id.not_nil!
+      if _id < 0
+        raise ArgumentError.new("invalid value for \"id\", must be greater than or equal to 0.")
+      end
+
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -64,13 +87,12 @@ module PetStore
       if name.nil?
         return @name = nil
       end
-      @name = name
-    end
+      _name = name.not_nil!
+      if _name.to_s.size < 5
+        raise ArgumentError.new("invalid value for \"name\", the character length must be great than or equal to 5.")
+      end
 
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @name = _name
     end
 
     # Generates #hash and #== methods from all fields

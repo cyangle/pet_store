@@ -15,6 +15,7 @@ module PetStore
   class ArrayTest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -41,7 +42,7 @@ module PetStore
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -49,7 +50,7 @@ module PetStore
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -59,7 +60,8 @@ module PetStore
       if array_of_string.nil?
         return @array_of_string = nil
       end
-      @array_of_string = array_of_string
+      _array_of_string = array_of_string.not_nil!
+      @array_of_string = _array_of_string
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -68,7 +70,8 @@ module PetStore
       if array_array_of_integer.nil?
         return @array_array_of_integer = nil
       end
-      @array_array_of_integer = array_array_of_integer
+      _array_array_of_integer = array_array_of_integer.not_nil!
+      @array_array_of_integer = _array_array_of_integer
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -77,13 +80,8 @@ module PetStore
       if array_array_of_model.nil?
         return @array_array_of_model = nil
       end
-      @array_array_of_model = array_array_of_model
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _array_array_of_model = array_array_of_model.not_nil!
+      @array_array_of_model = _array_array_of_model
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module PetStore
   class HealthCheckResult
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -37,7 +38,7 @@ module PetStore
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -45,7 +46,7 @@ module PetStore
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -55,13 +56,8 @@ module PetStore
       if nullable_message.nil?
         return @nullable_message = nil
       end
-      @nullable_message = nullable_message
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _nullable_message = nullable_message.not_nil!
+      @nullable_message = _nullable_message
     end
 
     # Generates #hash and #== methods from all fields
