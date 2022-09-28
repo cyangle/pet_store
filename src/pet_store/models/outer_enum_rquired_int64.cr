@@ -17,7 +17,7 @@ module PetStore
 
     property data : Int64
 
-    ENUM_VALIDATOR = EnumValidator.new("outerEnumRquiredInt64", "Int64", ["1", "2", "3"])
+    ENUM_VALIDATOR = OpenApi::EnumValidator.new("outerEnumRquiredInt64", "Int64", ["1", "2", "3"])
 
     delegate to_json_object_key, to: @data
     delegate error_message, to: ENUM_VALIDATOR

@@ -41,7 +41,7 @@ module PetStore
     @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["available", "pending", "sold"])
+    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["available", "pending", "sold"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -67,18 +67,10 @@ module PetStore
       invalid_properties.push("\"photo_urls\" is required and cannot be null") if @photo_urls.nil?
 
       if _category = @category
-        if _category.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_category.list_invalid_properties_for("category"))
-        end
+        invalid_properties.concat(_category.list_invalid_properties_for("category")) if _category.is_a?(OpenApi::Validatable)
       end
       if _tags = @tags
-        if _tags.is_a?(Array)
-          _tags.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("tags"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "tags", array: _tags)) if _tags.is_a?(Array)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
@@ -94,18 +86,10 @@ module PetStore
       return false if @photo_urls.nil?
 
       if _category = @category
-        if _category.is_a?(OpenApi::Validatable)
-          return false unless _category.valid?
-        end
+        return false if _category.is_a?(OpenApi::Validatable) && !_category.valid?
       end
       if _tags = @tags
-        if _tags.is_a?(Array)
-          _tags.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _tags.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _tags)
       end
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
 
@@ -149,9 +133,7 @@ module PetStore
         return @category = nil
       end
       _category = category.not_nil!
-      if _category.is_a?(OpenApi::Validatable)
-        _category.validate
-      end
+      _category.validate if _category.is_a?(OpenApi::Validatable)
       @category = _category
     end
 
@@ -162,13 +144,7 @@ module PetStore
         return @tags = nil
       end
       _tags = tags.not_nil!
-      if _tags.is_a?(Array)
-        _tags.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _tags) if _tags.is_a?(Array)
       @tags = _tags
     end
 

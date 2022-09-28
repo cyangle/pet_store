@@ -81,4 +81,6 @@ src/pet_store/models/tag.cr
 src/pet_store/models/user.cr
 src/pet_store/models/whale.cr
 src/pet_store/models/zebra.cr
+src/validators/array_validator.cr
 src/validators/enum_validator.cr
+src/validators/hash_validator.cr

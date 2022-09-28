@@ -17,7 +17,7 @@ module PetStore
 
     property data : String
 
-    ENUM_VALIDATOR = EnumValidator.new("outerEnumRquired", "String", ["started", "in_progress", "completed"])
+    ENUM_VALIDATOR = OpenApi::EnumValidator.new("outerEnumRquired", "String", ["started", "in_progress", "completed"])
 
     delegate to_json_object_key, to: @data
     delegate error_message, to: ENUM_VALIDATOR

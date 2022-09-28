@@ -23,12 +23,12 @@ module PetStore
     @[JSON::Field(key: "just_symbol", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter just_symbol : String? = nil
 
-    ENUM_VALIDATOR_FOR_JUST_SYMBOL = EnumValidator.new("just_symbol", "String", [">=", "$"])
+    ENUM_VALIDATOR_FOR_JUST_SYMBOL = OpenApi::EnumValidator.new("just_symbol", "String", [">=", "$"])
 
     @[JSON::Field(key: "array_enum", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter array_enum : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_ARRAY_ENUM = EnumValidator.new("array_enum", "Array(String)", ["fish", "crab"])
+    ENUM_VALIDATOR_FOR_ARRAY_ENUM = OpenApi::EnumValidator.new("array_enum", "Array(String)", ["fish", "crab"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

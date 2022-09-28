@@ -17,7 +17,7 @@ module PetStore
 
     property data : Int32
 
-    ENUM_VALIDATOR = EnumValidator.new("OuterEnumInteger", "Int32", ["0", "1", "2"])
+    ENUM_VALIDATOR = OpenApi::EnumValidator.new("OuterEnumInteger", "Int32", ["0", "1", "2"])
 
     delegate to_json_object_key, to: @data
     delegate error_message, to: ENUM_VALIDATOR

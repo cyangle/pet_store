@@ -17,7 +17,7 @@ module PetStore
 
     property data : String
 
-    ENUM_VALIDATOR = EnumValidator.new("EnumClass", "String", ["_abc", "-efg", "(xyz)"])
+    ENUM_VALIDATOR = OpenApi::EnumValidator.new("EnumClass", "String", ["_abc", "-efg", "(xyz)"])
 
     delegate to_json_object_key, to: @data
     delegate error_message, to: ENUM_VALIDATOR

@@ -41,18 +41,10 @@ module PetStore
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _file = @file
-        if _file.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_file.list_invalid_properties_for("file"))
-        end
+        invalid_properties.concat(_file.list_invalid_properties_for("file")) if _file.is_a?(OpenApi::Validatable)
       end
       if _files = @files
-        if _files.is_a?(Array)
-          _files.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("files"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "files", array: _files)) if _files.is_a?(Array)
       end
 
       invalid_properties
@@ -62,18 +54,10 @@ module PetStore
     # @return true if the model is valid
     def valid? : Bool
       if _file = @file
-        if _file.is_a?(OpenApi::Validatable)
-          return false unless _file.valid?
-        end
+        return false if _file.is_a?(OpenApi::Validatable) && !_file.valid?
       end
       if _files = @files
-        if _files.is_a?(Array)
-          _files.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _files.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _files)
       end
 
       true
@@ -86,9 +70,7 @@ module PetStore
         return @file = nil
       end
       _file = file.not_nil!
-      if _file.is_a?(OpenApi::Validatable)
-        _file.validate
-      end
+      _file.validate if _file.is_a?(OpenApi::Validatable)
       @file = _file
     end
 
@@ -99,13 +81,7 @@ module PetStore
         return @files = nil
       end
       _files = files.not_nil!
-      if _files.is_a?(Array)
-        _files.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _files) if _files.is_a?(Array)
       @files = _files
     end
 

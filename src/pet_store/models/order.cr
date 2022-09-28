@@ -36,7 +36,7 @@ module PetStore
     @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["placed", "approved", "delivered"])
+    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["placed", "approved", "delivered"])
 
     @[JSON::Field(key: "complete", type: Bool?, default: false, required: false, nullable: false, emit_null: false)]
     getter complete : Bool? = false

@@ -37,9 +37,7 @@ module PetStore
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _string = @string
-        if _string.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_string.list_invalid_properties_for("string"))
-        end
+        invalid_properties.concat(_string.list_invalid_properties_for("string")) if _string.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -49,9 +47,7 @@ module PetStore
     # @return true if the model is valid
     def valid? : Bool
       if _string = @string
-        if _string.is_a?(OpenApi::Validatable)
-          return false unless _string.valid?
-        end
+        return false if _string.is_a?(OpenApi::Validatable) && !_string.valid?
       end
 
       true
@@ -64,9 +60,7 @@ module PetStore
         return @string = nil
       end
       _string = string.not_nil!
-      if _string.is_a?(OpenApi::Validatable)
-        _string.validate
-      end
+      _string.validate if _string.is_a?(OpenApi::Validatable)
       @string = _string
     end
 

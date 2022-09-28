@@ -26,7 +26,7 @@ module PetStore
     @[JSON::Field(key: "map_of_enum_string", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter map_of_enum_string : Hash(String, String)? = nil
 
-    ENUM_VALIDATOR_FOR_MAP_OF_ENUM_STRING = EnumValidator.new("map_of_enum_string", "Hash(String, String)", ["UPPER", "lower"])
+    ENUM_VALIDATOR_FOR_MAP_OF_ENUM_STRING = OpenApi::EnumValidator.new("map_of_enum_string", "Hash(String, String)", ["UPPER", "lower"])
 
     @[JSON::Field(key: "direct_map", type: Hash(String, Bool)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter direct_map : Hash(String, Bool)? = nil

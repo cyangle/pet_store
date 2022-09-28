@@ -23,7 +23,7 @@ module PetStore
     @[JSON::Field(key: "enum_string_required", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter enum_string_required : String? = nil
 
-    ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED = EnumValidator.new("enum_string_required", "String", ["UPPER", "lower", ""])
+    ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED = OpenApi::EnumValidator.new("enum_string_required", "String", ["UPPER", "lower", ""])
 
     @[JSON::Field(key: "outerEnumRquired", type: PetStore::OuterEnumRquired?, default: nil, required: true, nullable: false, emit_null: false)]
     getter outer_enum_rquired : PetStore::OuterEnumRquired? = nil
@@ -36,27 +36,27 @@ module PetStore
     @[JSON::Field(key: "enum_string", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter enum_string : String? = nil
 
-    ENUM_VALIDATOR_FOR_ENUM_STRING = EnumValidator.new("enum_string", "String", ["UPPER", "lower", ""])
+    ENUM_VALIDATOR_FOR_ENUM_STRING = OpenApi::EnumValidator.new("enum_string", "String", ["UPPER", "lower", ""])
 
     @[JSON::Field(key: "enum_int32", type: Int32?, default: nil, required: false, nullable: false, emit_null: false)]
     getter enum_int32 : Int32? = nil
 
-    ENUM_VALIDATOR_FOR_ENUM_INT32 = EnumValidator.new("enum_int32", "Int32", ["1", "-1"])
+    ENUM_VALIDATOR_FOR_ENUM_INT32 = OpenApi::EnumValidator.new("enum_int32", "Int32", ["1", "-1"])
 
     @[JSON::Field(key: "enum_int64", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter enum_int64 : Int64? = nil
 
-    ENUM_VALIDATOR_FOR_ENUM_INT64 = EnumValidator.new("enum_int64", "Int64", ["1", "-1"])
+    ENUM_VALIDATOR_FOR_ENUM_INT64 = OpenApi::EnumValidator.new("enum_int64", "Int64", ["1", "-1"])
 
     @[JSON::Field(key: "enum_float", type: Float32?, default: nil, required: false, nullable: false, emit_null: false)]
     getter enum_float : Float32? = nil
 
-    ENUM_VALIDATOR_FOR_ENUM_FLOAT = EnumValidator.new("enum_float", "Float32", ["1.1", "-1.2"])
+    ENUM_VALIDATOR_FOR_ENUM_FLOAT = OpenApi::EnumValidator.new("enum_float", "Float32", ["1.1", "-1.2"])
 
     @[JSON::Field(key: "enum_double", type: Float64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter enum_double : Float64? = nil
 
-    ENUM_VALIDATOR_FOR_ENUM_DOUBLE = EnumValidator.new("enum_double", "Float64", ["1.1", "-1.2"])
+    ENUM_VALIDATOR_FOR_ENUM_DOUBLE = OpenApi::EnumValidator.new("enum_double", "Float64", ["1.1", "-1.2"])
 
     @[JSON::Field(key: "outerEnum", type: PetStore::OuterEnum?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: outer_enum.nil? && !outer_enum_present?)]
     getter outer_enum : PetStore::OuterEnum? = nil
