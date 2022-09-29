@@ -27,12 +27,35 @@ describe PetStore::MapTest do
   end
 
   describe "test attribute 'map_of_enum_string'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # allowable_values = PetStore::MapTest::VALID_VALUES_FOR_MAP_OF_ENUM_STRING
-      # allowable_values.each do |value|
-      #   instance.map_of_enum_string = value.as(Hash(String, String))
-      # end
+    it "validates" do
+      instance = PetStore::MapTest.new
+      instance.valid?.should be_true
+      instance.list_invalid_properties.empty?.should be_true
+      invalid_hash = {"test" => "fail"}
+      invalid_instance = PetStore::MapTest.new(map_of_enum_string: invalid_hash)
+      invalid_instance.valid?.should be_false
+      invalid_instance.list_invalid_properties.empty?.should be_false
+      allowable_values = PetStore::MapTest::VALID_VALUES_FOR_MAP_OF_ENUM_STRING
+      allowable_values.each do |value|
+        instance.map_of_enum_string = {"test" => value}
+      end
+      expect_raises(ArgumentError, /must be one of/) do
+        instance.map_of_enum_string = invalid_hash
+      end
+    end
+
+    it "validates partial invalid values" do
+      instance = PetStore::MapTest.new
+      instance.valid?.should be_true
+      valid_hash = {"a" => PetStore::MapTest::VALID_VALUES_FOR_MAP_OF_ENUM_STRING.first}
+      invalid_hash = {"a" => "UPPER", "test" => "fail"}
+      instance.map_of_enum_string = valid_hash
+      expect_raises(ArgumentError, /must be one of/) do
+        instance.map_of_enum_string = invalid_hash
+      end
+      expect_raises(ArgumentError, /must be one of/) do
+        instance.map_of_enum_string = invalid_hash.merge(valid_hash)
+      end
     end
   end
 
