@@ -23,12 +23,12 @@ module PetStore
     @[JSON::Field(key: "just_symbol", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter just_symbol : String? = nil
 
-    ENUM_VALIDATOR_FOR_JUST_SYMBOL = OpenApi::EnumValidator.new("just_symbol", "String", [">=", "$"])
+    VALID_VALUES_FOR_JUST_SYMBOL = StaticArray[">=", "$"]
 
     @[JSON::Field(key: "array_enum", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter array_enum : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_ARRAY_ENUM = OpenApi::EnumValidator.new("array_enum", "Array(String)", ["fish", "crab"])
+    VALID_VALUES_FOR_ARRAY_ENUM = StaticArray["fish", "crab"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -45,18 +45,25 @@ module PetStore
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_JUST_SYMBOL.error_message) unless ENUM_VALIDATOR_FOR_JUST_SYMBOL.valid?(@just_symbol)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ARRAY_ENUM.error_message) unless ENUM_VALIDATOR_FOR_ARRAY_ENUM.all_valid?(@array_enum)
-
+      if _just_symbol = @just_symbol
+        invalid_properties.push(OpenApi::EnumValidator.error_message("just_symbol", VALID_VALUES_FOR_JUST_SYMBOL)) unless OpenApi::EnumValidator.valid?("just_symbol", _just_symbol, VALID_VALUES_FOR_JUST_SYMBOL)
+      end
+      if _array_enum = @array_enum
+        invalid_properties.push(OpenApi::EnumValidator.error_message("array_enum", VALID_VALUES_FOR_ARRAY_ENUM)) unless OpenApi::EnumValidator.valid?("array_enum", _array_enum, VALID_VALUES_FOR_ARRAY_ENUM)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_JUST_SYMBOL.valid?(@just_symbol)
-      return false unless ENUM_VALIDATOR_FOR_ARRAY_ENUM.all_valid?(@array_enum)
+      if _just_symbol = @just_symbol
+        return false unless OpenApi::EnumValidator.valid?("just_symbol", _just_symbol, VALID_VALUES_FOR_JUST_SYMBOL)
+      end
+
+      if _array_enum = @array_enum
+        return false unless OpenApi::EnumValidator.valid?("array_enum", _array_enum, VALID_VALUES_FOR_ARRAY_ENUM)
+      end
 
       true
     end
@@ -68,7 +75,7 @@ module PetStore
         return @just_symbol = nil
       end
       _just_symbol = just_symbol.not_nil!
-      ENUM_VALIDATOR_FOR_JUST_SYMBOL.valid!(_just_symbol)
+      OpenApi::EnumValidator.validate("just_symbol", _just_symbol, VALID_VALUES_FOR_JUST_SYMBOL)
       @just_symbol = _just_symbol
     end
 
@@ -79,7 +86,7 @@ module PetStore
         return @array_enum = nil
       end
       _array_enum = array_enum.not_nil!
-      ENUM_VALIDATOR_FOR_ARRAY_ENUM.all_valid!(_array_enum)
+      OpenApi::EnumValidator.validate("array_enum", _array_enum, VALID_VALUES_FOR_ARRAY_ENUM)
       @array_enum = _array_enum
     end
 

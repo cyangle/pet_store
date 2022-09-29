@@ -23,7 +23,7 @@ module PetStore
     @[JSON::Field(key: "enum_string_required", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter enum_string_required : String? = nil
 
-    ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED = OpenApi::EnumValidator.new("enum_string_required", "String", ["UPPER", "lower", ""])
+    VALID_VALUES_FOR_ENUM_STRING_REQUIRED = StaticArray["UPPER", "lower", ""]
 
     @[JSON::Field(key: "outerEnumRquired", type: PetStore::OuterEnumRquired?, default: nil, required: true, nullable: false, emit_null: false)]
     getter outer_enum_rquired : PetStore::OuterEnumRquired? = nil
@@ -36,27 +36,27 @@ module PetStore
     @[JSON::Field(key: "enum_string", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter enum_string : String? = nil
 
-    ENUM_VALIDATOR_FOR_ENUM_STRING = OpenApi::EnumValidator.new("enum_string", "String", ["UPPER", "lower", ""])
+    VALID_VALUES_FOR_ENUM_STRING = StaticArray["UPPER", "lower", ""]
 
     @[JSON::Field(key: "enum_int32", type: Int32?, default: nil, required: false, nullable: false, emit_null: false)]
     getter enum_int32 : Int32? = nil
 
-    ENUM_VALIDATOR_FOR_ENUM_INT32 = OpenApi::EnumValidator.new("enum_int32", "Int32", ["1", "-1"])
+    VALID_VALUES_FOR_ENUM_INT32 = StaticArray[Int32.new("1"), Int32.new("-1")]
 
     @[JSON::Field(key: "enum_int64", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter enum_int64 : Int64? = nil
 
-    ENUM_VALIDATOR_FOR_ENUM_INT64 = OpenApi::EnumValidator.new("enum_int64", "Int64", ["1", "-1"])
+    VALID_VALUES_FOR_ENUM_INT64 = StaticArray[Int64.new("1"), Int64.new("-1")]
 
     @[JSON::Field(key: "enum_float", type: Float32?, default: nil, required: false, nullable: false, emit_null: false)]
     getter enum_float : Float32? = nil
 
-    ENUM_VALIDATOR_FOR_ENUM_FLOAT = OpenApi::EnumValidator.new("enum_float", "Float32", ["1.1", "-1.2"])
+    VALID_VALUES_FOR_ENUM_FLOAT = StaticArray[Float32.new("1.1"), Float32.new("-1.2")]
 
     @[JSON::Field(key: "enum_double", type: Float64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter enum_double : Float64? = nil
 
-    ENUM_VALIDATOR_FOR_ENUM_DOUBLE = OpenApi::EnumValidator.new("enum_double", "Float64", ["1.1", "-1.2"])
+    VALID_VALUES_FOR_ENUM_DOUBLE = StaticArray[Float64.new("1.1"), Float64.new("-1.2")]
 
     @[JSON::Field(key: "outerEnum", type: PetStore::OuterEnum?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: outer_enum.nil? && !outer_enum_present?)]
     getter outer_enum : PetStore::OuterEnum? = nil
@@ -99,25 +99,36 @@ module PetStore
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.error_message) unless ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.valid?(@enum_string_required, false)
+      invalid_properties.push("\"enum_string_required\" is required and cannot be null") if @enum_string_required.nil?
+
+      if _enum_string_required = @enum_string_required
+        invalid_properties.push(OpenApi::EnumValidator.error_message("enum_string_required", VALID_VALUES_FOR_ENUM_STRING_REQUIRED)) unless OpenApi::EnumValidator.valid?("enum_string_required", _enum_string_required, VALID_VALUES_FOR_ENUM_STRING_REQUIRED)
+      end
       invalid_properties.push("\"outer_enum_rquired\" is required and cannot be null") if @outer_enum_rquired.nil?
+
       if _outer_enum_rquired = @outer_enum_rquired
         invalid_properties.push(_outer_enum_rquired.error_message) if !_outer_enum_rquired.valid?
       end
       invalid_properties.push("\"outer_enum_rquired_int64\" is required and cannot be null") if @outer_enum_rquired_int64.nil?
+
       if _outer_enum_rquired_int64 = @outer_enum_rquired_int64
         invalid_properties.push(_outer_enum_rquired_int64.error_message) if !_outer_enum_rquired_int64.valid?
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_STRING.error_message) unless ENUM_VALIDATOR_FOR_ENUM_STRING.valid?(@enum_string)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_INT32.error_message) unless ENUM_VALIDATOR_FOR_ENUM_INT32.valid?(@enum_int32)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_INT64.error_message) unless ENUM_VALIDATOR_FOR_ENUM_INT64.valid?(@enum_int64)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_FLOAT.error_message) unless ENUM_VALIDATOR_FOR_ENUM_FLOAT.valid?(@enum_float)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_DOUBLE.error_message) unless ENUM_VALIDATOR_FOR_ENUM_DOUBLE.valid?(@enum_double)
+      if _enum_string = @enum_string
+        invalid_properties.push(OpenApi::EnumValidator.error_message("enum_string", VALID_VALUES_FOR_ENUM_STRING)) unless OpenApi::EnumValidator.valid?("enum_string", _enum_string, VALID_VALUES_FOR_ENUM_STRING)
+      end
+      if _enum_int32 = @enum_int32
+        invalid_properties.push(OpenApi::EnumValidator.error_message("enum_int32", VALID_VALUES_FOR_ENUM_INT32)) unless OpenApi::EnumValidator.valid?("enum_int32", _enum_int32, VALID_VALUES_FOR_ENUM_INT32)
+      end
+      if _enum_int64 = @enum_int64
+        invalid_properties.push(OpenApi::EnumValidator.error_message("enum_int64", VALID_VALUES_FOR_ENUM_INT64)) unless OpenApi::EnumValidator.valid?("enum_int64", _enum_int64, VALID_VALUES_FOR_ENUM_INT64)
+      end
+      if _enum_float = @enum_float
+        invalid_properties.push(OpenApi::EnumValidator.error_message("enum_float", VALID_VALUES_FOR_ENUM_FLOAT)) unless OpenApi::EnumValidator.valid?("enum_float", _enum_float, VALID_VALUES_FOR_ENUM_FLOAT)
+      end
+      if _enum_double = @enum_double
+        invalid_properties.push(OpenApi::EnumValidator.error_message("enum_double", VALID_VALUES_FOR_ENUM_DOUBLE)) unless OpenApi::EnumValidator.valid?("enum_double", _enum_double, VALID_VALUES_FOR_ENUM_DOUBLE)
+      end
       if _outer_enum = @outer_enum
         invalid_properties.push(_outer_enum.error_message) if !_outer_enum.valid?
       end
@@ -130,36 +141,59 @@ module PetStore
       if _outer_enum_integer_default_value = @outer_enum_integer_default_value
         invalid_properties.push(_outer_enum_integer_default_value.error_message) if !_outer_enum_integer_default_value.valid?
       end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.valid?(@enum_string_required, false)
+      return false if @enum_string_required.nil?
+      if _enum_string_required = @enum_string_required
+        return false unless OpenApi::EnumValidator.valid?("enum_string_required", _enum_string_required, VALID_VALUES_FOR_ENUM_STRING_REQUIRED)
+      end
+
       return false if @outer_enum_rquired.nil?
       if _outer_enum_rquired = @outer_enum_rquired
         return false if !_outer_enum_rquired.valid?
       end
+
       return false if @outer_enum_rquired_int64.nil?
       if _outer_enum_rquired_int64 = @outer_enum_rquired_int64
         return false if !_outer_enum_rquired_int64.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_ENUM_STRING.valid?(@enum_string)
-      return false unless ENUM_VALIDATOR_FOR_ENUM_INT32.valid?(@enum_int32)
-      return false unless ENUM_VALIDATOR_FOR_ENUM_INT64.valid?(@enum_int64)
-      return false unless ENUM_VALIDATOR_FOR_ENUM_FLOAT.valid?(@enum_float)
-      return false unless ENUM_VALIDATOR_FOR_ENUM_DOUBLE.valid?(@enum_double)
+
+      if _enum_string = @enum_string
+        return false unless OpenApi::EnumValidator.valid?("enum_string", _enum_string, VALID_VALUES_FOR_ENUM_STRING)
+      end
+
+      if _enum_int32 = @enum_int32
+        return false unless OpenApi::EnumValidator.valid?("enum_int32", _enum_int32, VALID_VALUES_FOR_ENUM_INT32)
+      end
+
+      if _enum_int64 = @enum_int64
+        return false unless OpenApi::EnumValidator.valid?("enum_int64", _enum_int64, VALID_VALUES_FOR_ENUM_INT64)
+      end
+
+      if _enum_float = @enum_float
+        return false unless OpenApi::EnumValidator.valid?("enum_float", _enum_float, VALID_VALUES_FOR_ENUM_FLOAT)
+      end
+
+      if _enum_double = @enum_double
+        return false unless OpenApi::EnumValidator.valid?("enum_double", _enum_double, VALID_VALUES_FOR_ENUM_DOUBLE)
+      end
+
       if _outer_enum = @outer_enum
         return false if !_outer_enum.valid?
       end
+
       if _outer_enum_integer = @outer_enum_integer
         return false if !_outer_enum_integer.valid?
       end
+
       if _outer_enum_default_value = @outer_enum_default_value
         return false if !_outer_enum_default_value.valid?
       end
+
       if _outer_enum_integer_default_value = @outer_enum_integer_default_value
         return false if !_outer_enum_integer_default_value.valid?
       end
@@ -174,7 +208,7 @@ module PetStore
         raise ArgumentError.new("\"enum_string_required\" is required and cannot be null")
       end
       _enum_string_required = enum_string_required.not_nil!
-      ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.valid!(_enum_string_required)
+      OpenApi::EnumValidator.validate("enum_string_required", _enum_string_required, VALID_VALUES_FOR_ENUM_STRING_REQUIRED)
       @enum_string_required = _enum_string_required
     end
 
@@ -185,7 +219,7 @@ module PetStore
         raise ArgumentError.new("\"outer_enum_rquired\" is required and cannot be null")
       end
       _outer_enum_rquired = outer_enum_rquired.not_nil!
-      _outer_enum_rquired.valid!
+      _outer_enum_rquired.validate
       @outer_enum_rquired = _outer_enum_rquired
     end
 
@@ -196,7 +230,7 @@ module PetStore
         raise ArgumentError.new("\"outer_enum_rquired_int64\" is required and cannot be null")
       end
       _outer_enum_rquired_int64 = outer_enum_rquired_int64.not_nil!
-      _outer_enum_rquired_int64.valid!
+      _outer_enum_rquired_int64.validate
       @outer_enum_rquired_int64 = _outer_enum_rquired_int64
     end
 
@@ -207,7 +241,7 @@ module PetStore
         return @enum_string = nil
       end
       _enum_string = enum_string.not_nil!
-      ENUM_VALIDATOR_FOR_ENUM_STRING.valid!(_enum_string)
+      OpenApi::EnumValidator.validate("enum_string", _enum_string, VALID_VALUES_FOR_ENUM_STRING)
       @enum_string = _enum_string
     end
 
@@ -218,7 +252,7 @@ module PetStore
         return @enum_int32 = nil
       end
       _enum_int32 = enum_int32.not_nil!
-      ENUM_VALIDATOR_FOR_ENUM_INT32.valid!(_enum_int32)
+      OpenApi::EnumValidator.validate("enum_int32", _enum_int32, VALID_VALUES_FOR_ENUM_INT32)
       @enum_int32 = _enum_int32
     end
 
@@ -229,7 +263,7 @@ module PetStore
         return @enum_int64 = nil
       end
       _enum_int64 = enum_int64.not_nil!
-      ENUM_VALIDATOR_FOR_ENUM_INT64.valid!(_enum_int64)
+      OpenApi::EnumValidator.validate("enum_int64", _enum_int64, VALID_VALUES_FOR_ENUM_INT64)
       @enum_int64 = _enum_int64
     end
 
@@ -240,7 +274,7 @@ module PetStore
         return @enum_float = nil
       end
       _enum_float = enum_float.not_nil!
-      ENUM_VALIDATOR_FOR_ENUM_FLOAT.valid!(_enum_float)
+      OpenApi::EnumValidator.validate("enum_float", _enum_float, VALID_VALUES_FOR_ENUM_FLOAT)
       @enum_float = _enum_float
     end
 
@@ -251,7 +285,7 @@ module PetStore
         return @enum_double = nil
       end
       _enum_double = enum_double.not_nil!
-      ENUM_VALIDATOR_FOR_ENUM_DOUBLE.valid!(_enum_double)
+      OpenApi::EnumValidator.validate("enum_double", _enum_double, VALID_VALUES_FOR_ENUM_DOUBLE)
       @enum_double = _enum_double
     end
 
@@ -262,7 +296,7 @@ module PetStore
         return @outer_enum = nil
       end
       _outer_enum = outer_enum.not_nil!
-      _outer_enum.valid!
+      _outer_enum.validate
       @outer_enum = _outer_enum
     end
 
@@ -273,7 +307,7 @@ module PetStore
         return @outer_enum_integer = nil
       end
       _outer_enum_integer = outer_enum_integer.not_nil!
-      _outer_enum_integer.valid!
+      _outer_enum_integer.validate
       @outer_enum_integer = _outer_enum_integer
     end
 
@@ -284,7 +318,7 @@ module PetStore
         return @outer_enum_default_value = nil
       end
       _outer_enum_default_value = outer_enum_default_value.not_nil!
-      _outer_enum_default_value.valid!
+      _outer_enum_default_value.validate
       @outer_enum_default_value = _outer_enum_default_value
     end
 
@@ -295,7 +329,7 @@ module PetStore
         return @outer_enum_integer_default_value = nil
       end
       _outer_enum_integer_default_value = outer_enum_integer_default_value.not_nil!
-      _outer_enum_integer_default_value.valid!
+      _outer_enum_integer_default_value.validate
       @outer_enum_integer_default_value = _outer_enum_integer_default_value
     end
 

@@ -47,8 +47,8 @@ describe PetStore::Order do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = PetStore::Order::ENUM_VALIDATOR_FOR_STATUS
-      # validator.allowable_values.each do |value|
+      # allowable_values = PetStore::Order::VALID_VALUES_FOR_STATUS
+      # allowable_values.each do |value|
       #   instance.status = value.as(String)
       # end
     end

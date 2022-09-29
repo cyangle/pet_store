@@ -41,7 +41,7 @@ module PetStore
     @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["available", "pending", "sold"])
+    VALID_VALUES_FOR_STATUS = StaticArray["available", "pending", "sold"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -62,6 +62,7 @@ module PetStore
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
 
       invalid_properties.push("\"photo_urls\" is required and cannot be null") if @photo_urls.nil?
@@ -72,9 +73,9 @@ module PetStore
       if _tags = @tags
         invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "tags", array: _tags)) if _tags.is_a?(Array)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
-
+      if _status = @status
+        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?("status", _status, VALID_VALUES_FOR_STATUS)
+      end
       invalid_properties
     end
 
@@ -88,10 +89,14 @@ module PetStore
       if _category = @category
         return false if _category.is_a?(OpenApi::Validatable) && !_category.valid?
       end
+
       if _tags = @tags
         return false if _tags.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _tags)
       end
-      return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
+
+      if _status = @status
+        return false unless OpenApi::EnumValidator.valid?("status", _status, VALID_VALUES_FOR_STATUS)
+      end
 
       true
     end
@@ -155,7 +160,7 @@ module PetStore
         return @status = nil
       end
       _status = status.not_nil!
-      ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
+      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
       @status = _status
     end
 

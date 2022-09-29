@@ -53,9 +53,18 @@ describe PetStore::EnumTest do
     it "should work" do
       json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress"})
       instance = PetStore::EnumTest.from_json(json)
-      validator = PetStore::EnumTest::ENUM_VALIDATOR_FOR_ENUM_STRING
-      validator.allowable_values.each do |value|
+      allowable_values = PetStore::EnumTest::VALID_VALUES_FOR_ENUM_STRING
+      allowable_values.each do |value|
         instance.enum_string = value.as(String)
+      end
+    end
+
+    it "returns false if the value in not valid" do
+      json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress"})
+      instance = PetStore::EnumTest.from_json(json)
+      instance.valid?.should be_true
+      expect_raises(ArgumentError, /must be one of/) do
+        instance.enum_string = "fail"
       end
     end
 
@@ -74,8 +83,8 @@ describe PetStore::EnumTest do
     it "should work" do
       json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress"})
       instance = PetStore::EnumTest.from_json(json)
-      validator = PetStore::EnumTest::ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED
-      validator.allowable_values.each do |value|
+      allowable_values = PetStore::EnumTest::VALID_VALUES_FOR_ENUM_STRING_REQUIRED
+      allowable_values.each do |value|
         instance.enum_string_required = value.as(String)
       end
     end
@@ -85,8 +94,8 @@ describe PetStore::EnumTest do
     it "should work" do
       json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress"})
       instance = PetStore::EnumTest.from_json(json)
-      validator = PetStore::EnumTest::ENUM_VALIDATOR_FOR_ENUM_INT32
-      validator.allowable_values.each do |value|
+      allowable_values = PetStore::EnumTest::VALID_VALUES_FOR_ENUM_INT32
+      allowable_values.each do |value|
         instance.enum_int32 = value.as(Int32)
       end
     end
@@ -106,9 +115,18 @@ describe PetStore::EnumTest do
     it "should work" do
       json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress"})
       instance = PetStore::EnumTest.from_json(json)
-      validator = PetStore::EnumTest::ENUM_VALIDATOR_FOR_ENUM_INT64
-      validator.allowable_values.each do |value|
+      allowable_values = PetStore::EnumTest::VALID_VALUES_FOR_ENUM_INT64
+      allowable_values.each do |value|
         instance.enum_int64 = value.as(Int64)
+      end
+    end
+
+    it "returns false if the value in not valid" do
+      json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress"})
+      instance = PetStore::EnumTest.from_json(json)
+      instance.valid?.should be_true
+      expect_raises(ArgumentError, /must be one of/) do
+        instance.enum_int64 = 0_i64
       end
     end
 
@@ -127,8 +145,8 @@ describe PetStore::EnumTest do
     it "should work" do
       json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress"})
       instance = PetStore::EnumTest.from_json(json)
-      validator = PetStore::EnumTest::ENUM_VALIDATOR_FOR_ENUM_FLOAT
-      validator.allowable_values.each do |value|
+      allowable_values = PetStore::EnumTest::VALID_VALUES_FOR_ENUM_FLOAT
+      allowable_values.each do |value|
         instance.enum_float = value.as(Float32)
       end
     end
@@ -148,8 +166,8 @@ describe PetStore::EnumTest do
     it "should work" do
       json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress"})
       instance = PetStore::EnumTest.from_json(json)
-      validator = PetStore::EnumTest::ENUM_VALIDATOR_FOR_ENUM_DOUBLE
-      validator.allowable_values.each do |value|
+      allowable_values = PetStore::EnumTest::VALID_VALUES_FOR_ENUM_DOUBLE
+      allowable_values.each do |value|
         instance.enum_double = value.as(Float64)
       end
     end
@@ -185,7 +203,7 @@ describe PetStore::EnumTest do
     end
 
     context "sets outer_enum to valid values" do
-      PetStore::OuterEnum::ENUM_VALIDATOR.allowable_values.each do |value|
+      PetStore::OuterEnum::VALID_VALUES.each do |value|
         it "sets the value to #{value}" do
           json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress"})
           instance = PetStore::EnumTest.from_json(json)

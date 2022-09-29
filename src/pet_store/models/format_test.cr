@@ -103,7 +103,9 @@ module PetStore
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"number\" is required and cannot be null") if @number.nil?
+
       if _number = @number
         if max_number_error = OpenApi::PrimitiveValidator.max_number_error("number", _number, 543.2)
           invalid_properties.push(max_number_error)
@@ -118,6 +120,7 @@ module PetStore
       invalid_properties.push("\"date\" is required and cannot be null") if @date.nil?
 
       invalid_properties.push("\"password\" is required and cannot be null") if @password.nil?
+
       if _password = @password
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("password", _password.to_s.size, 64)
           invalid_properties.push(max_length_error)
@@ -180,7 +183,6 @@ module PetStore
           invalid_properties.push(pattern_error)
         end
       end
-
       invalid_properties
     end
 
@@ -192,6 +194,7 @@ module PetStore
         return false if _number > 543.2
         return false if _number < 32.1
       end
+
       return false if @byte.nil?
 
       return false if @date.nil?
@@ -201,10 +204,12 @@ module PetStore
         return false if _password.to_s.size > 64
         return false if _password.to_s.size < 10
       end
+
       if _integer = @integer
         return false if _integer > 100
         return false if _integer < 10
       end
+
       if _int32 = @int32
         return false if _int32 > 200
         return false if _int32 < 20
@@ -214,10 +219,12 @@ module PetStore
         return false if _float > 987.6
         return false if _float < 54.3
       end
+
       if _double = @double
         return false if _double > 123.4
         return false if _double < 67.8
       end
+
       if _string = @string
         return false if _string !~ PATTERN_FOR_STRING
       end
@@ -225,6 +232,7 @@ module PetStore
       if _pattern_with_digits = @pattern_with_digits
         return false if _pattern_with_digits !~ PATTERN_FOR_PATTERN_WITH_DIGITS
       end
+
       if _pattern_with_digits_and_delimiter = @pattern_with_digits_and_delimiter
         return false if _pattern_with_digits_and_delimiter !~ PATTERN_FOR_PATTERN_WITH_DIGITS_AND_DELIMITER
       end

@@ -25,7 +25,7 @@ describe PetStore::OuterEnum do
       end
 
       context "with valid values" do
-        PetStore::OuterEnum::ENUM_VALIDATOR.allowable_values.each do |value|
+        PetStore::OuterEnum::VALID_VALUES.each do |value|
           it "creats an instance with value #{value}" do
             instance = PetStore::OuterEnum.new(value.as(String))
             (instance).should be_a(PetStore::OuterEnum)
@@ -46,7 +46,7 @@ describe PetStore::OuterEnum do
       end
 
       context "with valid values" do
-        PetStore::OuterEnum::ENUM_VALIDATOR.allowable_values.each do |value|
+        PetStore::OuterEnum::VALID_VALUES.each do |value|
           it "creats an instance with value #{value}" do
             instance = PetStore::OuterEnum.new!(value.as(String))
             (instance).should be_a(PetStore::OuterEnum)

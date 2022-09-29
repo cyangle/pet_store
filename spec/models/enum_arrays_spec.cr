@@ -23,8 +23,8 @@ describe PetStore::EnumArrays do
   describe "test attribute 'just_symbol'" do
     it "should work" do
       instance = PetStore::EnumArrays.new
-      validator = PetStore::EnumArrays::ENUM_VALIDATOR_FOR_JUST_SYMBOL
-      validator.allowable_values.each do |value|
+      allowable_values = PetStore::EnumArrays::VALID_VALUES_FOR_JUST_SYMBOL
+      allowable_values.each do |value|
         instance.just_symbol = value.as(String)
       end
     end
@@ -60,8 +60,8 @@ describe PetStore::EnumArrays do
   describe "test attribute 'array_enum'" do
     it "should work" do
       instance = PetStore::EnumArrays.new
-      validator = PetStore::EnumArrays::ENUM_VALIDATOR_FOR_ARRAY_ENUM
-      validator.allowable_values.each do |value|
+      allowable_values = PetStore::EnumArrays::VALID_VALUES_FOR_ARRAY_ENUM
+      allowable_values.each do |value|
         instance.array_enum = [value.as(String)]
       end
     end

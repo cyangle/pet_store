@@ -48,7 +48,6 @@ module PetStore
       if _map = @map
         invalid_properties.concat(OpenApi::HashValidator.list_invalid_properties_for(key: "map", hash: _map)) if _map.is_a?(Hash)
       end
-
       invalid_properties
     end
 

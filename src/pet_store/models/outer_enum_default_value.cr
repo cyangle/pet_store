@@ -13,14 +13,16 @@ require "log"
 
 module PetStore
   class OuterEnumDefaultValue
+    include OpenApi::Validatable
     include OpenApi::Json
 
     property data : String
 
-    ENUM_VALIDATOR = OpenApi::EnumValidator.new("OuterEnumDefaultValue", "String", ["placed", "approved", "delivered"])
+    ERROR_MESSAGE = %{invalid value for "OuterEnumDefaultValue", must be one of ["placed", "approved", "delivered"].}
+
+    VALID_VALUES = StaticArray["placed", "approved", "delivered"]
 
     delegate to_json_object_key, to: @data
-    delegate error_message, to: ENUM_VALIDATOR
 
     def self.from_json(value : JSON::PullParser) : OuterEnumDefaultValue
       new(value)
@@ -39,18 +41,28 @@ module PetStore
     end
 
     def self.new!(data : String)
-      new(data).tap(&.valid!)
+      new(data).tap(&.validate)
     end
 
     def initialize(@data : String)
     end
 
-    def valid?
-      ENUM_VALIDATOR.valid?(@data, false)
+    def error_message : String
+      ERROR_MESSAGE
     end
 
-    def valid!
-      ENUM_VALIDATOR.valid!(@data, false)
+    def list_invalid_properties : Array(String)
+      errors = Array(String).new
+      errors.push(error_message) unless valid?
+      errors
+    end
+
+    def valid? : Bool
+      OpenApi::EnumValidator.valid?("OuterEnumDefaultValue", data, VALID_VALUES, false)
+    end
+
+    def validate : Nil
+      OpenApi::EnumValidator.validate("OuterEnumDefaultValue", data, VALID_VALUES, false)
     end
 
     def to_json(json : JSON::Builder) : Nil

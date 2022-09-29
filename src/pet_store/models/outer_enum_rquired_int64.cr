@@ -13,14 +13,16 @@ require "log"
 
 module PetStore
   class OuterEnumRquiredInt64
+    include OpenApi::Validatable
     include OpenApi::Json
 
     property data : Int64
 
-    ENUM_VALIDATOR = OpenApi::EnumValidator.new("outerEnumRquiredInt64", "Int64", ["1", "2", "3"])
+    ERROR_MESSAGE = %{invalid value for "outerEnumRquiredInt64", must be one of ["1", "2", "3"].}
+
+    VALID_VALUES = StaticArray[Int64.new("1"), Int64.new("2"), Int64.new("3")]
 
     delegate to_json_object_key, to: @data
-    delegate error_message, to: ENUM_VALIDATOR
 
     def self.from_json(value : JSON::PullParser) : OuterEnumRquiredInt64
       new(value)
@@ -39,18 +41,28 @@ module PetStore
     end
 
     def self.new!(data : Int64)
-      new(data).tap(&.valid!)
+      new(data).tap(&.validate)
     end
 
     def initialize(@data : Int64)
     end
 
-    def valid?
-      ENUM_VALIDATOR.valid?(@data, false)
+    def error_message : String
+      ERROR_MESSAGE
     end
 
-    def valid!
-      ENUM_VALIDATOR.valid!(@data, false)
+    def list_invalid_properties : Array(String)
+      errors = Array(String).new
+      errors.push(error_message) unless valid?
+      errors
+    end
+
+    def valid? : Bool
+      OpenApi::EnumValidator.valid?("outerEnumRquiredInt64", data, VALID_VALUES, false)
+    end
+
+    def validate : Nil
+      OpenApi::EnumValidator.validate("outerEnumRquiredInt64", data, VALID_VALUES, false)
     end
 
     def to_json(json : JSON::Builder) : Nil

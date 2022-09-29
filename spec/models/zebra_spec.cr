@@ -23,8 +23,8 @@ describe PetStore::Zebra do
   describe "test attribute '_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = PetStore::Zebra::ENUM_VALIDATOR_FOR__TYPE
-      # validator.allowable_values.each do |value|
+      # allowable_values = PetStore::Zebra::VALID_VALUES_FOR__TYPE
+      # allowable_values.each do |value|
       #   instance._type = value.as(String)
       # end
     end

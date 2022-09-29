@@ -50,7 +50,9 @@ module PetStore
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"class_name\" is required and cannot be null") if @class_name.nil?
+
       if _class_name = @class_name
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("class_name", _class_name.to_s.size, 64)
           invalid_properties.push(max_length_error)

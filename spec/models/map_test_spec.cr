@@ -29,8 +29,8 @@ describe PetStore::MapTest do
   describe "test attribute 'map_of_enum_string'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = PetStore::MapTest::ENUM_VALIDATOR_FOR_MAP_OF_ENUM_STRING
-      # validator.allowable_values.each do |value|
+      # allowable_values = PetStore::MapTest::VALID_VALUES_FOR_MAP_OF_ENUM_STRING
+      # allowable_values.each do |value|
       #   instance.map_of_enum_string = value.as(Hash(String, String))
       # end
     end

@@ -36,7 +36,7 @@ module PetStore
     @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["placed", "approved", "delivered"])
+    VALID_VALUES_FOR_STATUS = StaticArray["placed", "approved", "delivered"]
 
     @[JSON::Field(key: "complete", type: Bool?, default: false, required: false, nullable: false, emit_null: false)]
     getter complete : Bool? = false
@@ -60,7 +60,9 @@ module PetStore
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
+      if _status = @status
+        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?("status", _status, VALID_VALUES_FOR_STATUS)
+      end
 
       invalid_properties
     end
@@ -68,7 +70,9 @@ module PetStore
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
+      if _status = @status
+        return false unless OpenApi::EnumValidator.valid?("status", _status, VALID_VALUES_FOR_STATUS)
+      end
 
       true
     end
@@ -120,7 +124,7 @@ module PetStore
         return @status = nil
       end
       _status = status.not_nil!
-      ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
+      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
       @status = _status
     end
 

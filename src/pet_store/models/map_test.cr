@@ -26,7 +26,7 @@ module PetStore
     @[JSON::Field(key: "map_of_enum_string", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter map_of_enum_string : Hash(String, String)? = nil
 
-    ENUM_VALIDATOR_FOR_MAP_OF_ENUM_STRING = OpenApi::EnumValidator.new("map_of_enum_string", "Hash(String, String)", ["UPPER", "lower"])
+    VALID_VALUES_FOR_MAP_OF_ENUM_STRING = StaticArray["UPPER", "lower"]
 
     @[JSON::Field(key: "direct_map", type: Hash(String, Bool)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter direct_map : Hash(String, Bool)? = nil
@@ -51,7 +51,9 @@ module PetStore
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_MAP_OF_ENUM_STRING.error_message) unless ENUM_VALIDATOR_FOR_MAP_OF_ENUM_STRING.all_valid?(@map_of_enum_string.try(&.values))
+      if _map_of_enum_string = @map_of_enum_string
+        invalid_properties.push(OpenApi::EnumValidator.error_message("map_of_enum_string", VALID_VALUES_FOR_MAP_OF_ENUM_STRING)) unless OpenApi::EnumValidator.valid?("map_of_enum_string", _map_of_enum_string.values, VALID_VALUES_FOR_MAP_OF_ENUM_STRING)
+      end
 
       invalid_properties
     end
@@ -59,7 +61,9 @@ module PetStore
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_MAP_OF_ENUM_STRING.all_valid?(@map_of_enum_string.try(&.values))
+      if _map_of_enum_string = @map_of_enum_string
+        return false unless OpenApi::EnumValidator.valid?("map_of_enum_string", _map_of_enum_string.values, VALID_VALUES_FOR_MAP_OF_ENUM_STRING)
+      end
 
       true
     end
@@ -81,7 +85,7 @@ module PetStore
         return @map_of_enum_string = nil
       end
       _map_of_enum_string = map_of_enum_string.not_nil!
-      ENUM_VALIDATOR_FOR_MAP_OF_ENUM_STRING.all_valid!(_map_of_enum_string.values)
+      OpenApi::EnumValidator.validate("map_of_enum_string", _map_of_enum_string.values, VALID_VALUES_FOR_MAP_OF_ENUM_STRING)
       @map_of_enum_string = _map_of_enum_string
     end
 

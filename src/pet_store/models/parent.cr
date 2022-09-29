@@ -36,10 +36,10 @@ module PetStore
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _kids = @kids
         invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "kids", array: _kids)) if _kids.is_a?(Array)
       end
-
       invalid_properties
     end
 

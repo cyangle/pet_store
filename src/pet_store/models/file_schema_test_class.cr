@@ -40,13 +40,13 @@ module PetStore
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _file = @file
         invalid_properties.concat(_file.list_invalid_properties_for("file")) if _file.is_a?(OpenApi::Validatable)
       end
       if _files = @files
         invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "files", array: _files)) if _files.is_a?(Array)
       end
-
       invalid_properties
     end
 
@@ -56,6 +56,7 @@ module PetStore
       if _file = @file
         return false if _file.is_a?(OpenApi::Validatable) && !_file.valid?
       end
+
       if _files = @files
         return false if _files.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _files)
       end

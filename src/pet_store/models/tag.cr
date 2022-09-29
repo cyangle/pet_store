@@ -40,6 +40,7 @@ module PetStore
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _id = @id
         if min_number_error = OpenApi::PrimitiveValidator.min_number_error("id", _id, 0)
           invalid_properties.push(min_number_error)
@@ -50,7 +51,6 @@ module PetStore
           invalid_properties.push(min_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -60,6 +60,7 @@ module PetStore
       if _id = @id
         return false if _id < 0
       end
+
       if _name = @name
         return false if _name.to_s.size < 5
       end
