@@ -41,13 +41,13 @@ module PetStore
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _id = @id
-        if _id < 0
-          invalid_properties.push("invalid value for \"id\", must be greater than or equal to 0.")
+        if min_number_error = OpenApi::PrimitiveValidator.min_number_error("id", _id, 0)
+          invalid_properties.push(min_number_error)
         end
       end
       if _name = @name
-        if _name.to_s.size < 5
-          invalid_properties.push("invalid value for \"name\", the character length must be great than or equal to 5.")
+        if min_length_error = OpenApi::PrimitiveValidator.min_length_error("name", _name.to_s.size, 5)
+          invalid_properties.push(min_length_error)
         end
       end
 
@@ -74,8 +74,8 @@ module PetStore
         return @id = nil
       end
       _id = id.not_nil!
-      if _id < 0
-        raise ArgumentError.new("invalid value for \"id\", must be greater than or equal to 0.")
+      if min_number_error = OpenApi::PrimitiveValidator.min_number_error("id", _id, 0)
+        raise ArgumentError.new(min_number_error)
       end
 
       @id = _id
@@ -88,8 +88,8 @@ module PetStore
         return @name = nil
       end
       _name = name.not_nil!
-      if _name.to_s.size < 5
-        raise ArgumentError.new("invalid value for \"name\", the character length must be great than or equal to 5.")
+      if min_length_error = OpenApi::PrimitiveValidator.min_length_error("name", _name.to_s.size, 5)
+        raise ArgumentError.new(min_length_error)
       end
 
       @name = _name

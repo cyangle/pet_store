@@ -52,6 +52,8 @@ module PetStore
     @[JSON::Field(key: "string", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter string : String? = nil
 
+    PATTERN_FOR_STRING = /[a-z]/i
+
     @[JSON::Field(key: "binary", type: ::File?, default: nil, required: false, nullable: false, emit_null: false)]
     getter binary : ::File? = nil
 
@@ -65,9 +67,13 @@ module PetStore
     @[JSON::Field(key: "pattern_with_digits", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter pattern_with_digits : String? = nil
 
+    PATTERN_FOR_PATTERN_WITH_DIGITS = /^\d{10}$/
+
     # A string starting with 'image_' (case insensitive) and one to three digits following i.e. Image_01.
     @[JSON::Field(key: "pattern_with_digits_and_delimiter", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter pattern_with_digits_and_delimiter : String? = nil
+
+    PATTERN_FOR_PATTERN_WITH_DIGITS_AND_DELIMITER = /^image_\d{1,3}$/i
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -99,12 +105,12 @@ module PetStore
       invalid_properties = Array(String).new
       invalid_properties.push("\"number\" is required and cannot be null") if @number.nil?
       if _number = @number
-        if _number > 543.2
-          invalid_properties.push("invalid value for \"number\", must be smaller than or equal to 543.2.")
+        if max_number_error = OpenApi::PrimitiveValidator.max_number_error("number", _number, 543.2)
+          invalid_properties.push(max_number_error)
         end
 
-        if _number < 32.1
-          invalid_properties.push("invalid value for \"number\", must be greater than or equal to 32.1.")
+        if min_number_error = OpenApi::PrimitiveValidator.min_number_error("number", _number, 32.1)
+          invalid_properties.push(min_number_error)
         end
       end
       invalid_properties.push("\"byte\" is required and cannot be null") if @byte.nil?
@@ -113,68 +119,65 @@ module PetStore
 
       invalid_properties.push("\"password\" is required and cannot be null") if @password.nil?
       if _password = @password
-        if _password.to_s.size > 64
-          invalid_properties.push("invalid value for \"password\", the character length must be smaller than or equal to 64.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("password", _password.to_s.size, 64)
+          invalid_properties.push(max_length_error)
         end
 
-        if _password.to_s.size < 10
-          invalid_properties.push("invalid value for \"password\", the character length must be great than or equal to 10.")
+        if min_length_error = OpenApi::PrimitiveValidator.min_length_error("password", _password.to_s.size, 10)
+          invalid_properties.push(min_length_error)
         end
       end
       if _integer = @integer
-        if _integer > 100
-          invalid_properties.push("invalid value for \"integer\", must be smaller than or equal to 100.")
+        if max_number_error = OpenApi::PrimitiveValidator.max_number_error("integer", _integer, 100)
+          invalid_properties.push(max_number_error)
         end
 
-        if _integer < 10
-          invalid_properties.push("invalid value for \"integer\", must be greater than or equal to 10.")
+        if min_number_error = OpenApi::PrimitiveValidator.min_number_error("integer", _integer, 10)
+          invalid_properties.push(min_number_error)
         end
       end
       if _int32 = @int32
-        if _int32 > 200
-          invalid_properties.push("invalid value for \"int32\", must be smaller than or equal to 200.")
+        if max_number_error = OpenApi::PrimitiveValidator.max_number_error("int32", _int32, 200)
+          invalid_properties.push(max_number_error)
         end
 
-        if _int32 < 20
-          invalid_properties.push("invalid value for \"int32\", must be greater than or equal to 20.")
+        if min_number_error = OpenApi::PrimitiveValidator.min_number_error("int32", _int32, 20)
+          invalid_properties.push(min_number_error)
         end
       end
 
       if _float = @float
-        if _float > 987.6
-          invalid_properties.push("invalid value for \"float\", must be smaller than or equal to 987.6.")
+        if max_number_error = OpenApi::PrimitiveValidator.max_number_error("float", _float, 987.6)
+          invalid_properties.push(max_number_error)
         end
 
-        if _float < 54.3
-          invalid_properties.push("invalid value for \"float\", must be greater than or equal to 54.3.")
+        if min_number_error = OpenApi::PrimitiveValidator.min_number_error("float", _float, 54.3)
+          invalid_properties.push(min_number_error)
         end
       end
       if _double = @double
-        if _double > 123.4
-          invalid_properties.push("invalid value for \"double\", must be smaller than or equal to 123.4.")
+        if max_number_error = OpenApi::PrimitiveValidator.max_number_error("double", _double, 123.4)
+          invalid_properties.push(max_number_error)
         end
 
-        if _double < 67.8
-          invalid_properties.push("invalid value for \"double\", must be greater than or equal to 67.8.")
+        if min_number_error = OpenApi::PrimitiveValidator.min_number_error("double", _double, 67.8)
+          invalid_properties.push(min_number_error)
         end
       end
       if _string = @string
-        pattern = /[a-z]/i
-        if _string !~ pattern
-          invalid_properties.push("invalid value for \"string\", must conform to the pattern #{pattern}.")
+        if pattern_error = OpenApi::PrimitiveValidator.pattern_error("string", _string, PATTERN_FOR_STRING)
+          invalid_properties.push(pattern_error)
         end
       end
 
       if _pattern_with_digits = @pattern_with_digits
-        pattern = /^\d{10}$/
-        if _pattern_with_digits !~ pattern
-          invalid_properties.push("invalid value for \"pattern_with_digits\", must conform to the pattern #{pattern}.")
+        if pattern_error = OpenApi::PrimitiveValidator.pattern_error("pattern_with_digits", _pattern_with_digits, PATTERN_FOR_PATTERN_WITH_DIGITS)
+          invalid_properties.push(pattern_error)
         end
       end
       if _pattern_with_digits_and_delimiter = @pattern_with_digits_and_delimiter
-        pattern = /^image_\d{1,3}$/i
-        if _pattern_with_digits_and_delimiter !~ pattern
-          invalid_properties.push("invalid value for \"pattern_with_digits_and_delimiter\", must conform to the pattern #{pattern}.")
+        if pattern_error = OpenApi::PrimitiveValidator.pattern_error("pattern_with_digits_and_delimiter", _pattern_with_digits_and_delimiter, PATTERN_FOR_PATTERN_WITH_DIGITS_AND_DELIMITER)
+          invalid_properties.push(pattern_error)
         end
       end
 
@@ -216,14 +219,14 @@ module PetStore
         return false if _double < 67.8
       end
       if _string = @string
-        return false if _string !~ /[a-z]/i
+        return false if _string !~ PATTERN_FOR_STRING
       end
 
       if _pattern_with_digits = @pattern_with_digits
-        return false if _pattern_with_digits !~ /^\d{10}$/
+        return false if _pattern_with_digits !~ PATTERN_FOR_PATTERN_WITH_DIGITS
       end
       if _pattern_with_digits_and_delimiter = @pattern_with_digits_and_delimiter
-        return false if _pattern_with_digits_and_delimiter !~ /^image_\d{1,3}$/i
+        return false if _pattern_with_digits_and_delimiter !~ PATTERN_FOR_PATTERN_WITH_DIGITS_AND_DELIMITER
       end
 
       true
@@ -236,12 +239,12 @@ module PetStore
         raise ArgumentError.new("\"number\" is required and cannot be null")
       end
       _number = number.not_nil!
-      if _number > 543.2
-        raise ArgumentError.new("invalid value for \"number\", must be smaller than or equal to 543.2.")
+      if max_number_error = OpenApi::PrimitiveValidator.max_number_error("number", _number, 543.2)
+        raise ArgumentError.new(max_number_error)
       end
 
-      if _number < 32.1
-        raise ArgumentError.new("invalid value for \"number\", must be greater than or equal to 32.1.")
+      if min_number_error = OpenApi::PrimitiveValidator.min_number_error("number", _number, 32.1)
+        raise ArgumentError.new(min_number_error)
       end
 
       @number = _number
@@ -274,12 +277,12 @@ module PetStore
         raise ArgumentError.new("\"password\" is required and cannot be null")
       end
       _password = password.not_nil!
-      if _password.to_s.size > 64
-        raise ArgumentError.new("invalid value for \"password\", the character length must be smaller than or equal to 64.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("password", _password.to_s.size, 64)
+        raise ArgumentError.new(max_length_error)
       end
 
-      if _password.to_s.size < 10
-        raise ArgumentError.new("invalid value for \"password\", the character length must be great than or equal to 10.")
+      if min_length_error = OpenApi::PrimitiveValidator.min_length_error("password", _password.to_s.size, 10)
+        raise ArgumentError.new(min_length_error)
       end
 
       @password = _password
@@ -292,12 +295,12 @@ module PetStore
         return @integer = nil
       end
       _integer = integer.not_nil!
-      if _integer > 100
-        raise ArgumentError.new("invalid value for \"integer\", must be smaller than or equal to 100.")
+      if max_number_error = OpenApi::PrimitiveValidator.max_number_error("integer", _integer, 100)
+        raise ArgumentError.new(max_number_error)
       end
 
-      if _integer < 10
-        raise ArgumentError.new("invalid value for \"integer\", must be greater than or equal to 10.")
+      if min_number_error = OpenApi::PrimitiveValidator.min_number_error("integer", _integer, 10)
+        raise ArgumentError.new(min_number_error)
       end
 
       @integer = _integer
@@ -310,12 +313,12 @@ module PetStore
         return @int32 = nil
       end
       _int32 = int32.not_nil!
-      if _int32 > 200
-        raise ArgumentError.new("invalid value for \"int32\", must be smaller than or equal to 200.")
+      if max_number_error = OpenApi::PrimitiveValidator.max_number_error("int32", _int32, 200)
+        raise ArgumentError.new(max_number_error)
       end
 
-      if _int32 < 20
-        raise ArgumentError.new("invalid value for \"int32\", must be greater than or equal to 20.")
+      if min_number_error = OpenApi::PrimitiveValidator.min_number_error("int32", _int32, 20)
+        raise ArgumentError.new(min_number_error)
       end
 
       @int32 = _int32
@@ -338,12 +341,12 @@ module PetStore
         return @float = nil
       end
       _float = float.not_nil!
-      if _float > 987.6
-        raise ArgumentError.new("invalid value for \"float\", must be smaller than or equal to 987.6.")
+      if max_number_error = OpenApi::PrimitiveValidator.max_number_error("float", _float, 987.6)
+        raise ArgumentError.new(max_number_error)
       end
 
-      if _float < 54.3
-        raise ArgumentError.new("invalid value for \"float\", must be greater than or equal to 54.3.")
+      if min_number_error = OpenApi::PrimitiveValidator.min_number_error("float", _float, 54.3)
+        raise ArgumentError.new(min_number_error)
       end
 
       @float = _float
@@ -356,12 +359,12 @@ module PetStore
         return @double = nil
       end
       _double = double.not_nil!
-      if _double > 123.4
-        raise ArgumentError.new("invalid value for \"double\", must be smaller than or equal to 123.4.")
+      if max_number_error = OpenApi::PrimitiveValidator.max_number_error("double", _double, 123.4)
+        raise ArgumentError.new(max_number_error)
       end
 
-      if _double < 67.8
-        raise ArgumentError.new("invalid value for \"double\", must be greater than or equal to 67.8.")
+      if min_number_error = OpenApi::PrimitiveValidator.min_number_error("double", _double, 67.8)
+        raise ArgumentError.new(min_number_error)
       end
 
       @double = _double
@@ -374,9 +377,8 @@ module PetStore
         return @string = nil
       end
       _string = string.not_nil!
-      pattern = /[a-z]/i
-      if _string !~ pattern
-        raise ArgumentError.new("invalid value for \"string\", must conform to the pattern #{pattern}.")
+      if pattern_error = OpenApi::PrimitiveValidator.pattern_error("string", _string, PATTERN_FOR_STRING)
+        raise ArgumentError.new(pattern_error)
       end
 
       @string = _string
@@ -419,9 +421,8 @@ module PetStore
         return @pattern_with_digits = nil
       end
       _pattern_with_digits = pattern_with_digits.not_nil!
-      pattern = /^\d{10}$/
-      if _pattern_with_digits !~ pattern
-        raise ArgumentError.new("invalid value for \"pattern_with_digits\", must conform to the pattern #{pattern}.")
+      if pattern_error = OpenApi::PrimitiveValidator.pattern_error("pattern_with_digits", _pattern_with_digits, PATTERN_FOR_PATTERN_WITH_DIGITS)
+        raise ArgumentError.new(pattern_error)
       end
 
       @pattern_with_digits = _pattern_with_digits
@@ -434,9 +435,8 @@ module PetStore
         return @pattern_with_digits_and_delimiter = nil
       end
       _pattern_with_digits_and_delimiter = pattern_with_digits_and_delimiter.not_nil!
-      pattern = /^image_\d{1,3}$/i
-      if _pattern_with_digits_and_delimiter !~ pattern
-        raise ArgumentError.new("invalid value for \"pattern_with_digits_and_delimiter\", must conform to the pattern #{pattern}.")
+      if pattern_error = OpenApi::PrimitiveValidator.pattern_error("pattern_with_digits_and_delimiter", _pattern_with_digits_and_delimiter, PATTERN_FOR_PATTERN_WITH_DIGITS_AND_DELIMITER)
+        raise ArgumentError.new(pattern_error)
       end
 
       @pattern_with_digits_and_delimiter = _pattern_with_digits_and_delimiter

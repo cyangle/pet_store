@@ -101,11 +101,13 @@ module PetStore
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.error_message) unless ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.valid?(@enum_string_required, false)
       invalid_properties.push("\"outer_enum_rquired\" is required and cannot be null") if @outer_enum_rquired.nil?
-
-      invalid_properties.push(@outer_enum_rquired.not_nil!.error_message) if !@outer_enum_rquired.nil? && !@outer_enum_rquired.not_nil!.valid?
+      if _outer_enum_rquired = @outer_enum_rquired
+        invalid_properties.push(_outer_enum_rquired.error_message) if !_outer_enum_rquired.valid?
+      end
       invalid_properties.push("\"outer_enum_rquired_int64\" is required and cannot be null") if @outer_enum_rquired_int64.nil?
-
-      invalid_properties.push(@outer_enum_rquired_int64.not_nil!.error_message) if !@outer_enum_rquired_int64.nil? && !@outer_enum_rquired_int64.not_nil!.valid?
+      if _outer_enum_rquired_int64 = @outer_enum_rquired_int64
+        invalid_properties.push(_outer_enum_rquired_int64.error_message) if !_outer_enum_rquired_int64.valid?
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_STRING.error_message) unless ENUM_VALIDATOR_FOR_ENUM_STRING.valid?(@enum_string)
 
@@ -116,14 +118,18 @@ module PetStore
       invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_FLOAT.error_message) unless ENUM_VALIDATOR_FOR_ENUM_FLOAT.valid?(@enum_float)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ENUM_DOUBLE.error_message) unless ENUM_VALIDATOR_FOR_ENUM_DOUBLE.valid?(@enum_double)
-
-      invalid_properties.push(@outer_enum.not_nil!.error_message) if !@outer_enum.nil? && !@outer_enum.not_nil!.valid?
-
-      invalid_properties.push(@outer_enum_integer.not_nil!.error_message) if !@outer_enum_integer.nil? && !@outer_enum_integer.not_nil!.valid?
-
-      invalid_properties.push(@outer_enum_default_value.not_nil!.error_message) if !@outer_enum_default_value.nil? && !@outer_enum_default_value.not_nil!.valid?
-
-      invalid_properties.push(@outer_enum_integer_default_value.not_nil!.error_message) if !@outer_enum_integer_default_value.nil? && !@outer_enum_integer_default_value.not_nil!.valid?
+      if _outer_enum = @outer_enum
+        invalid_properties.push(_outer_enum.error_message) if !_outer_enum.valid?
+      end
+      if _outer_enum_integer = @outer_enum_integer
+        invalid_properties.push(_outer_enum_integer.error_message) if !_outer_enum_integer.valid?
+      end
+      if _outer_enum_default_value = @outer_enum_default_value
+        invalid_properties.push(_outer_enum_default_value.error_message) if !_outer_enum_default_value.valid?
+      end
+      if _outer_enum_integer_default_value = @outer_enum_integer_default_value
+        invalid_properties.push(_outer_enum_integer_default_value.error_message) if !_outer_enum_integer_default_value.valid?
+      end
 
       invalid_properties
     end
@@ -133,18 +139,30 @@ module PetStore
     def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_ENUM_STRING_REQUIRED.valid?(@enum_string_required, false)
       return false if @outer_enum_rquired.nil?
-      return false if !@outer_enum_rquired.nil? && !@outer_enum_rquired.not_nil!.valid?
+      if _outer_enum_rquired = @outer_enum_rquired
+        return false if !_outer_enum_rquired.valid?
+      end
       return false if @outer_enum_rquired_int64.nil?
-      return false if !@outer_enum_rquired_int64.nil? && !@outer_enum_rquired_int64.not_nil!.valid?
+      if _outer_enum_rquired_int64 = @outer_enum_rquired_int64
+        return false if !_outer_enum_rquired_int64.valid?
+      end
       return false unless ENUM_VALIDATOR_FOR_ENUM_STRING.valid?(@enum_string)
       return false unless ENUM_VALIDATOR_FOR_ENUM_INT32.valid?(@enum_int32)
       return false unless ENUM_VALIDATOR_FOR_ENUM_INT64.valid?(@enum_int64)
       return false unless ENUM_VALIDATOR_FOR_ENUM_FLOAT.valid?(@enum_float)
       return false unless ENUM_VALIDATOR_FOR_ENUM_DOUBLE.valid?(@enum_double)
-      return false if !@outer_enum.nil? && !@outer_enum.not_nil!.valid?
-      return false if !@outer_enum_integer.nil? && !@outer_enum_integer.not_nil!.valid?
-      return false if !@outer_enum_default_value.nil? && !@outer_enum_default_value.not_nil!.valid?
-      return false if !@outer_enum_integer_default_value.nil? && !@outer_enum_integer_default_value.not_nil!.valid?
+      if _outer_enum = @outer_enum
+        return false if !_outer_enum.valid?
+      end
+      if _outer_enum_integer = @outer_enum_integer
+        return false if !_outer_enum_integer.valid?
+      end
+      if _outer_enum_default_value = @outer_enum_default_value
+        return false if !_outer_enum_default_value.valid?
+      end
+      if _outer_enum_integer_default_value = @outer_enum_integer_default_value
+        return false if !_outer_enum_integer_default_value.valid?
+      end
 
       true
     end

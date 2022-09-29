@@ -63,14 +63,14 @@ module PetStore
       invalid_properties = Array(String).new
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
       if _name = @name
-        if _name.to_s.size > 255
-          invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 255.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 255)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"class_name\" is required and cannot be null") if @class_name.nil?
       if _class_name = @class_name
-        if _class_name.to_s.size > 64
-          invalid_properties.push("invalid value for \"class_name\", the character length must be smaller than or equal to 64.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("class_name", _class_name.to_s.size, 64)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -99,8 +99,8 @@ module PetStore
         raise ArgumentError.new("\"name\" is required and cannot be null")
       end
       _name = name.not_nil!
-      if _name.to_s.size > 255
-        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 255.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 255)
+        raise ArgumentError.new(max_length_error)
       end
 
       @name = _name
@@ -113,8 +113,8 @@ module PetStore
         raise ArgumentError.new("\"class_name\" is required and cannot be null")
       end
       _class_name = class_name.not_nil!
-      if _class_name.to_s.size > 64
-        raise ArgumentError.new("invalid value for \"class_name\", the character length must be smaller than or equal to 64.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("class_name", _class_name.to_s.size, 64)
+        raise ArgumentError.new(max_length_error)
       end
 
       @class_name = _class_name
