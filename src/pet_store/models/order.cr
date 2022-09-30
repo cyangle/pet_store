@@ -61,7 +61,7 @@ module PetStore
       invalid_properties = Array(String).new
 
       if _status = @status
-        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?("status", _status, VALID_VALUES_FOR_STATUS)
+        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 
       invalid_properties
@@ -71,7 +71,7 @@ module PetStore
     # @return true if the model is valid
     def valid? : Bool
       if _status = @status
-        return false unless OpenApi::EnumValidator.valid?("status", _status, VALID_VALUES_FOR_STATUS)
+        return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 
       true

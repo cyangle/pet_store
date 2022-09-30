@@ -58,7 +58,7 @@ module PetStore
     end
 
     def valid? : Bool
-      OpenApi::EnumValidator.valid?("OuterEnum", data, VALID_VALUES, false)
+      OpenApi::EnumValidator.valid?(data, VALID_VALUES, false)
     end
 
     def validate : Nil

@@ -49,7 +49,7 @@ module PetStore
       invalid_properties.push("\"class_name\" is required and cannot be null") if @class_name.nil?
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?("_type", __type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       invalid_properties
     end
@@ -60,7 +60,7 @@ module PetStore
       return false if @class_name.nil?
 
       if __type = @_type
-        return false unless OpenApi::EnumValidator.valid?("_type", __type, VALID_VALUES_FOR__TYPE)
+        return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
       true

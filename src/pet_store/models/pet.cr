@@ -74,7 +74,7 @@ module PetStore
         invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "tags", array: _tags)) if _tags.is_a?(Array)
       end
       if _status = @status
-        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?("status", _status, VALID_VALUES_FOR_STATUS)
+        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties
     end
@@ -95,7 +95,7 @@ module PetStore
       end
 
       if _status = @status
-        return false unless OpenApi::EnumValidator.valid?("status", _status, VALID_VALUES_FOR_STATUS)
+        return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 
       true
