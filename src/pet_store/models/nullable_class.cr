@@ -18,7 +18,7 @@ module PetStore
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "required_nullable_prop", type: String?, default: nil, required: true, nullable: true, emit_null: true)]
     getter required_nullable_prop : String? = nil
@@ -26,7 +26,9 @@ module PetStore
     @[JSON::Field(key: "required_non_nullable_prop", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter required_non_nullable_prop : String? = nil
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "optional_nullable_prop", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: optional_nullable_prop.nil? && !optional_nullable_prop_present?)]
     getter optional_nullable_prop : String? = nil

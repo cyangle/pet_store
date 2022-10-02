@@ -19,7 +19,7 @@ module PetStore
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "name", type: Int32?, default: nil, required: false, nullable: false, emit_null: false)]
     getter name : Int32? = nil

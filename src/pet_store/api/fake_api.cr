@@ -371,7 +371,7 @@ module PetStore
     end
 
     # For this test, the body for this request much reference a schema named `File`.
-    # @param file_schema_test_class [PetStore::FileSchemaTestClass?]
+    # @required @param file_schema_test_class [PetStore::FileSchemaTestClass?]
     # @return [nil]
     def test_body_with_file_schema(*, file_schema_test_class : PetStore::FileSchemaTestClass? = nil)
       test_body_with_file_schema_with_http_info(file_schema_test_class: file_schema_test_class)
@@ -379,7 +379,7 @@ module PetStore
     end
 
     # For this test, the body for this request much reference a schema named &#x60;File&#x60;.
-    # @param file_schema_test_class [PetStore::FileSchemaTestClass?]
+    # @required @param file_schema_test_class [PetStore::FileSchemaTestClass?]
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def test_body_with_file_schema_with_http_info(*, file_schema_test_class : PetStore::FileSchemaTestClass? = nil)
       request = build_api_request_for_test_body_with_file_schema(file_schema_test_class: file_schema_test_class)
@@ -394,7 +394,7 @@ module PetStore
     end
 
     # For this test, the body for this request much reference a schema named &#x60;File&#x60;.
-    # @param file_schema_test_class [PetStore::FileSchemaTestClass?]
+    # @required @param file_schema_test_class [PetStore::FileSchemaTestClass?]
     # @return nil
     def test_body_with_file_schema(*, file_schema_test_class : PetStore::FileSchemaTestClass? = nil, &block : Crest::Response ->)
       build_api_request_for_test_body_with_file_schema(file_schema_test_class: file_schema_test_class).execute(&block)
@@ -445,16 +445,16 @@ module PetStore
       )
     end
 
-    # @param query [String?]
-    # @param user [PetStore::User?]
+    # @required @param query [String?]
+    # @required @param user [PetStore::User?]
     # @return [nil]
     def test_body_with_query_params(*, query : String? = nil, user : PetStore::User? = nil)
       test_body_with_query_params_with_http_info(query: query, user: user)
       nil
     end
 
-    # @param query [String?]
-    # @param user [PetStore::User?]
+    # @required @param query [String?]
+    # @required @param user [PetStore::User?]
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def test_body_with_query_params_with_http_info(*, query : String? = nil, user : PetStore::User? = nil)
       request = build_api_request_for_test_body_with_query_params(query: query, user: user)
@@ -468,8 +468,8 @@ module PetStore
       return nil, status_code, headers
     end
 
-    # @param query [String?]
-    # @param user [PetStore::User?]
+    # @required @param query [String?]
+    # @required @param user [PetStore::User?]
     # @return nil
     def test_body_with_query_params(*, query : String? = nil, user : PetStore::User? = nil, &block : Crest::Response ->)
       build_api_request_for_test_body_with_query_params(query: query, user: user).execute(&block)
@@ -525,7 +525,7 @@ module PetStore
 
     # To test \"client\" model
     # To test \"client\" model
-    # @param client [PetStore::Client?] client model
+    # @required @param client [PetStore::Client?] client model
     # @return [Client]
     def test_client_model(*, client : PetStore::Client? = nil)
       data, _status_code, _headers = test_client_model_with_http_info(client: client)
@@ -534,7 +534,7 @@ module PetStore
 
     # To test \&quot;client\&quot; model
     # To test \&quot;client\&quot; model
-    # @param client [PetStore::Client?] client model
+    # @required @param client [PetStore::Client?] client model
     # @return [Array<(Client, Integer, Hash)>] Client data, response status code and response headers
     def test_client_model_with_http_info(*, client : PetStore::Client? = nil)
       request = build_api_request_for_test_client_model(client: client)
@@ -550,7 +550,7 @@ module PetStore
 
     # To test \&quot;client\&quot; model
     # To test \&quot;client\&quot; model
-    # @param client [PetStore::Client?] client model
+    # @required @param client [PetStore::Client?] client model
     # @return nil
     def test_client_model(*, client : PetStore::Client? = nil, &block : Crest::Response ->)
       build_api_request_for_test_client_model(client: client).execute(&block)
@@ -605,10 +605,10 @@ module PetStore
 
     # Fake endpoint for testing various parameters 假端點 偽のエンドポイント 가짜 엔드 포인트
     # Fake endpoint for testing various parameters 假端點 偽のエンドポイント 가짜 엔드 포인트
-    # @param number [Float64?] None
-    # @param double [Float64?] None
-    # @param pattern_without_delimiter [String?] None
-    # @param byte [String?] None
+    # @required @param number [Float64?] None
+    # @required @param double [Float64?] None
+    # @required @param pattern_without_delimiter [String?] None
+    # @required @param byte [String?] None
     # @optional @param integer [Int32?] None
     # @optional @param int32 [Int32?] None
     # @optional @param int64 [Int64?] None
@@ -627,10 +627,10 @@ module PetStore
 
     # Fake endpoint for testing various parameters 假端點 偽のエンドポイント 가짜 엔드 포인트
     # Fake endpoint for testing various parameters 假端點 偽のエンドポイント 가짜 엔드 포인트
-    # @param number [Float64?] None
-    # @param double [Float64?] None
-    # @param pattern_without_delimiter [String?] None
-    # @param byte [String?] None
+    # @required @param number [Float64?] None
+    # @required @param double [Float64?] None
+    # @required @param pattern_without_delimiter [String?] None
+    # @required @param byte [String?] None
     # @optional @param integer [Int32?] None
     # @optional @param int32 [Int32?] None
     # @optional @param int64 [Int64?] None
@@ -656,10 +656,10 @@ module PetStore
 
     # Fake endpoint for testing various parameters 假端點 偽のエンドポイント 가짜 엔드 포인트
     # Fake endpoint for testing various parameters 假端點 偽のエンドポイント 가짜 엔드 포인트
-    # @param number [Float64?] None
-    # @param double [Float64?] None
-    # @param pattern_without_delimiter [String?] None
-    # @param byte [String?] None
+    # @required @param number [Float64?] None
+    # @required @param double [Float64?] None
+    # @required @param pattern_without_delimiter [String?] None
+    # @required @param byte [String?] None
     # @optional @param integer [Int32?] None
     # @optional @param int32 [Int32?] None
     # @optional @param int64 [Int64?] None
@@ -918,9 +918,9 @@ module PetStore
 
     # Fake endpoint to test group parameters (optional)
     # Fake endpoint to test group parameters (optional)
-    # @param required_string_group [Int32?] Required String in group parameters
-    # @param required_boolean_group [Bool?] Required Boolean in group parameters
-    # @param required_int64_group [Int64?] Required Integer in group parameters
+    # @required @param required_string_group [Int32?] Required String in group parameters
+    # @required @param required_boolean_group [Bool?] Required Boolean in group parameters
+    # @required @param required_int64_group [Int64?] Required Integer in group parameters
     # @optional @param string_group [Int32?] String in group parameters
     # @optional @param boolean_group [Bool?] Boolean in group parameters
     # @optional @param int64_group [Int64?] Integer in group parameters
@@ -932,9 +932,9 @@ module PetStore
 
     # Fake endpoint to test group parameters (optional)
     # Fake endpoint to test group parameters (optional)
-    # @param required_string_group [Int32?] Required String in group parameters
-    # @param required_boolean_group [Bool?] Required Boolean in group parameters
-    # @param required_int64_group [Int64?] Required Integer in group parameters
+    # @required @param required_string_group [Int32?] Required String in group parameters
+    # @required @param required_boolean_group [Bool?] Required Boolean in group parameters
+    # @required @param required_int64_group [Int64?] Required Integer in group parameters
     # @optional @param string_group [Int32?] String in group parameters
     # @optional @param boolean_group [Bool?] Boolean in group parameters
     # @optional @param int64_group [Int64?] Integer in group parameters
@@ -953,9 +953,9 @@ module PetStore
 
     # Fake endpoint to test group parameters (optional)
     # Fake endpoint to test group parameters (optional)
-    # @param required_string_group [Int32?] Required String in group parameters
-    # @param required_boolean_group [Bool?] Required Boolean in group parameters
-    # @param required_int64_group [Int64?] Required Integer in group parameters
+    # @required @param required_string_group [Int32?] Required String in group parameters
+    # @required @param required_boolean_group [Bool?] Required Boolean in group parameters
+    # @required @param required_int64_group [Int64?] Required Integer in group parameters
     # @optional @param string_group [Int32?] String in group parameters
     # @optional @param boolean_group [Bool?] Boolean in group parameters
     # @optional @param int64_group [Int64?] Integer in group parameters
@@ -1016,7 +1016,7 @@ module PetStore
 
     # test inline additionalProperties
     #
-    # @param request_body [Hash(String, String)?] request body
+    # @required @param request_body [Hash(String, String)?] request body
     # @return [nil]
     def test_inline_additional_properties(*, request_body : Hash(String, String)? = nil)
       test_inline_additional_properties_with_http_info(request_body: request_body)
@@ -1025,7 +1025,7 @@ module PetStore
 
     # test inline additionalProperties
     #
-    # @param request_body [Hash(String, String)?] request body
+    # @required @param request_body [Hash(String, String)?] request body
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def test_inline_additional_properties_with_http_info(*, request_body : Hash(String, String)? = nil)
       request = build_api_request_for_test_inline_additional_properties(request_body: request_body)
@@ -1041,7 +1041,7 @@ module PetStore
 
     # test inline additionalProperties
     #
-    # @param request_body [Hash(String, String)?] request body
+    # @required @param request_body [Hash(String, String)?] request body
     # @return nil
     def test_inline_additional_properties(*, request_body : Hash(String, String)? = nil, &block : Crest::Response ->)
       build_api_request_for_test_inline_additional_properties(request_body: request_body).execute(&block)
@@ -1091,8 +1091,8 @@ module PetStore
 
     # test json serialization of form data
     #
-    # @param param [String?] field1
-    # @param param2 [String?] field2
+    # @required @param param [String?] field1
+    # @required @param param2 [String?] field2
     # @return [nil]
     def test_json_form_data(*, param : String? = nil, param2 : String? = nil)
       test_json_form_data_with_http_info(param: param, param2: param2)
@@ -1101,8 +1101,8 @@ module PetStore
 
     # test json serialization of form data
     #
-    # @param param [String?] field1
-    # @param param2 [String?] field2
+    # @required @param param [String?] field1
+    # @required @param param2 [String?] field2
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def test_json_form_data_with_http_info(*, param : String? = nil, param2 : String? = nil)
       request = build_api_request_for_test_json_form_data(param: param, param2: param2)
@@ -1118,8 +1118,8 @@ module PetStore
 
     # test json serialization of form data
     #
-    # @param param [String?] field1
-    # @param param2 [String?] field2
+    # @required @param param [String?] field1
+    # @required @param param2 [String?] field2
     # @return nil
     def test_json_form_data(*, param : String? = nil, param2 : String? = nil, &block : Crest::Response ->)
       build_api_request_for_test_json_form_data(param: param, param2: param2).execute(&block)
@@ -1172,11 +1172,11 @@ module PetStore
     end
 
     # To test the collection format in query parameters
-    # @param pipe [Array(String)?]
-    # @param ioutil [Array(String)?]
-    # @param http [Array(String)?]
-    # @param url [Array(String)?]
-    # @param context [Array(String)?]
+    # @required @param pipe [Array(String)?]
+    # @required @param ioutil [Array(String)?]
+    # @required @param http [Array(String)?]
+    # @required @param url [Array(String)?]
+    # @required @param context [Array(String)?]
     # @return [nil]
     def test_query_parameter_collection_format(*, pipe : Array(String)? = nil, ioutil : Array(String)? = nil, http : Array(String)? = nil, url : Array(String)? = nil, context : Array(String)? = nil)
       test_query_parameter_collection_format_with_http_info(pipe: pipe, ioutil: ioutil, http: http, url: url, context: context)
@@ -1184,11 +1184,11 @@ module PetStore
     end
 
     # To test the collection format in query parameters
-    # @param pipe [Array(String)?]
-    # @param ioutil [Array(String)?]
-    # @param http [Array(String)?]
-    # @param url [Array(String)?]
-    # @param context [Array(String)?]
+    # @required @param pipe [Array(String)?]
+    # @required @param ioutil [Array(String)?]
+    # @required @param http [Array(String)?]
+    # @required @param url [Array(String)?]
+    # @required @param context [Array(String)?]
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def test_query_parameter_collection_format_with_http_info(*, pipe : Array(String)? = nil, ioutil : Array(String)? = nil, http : Array(String)? = nil, url : Array(String)? = nil, context : Array(String)? = nil)
       request = build_api_request_for_test_query_parameter_collection_format(pipe: pipe, ioutil: ioutil, http: http, url: url, context: context)
@@ -1203,11 +1203,11 @@ module PetStore
     end
 
     # To test the collection format in query parameters
-    # @param pipe [Array(String)?]
-    # @param ioutil [Array(String)?]
-    # @param http [Array(String)?]
-    # @param url [Array(String)?]
-    # @param context [Array(String)?]
+    # @required @param pipe [Array(String)?]
+    # @required @param ioutil [Array(String)?]
+    # @required @param http [Array(String)?]
+    # @required @param url [Array(String)?]
+    # @required @param context [Array(String)?]
     # @return nil
     def test_query_parameter_collection_format(*, pipe : Array(String)? = nil, ioutil : Array(String)? = nil, http : Array(String)? = nil, url : Array(String)? = nil, context : Array(String)? = nil, &block : Crest::Response ->)
       build_api_request_for_test_query_parameter_collection_format(pipe: pipe, ioutil: ioutil, http: http, url: url, context: context).execute(&block)
@@ -1267,8 +1267,8 @@ module PetStore
     end
 
     # To test unique items in header and query parameters
-    # @param query_unique [Array(String)?]
-    # @param header_unique [Array(String)?]
+    # @required @param query_unique [Array(String)?]
+    # @required @param header_unique [Array(String)?]
     # @return [Set(Pet)]
     def test_unique_items_header_and_query_parameter_collection_format(*, query_unique : Array(String)? = nil, header_unique : Array(String)? = nil)
       data, _status_code, _headers = test_unique_items_header_and_query_parameter_collection_format_with_http_info(query_unique: query_unique, header_unique: header_unique)
@@ -1276,8 +1276,8 @@ module PetStore
     end
 
     # To test unique items in header and query parameters
-    # @param query_unique [Array(String)?]
-    # @param header_unique [Array(String)?]
+    # @required @param query_unique [Array(String)?]
+    # @required @param header_unique [Array(String)?]
     # @return [Array<(Set(Pet), Integer, Hash)>] Set(Pet) data, response status code and response headers
     def test_unique_items_header_and_query_parameter_collection_format_with_http_info(*, query_unique : Array(String)? = nil, header_unique : Array(String)? = nil)
       request = build_api_request_for_test_unique_items_header_and_query_parameter_collection_format(query_unique: query_unique, header_unique: header_unique)
@@ -1292,8 +1292,8 @@ module PetStore
     end
 
     # To test unique items in header and query parameters
-    # @param query_unique [Array(String)?]
-    # @param header_unique [Array(String)?]
+    # @required @param query_unique [Array(String)?]
+    # @required @param header_unique [Array(String)?]
     # @return nil
     def test_unique_items_header_and_query_parameter_collection_format(*, query_unique : Array(String)? = nil, header_unique : Array(String)? = nil, &block : Crest::Response ->)
       build_api_request_for_test_unique_items_header_and_query_parameter_collection_format(query_unique: query_unique, header_unique: header_unique).execute(&block)

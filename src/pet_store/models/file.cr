@@ -19,7 +19,7 @@ module PetStore
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     # Test capitalization
     @[JSON::Field(key: "sourceURI", type: String?, default: nil, required: false, nullable: false, emit_null: false)]

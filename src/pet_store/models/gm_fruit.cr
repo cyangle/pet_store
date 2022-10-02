@@ -18,7 +18,7 @@ module PetStore
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "color", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     property color : String? = nil
@@ -29,6 +29,7 @@ module PetStore
     @[JSON::Field(key: "lengthCm", type: Float64?, default: nil, required: true, nullable: false, emit_null: false)]
     property length_cm : Float64? = nil
 
+    # End of Required Properties
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
       [

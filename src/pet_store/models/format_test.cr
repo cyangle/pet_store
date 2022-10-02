@@ -18,7 +18,7 @@ module PetStore
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "number", type: Float64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter number : Float64? = nil
@@ -36,7 +36,9 @@ module PetStore
     MAX_LENGTH_FOR_PASSWORD = 64
     MIN_LENGTH_FOR_PASSWORD = 10
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "integer", type: Int32?, default: nil, required: false, nullable: false, emit_null: false)]
     getter integer : Int32? = nil

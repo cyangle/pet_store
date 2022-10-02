@@ -18,7 +18,7 @@ module PetStore
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "enum_string_required", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter enum_string_required : String? = nil
@@ -31,7 +31,9 @@ module PetStore
     @[JSON::Field(key: "outerEnumRquiredInt64", type: PetStore::OuterEnumRquiredInt64?, default: PetStore::OuterEnumRquiredInt64.new(3), required: true, nullable: false, emit_null: false)]
     getter outer_enum_rquired_int64 : PetStore::OuterEnumRquiredInt64? = PetStore::OuterEnumRquiredInt64.new(3)
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "enum_string", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter enum_string : String? = nil

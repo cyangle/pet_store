@@ -18,13 +18,15 @@ module PetStore
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter name : String? = nil
     MAX_LENGTH_FOR_NAME = 255
 
-    # Optional properties
+    # End of Required Properties
+
+    # Optional Properties
 
     @[JSON::Field(key: "declawed", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter declawed : Bool? = nil

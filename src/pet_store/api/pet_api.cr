@@ -21,7 +21,7 @@ module PetStore
 
     # Add a new pet to the store
     #
-    # @param pet [PetStore::Pet?] Pet object that needs to be added to the store
+    # @required @param pet [PetStore::Pet?] Pet object that needs to be added to the store
     # @return [nil]
     def add_pet(*, pet : PetStore::Pet? = nil)
       add_pet_with_http_info(pet: pet)
@@ -30,7 +30,7 @@ module PetStore
 
     # Add a new pet to the store
     #
-    # @param pet [PetStore::Pet?] Pet object that needs to be added to the store
+    # @required @param pet [PetStore::Pet?] Pet object that needs to be added to the store
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def add_pet_with_http_info(*, pet : PetStore::Pet? = nil)
       request = build_api_request_for_add_pet(pet: pet)
@@ -46,7 +46,7 @@ module PetStore
 
     # Add a new pet to the store
     #
-    # @param pet [PetStore::Pet?] Pet object that needs to be added to the store
+    # @required @param pet [PetStore::Pet?] Pet object that needs to be added to the store
     # @return nil
     def add_pet(*, pet : PetStore::Pet? = nil, &block : Crest::Response ->)
       build_api_request_for_add_pet(pet: pet).execute(&block)
@@ -99,7 +99,7 @@ module PetStore
 
     # Deletes a pet
     #
-    # @param pet_id [Int64?] Pet id to delete
+    # @required @param pet_id [Int64?] Pet id to delete
     # @optional @param api_key [String?]
     # @return [nil]
     def delete_pet(*, pet_id : Int64? = nil, api_key : String? = nil)
@@ -109,7 +109,7 @@ module PetStore
 
     # Deletes a pet
     #
-    # @param pet_id [Int64?] Pet id to delete
+    # @required @param pet_id [Int64?] Pet id to delete
     # @optional @param api_key [String?]
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def delete_pet_with_http_info(*, pet_id : Int64? = nil, api_key : String? = nil)
@@ -126,7 +126,7 @@ module PetStore
 
     # Deletes a pet
     #
-    # @param pet_id [Int64?] Pet id to delete
+    # @required @param pet_id [Int64?] Pet id to delete
     # @optional @param api_key [String?]
     # @return nil
     def delete_pet(*, pet_id : Int64? = nil, api_key : String? = nil, &block : Crest::Response ->)
@@ -176,7 +176,7 @@ module PetStore
 
     # Finds Pets by status
     # Multiple status values can be provided with comma separated strings
-    # @param status [Array(String)?] Status values that need to be considered for filter
+    # @required @param status [Array(String)?] Status values that need to be considered for filter
     # @return [Array(Pet)]
     def find_pets_by_status(*, status : Array(String)? = nil)
       data, _status_code, _headers = find_pets_by_status_with_http_info(status: status)
@@ -185,7 +185,7 @@ module PetStore
 
     # Finds Pets by status
     # Multiple status values can be provided with comma separated strings
-    # @param status [Array(String)?] Status values that need to be considered for filter
+    # @required @param status [Array(String)?] Status values that need to be considered for filter
     # @return [Array<(Array(Pet), Integer, Hash)>] Array(Pet) data, response status code and response headers
     def find_pets_by_status_with_http_info(*, status : Array(String)? = nil)
       request = build_api_request_for_find_pets_by_status(status: status)
@@ -201,7 +201,7 @@ module PetStore
 
     # Finds Pets by status
     # Multiple status values can be provided with comma separated strings
-    # @param status [Array(String)?] Status values that need to be considered for filter
+    # @required @param status [Array(String)?] Status values that need to be considered for filter
     # @return nil
     def find_pets_by_status(*, status : Array(String)? = nil, &block : Crest::Response ->)
       build_api_request_for_find_pets_by_status(status: status).execute(&block)
@@ -257,7 +257,7 @@ module PetStore
 
     # Finds Pets by tags
     # Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
-    # @param tags [Array(String)?] Tags to filter by
+    # @required @param tags [Array(String)?] Tags to filter by
     # @return [Array(Pet)]
     def find_pets_by_tags(*, tags : Array(String)? = nil)
       data, _status_code, _headers = find_pets_by_tags_with_http_info(tags: tags)
@@ -266,7 +266,7 @@ module PetStore
 
     # Finds Pets by tags
     # Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
-    # @param tags [Array(String)?] Tags to filter by
+    # @required @param tags [Array(String)?] Tags to filter by
     # @return [Array<(Array(Pet), Integer, Hash)>] Array(Pet) data, response status code and response headers
     def find_pets_by_tags_with_http_info(*, tags : Array(String)? = nil)
       request = build_api_request_for_find_pets_by_tags(tags: tags)
@@ -282,7 +282,7 @@ module PetStore
 
     # Finds Pets by tags
     # Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
-    # @param tags [Array(String)?] Tags to filter by
+    # @required @param tags [Array(String)?] Tags to filter by
     # @return nil
     def find_pets_by_tags(*, tags : Array(String)? = nil, &block : Crest::Response ->)
       build_api_request_for_find_pets_by_tags(tags: tags).execute(&block)
@@ -333,7 +333,7 @@ module PetStore
 
     # Find pet by ID
     # Returns a single pet
-    # @param pet_id [Int64?] ID of pet to return
+    # @required @param pet_id [Int64?] ID of pet to return
     # @return [Pet]
     def get_pet_by_id(*, pet_id : Int64? = nil)
       data, _status_code, _headers = get_pet_by_id_with_http_info(pet_id: pet_id)
@@ -342,7 +342,7 @@ module PetStore
 
     # Find pet by ID
     # Returns a single pet
-    # @param pet_id [Int64?] ID of pet to return
+    # @required @param pet_id [Int64?] ID of pet to return
     # @return [Array<(Pet, Integer, Hash)>] Pet data, response status code and response headers
     def get_pet_by_id_with_http_info(*, pet_id : Int64? = nil)
       request = build_api_request_for_get_pet_by_id(pet_id: pet_id)
@@ -358,7 +358,7 @@ module PetStore
 
     # Find pet by ID
     # Returns a single pet
-    # @param pet_id [Int64?] ID of pet to return
+    # @required @param pet_id [Int64?] ID of pet to return
     # @return nil
     def get_pet_by_id(*, pet_id : Int64? = nil, &block : Crest::Response ->)
       build_api_request_for_get_pet_by_id(pet_id: pet_id).execute(&block)
@@ -408,7 +408,7 @@ module PetStore
 
     # Update an existing pet
     #
-    # @param pet [PetStore::Pet?] Pet object that needs to be added to the store
+    # @required @param pet [PetStore::Pet?] Pet object that needs to be added to the store
     # @return [nil]
     def update_pet(*, pet : PetStore::Pet? = nil)
       update_pet_with_http_info(pet: pet)
@@ -417,7 +417,7 @@ module PetStore
 
     # Update an existing pet
     #
-    # @param pet [PetStore::Pet?] Pet object that needs to be added to the store
+    # @required @param pet [PetStore::Pet?] Pet object that needs to be added to the store
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def update_pet_with_http_info(*, pet : PetStore::Pet? = nil)
       request = build_api_request_for_update_pet(pet: pet)
@@ -433,7 +433,7 @@ module PetStore
 
     # Update an existing pet
     #
-    # @param pet [PetStore::Pet?] Pet object that needs to be added to the store
+    # @required @param pet [PetStore::Pet?] Pet object that needs to be added to the store
     # @return nil
     def update_pet(*, pet : PetStore::Pet? = nil, &block : Crest::Response ->)
       build_api_request_for_update_pet(pet: pet).execute(&block)
@@ -486,7 +486,7 @@ module PetStore
 
     # Updates a pet in the store with form data
     #
-    # @param pet_id [Int64?] ID of pet that needs to be updated
+    # @required @param pet_id [Int64?] ID of pet that needs to be updated
     # @optional @param name [String?] Updated name of the pet
     # @optional @param status [String?] Updated status of the pet
     # @return [nil]
@@ -497,7 +497,7 @@ module PetStore
 
     # Updates a pet in the store with form data
     #
-    # @param pet_id [Int64?] ID of pet that needs to be updated
+    # @required @param pet_id [Int64?] ID of pet that needs to be updated
     # @optional @param name [String?] Updated name of the pet
     # @optional @param status [String?] Updated status of the pet
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -515,7 +515,7 @@ module PetStore
 
     # Updates a pet in the store with form data
     #
-    # @param pet_id [Int64?] ID of pet that needs to be updated
+    # @required @param pet_id [Int64?] ID of pet that needs to be updated
     # @optional @param name [String?] Updated name of the pet
     # @optional @param status [String?] Updated status of the pet
     # @return nil
@@ -569,7 +569,7 @@ module PetStore
 
     # uploads an image
     #
-    # @param pet_id [Int64?] ID of pet to update
+    # @required @param pet_id [Int64?] ID of pet to update
     # @optional @param additional_metadata [String?] Additional data to pass to server
     # @optional @param file [::File?] file to upload
     # @return [ApiResponse]
@@ -580,7 +580,7 @@ module PetStore
 
     # uploads an image
     #
-    # @param pet_id [Int64?] ID of pet to update
+    # @required @param pet_id [Int64?] ID of pet to update
     # @optional @param additional_metadata [String?] Additional data to pass to server
     # @optional @param file [::File?] file to upload
     # @return [Array<(ApiResponse, Integer, Hash)>] ApiResponse data, response status code and response headers
@@ -598,7 +598,7 @@ module PetStore
 
     # uploads an image
     #
-    # @param pet_id [Int64?] ID of pet to update
+    # @required @param pet_id [Int64?] ID of pet to update
     # @optional @param additional_metadata [String?] Additional data to pass to server
     # @optional @param file [::File?] file to upload
     # @return nil
@@ -654,8 +654,8 @@ module PetStore
 
     # uploads an image (required)
     #
-    # @param pet_id [Int64?] ID of pet to update
-    # @param required_file [::File?] file to upload
+    # @required @param pet_id [Int64?] ID of pet to update
+    # @required @param required_file [::File?] file to upload
     # @optional @param additional_metadata [String?] Additional data to pass to server
     # @return [ApiResponse]
     def upload_file_with_required_file(*, pet_id : Int64? = nil, required_file : ::File? = nil, additional_metadata : String? = nil)
@@ -665,8 +665,8 @@ module PetStore
 
     # uploads an image (required)
     #
-    # @param pet_id [Int64?] ID of pet to update
-    # @param required_file [::File?] file to upload
+    # @required @param pet_id [Int64?] ID of pet to update
+    # @required @param required_file [::File?] file to upload
     # @optional @param additional_metadata [String?] Additional data to pass to server
     # @return [Array<(ApiResponse, Integer, Hash)>] ApiResponse data, response status code and response headers
     def upload_file_with_required_file_with_http_info(*, pet_id : Int64? = nil, required_file : ::File? = nil, additional_metadata : String? = nil)
@@ -683,8 +683,8 @@ module PetStore
 
     # uploads an image (required)
     #
-    # @param pet_id [Int64?] ID of pet to update
-    # @param required_file [::File?] file to upload
+    # @required @param pet_id [Int64?] ID of pet to update
+    # @required @param required_file [::File?] file to upload
     # @optional @param additional_metadata [String?] Additional data to pass to server
     # @return nil
     def upload_file_with_required_file(*, pet_id : Int64? = nil, required_file : ::File? = nil, additional_metadata : String? = nil, &block : Crest::Response ->)

@@ -21,7 +21,7 @@ module PetStore
 
     # Create user
     # This can only be done by the logged in user.
-    # @param user [PetStore::User?] Created user object
+    # @required @param user [PetStore::User?] Created user object
     # @return [nil]
     def create_user(*, user : PetStore::User? = nil)
       create_user_with_http_info(user: user)
@@ -30,7 +30,7 @@ module PetStore
 
     # Create user
     # This can only be done by the logged in user.
-    # @param user [PetStore::User?] Created user object
+    # @required @param user [PetStore::User?] Created user object
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def create_user_with_http_info(*, user : PetStore::User? = nil)
       request = build_api_request_for_create_user(user: user)
@@ -46,7 +46,7 @@ module PetStore
 
     # Create user
     # This can only be done by the logged in user.
-    # @param user [PetStore::User?] Created user object
+    # @required @param user [PetStore::User?] Created user object
     # @return nil
     def create_user(*, user : PetStore::User? = nil, &block : Crest::Response ->)
       build_api_request_for_create_user(user: user).execute(&block)
@@ -99,7 +99,7 @@ module PetStore
 
     # Creates list of users with given input array
     #
-    # @param user [Array(PetStore::User)?] List of user object
+    # @required @param user [Array(PetStore::User)?] List of user object
     # @return [nil]
     def create_users_with_array_input(*, user : Array(PetStore::User)? = nil)
       create_users_with_array_input_with_http_info(user: user)
@@ -108,7 +108,7 @@ module PetStore
 
     # Creates list of users with given input array
     #
-    # @param user [Array(PetStore::User)?] List of user object
+    # @required @param user [Array(PetStore::User)?] List of user object
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def create_users_with_array_input_with_http_info(*, user : Array(PetStore::User)? = nil)
       request = build_api_request_for_create_users_with_array_input(user: user)
@@ -124,7 +124,7 @@ module PetStore
 
     # Creates list of users with given input array
     #
-    # @param user [Array(PetStore::User)?] List of user object
+    # @required @param user [Array(PetStore::User)?] List of user object
     # @return nil
     def create_users_with_array_input(*, user : Array(PetStore::User)? = nil, &block : Crest::Response ->)
       build_api_request_for_create_users_with_array_input(user: user).execute(&block)
@@ -177,7 +177,7 @@ module PetStore
 
     # Creates list of users with given input array
     #
-    # @param user [Array(PetStore::User)?] List of user object
+    # @required @param user [Array(PetStore::User)?] List of user object
     # @return [nil]
     def create_users_with_list_input(*, user : Array(PetStore::User)? = nil)
       create_users_with_list_input_with_http_info(user: user)
@@ -186,7 +186,7 @@ module PetStore
 
     # Creates list of users with given input array
     #
-    # @param user [Array(PetStore::User)?] List of user object
+    # @required @param user [Array(PetStore::User)?] List of user object
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def create_users_with_list_input_with_http_info(*, user : Array(PetStore::User)? = nil)
       request = build_api_request_for_create_users_with_list_input(user: user)
@@ -202,7 +202,7 @@ module PetStore
 
     # Creates list of users with given input array
     #
-    # @param user [Array(PetStore::User)?] List of user object
+    # @required @param user [Array(PetStore::User)?] List of user object
     # @return nil
     def create_users_with_list_input(*, user : Array(PetStore::User)? = nil, &block : Crest::Response ->)
       build_api_request_for_create_users_with_list_input(user: user).execute(&block)
@@ -255,7 +255,7 @@ module PetStore
 
     # Delete user
     # This can only be done by the logged in user.
-    # @param username [String?] The name that needs to be deleted
+    # @required @param username [String?] The name that needs to be deleted
     # @return [nil]
     def delete_user(*, username : String? = nil)
       delete_user_with_http_info(username: username)
@@ -264,7 +264,7 @@ module PetStore
 
     # Delete user
     # This can only be done by the logged in user.
-    # @param username [String?] The name that needs to be deleted
+    # @required @param username [String?] The name that needs to be deleted
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def delete_user_with_http_info(*, username : String? = nil)
       request = build_api_request_for_delete_user(username: username)
@@ -280,7 +280,7 @@ module PetStore
 
     # Delete user
     # This can only be done by the logged in user.
-    # @param username [String?] The name that needs to be deleted
+    # @required @param username [String?] The name that needs to be deleted
     # @return nil
     def delete_user(*, username : String? = nil, &block : Crest::Response ->)
       build_api_request_for_delete_user(username: username).execute(&block)
@@ -328,7 +328,7 @@ module PetStore
 
     # Get user by user name
     #
-    # @param username [String?] The name that needs to be fetched. Use user1 for testing.
+    # @required @param username [String?] The name that needs to be fetched. Use user1 for testing.
     # @return [User]
     def get_user_by_name(*, username : String? = nil)
       data, _status_code, _headers = get_user_by_name_with_http_info(username: username)
@@ -337,7 +337,7 @@ module PetStore
 
     # Get user by user name
     #
-    # @param username [String?] The name that needs to be fetched. Use user1 for testing.
+    # @required @param username [String?] The name that needs to be fetched. Use user1 for testing.
     # @return [Array<(User, Integer, Hash)>] User data, response status code and response headers
     def get_user_by_name_with_http_info(*, username : String? = nil)
       request = build_api_request_for_get_user_by_name(username: username)
@@ -353,7 +353,7 @@ module PetStore
 
     # Get user by user name
     #
-    # @param username [String?] The name that needs to be fetched. Use user1 for testing.
+    # @required @param username [String?] The name that needs to be fetched. Use user1 for testing.
     # @return nil
     def get_user_by_name(*, username : String? = nil, &block : Crest::Response ->)
       build_api_request_for_get_user_by_name(username: username).execute(&block)
@@ -403,8 +403,8 @@ module PetStore
 
     # Logs user into the system
     #
-    # @param username [String?] The user name for login
-    # @param password [String?] The password for login in clear text
+    # @required @param username [String?] The user name for login
+    # @required @param password [String?] The password for login in clear text
     # @return [String]
     def login_user(*, username : String? = nil, password : String? = nil)
       data, _status_code, _headers = login_user_with_http_info(username: username, password: password)
@@ -413,8 +413,8 @@ module PetStore
 
     # Logs user into the system
     #
-    # @param username [String?] The user name for login
-    # @param password [String?] The password for login in clear text
+    # @required @param username [String?] The user name for login
+    # @required @param password [String?] The password for login in clear text
     # @return [Array<(String, Integer, Hash)>] String data, response status code and response headers
     def login_user_with_http_info(*, username : String? = nil, password : String? = nil)
       request = build_api_request_for_login_user(username: username, password: password)
@@ -430,8 +430,8 @@ module PetStore
 
     # Logs user into the system
     #
-    # @param username [String?] The user name for login
-    # @param password [String?] The password for login in clear text
+    # @required @param username [String?] The user name for login
+    # @required @param password [String?] The password for login in clear text
     # @return nil
     def login_user(*, username : String? = nil, password : String? = nil, &block : Crest::Response ->)
       build_api_request_for_login_user(username: username, password: password).execute(&block)
@@ -551,8 +551,8 @@ module PetStore
 
     # Updated user
     # This can only be done by the logged in user.
-    # @param username [String?] name that need to be deleted
-    # @param user [PetStore::User?] Updated user object
+    # @required @param username [String?] name that need to be deleted
+    # @required @param user [PetStore::User?] Updated user object
     # @return [nil]
     def update_user(*, username : String? = nil, user : PetStore::User? = nil)
       update_user_with_http_info(username: username, user: user)
@@ -561,8 +561,8 @@ module PetStore
 
     # Updated user
     # This can only be done by the logged in user.
-    # @param username [String?] name that need to be deleted
-    # @param user [PetStore::User?] Updated user object
+    # @required @param username [String?] name that need to be deleted
+    # @required @param user [PetStore::User?] Updated user object
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def update_user_with_http_info(*, username : String? = nil, user : PetStore::User? = nil)
       request = build_api_request_for_update_user(username: username, user: user)
@@ -578,8 +578,8 @@ module PetStore
 
     # Updated user
     # This can only be done by the logged in user.
-    # @param username [String?] name that need to be deleted
-    # @param user [PetStore::User?] Updated user object
+    # @required @param username [String?] name that need to be deleted
+    # @required @param user [PetStore::User?] Updated user object
     # @return nil
     def update_user(*, username : String? = nil, user : PetStore::User? = nil, &block : Crest::Response ->)
       build_api_request_for_update_user(username: username, user: user).execute(&block)

@@ -19,7 +19,7 @@ module PetStore
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Optional properties
+    # Optional Properties
 
     @[JSON::Field(key: "NullableMessage", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: nullable_message.nil? && !nullable_message_present?)]
     getter nullable_message : String? = nil

@@ -18,10 +18,12 @@ module PetStore
     include OpenApi::Validatable
     include OpenApi::Json
 
-    # Required properties
+    # Required Properties
 
     @[JSON::Field(key: "count", type: Float64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter count : Float64? = nil
+
+    # End of Required Properties
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

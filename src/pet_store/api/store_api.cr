@@ -21,7 +21,7 @@ module PetStore
 
     # Delete purchase order by ID
     # For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors
-    # @param order_id [String?] ID of the order that needs to be deleted
+    # @required @param order_id [String?] ID of the order that needs to be deleted
     # @return [nil]
     def delete_order(*, order_id : String? = nil)
       delete_order_with_http_info(order_id: order_id)
@@ -30,7 +30,7 @@ module PetStore
 
     # Delete purchase order by ID
     # For valid response try integer IDs with value &lt; 1000. Anything above 1000 or nonintegers will generate API errors
-    # @param order_id [String?] ID of the order that needs to be deleted
+    # @required @param order_id [String?] ID of the order that needs to be deleted
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def delete_order_with_http_info(*, order_id : String? = nil)
       request = build_api_request_for_delete_order(order_id: order_id)
@@ -46,7 +46,7 @@ module PetStore
 
     # Delete purchase order by ID
     # For valid response try integer IDs with value &lt; 1000. Anything above 1000 or nonintegers will generate API errors
-    # @param order_id [String?] ID of the order that needs to be deleted
+    # @required @param order_id [String?] ID of the order that needs to be deleted
     # @return nil
     def delete_order(*, order_id : String? = nil, &block : Crest::Response ->)
       build_api_request_for_delete_order(order_id: order_id).execute(&block)
@@ -162,7 +162,7 @@ module PetStore
 
     # Find purchase order by ID
     # For valid response try integer IDs with value <= 5 or > 10. Other values will generated exceptions
-    # @param order_id [Int64?] ID of pet that needs to be fetched
+    # @required @param order_id [Int64?] ID of pet that needs to be fetched
     # @return [Order]
     def get_order_by_id(*, order_id : Int64? = nil)
       data, _status_code, _headers = get_order_by_id_with_http_info(order_id: order_id)
@@ -171,7 +171,7 @@ module PetStore
 
     # Find purchase order by ID
     # For valid response try integer IDs with value &lt;&#x3D; 5 or &gt; 10. Other values will generated exceptions
-    # @param order_id [Int64?] ID of pet that needs to be fetched
+    # @required @param order_id [Int64?] ID of pet that needs to be fetched
     # @return [Array<(Order, Integer, Hash)>] Order data, response status code and response headers
     def get_order_by_id_with_http_info(*, order_id : Int64? = nil)
       request = build_api_request_for_get_order_by_id(order_id: order_id)
@@ -187,7 +187,7 @@ module PetStore
 
     # Find purchase order by ID
     # For valid response try integer IDs with value &lt;&#x3D; 5 or &gt; 10. Other values will generated exceptions
-    # @param order_id [Int64?] ID of pet that needs to be fetched
+    # @required @param order_id [Int64?] ID of pet that needs to be fetched
     # @return nil
     def get_order_by_id(*, order_id : Int64? = nil, &block : Crest::Response ->)
       build_api_request_for_get_order_by_id(order_id: order_id).execute(&block)
@@ -244,7 +244,7 @@ module PetStore
 
     # Place an order for a pet
     #
-    # @param order [PetStore::Order?] order placed for purchasing the pet
+    # @required @param order [PetStore::Order?] order placed for purchasing the pet
     # @return [Order]
     def place_order(*, order : PetStore::Order? = nil)
       data, _status_code, _headers = place_order_with_http_info(order: order)
@@ -253,7 +253,7 @@ module PetStore
 
     # Place an order for a pet
     #
-    # @param order [PetStore::Order?] order placed for purchasing the pet
+    # @required @param order [PetStore::Order?] order placed for purchasing the pet
     # @return [Array<(Order, Integer, Hash)>] Order data, response status code and response headers
     def place_order_with_http_info(*, order : PetStore::Order? = nil)
       request = build_api_request_for_place_order(order: order)
@@ -269,7 +269,7 @@ module PetStore
 
     # Place an order for a pet
     #
-    # @param order [PetStore::Order?] order placed for purchasing the pet
+    # @required @param order [PetStore::Order?] order placed for purchasing the pet
     # @return nil
     def place_order(*, order : PetStore::Order? = nil, &block : Crest::Response ->)
       build_api_request_for_place_order(order: order).execute(&block)

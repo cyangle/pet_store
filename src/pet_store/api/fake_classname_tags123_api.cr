@@ -21,7 +21,7 @@ module PetStore
 
     # To test class name in snake case
     # To test class name in snake case
-    # @param client [PetStore::Client?] client model
+    # @required @param client [PetStore::Client?] client model
     # @return [Client]
     def test_classname(*, client : PetStore::Client? = nil)
       data, _status_code, _headers = test_classname_with_http_info(client: client)
@@ -30,7 +30,7 @@ module PetStore
 
     # To test class name in snake case
     # To test class name in snake case
-    # @param client [PetStore::Client?] client model
+    # @required @param client [PetStore::Client?] client model
     # @return [Array<(Client, Integer, Hash)>] Client data, response status code and response headers
     def test_classname_with_http_info(*, client : PetStore::Client? = nil)
       request = build_api_request_for_test_classname(client: client)
@@ -46,7 +46,7 @@ module PetStore
 
     # To test class name in snake case
     # To test class name in snake case
-    # @param client [PetStore::Client?] client model
+    # @required @param client [PetStore::Client?] client model
     # @return nil
     def test_classname(*, client : PetStore::Client? = nil, &block : Crest::Response ->)
       build_api_request_for_test_classname(client: client).execute(&block)
