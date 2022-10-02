@@ -14,8 +14,11 @@ tasks:
         name: 'Correct AnyType?'
         pattern: 'JSONType'
         new_value: 'JSON::Type'
+  - name: 'Update all'
+    file_glob: './src/pet_store/**/*cr'
+    changes:
       -
         name: "Remove empty if blocks"
-        pattern: '^\s+if _[^\s]+ = [^\s]+$\n^\s+end$'
+        pattern: '(^\s+if [^\s]+ = [^\s]+$\n^\s+end$|^\s+if [^\s]+$\n^\s+end$)'
         new_value: ''
         multi_line: true

@@ -40,8 +40,8 @@ module PetStore
     # pet status in the store
     @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter status : String? = nil
-
-    VALID_VALUES_FOR_STATUS = StaticArray["available", "pending", "sold"]
+    ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [available, pending, sold]."
+    VALID_VALUES_FOR_STATUS  = StaticArray["available", "pending", "sold"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -71,10 +71,10 @@ module PetStore
         invalid_properties.concat(_category.list_invalid_properties_for("category")) if _category.is_a?(OpenApi::Validatable)
       end
       if _tags = @tags
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "tags", array: _tags)) if _tags.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "tags", container: _tags)) if _tags.is_a?(Array)
       end
       if _status = @status
-        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties
     end
@@ -91,7 +91,7 @@ module PetStore
       end
 
       if _tags = @tags
-        return false if _tags.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _tags)
+        return false if _tags.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _tags)
       end
 
       if _status = @status
@@ -149,7 +149,7 @@ module PetStore
         return @tags = nil
       end
       _tags = tags.not_nil!
-      OpenApi::ArrayValidator.validate(array: _tags) if _tags.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _tags) if _tags.is_a?(Array)
       @tags = _tags
     end
 

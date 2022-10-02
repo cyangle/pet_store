@@ -13,29 +13,31 @@ module PetStore
   class AnotherFakeApi
     property api_client : ApiClient
 
+    delegate client_side_validation, debugging, to: @api_client.config
+
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
 
     # To test special tags
     # To test special tags and operation ID starting with number
-    # @param client [Client] client model
+    # @param client [PetStore::Client?] client model
     # @return [Client]
-    def call_123_test_special_tags(*, client : Client)
+    def call_123_test_special_tags(*, client : PetStore::Client? = nil)
       data, _status_code, _headers = call_123_test_special_tags_with_http_info(client: client)
       data
     end
 
     # To test special tags
     # To test special tags and operation ID starting with number
-    # @param client [Client] client model
+    # @param client [PetStore::Client?] client model
     # @return [Array<(Client, Integer, Hash)>] Client data, response status code and response headers
-    def call_123_test_special_tags_with_http_info(*, client : Client)
+    def call_123_test_special_tags_with_http_info(*, client : PetStore::Client? = nil)
       request = build_api_request_for_call_123_test_special_tags(client: client)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "API called: AnotherFakeApi#call_123_test_special_tags\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -44,17 +46,25 @@ module PetStore
 
     # To test special tags
     # To test special tags and operation ID starting with number
-    # @param client [Client] client model
+    # @param client [PetStore::Client?] client model
     # @return nil
-    def call_123_test_special_tags(*, client : Client, &block : Crest::Response ->)
+    def call_123_test_special_tags(*, client : PetStore::Client? = nil, &block : Crest::Response ->)
       build_api_request_for_call_123_test_special_tags(client: client).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_call_123_test_special_tags(*, client : Client) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_call_123_test_special_tags(*, client : PetStore::Client? = nil) : Crest::Request
+      if debugging
         Log.debug { "Calling API: AnotherFakeApi.call_123_test_special_tags ..." }
       end
+
+      if client_side_validation
+        raise ArgumentError.new("\"client\" is required and cannot be null") if client.nil?
+        if _client = client
+          _client.validate if _client.is_a?(OpenApi::Validatable)
+        end
+      end
+
       # resource path
       local_var_path = "/another-fake/dummy"
 

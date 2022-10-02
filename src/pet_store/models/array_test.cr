@@ -22,6 +22,8 @@ module PetStore
 
     @[JSON::Field(key: "array_of_string", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter array_of_string : Array(String)? = nil
+    MAX_ITEMS_FOR_ARRAY_OF_STRING = 10
+    MIN_ITEMS_FOR_ARRAY_OF_STRING =  1
 
     @[JSON::Field(key: "array_array_of_integer", type: Array(Array(Int64))?, default: nil, required: false, nullable: false, emit_null: false)]
     getter array_array_of_integer : Array(Array(Int64))? = nil
@@ -45,12 +47,27 @@ module PetStore
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
+      if _array_of_string = @array_of_string
+        if max_items_error = OpenApi::PrimitiveValidator.max_items_error("array_of_string", _array_of_string.size, MAX_ITEMS_FOR_ARRAY_OF_STRING)
+          invalid_properties.push(max_items_error)
+        end
+
+        if min_items_error = OpenApi::PrimitiveValidator.min_items_error("array_of_string", _array_of_string.size, MIN_ITEMS_FOR_ARRAY_OF_STRING)
+          invalid_properties.push(min_items_error)
+        end
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
+      if _array_of_string = @array_of_string
+        return false if _array_of_string.size > MAX_ITEMS_FOR_ARRAY_OF_STRING
+        return false if _array_of_string.size < MIN_ITEMS_FOR_ARRAY_OF_STRING
+      end
+
       true
     end
 
@@ -61,6 +78,8 @@ module PetStore
         return @array_of_string = nil
       end
       _array_of_string = array_of_string.not_nil!
+      OpenApi::PrimitiveValidator.validate_max_items("array_of_string", _array_of_string.size, MAX_ITEMS_FOR_ARRAY_OF_STRING)
+      OpenApi::PrimitiveValidator.validate_min_items("array_of_string", _array_of_string.size, MIN_ITEMS_FOR_ARRAY_OF_STRING)
       @array_of_string = _array_of_string
     end
 

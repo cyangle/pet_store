@@ -25,8 +25,8 @@ module PetStore
 
     @[JSON::Field(key: "map_of_enum_string", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter map_of_enum_string : Hash(String, String)? = nil
-
-    VALID_VALUES_FOR_MAP_OF_ENUM_STRING = StaticArray["UPPER", "lower"]
+    ERROR_MESSAGE_FOR_MAP_OF_ENUM_STRING = "invalid value for \"map_of_enum_string\", must be one of [UPPER, lower]."
+    VALID_VALUES_FOR_MAP_OF_ENUM_STRING  = StaticArray["UPPER", "lower"]
 
     @[JSON::Field(key: "direct_map", type: Hash(String, Bool)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter direct_map : Hash(String, Bool)? = nil
@@ -52,7 +52,7 @@ module PetStore
       invalid_properties = Array(String).new
 
       if _map_of_enum_string = @map_of_enum_string
-        invalid_properties.push(OpenApi::EnumValidator.error_message("map_of_enum_string", VALID_VALUES_FOR_MAP_OF_ENUM_STRING)) unless OpenApi::EnumValidator.valid?(_map_of_enum_string, VALID_VALUES_FOR_MAP_OF_ENUM_STRING)
+        invalid_properties.push(ERROR_MESSAGE_FOR_MAP_OF_ENUM_STRING) unless OpenApi::EnumValidator.valid?(_map_of_enum_string, VALID_VALUES_FOR_MAP_OF_ENUM_STRING)
       end
 
       invalid_properties

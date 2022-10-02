@@ -52,7 +52,19 @@ describe PetStore::FormatTest do
 
   describe "test attribute 'double'" do
     it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      instance = PetStore::FormatTest.new(
+        number: 100.0_f64,
+        byte: "test",
+        date: Time.local,
+        password: "0123456789"
+      )
+      instance.valid?.should be_true
+      expect_raises(ArgumentError, /must be greater than or equal to/) do
+        instance.double = 0.0
+      end
+      expect_raises(ArgumentError, /must be smaller than or equal to/) do
+        instance.double = 200.0
+      end
     end
   end
 

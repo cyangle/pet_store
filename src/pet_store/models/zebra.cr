@@ -27,8 +27,8 @@ module PetStore
 
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["plains", "mountain", "grevys"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [plains, mountain, grevys]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["plains", "mountain", "grevys"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -49,7 +49,7 @@ module PetStore
       invalid_properties.push("\"class_name\" is required and cannot be null") if @class_name.nil?
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       invalid_properties
     end

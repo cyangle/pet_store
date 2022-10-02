@@ -45,7 +45,7 @@ module PetStore
         invalid_properties.concat(_file.list_invalid_properties_for("file")) if _file.is_a?(OpenApi::Validatable)
       end
       if _files = @files
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "files", array: _files)) if _files.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "files", container: _files)) if _files.is_a?(Array)
       end
       invalid_properties
     end
@@ -58,7 +58,7 @@ module PetStore
       end
 
       if _files = @files
-        return false if _files.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _files)
+        return false if _files.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _files)
       end
 
       true
@@ -82,7 +82,7 @@ module PetStore
         return @files = nil
       end
       _files = files.not_nil!
-      OpenApi::ArrayValidator.validate(array: _files) if _files.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _files) if _files.is_a?(Array)
       @files = _files
     end
 

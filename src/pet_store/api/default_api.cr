@@ -13,6 +13,8 @@ module PetStore
   class DefaultApi
     property api_client : ApiClient
 
+    delegate client_side_validation, debugging, to: @api_client.config
+
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
@@ -29,7 +31,7 @@ module PetStore
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "API called: DefaultApi#foo_get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -43,9 +45,10 @@ module PetStore
 
     # @return Crest::Request
     def build_api_request_for_foo_get : Crest::Request
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "Calling API: DefaultApi.foo_get ..." }
       end
+
       # resource path
       local_var_path = "/foo"
 

@@ -13,29 +13,31 @@ module PetStore
   class StoreApi
     property api_client : ApiClient
 
+    delegate client_side_validation, debugging, to: @api_client.config
+
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
 
     # Delete purchase order by ID
     # For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors
-    # @param order_id [String] ID of the order that needs to be deleted
+    # @param order_id [String?] ID of the order that needs to be deleted
     # @return [nil]
-    def delete_order(*, order_id : String)
+    def delete_order(*, order_id : String? = nil)
       delete_order_with_http_info(order_id: order_id)
       nil
     end
 
     # Delete purchase order by ID
     # For valid response try integer IDs with value &lt; 1000. Anything above 1000 or nonintegers will generate API errors
-    # @param order_id [String] ID of the order that needs to be deleted
+    # @param order_id [String?] ID of the order that needs to be deleted
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def delete_order_with_http_info(*, order_id : String)
+    def delete_order_with_http_info(*, order_id : String? = nil)
       request = build_api_request_for_delete_order(order_id: order_id)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "API called: StoreApi#delete_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -44,17 +46,22 @@ module PetStore
 
     # Delete purchase order by ID
     # For valid response try integer IDs with value &lt; 1000. Anything above 1000 or nonintegers will generate API errors
-    # @param order_id [String] ID of the order that needs to be deleted
+    # @param order_id [String?] ID of the order that needs to be deleted
     # @return nil
-    def delete_order(*, order_id : String, &block : Crest::Response ->)
+    def delete_order(*, order_id : String? = nil, &block : Crest::Response ->)
       build_api_request_for_delete_order(order_id: order_id).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_delete_order(*, order_id : String) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_delete_order(*, order_id : String? = nil) : Crest::Request
+      if debugging
         Log.debug { "Calling API: StoreApi.delete_order ..." }
       end
+
+      if client_side_validation
+        raise ArgumentError.new("\"order_id\" is required and cannot be null") if order_id.nil?
+      end
+
       # resource path
       local_var_path = "/store/order/{order_id}".sub("{" + "order_id" + "}", URI.encode_path(order_id.to_s))
 
@@ -101,7 +108,7 @@ module PetStore
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "API called: StoreApi#get_inventory\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -117,9 +124,10 @@ module PetStore
 
     # @return Crest::Request
     def build_api_request_for_get_inventory : Crest::Request
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "Calling API: StoreApi.get_inventory ..." }
       end
+
       # resource path
       local_var_path = "/store/inventory"
 
@@ -154,23 +162,23 @@ module PetStore
 
     # Find purchase order by ID
     # For valid response try integer IDs with value <= 5 or > 10. Other values will generated exceptions
-    # @param order_id [Int64] ID of pet that needs to be fetched
+    # @param order_id [Int64?] ID of pet that needs to be fetched
     # @return [Order]
-    def get_order_by_id(*, order_id : Int64)
+    def get_order_by_id(*, order_id : Int64? = nil)
       data, _status_code, _headers = get_order_by_id_with_http_info(order_id: order_id)
       data
     end
 
     # Find purchase order by ID
     # For valid response try integer IDs with value &lt;&#x3D; 5 or &gt; 10. Other values will generated exceptions
-    # @param order_id [Int64] ID of pet that needs to be fetched
+    # @param order_id [Int64?] ID of pet that needs to be fetched
     # @return [Array<(Order, Integer, Hash)>] Order data, response status code and response headers
-    def get_order_by_id_with_http_info(*, order_id : Int64)
+    def get_order_by_id_with_http_info(*, order_id : Int64? = nil)
       request = build_api_request_for_get_order_by_id(order_id: order_id)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "API called: StoreApi#get_order_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -179,23 +187,27 @@ module PetStore
 
     # Find purchase order by ID
     # For valid response try integer IDs with value &lt;&#x3D; 5 or &gt; 10. Other values will generated exceptions
-    # @param order_id [Int64] ID of pet that needs to be fetched
+    # @param order_id [Int64?] ID of pet that needs to be fetched
     # @return nil
-    def get_order_by_id(*, order_id : Int64, &block : Crest::Response ->)
+    def get_order_by_id(*, order_id : Int64? = nil, &block : Crest::Response ->)
       build_api_request_for_get_order_by_id(order_id: order_id).execute(&block)
     end
 
+    GET_ORDER_BY_ID_MAX_FOR_ORDER_ID = Int64.new("5")
+    GET_ORDER_BY_ID_MIN_FOR_ORDER_ID = Int64.new("1")
+
     # @return Crest::Request
-    def build_api_request_for_get_order_by_id(*, order_id : Int64) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_get_order_by_id(*, order_id : Int64? = nil) : Crest::Request
+      if debugging
         Log.debug { "Calling API: StoreApi.get_order_by_id ..." }
       end
-      if @api_client.config.client_side_validation && order_id > 5
-        raise ArgumentError.new("invalid value for \"order_id\" when calling StoreApi.get_order_by_id, must be smaller than or equal to 5.")
-      end
 
-      if @api_client.config.client_side_validation && order_id < 1
-        raise ArgumentError.new("invalid value for \"order_id\" when calling StoreApi.get_order_by_id, must be greater than or equal to 1.")
+      if client_side_validation
+        raise ArgumentError.new("\"order_id\" is required and cannot be null") if order_id.nil?
+        if _order_id = order_id
+          OpenApi::PrimitiveValidator.validate_max_number("order_id", _order_id, GET_ORDER_BY_ID_MAX_FOR_ORDER_ID)
+          OpenApi::PrimitiveValidator.validate_min_number("order_id", _order_id, GET_ORDER_BY_ID_MIN_FOR_ORDER_ID)
+        end
       end
 
       # resource path
@@ -232,23 +244,23 @@ module PetStore
 
     # Place an order for a pet
     #
-    # @param order [Order] order placed for purchasing the pet
+    # @param order [PetStore::Order?] order placed for purchasing the pet
     # @return [Order]
-    def place_order(*, order : Order)
+    def place_order(*, order : PetStore::Order? = nil)
       data, _status_code, _headers = place_order_with_http_info(order: order)
       data
     end
 
     # Place an order for a pet
     #
-    # @param order [Order] order placed for purchasing the pet
+    # @param order [PetStore::Order?] order placed for purchasing the pet
     # @return [Array<(Order, Integer, Hash)>] Order data, response status code and response headers
-    def place_order_with_http_info(*, order : Order)
+    def place_order_with_http_info(*, order : PetStore::Order? = nil)
       request = build_api_request_for_place_order(order: order)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "API called: StoreApi#place_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -257,17 +269,25 @@ module PetStore
 
     # Place an order for a pet
     #
-    # @param order [Order] order placed for purchasing the pet
+    # @param order [PetStore::Order?] order placed for purchasing the pet
     # @return nil
-    def place_order(*, order : Order, &block : Crest::Response ->)
+    def place_order(*, order : PetStore::Order? = nil, &block : Crest::Response ->)
       build_api_request_for_place_order(order: order).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_place_order(*, order : Order) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_place_order(*, order : PetStore::Order? = nil) : Crest::Request
+      if debugging
         Log.debug { "Calling API: StoreApi.place_order ..." }
       end
+
+      if client_side_validation
+        raise ArgumentError.new("\"order\" is required and cannot be null") if order.nil?
+        if _order = order
+          _order.validate if _order.is_a?(OpenApi::Validatable)
+        end
+      end
+
       # resource path
       local_var_path = "/store/order"
 

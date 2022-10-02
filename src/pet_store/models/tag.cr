@@ -22,9 +22,11 @@ module PetStore
 
     @[JSON::Field(key: "id", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter id : Int64? = nil
+    MIN_FOR_ID = Int64.new("0")
 
     @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter name : String? = nil
+    MIN_LENGTH_FOR_NAME = 5
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -42,12 +44,12 @@ module PetStore
       invalid_properties = Array(String).new
 
       if _id = @id
-        if min_number_error = OpenApi::PrimitiveValidator.min_number_error("id", _id, 0)
+        if min_number_error = OpenApi::PrimitiveValidator.min_number_error("id", _id, MIN_FOR_ID)
           invalid_properties.push(min_number_error)
         end
       end
       if _name = @name
-        if min_length_error = OpenApi::PrimitiveValidator.min_length_error("name", _name.to_s.size, 5)
+        if min_length_error = OpenApi::PrimitiveValidator.min_length_error("name", _name.to_s.size, MIN_LENGTH_FOR_NAME)
           invalid_properties.push(min_length_error)
         end
       end
@@ -58,11 +60,11 @@ module PetStore
     # @return true if the model is valid
     def valid? : Bool
       if _id = @id
-        return false if _id < 0
+        return false if _id < MIN_FOR_ID
       end
 
       if _name = @name
-        return false if _name.to_s.size < 5
+        return false if _name.to_s.size < MIN_LENGTH_FOR_NAME
       end
 
       true
@@ -75,10 +77,7 @@ module PetStore
         return @id = nil
       end
       _id = id.not_nil!
-      if min_number_error = OpenApi::PrimitiveValidator.min_number_error("id", _id, 0)
-        raise ArgumentError.new(min_number_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_min_number("id", _id, MIN_FOR_ID)
       @id = _id
     end
 
@@ -89,10 +88,7 @@ module PetStore
         return @name = nil
       end
       _name = name.not_nil!
-      if min_length_error = OpenApi::PrimitiveValidator.min_length_error("name", _name.to_s.size, 5)
-        raise ArgumentError.new(min_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_min_length("name", _name.to_s.size, MIN_LENGTH_FOR_NAME)
       @name = _name
     end
 

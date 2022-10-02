@@ -13,6 +13,8 @@ module PetStore
   class FakeApi
     property api_client : ApiClient
 
+    delegate client_side_validation, debugging, to: @api_client.config
+
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
@@ -31,7 +33,7 @@ module PetStore
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "API called: FakeApi#fake_health_get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -46,9 +48,10 @@ module PetStore
 
     # @return Crest::Request
     def build_api_request_for_fake_health_get : Crest::Request
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "Calling API: FakeApi.fake_health_get ..." }
       end
+
       # resource path
       local_var_path = "/fake/health"
 
@@ -97,7 +100,7 @@ module PetStore
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "API called: FakeApi#fake_outer_boolean_serialize\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -113,9 +116,10 @@ module PetStore
 
     # @return Crest::Request
     def build_api_request_for_fake_outer_boolean_serialize(*, body : Bool? = nil) : Crest::Request
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "Calling API: FakeApi.fake_outer_boolean_serialize ..." }
       end
+
       # resource path
       local_var_path = "/fake/outer/boolean"
 
@@ -151,22 +155,22 @@ module PetStore
     end
 
     # Test serialization of object with outer number type
-    # @optional @param outer_composite [OuterComposite?] Input composite as post body
+    # @optional @param outer_composite [PetStore::OuterComposite?] Input composite as post body
     # @return [OuterComposite]
-    def fake_outer_composite_serialize(*, outer_composite : OuterComposite? = nil)
+    def fake_outer_composite_serialize(*, outer_composite : PetStore::OuterComposite? = nil)
       data, _status_code, _headers = fake_outer_composite_serialize_with_http_info(outer_composite: outer_composite)
       data
     end
 
     # Test serialization of object with outer number type
-    # @optional @param outer_composite [OuterComposite?] Input composite as post body
+    # @optional @param outer_composite [PetStore::OuterComposite?] Input composite as post body
     # @return [Array<(OuterComposite, Integer, Hash)>] OuterComposite data, response status code and response headers
-    def fake_outer_composite_serialize_with_http_info(*, outer_composite : OuterComposite? = nil)
+    def fake_outer_composite_serialize_with_http_info(*, outer_composite : PetStore::OuterComposite? = nil)
       request = build_api_request_for_fake_outer_composite_serialize(outer_composite: outer_composite)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "API called: FakeApi#fake_outer_composite_serialize\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -174,17 +178,24 @@ module PetStore
     end
 
     # Test serialization of object with outer number type
-    # @optional @param outer_composite [OuterComposite?] Input composite as post body
+    # @optional @param outer_composite [PetStore::OuterComposite?] Input composite as post body
     # @return nil
-    def fake_outer_composite_serialize(*, outer_composite : OuterComposite? = nil, &block : Crest::Response ->)
+    def fake_outer_composite_serialize(*, outer_composite : PetStore::OuterComposite? = nil, &block : Crest::Response ->)
       build_api_request_for_fake_outer_composite_serialize(outer_composite: outer_composite).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_fake_outer_composite_serialize(*, outer_composite : OuterComposite? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_fake_outer_composite_serialize(*, outer_composite : PetStore::OuterComposite? = nil) : Crest::Request
+      if debugging
         Log.debug { "Calling API: FakeApi.fake_outer_composite_serialize ..." }
       end
+
+      if client_side_validation
+        if _outer_composite = outer_composite
+          _outer_composite.validate if _outer_composite.is_a?(OpenApi::Validatable)
+        end
+      end
+
       # resource path
       local_var_path = "/fake/outer/composite"
 
@@ -235,7 +246,7 @@ module PetStore
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "API called: FakeApi#fake_outer_number_serialize\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -251,9 +262,10 @@ module PetStore
 
     # @return Crest::Request
     def build_api_request_for_fake_outer_number_serialize(*, body : Float64? = nil) : Crest::Request
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "Calling API: FakeApi.fake_outer_number_serialize ..." }
       end
+
       # resource path
       local_var_path = "/fake/outer/number"
 
@@ -304,7 +316,7 @@ module PetStore
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "API called: FakeApi#fake_outer_string_serialize\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -320,9 +332,10 @@ module PetStore
 
     # @return Crest::Request
     def build_api_request_for_fake_outer_string_serialize(*, body : String? = nil) : Crest::Request
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "Calling API: FakeApi.fake_outer_string_serialize ..." }
       end
+
       # resource path
       local_var_path = "/fake/outer/string"
 
@@ -358,22 +371,22 @@ module PetStore
     end
 
     # For this test, the body for this request much reference a schema named `File`.
-    # @param file_schema_test_class [FileSchemaTestClass]
+    # @param file_schema_test_class [PetStore::FileSchemaTestClass?]
     # @return [nil]
-    def test_body_with_file_schema(*, file_schema_test_class : FileSchemaTestClass)
+    def test_body_with_file_schema(*, file_schema_test_class : PetStore::FileSchemaTestClass? = nil)
       test_body_with_file_schema_with_http_info(file_schema_test_class: file_schema_test_class)
       nil
     end
 
     # For this test, the body for this request much reference a schema named &#x60;File&#x60;.
-    # @param file_schema_test_class [FileSchemaTestClass]
+    # @param file_schema_test_class [PetStore::FileSchemaTestClass?]
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def test_body_with_file_schema_with_http_info(*, file_schema_test_class : FileSchemaTestClass)
+    def test_body_with_file_schema_with_http_info(*, file_schema_test_class : PetStore::FileSchemaTestClass? = nil)
       request = build_api_request_for_test_body_with_file_schema(file_schema_test_class: file_schema_test_class)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "API called: FakeApi#test_body_with_file_schema\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -381,17 +394,25 @@ module PetStore
     end
 
     # For this test, the body for this request much reference a schema named &#x60;File&#x60;.
-    # @param file_schema_test_class [FileSchemaTestClass]
+    # @param file_schema_test_class [PetStore::FileSchemaTestClass?]
     # @return nil
-    def test_body_with_file_schema(*, file_schema_test_class : FileSchemaTestClass, &block : Crest::Response ->)
+    def test_body_with_file_schema(*, file_schema_test_class : PetStore::FileSchemaTestClass? = nil, &block : Crest::Response ->)
       build_api_request_for_test_body_with_file_schema(file_schema_test_class: file_schema_test_class).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_test_body_with_file_schema(*, file_schema_test_class : FileSchemaTestClass) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_test_body_with_file_schema(*, file_schema_test_class : PetStore::FileSchemaTestClass? = nil) : Crest::Request
+      if debugging
         Log.debug { "Calling API: FakeApi.test_body_with_file_schema ..." }
       end
+
+      if client_side_validation
+        raise ArgumentError.new("\"file_schema_test_class\" is required and cannot be null") if file_schema_test_class.nil?
+        if _file_schema_test_class = file_schema_test_class
+          _file_schema_test_class.validate if _file_schema_test_class.is_a?(OpenApi::Validatable)
+        end
+      end
+
       # resource path
       local_var_path = "/fake/body-with-file-schema"
 
@@ -424,41 +445,51 @@ module PetStore
       )
     end
 
-    # @param query [String]
-    # @param user [User]
+    # @param query [String?]
+    # @param user [PetStore::User?]
     # @return [nil]
-    def test_body_with_query_params(*, query : String, user : User)
+    def test_body_with_query_params(*, query : String? = nil, user : PetStore::User? = nil)
       test_body_with_query_params_with_http_info(query: query, user: user)
       nil
     end
 
-    # @param query [String]
-    # @param user [User]
+    # @param query [String?]
+    # @param user [PetStore::User?]
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def test_body_with_query_params_with_http_info(*, query : String, user : User)
+    def test_body_with_query_params_with_http_info(*, query : String? = nil, user : PetStore::User? = nil)
       request = build_api_request_for_test_body_with_query_params(query: query, user: user)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "API called: FakeApi#test_body_with_query_params\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
       return nil, status_code, headers
     end
 
-    # @param query [String]
-    # @param user [User]
+    # @param query [String?]
+    # @param user [PetStore::User?]
     # @return nil
-    def test_body_with_query_params(*, query : String, user : User, &block : Crest::Response ->)
+    def test_body_with_query_params(*, query : String? = nil, user : PetStore::User? = nil, &block : Crest::Response ->)
       build_api_request_for_test_body_with_query_params(query: query, user: user).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_test_body_with_query_params(*, query : String, user : User) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_test_body_with_query_params(*, query : String? = nil, user : PetStore::User? = nil) : Crest::Request
+      if debugging
         Log.debug { "Calling API: FakeApi.test_body_with_query_params ..." }
       end
+
+      if client_side_validation
+        raise ArgumentError.new("\"query\" is required and cannot be null") if query.nil?
+
+        raise ArgumentError.new("\"user\" is required and cannot be null") if user.nil?
+        if _user = user
+          _user.validate if _user.is_a?(OpenApi::Validatable)
+        end
+      end
+
       # resource path
       local_var_path = "/fake/body-with-query-params"
 
@@ -494,23 +525,23 @@ module PetStore
 
     # To test \"client\" model
     # To test \"client\" model
-    # @param client [Client] client model
+    # @param client [PetStore::Client?] client model
     # @return [Client]
-    def test_client_model(*, client : Client)
+    def test_client_model(*, client : PetStore::Client? = nil)
       data, _status_code, _headers = test_client_model_with_http_info(client: client)
       data
     end
 
     # To test \&quot;client\&quot; model
     # To test \&quot;client\&quot; model
-    # @param client [Client] client model
+    # @param client [PetStore::Client?] client model
     # @return [Array<(Client, Integer, Hash)>] Client data, response status code and response headers
-    def test_client_model_with_http_info(*, client : Client)
+    def test_client_model_with_http_info(*, client : PetStore::Client? = nil)
       request = build_api_request_for_test_client_model(client: client)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "API called: FakeApi#test_client_model\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -519,17 +550,25 @@ module PetStore
 
     # To test \&quot;client\&quot; model
     # To test \&quot;client\&quot; model
-    # @param client [Client] client model
+    # @param client [PetStore::Client?] client model
     # @return nil
-    def test_client_model(*, client : Client, &block : Crest::Response ->)
+    def test_client_model(*, client : PetStore::Client? = nil, &block : Crest::Response ->)
       build_api_request_for_test_client_model(client: client).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_test_client_model(*, client : Client) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_test_client_model(*, client : PetStore::Client? = nil) : Crest::Request
+      if debugging
         Log.debug { "Calling API: FakeApi.test_client_model ..." }
       end
+
+      if client_side_validation
+        raise ArgumentError.new("\"client\" is required and cannot be null") if client.nil?
+        if _client = client
+          _client.validate if _client.is_a?(OpenApi::Validatable)
+        end
+      end
+
       # resource path
       local_var_path = "/fake"
 
@@ -566,10 +605,10 @@ module PetStore
 
     # Fake endpoint for testing various parameters 假端點 偽のエンドポイント 가짜 엔드 포인트
     # Fake endpoint for testing various parameters 假端點 偽のエンドポイント 가짜 엔드 포인트
-    # @param number [Float64] None
-    # @param double [Float64] None
-    # @param pattern_without_delimiter [String] None
-    # @param byte [String] None
+    # @param number [Float64?] None
+    # @param double [Float64?] None
+    # @param pattern_without_delimiter [String?] None
+    # @param byte [String?] None
     # @optional @param integer [Int32?] None
     # @optional @param int32 [Int32?] None
     # @optional @param int64 [Int64?] None
@@ -581,17 +620,17 @@ module PetStore
     # @optional @param password [String?] None
     # @optional @param callback [String?] None
     # @return [nil]
-    def test_endpoint_parameters(*, number : Float64, double : Float64, pattern_without_delimiter : String, byte : String, integer : Int32? = nil, int32 : Int32? = nil, int64 : Int64? = nil, float : Float32? = nil, string : String? = nil, binary : ::File? = nil, date : Time? = nil, date_time : Time? = nil, password : String? = nil, callback : String? = nil)
+    def test_endpoint_parameters(*, number : Float64? = nil, double : Float64? = nil, pattern_without_delimiter : String? = nil, byte : String? = nil, integer : Int32? = nil, int32 : Int32? = nil, int64 : Int64? = nil, float : Float32? = nil, string : String? = nil, binary : ::File? = nil, date : Time? = nil, date_time : Time? = nil, password : String? = nil, callback : String? = nil)
       test_endpoint_parameters_with_http_info(number: number, double: double, pattern_without_delimiter: pattern_without_delimiter, byte: byte, integer: integer, int32: int32, int64: int64, float: float, string: string, binary: binary, date: date, date_time: date_time, password: password, callback: callback)
       nil
     end
 
     # Fake endpoint for testing various parameters 假端點 偽のエンドポイント 가짜 엔드 포인트
     # Fake endpoint for testing various parameters 假端點 偽のエンドポイント 가짜 엔드 포인트
-    # @param number [Float64] None
-    # @param double [Float64] None
-    # @param pattern_without_delimiter [String] None
-    # @param byte [String] None
+    # @param number [Float64?] None
+    # @param double [Float64?] None
+    # @param pattern_without_delimiter [String?] None
+    # @param byte [String?] None
     # @optional @param integer [Int32?] None
     # @optional @param int32 [Int32?] None
     # @optional @param int64 [Int64?] None
@@ -603,12 +642,12 @@ module PetStore
     # @optional @param password [String?] None
     # @optional @param callback [String?] None
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def test_endpoint_parameters_with_http_info(*, number : Float64, double : Float64, pattern_without_delimiter : String, byte : String, integer : Int32? = nil, int32 : Int32? = nil, int64 : Int64? = nil, float : Float32? = nil, string : String? = nil, binary : ::File? = nil, date : Time? = nil, date_time : Time? = nil, password : String? = nil, callback : String? = nil)
+    def test_endpoint_parameters_with_http_info(*, number : Float64? = nil, double : Float64? = nil, pattern_without_delimiter : String? = nil, byte : String? = nil, integer : Int32? = nil, int32 : Int32? = nil, int64 : Int64? = nil, float : Float32? = nil, string : String? = nil, binary : ::File? = nil, date : Time? = nil, date_time : Time? = nil, password : String? = nil, callback : String? = nil)
       request = build_api_request_for_test_endpoint_parameters(number: number, double: double, pattern_without_delimiter: pattern_without_delimiter, byte: byte, integer: integer, int32: int32, int64: int64, float: float, string: string, binary: binary, date: date, date_time: date_time, password: password, callback: callback)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "API called: FakeApi#test_endpoint_parameters\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -617,10 +656,10 @@ module PetStore
 
     # Fake endpoint for testing various parameters 假端點 偽のエンドポイント 가짜 엔드 포인트
     # Fake endpoint for testing various parameters 假端點 偽のエンドポイント 가짜 엔드 포인트
-    # @param number [Float64] None
-    # @param double [Float64] None
-    # @param pattern_without_delimiter [String] None
-    # @param byte [String] None
+    # @param number [Float64?] None
+    # @param double [Float64?] None
+    # @param pattern_without_delimiter [String?] None
+    # @param byte [String?] None
     # @optional @param integer [Int32?] None
     # @optional @param int32 [Int32?] None
     # @optional @param int64 [Int64?] None
@@ -632,67 +671,67 @@ module PetStore
     # @optional @param password [String?] None
     # @optional @param callback [String?] None
     # @return nil
-    def test_endpoint_parameters(*, number : Float64, double : Float64, pattern_without_delimiter : String, byte : String, integer : Int32? = nil, int32 : Int32? = nil, int64 : Int64? = nil, float : Float32? = nil, string : String? = nil, binary : ::File? = nil, date : Time? = nil, date_time : Time? = nil, password : String? = nil, callback : String? = nil, &block : Crest::Response ->)
+    def test_endpoint_parameters(*, number : Float64? = nil, double : Float64? = nil, pattern_without_delimiter : String? = nil, byte : String? = nil, integer : Int32? = nil, int32 : Int32? = nil, int64 : Int64? = nil, float : Float32? = nil, string : String? = nil, binary : ::File? = nil, date : Time? = nil, date_time : Time? = nil, password : String? = nil, callback : String? = nil, &block : Crest::Response ->)
       build_api_request_for_test_endpoint_parameters(number: number, double: double, pattern_without_delimiter: pattern_without_delimiter, byte: byte, integer: integer, int32: int32, int64: int64, float: float, string: string, binary: binary, date: date, date_time: date_time, password: password, callback: callback).execute(&block)
     end
 
+    TEST_ENDPOINT_PARAMETERS_MAX_FOR_NUMBER                        = Float64.new("543.2")
+    TEST_ENDPOINT_PARAMETERS_MIN_FOR_NUMBER                        = Float64.new("32.1")
+    TEST_ENDPOINT_PARAMETERS_MAX_FOR_DOUBLE                        = Float64.new("123.4")
+    TEST_ENDPOINT_PARAMETERS_MIN_FOR_DOUBLE                        = Float64.new("67.8")
+    TEST_ENDPOINT_PARAMETERS_PATTERN_FOR_PATTERN_WITHOUT_DELIMITER = /^[A-Z].*/
+    TEST_ENDPOINT_PARAMETERS_MAX_FOR_INTEGER                       = Int32.new("100")
+    TEST_ENDPOINT_PARAMETERS_MIN_FOR_INTEGER                       = Int32.new("10")
+    TEST_ENDPOINT_PARAMETERS_MAX_FOR_INT32                         = Int32.new("200")
+    TEST_ENDPOINT_PARAMETERS_MIN_FOR_INT32                         = Int32.new("20")
+    TEST_ENDPOINT_PARAMETERS_MAX_FOR_FLOAT                         = Float32.new("987.6")
+    TEST_ENDPOINT_PARAMETERS_PATTERN_FOR_STRING                    = /[a-z]/i
+    TEST_ENDPOINT_PARAMETERS_MAX_LENGTH_FOR_PASSWORD               = 64
+    TEST_ENDPOINT_PARAMETERS_MIN_LENGTH_FOR_PASSWORD               = 10
+
     # @return Crest::Request
-    def build_api_request_for_test_endpoint_parameters(*, number : Float64, double : Float64, pattern_without_delimiter : String, byte : String, integer : Int32? = nil, int32 : Int32? = nil, int64 : Int64? = nil, float : Float32? = nil, string : String? = nil, binary : ::File? = nil, date : Time? = nil, date_time : Time? = nil, password : String? = nil, callback : String? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_test_endpoint_parameters(*, number : Float64? = nil, double : Float64? = nil, pattern_without_delimiter : String? = nil, byte : String? = nil, integer : Int32? = nil, int32 : Int32? = nil, int64 : Int64? = nil, float : Float32? = nil, string : String? = nil, binary : ::File? = nil, date : Time? = nil, date_time : Time? = nil, password : String? = nil, callback : String? = nil) : Crest::Request
+      if debugging
         Log.debug { "Calling API: FakeApi.test_endpoint_parameters ..." }
       end
-      if @api_client.config.client_side_validation && number > 543.2
-        raise ArgumentError.new("invalid value for \"number\" when calling FakeApi.test_endpoint_parameters, must be smaller than or equal to 543.2.")
-      end
 
-      if @api_client.config.client_side_validation && number < 32.1
-        raise ArgumentError.new("invalid value for \"number\" when calling FakeApi.test_endpoint_parameters, must be greater than or equal to 32.1.")
-      end
+      if client_side_validation
+        raise ArgumentError.new("\"number\" is required and cannot be null") if number.nil?
+        if _number = number
+          OpenApi::PrimitiveValidator.validate_max_number("number", _number, TEST_ENDPOINT_PARAMETERS_MAX_FOR_NUMBER)
+          OpenApi::PrimitiveValidator.validate_min_number("number", _number, TEST_ENDPOINT_PARAMETERS_MIN_FOR_NUMBER)
+        end
+        raise ArgumentError.new("\"double\" is required and cannot be null") if double.nil?
+        if _double = double
+          OpenApi::PrimitiveValidator.validate_max_number("double", _double, TEST_ENDPOINT_PARAMETERS_MAX_FOR_DOUBLE)
+          OpenApi::PrimitiveValidator.validate_min_number("double", _double, TEST_ENDPOINT_PARAMETERS_MIN_FOR_DOUBLE)
+        end
+        raise ArgumentError.new("\"pattern_without_delimiter\" is required and cannot be null") if pattern_without_delimiter.nil?
+        if _pattern_without_delimiter = pattern_without_delimiter
+          OpenApi::PrimitiveValidator.validate_pattern("pattern_without_delimiter", _pattern_without_delimiter, TEST_ENDPOINT_PARAMETERS_PATTERN_FOR_PATTERN_WITHOUT_DELIMITER)
+        end
+        raise ArgumentError.new("\"byte\" is required and cannot be null") if byte.nil?
 
-      if @api_client.config.client_side_validation && double > 123.4
-        raise ArgumentError.new("invalid value for \"double\" when calling FakeApi.test_endpoint_parameters, must be smaller than or equal to 123.4.")
-      end
+        if _integer = integer
+          OpenApi::PrimitiveValidator.validate_max_number("integer", _integer, TEST_ENDPOINT_PARAMETERS_MAX_FOR_INTEGER)
+          OpenApi::PrimitiveValidator.validate_min_number("integer", _integer, TEST_ENDPOINT_PARAMETERS_MIN_FOR_INTEGER)
+        end
+        if _int32 = int32
+          OpenApi::PrimitiveValidator.validate_max_number("int32", _int32, TEST_ENDPOINT_PARAMETERS_MAX_FOR_INT32)
+          OpenApi::PrimitiveValidator.validate_min_number("int32", _int32, TEST_ENDPOINT_PARAMETERS_MIN_FOR_INT32)
+        end
 
-      if @api_client.config.client_side_validation && double < 67.8
-        raise ArgumentError.new("invalid value for \"double\" when calling FakeApi.test_endpoint_parameters, must be greater than or equal to 67.8.")
-      end
+        if _float = float
+          OpenApi::PrimitiveValidator.validate_max_number("float", _float, TEST_ENDPOINT_PARAMETERS_MAX_FOR_FLOAT)
+        end
+        if _string = string
+          OpenApi::PrimitiveValidator.validate_pattern("string", _string, TEST_ENDPOINT_PARAMETERS_PATTERN_FOR_STRING)
+        end
 
-      pattern = /^[A-Z].*/
-      if @api_client.config.client_side_validation && pattern_without_delimiter !~ pattern
-        raise ArgumentError.new("invalid value for \"pattern_without_delimiter\" when calling FakeApi.test_endpoint_parameters, must conform to the pattern #{pattern}.")
-      end
-
-      if @api_client.config.client_side_validation && !integer.nil? && integer > 100
-        raise ArgumentError.new("invalid value for \"integer\" when calling FakeApi.test_endpoint_parameters, must be smaller than or equal to 100.")
-      end
-
-      if @api_client.config.client_side_validation && !integer.nil? && integer < 10
-        raise ArgumentError.new("invalid value for \"integer\" when calling FakeApi.test_endpoint_parameters, must be greater than or equal to 10.")
-      end
-
-      if @api_client.config.client_side_validation && !int32.nil? && int32 > 200
-        raise ArgumentError.new("invalid value for \"int32\" when calling FakeApi.test_endpoint_parameters, must be smaller than or equal to 200.")
-      end
-
-      if @api_client.config.client_side_validation && !int32.nil? && int32 < 20
-        raise ArgumentError.new("invalid value for \"int32\" when calling FakeApi.test_endpoint_parameters, must be greater than or equal to 20.")
-      end
-
-      if @api_client.config.client_side_validation && !float.nil? && float > 987.6
-        raise ArgumentError.new("invalid value for \"float\" when calling FakeApi.test_endpoint_parameters, must be smaller than or equal to 987.6.")
-      end
-
-      pattern = /[a-z]/i
-      if @api_client.config.client_side_validation && !string.nil? && string !~ pattern
-        raise ArgumentError.new("invalid value for \"string\" when calling FakeApi.test_endpoint_parameters, must conform to the pattern #{pattern}.")
-      end
-
-      if @api_client.config.client_side_validation && !password.nil? && password.to_s.size > 64
-        raise ArgumentError.new("invalid value for \"password\" when calling FakeApi.test_endpoint_parameters, the character length must be smaller than or equal to 64.")
-      end
-
-      if @api_client.config.client_side_validation && !password.nil? && password.to_s.size < 10
-        raise ArgumentError.new("invalid value for \"password\" when calling FakeApi.test_endpoint_parameters, the character length must be great than or equal to 10.")
+        if _password = password
+          OpenApi::PrimitiveValidator.validate_max_length("password", password.to_s.size, TEST_ENDPOINT_PARAMETERS_MAX_LENGTH_FOR_PASSWORD)
+          OpenApi::PrimitiveValidator.validate_min_length("password", password.to_s.size, TEST_ENDPOINT_PARAMETERS_MIN_LENGTH_FOR_PASSWORD)
+        end
       end
 
       # resource path
@@ -773,7 +812,7 @@ module PetStore
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "API called: FakeApi#test_enum_parameters\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -795,43 +834,48 @@ module PetStore
       build_api_request_for_test_enum_parameters(enum_header_string_array: enum_header_string_array, enum_header_string: enum_header_string, enum_query_string_array: enum_query_string_array, enum_query_string: enum_query_string, enum_query_integer: enum_query_integer, enum_query_double: enum_query_double, enum_form_string_array: enum_form_string_array, enum_form_string: enum_form_string).execute(&block)
     end
 
+    TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_HEADER_STRING_ARRAY = StaticArray[">", "$"]
+    TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_HEADER_STRING       = StaticArray["_abc", "-efg", "(xyz)"]
+    TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_QUERY_STRING_ARRAY  = StaticArray[">", "$"]
+    TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_QUERY_STRING        = StaticArray["_abc", "-efg", "(xyz)"]
+    TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_QUERY_INTEGER       = StaticArray[Int32.new("1"), Int32.new("-2")]
+    TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_QUERY_DOUBLE        = StaticArray[Float64.new("1.1"), Float64.new("-1.2")]
+    TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_FORM_STRING_ARRAY   = StaticArray[">", "$"]
+    TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_FORM_STRING         = StaticArray["_abc", "-efg", "(xyz)"]
+
     # @return Crest::Request
     def build_api_request_for_test_enum_parameters(*, enum_header_string_array : Array(String)? = nil, enum_header_string : String? = "-efg", enum_query_string_array : Array(String)? = nil, enum_query_string : String? = "-efg", enum_query_integer : Int32? = nil, enum_query_double : Float64? = nil, enum_form_string_array : Array(String)? = "$", enum_form_string : String? = "-efg") : Crest::Request
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "Calling API: FakeApi.test_enum_parameters ..." }
       end
-      allowable_values = [">", "$"]
-      if @api_client.config.client_side_validation && !enum_header_string_array.nil? && !enum_header_string_array.all? { |item| allowable_values.includes?(item) }
-        raise ArgumentError.new("invalid value for \"enum_header_string_array\", must include one of #{allowable_values}")
+
+      if client_side_validation
+        if _enum_header_string_array = enum_header_string_array
+          OpenApi::EnumValidator.validate("enum_header_string_array", _enum_header_string_array, TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_HEADER_STRING_ARRAY)
+        end
+        if _enum_header_string = enum_header_string
+          OpenApi::EnumValidator.validate("enum_header_string", _enum_header_string, TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_HEADER_STRING)
+        end
+        if _enum_query_string_array = enum_query_string_array
+          OpenApi::EnumValidator.validate("enum_query_string_array", _enum_query_string_array, TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_QUERY_STRING_ARRAY)
+        end
+        if _enum_query_string = enum_query_string
+          OpenApi::EnumValidator.validate("enum_query_string", _enum_query_string, TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_QUERY_STRING)
+        end
+        if _enum_query_integer = enum_query_integer
+          OpenApi::EnumValidator.validate("enum_query_integer", _enum_query_integer, TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_QUERY_INTEGER)
+        end
+        if _enum_query_double = enum_query_double
+          OpenApi::EnumValidator.validate("enum_query_double", _enum_query_double, TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_QUERY_DOUBLE)
+        end
+        if _enum_form_string_array = enum_form_string_array
+          OpenApi::EnumValidator.validate("enum_form_string_array", _enum_form_string_array, TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_FORM_STRING_ARRAY)
+        end
+        if _enum_form_string = enum_form_string
+          OpenApi::EnumValidator.validate("enum_form_string", _enum_form_string, TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_FORM_STRING)
+        end
       end
-      allowable_values = ["_abc", "-efg", "(xyz)"]
-      if @api_client.config.client_side_validation && !enum_header_string.nil? && !allowable_values.includes?(enum_header_string)
-        raise ArgumentError.new("invalid value for \"enum_header_string\", must be one of #{allowable_values}")
-      end
-      allowable_values = [">", "$"]
-      if @api_client.config.client_side_validation && !enum_query_string_array.nil? && !enum_query_string_array.all? { |item| allowable_values.includes?(item) }
-        raise ArgumentError.new("invalid value for \"enum_query_string_array\", must include one of #{allowable_values}")
-      end
-      allowable_values = ["_abc", "-efg", "(xyz)"]
-      if @api_client.config.client_side_validation && !enum_query_string.nil? && !allowable_values.includes?(enum_query_string)
-        raise ArgumentError.new("invalid value for \"enum_query_string\", must be one of #{allowable_values}")
-      end
-      allowable_values = ["1", "-2"]
-      if @api_client.config.client_side_validation && !enum_query_integer.nil? && !allowable_values.includes?(enum_query_integer)
-        raise ArgumentError.new("invalid value for \"enum_query_integer\", must be one of #{allowable_values}")
-      end
-      allowable_values = ["1.1", "-1.2"]
-      if @api_client.config.client_side_validation && !enum_query_double.nil? && !allowable_values.includes?(enum_query_double)
-        raise ArgumentError.new("invalid value for \"enum_query_double\", must be one of #{allowable_values}")
-      end
-      allowable_values = [">", "$"]
-      if @api_client.config.client_side_validation && !enum_form_string_array.nil? && !enum_form_string_array.all? { |item| allowable_values.includes?(item) }
-        raise ArgumentError.new("invalid value for \"enum_form_string_array\", must include one of #{allowable_values}")
-      end
-      allowable_values = ["_abc", "-efg", "(xyz)"]
-      if @api_client.config.client_side_validation && !enum_form_string.nil? && !allowable_values.includes?(enum_form_string)
-        raise ArgumentError.new("invalid value for \"enum_form_string\", must be one of #{allowable_values}")
-      end
+
       # resource path
       local_var_path = "/fake"
 
@@ -874,33 +918,33 @@ module PetStore
 
     # Fake endpoint to test group parameters (optional)
     # Fake endpoint to test group parameters (optional)
-    # @param required_string_group [Int32] Required String in group parameters
-    # @param required_boolean_group [Bool] Required Boolean in group parameters
-    # @param required_int64_group [Int64] Required Integer in group parameters
+    # @param required_string_group [Int32?] Required String in group parameters
+    # @param required_boolean_group [Bool?] Required Boolean in group parameters
+    # @param required_int64_group [Int64?] Required Integer in group parameters
     # @optional @param string_group [Int32?] String in group parameters
     # @optional @param boolean_group [Bool?] Boolean in group parameters
     # @optional @param int64_group [Int64?] Integer in group parameters
     # @return [nil]
-    def test_group_parameters(*, required_string_group : Int32, required_boolean_group : Bool, required_int64_group : Int64, string_group : Int32? = nil, boolean_group : Bool? = nil, int64_group : Int64? = nil)
+    def test_group_parameters(*, required_string_group : Int32? = nil, required_boolean_group : Bool? = nil, required_int64_group : Int64? = nil, string_group : Int32? = nil, boolean_group : Bool? = nil, int64_group : Int64? = nil)
       test_group_parameters_with_http_info(required_string_group: required_string_group, required_boolean_group: required_boolean_group, required_int64_group: required_int64_group, string_group: string_group, boolean_group: boolean_group, int64_group: int64_group)
       nil
     end
 
     # Fake endpoint to test group parameters (optional)
     # Fake endpoint to test group parameters (optional)
-    # @param required_string_group [Int32] Required String in group parameters
-    # @param required_boolean_group [Bool] Required Boolean in group parameters
-    # @param required_int64_group [Int64] Required Integer in group parameters
+    # @param required_string_group [Int32?] Required String in group parameters
+    # @param required_boolean_group [Bool?] Required Boolean in group parameters
+    # @param required_int64_group [Int64?] Required Integer in group parameters
     # @optional @param string_group [Int32?] String in group parameters
     # @optional @param boolean_group [Bool?] Boolean in group parameters
     # @optional @param int64_group [Int64?] Integer in group parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def test_group_parameters_with_http_info(*, required_string_group : Int32, required_boolean_group : Bool, required_int64_group : Int64, string_group : Int32? = nil, boolean_group : Bool? = nil, int64_group : Int64? = nil)
+    def test_group_parameters_with_http_info(*, required_string_group : Int32? = nil, required_boolean_group : Bool? = nil, required_int64_group : Int64? = nil, string_group : Int32? = nil, boolean_group : Bool? = nil, int64_group : Int64? = nil)
       request = build_api_request_for_test_group_parameters(required_string_group: required_string_group, required_boolean_group: required_boolean_group, required_int64_group: required_int64_group, string_group: string_group, boolean_group: boolean_group, int64_group: int64_group)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "API called: FakeApi#test_group_parameters\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -909,22 +953,31 @@ module PetStore
 
     # Fake endpoint to test group parameters (optional)
     # Fake endpoint to test group parameters (optional)
-    # @param required_string_group [Int32] Required String in group parameters
-    # @param required_boolean_group [Bool] Required Boolean in group parameters
-    # @param required_int64_group [Int64] Required Integer in group parameters
+    # @param required_string_group [Int32?] Required String in group parameters
+    # @param required_boolean_group [Bool?] Required Boolean in group parameters
+    # @param required_int64_group [Int64?] Required Integer in group parameters
     # @optional @param string_group [Int32?] String in group parameters
     # @optional @param boolean_group [Bool?] Boolean in group parameters
     # @optional @param int64_group [Int64?] Integer in group parameters
     # @return nil
-    def test_group_parameters(*, required_string_group : Int32, required_boolean_group : Bool, required_int64_group : Int64, string_group : Int32? = nil, boolean_group : Bool? = nil, int64_group : Int64? = nil, &block : Crest::Response ->)
+    def test_group_parameters(*, required_string_group : Int32? = nil, required_boolean_group : Bool? = nil, required_int64_group : Int64? = nil, string_group : Int32? = nil, boolean_group : Bool? = nil, int64_group : Int64? = nil, &block : Crest::Response ->)
       build_api_request_for_test_group_parameters(required_string_group: required_string_group, required_boolean_group: required_boolean_group, required_int64_group: required_int64_group, string_group: string_group, boolean_group: boolean_group, int64_group: int64_group).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_test_group_parameters(*, required_string_group : Int32, required_boolean_group : Bool, required_int64_group : Int64, string_group : Int32? = nil, boolean_group : Bool? = nil, int64_group : Int64? = nil) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_test_group_parameters(*, required_string_group : Int32? = nil, required_boolean_group : Bool? = nil, required_int64_group : Int64? = nil, string_group : Int32? = nil, boolean_group : Bool? = nil, int64_group : Int64? = nil) : Crest::Request
+      if debugging
         Log.debug { "Calling API: FakeApi.test_group_parameters ..." }
       end
+
+      if client_side_validation
+        raise ArgumentError.new("\"required_string_group\" is required and cannot be null") if required_string_group.nil?
+
+        raise ArgumentError.new("\"required_boolean_group\" is required and cannot be null") if required_boolean_group.nil?
+
+        raise ArgumentError.new("\"required_int64_group\" is required and cannot be null") if required_int64_group.nil?
+      end
+
       # resource path
       local_var_path = "/fake"
 
@@ -963,23 +1016,23 @@ module PetStore
 
     # test inline additionalProperties
     #
-    # @param request_body [Hash(String, String)] request body
+    # @param request_body [Hash(String, String)?] request body
     # @return [nil]
-    def test_inline_additional_properties(*, request_body : Hash(String, String))
+    def test_inline_additional_properties(*, request_body : Hash(String, String)? = nil)
       test_inline_additional_properties_with_http_info(request_body: request_body)
       nil
     end
 
     # test inline additionalProperties
     #
-    # @param request_body [Hash(String, String)] request body
+    # @param request_body [Hash(String, String)?] request body
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def test_inline_additional_properties_with_http_info(*, request_body : Hash(String, String))
+    def test_inline_additional_properties_with_http_info(*, request_body : Hash(String, String)? = nil)
       request = build_api_request_for_test_inline_additional_properties(request_body: request_body)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "API called: FakeApi#test_inline_additional_properties\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -988,17 +1041,22 @@ module PetStore
 
     # test inline additionalProperties
     #
-    # @param request_body [Hash(String, String)] request body
+    # @param request_body [Hash(String, String)?] request body
     # @return nil
-    def test_inline_additional_properties(*, request_body : Hash(String, String), &block : Crest::Response ->)
+    def test_inline_additional_properties(*, request_body : Hash(String, String)? = nil, &block : Crest::Response ->)
       build_api_request_for_test_inline_additional_properties(request_body: request_body).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_test_inline_additional_properties(*, request_body : Hash(String, String)) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_test_inline_additional_properties(*, request_body : Hash(String, String)? = nil) : Crest::Request
+      if debugging
         Log.debug { "Calling API: FakeApi.test_inline_additional_properties ..." }
       end
+
+      if client_side_validation
+        raise ArgumentError.new("\"request_body\" is required and cannot be null") if request_body.nil?
+      end
+
       # resource path
       local_var_path = "/fake/inline-additionalProperties"
 
@@ -1033,25 +1091,25 @@ module PetStore
 
     # test json serialization of form data
     #
-    # @param param [String] field1
-    # @param param2 [String] field2
+    # @param param [String?] field1
+    # @param param2 [String?] field2
     # @return [nil]
-    def test_json_form_data(*, param : String, param2 : String)
+    def test_json_form_data(*, param : String? = nil, param2 : String? = nil)
       test_json_form_data_with_http_info(param: param, param2: param2)
       nil
     end
 
     # test json serialization of form data
     #
-    # @param param [String] field1
-    # @param param2 [String] field2
+    # @param param [String?] field1
+    # @param param2 [String?] field2
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def test_json_form_data_with_http_info(*, param : String, param2 : String)
+    def test_json_form_data_with_http_info(*, param : String? = nil, param2 : String? = nil)
       request = build_api_request_for_test_json_form_data(param: param, param2: param2)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "API called: FakeApi#test_json_form_data\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -1060,18 +1118,25 @@ module PetStore
 
     # test json serialization of form data
     #
-    # @param param [String] field1
-    # @param param2 [String] field2
+    # @param param [String?] field1
+    # @param param2 [String?] field2
     # @return nil
-    def test_json_form_data(*, param : String, param2 : String, &block : Crest::Response ->)
+    def test_json_form_data(*, param : String? = nil, param2 : String? = nil, &block : Crest::Response ->)
       build_api_request_for_test_json_form_data(param: param, param2: param2).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_test_json_form_data(*, param : String, param2 : String) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_test_json_form_data(*, param : String? = nil, param2 : String? = nil) : Crest::Request
+      if debugging
         Log.debug { "Calling API: FakeApi.test_json_form_data ..." }
       end
+
+      if client_side_validation
+        raise ArgumentError.new("\"param\" is required and cannot be null") if param.nil?
+
+        raise ArgumentError.new("\"param2\" is required and cannot be null") if param2.nil?
+      end
+
       # resource path
       local_var_path = "/fake/jsonFormData"
 
@@ -1107,30 +1172,30 @@ module PetStore
     end
 
     # To test the collection format in query parameters
-    # @param pipe [Array(String)]
-    # @param ioutil [Array(String)]
-    # @param http [Array(String)]
-    # @param url [Array(String)]
-    # @param context [Array(String)]
+    # @param pipe [Array(String)?]
+    # @param ioutil [Array(String)?]
+    # @param http [Array(String)?]
+    # @param url [Array(String)?]
+    # @param context [Array(String)?]
     # @return [nil]
-    def test_query_parameter_collection_format(*, pipe : Array(String), ioutil : Array(String), http : Array(String), url : Array(String), context : Array(String))
+    def test_query_parameter_collection_format(*, pipe : Array(String)? = nil, ioutil : Array(String)? = nil, http : Array(String)? = nil, url : Array(String)? = nil, context : Array(String)? = nil)
       test_query_parameter_collection_format_with_http_info(pipe: pipe, ioutil: ioutil, http: http, url: url, context: context)
       nil
     end
 
     # To test the collection format in query parameters
-    # @param pipe [Array(String)]
-    # @param ioutil [Array(String)]
-    # @param http [Array(String)]
-    # @param url [Array(String)]
-    # @param context [Array(String)]
+    # @param pipe [Array(String)?]
+    # @param ioutil [Array(String)?]
+    # @param http [Array(String)?]
+    # @param url [Array(String)?]
+    # @param context [Array(String)?]
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def test_query_parameter_collection_format_with_http_info(*, pipe : Array(String), ioutil : Array(String), http : Array(String), url : Array(String), context : Array(String))
+    def test_query_parameter_collection_format_with_http_info(*, pipe : Array(String)? = nil, ioutil : Array(String)? = nil, http : Array(String)? = nil, url : Array(String)? = nil, context : Array(String)? = nil)
       request = build_api_request_for_test_query_parameter_collection_format(pipe: pipe, ioutil: ioutil, http: http, url: url, context: context)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "API called: FakeApi#test_query_parameter_collection_format\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -1138,21 +1203,34 @@ module PetStore
     end
 
     # To test the collection format in query parameters
-    # @param pipe [Array(String)]
-    # @param ioutil [Array(String)]
-    # @param http [Array(String)]
-    # @param url [Array(String)]
-    # @param context [Array(String)]
+    # @param pipe [Array(String)?]
+    # @param ioutil [Array(String)?]
+    # @param http [Array(String)?]
+    # @param url [Array(String)?]
+    # @param context [Array(String)?]
     # @return nil
-    def test_query_parameter_collection_format(*, pipe : Array(String), ioutil : Array(String), http : Array(String), url : Array(String), context : Array(String), &block : Crest::Response ->)
+    def test_query_parameter_collection_format(*, pipe : Array(String)? = nil, ioutil : Array(String)? = nil, http : Array(String)? = nil, url : Array(String)? = nil, context : Array(String)? = nil, &block : Crest::Response ->)
       build_api_request_for_test_query_parameter_collection_format(pipe: pipe, ioutil: ioutil, http: http, url: url, context: context).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_test_query_parameter_collection_format(*, pipe : Array(String), ioutil : Array(String), http : Array(String), url : Array(String), context : Array(String)) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_test_query_parameter_collection_format(*, pipe : Array(String)? = nil, ioutil : Array(String)? = nil, http : Array(String)? = nil, url : Array(String)? = nil, context : Array(String)? = nil) : Crest::Request
+      if debugging
         Log.debug { "Calling API: FakeApi.test_query_parameter_collection_format ..." }
       end
+
+      if client_side_validation
+        raise ArgumentError.new("\"pipe\" is required and cannot be null") if pipe.nil?
+
+        raise ArgumentError.new("\"ioutil\" is required and cannot be null") if ioutil.nil?
+
+        raise ArgumentError.new("\"http\" is required and cannot be null") if http.nil?
+
+        raise ArgumentError.new("\"url\" is required and cannot be null") if url.nil?
+
+        raise ArgumentError.new("\"context\" is required and cannot be null") if context.nil?
+      end
+
       # resource path
       local_var_path = "/fake/test-query-parameters"
 
@@ -1189,24 +1267,24 @@ module PetStore
     end
 
     # To test unique items in header and query parameters
-    # @param query_unique [Set(String)]
-    # @param header_unique [Set(String)]
+    # @param query_unique [Array(String)?]
+    # @param header_unique [Array(String)?]
     # @return [Set(Pet)]
-    def test_unique_items_header_and_query_parameter_collection_format(*, query_unique : Set(String), header_unique : Set(String))
+    def test_unique_items_header_and_query_parameter_collection_format(*, query_unique : Array(String)? = nil, header_unique : Array(String)? = nil)
       data, _status_code, _headers = test_unique_items_header_and_query_parameter_collection_format_with_http_info(query_unique: query_unique, header_unique: header_unique)
       data
     end
 
     # To test unique items in header and query parameters
-    # @param query_unique [Set(String)]
-    # @param header_unique [Set(String)]
+    # @param query_unique [Array(String)?]
+    # @param header_unique [Array(String)?]
     # @return [Array<(Set(Pet), Integer, Hash)>] Set(Pet) data, response status code and response headers
-    def test_unique_items_header_and_query_parameter_collection_format_with_http_info(*, query_unique : Set(String), header_unique : Set(String))
+    def test_unique_items_header_and_query_parameter_collection_format_with_http_info(*, query_unique : Array(String)? = nil, header_unique : Array(String)? = nil)
       request = build_api_request_for_test_unique_items_header_and_query_parameter_collection_format(query_unique: query_unique, header_unique: header_unique)
 
       data, status_code, headers = @api_client.execute_api_request(request)
 
-      if @api_client.config.debugging
+      if debugging
         Log.debug { "API called: FakeApi#test_unique_items_header_and_query_parameter_collection_format\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
@@ -1214,18 +1292,25 @@ module PetStore
     end
 
     # To test unique items in header and query parameters
-    # @param query_unique [Set(String)]
-    # @param header_unique [Set(String)]
+    # @param query_unique [Array(String)?]
+    # @param header_unique [Array(String)?]
     # @return nil
-    def test_unique_items_header_and_query_parameter_collection_format(*, query_unique : Set(String), header_unique : Set(String), &block : Crest::Response ->)
+    def test_unique_items_header_and_query_parameter_collection_format(*, query_unique : Array(String)? = nil, header_unique : Array(String)? = nil, &block : Crest::Response ->)
       build_api_request_for_test_unique_items_header_and_query_parameter_collection_format(query_unique: query_unique, header_unique: header_unique).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_test_unique_items_header_and_query_parameter_collection_format(*, query_unique : Set(String), header_unique : Set(String)) : Crest::Request
-      if @api_client.config.debugging
+    def build_api_request_for_test_unique_items_header_and_query_parameter_collection_format(*, query_unique : Array(String)? = nil, header_unique : Array(String)? = nil) : Crest::Request
+      if debugging
         Log.debug { "Calling API: FakeApi.test_unique_items_header_and_query_parameter_collection_format ..." }
       end
+
+      if client_side_validation
+        raise ArgumentError.new("\"query_unique\" is required and cannot be null") if query_unique.nil?
+
+        raise ArgumentError.new("\"header_unique\" is required and cannot be null") if header_unique.nil?
+      end
+
       # resource path
       local_var_path = "/fake/test-unique-parameters"
 

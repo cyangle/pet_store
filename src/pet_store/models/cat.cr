@@ -22,10 +22,12 @@ module PetStore
 
     @[JSON::Field(key: "name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter name : String? = nil
+    MAX_LENGTH_FOR_NAME = 255
 
     # This is the name of the class
     @[JSON::Field(key: "className", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter class_name : String? = nil
+    MAX_LENGTH_FOR_CLASS_NAME = 64
 
     # Optional properties
 
@@ -65,14 +67,14 @@ module PetStore
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
 
       if _name = @name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 255)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"class_name\" is required and cannot be null") if @class_name.nil?
 
       if _class_name = @class_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("class_name", _class_name.to_s.size, 64)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("class_name", _class_name.to_s.size, MAX_LENGTH_FOR_CLASS_NAME)
           invalid_properties.push(max_length_error)
         end
       end
@@ -85,12 +87,12 @@ module PetStore
     def valid? : Bool
       return false if @name.nil?
       if _name = @name
-        return false if _name.to_s.size > 255
+        return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
       return false if @class_name.nil?
       if _class_name = @class_name
-        return false if _class_name.to_s.size > 64
+        return false if _class_name.to_s.size > MAX_LENGTH_FOR_CLASS_NAME
       end
 
       true
@@ -103,10 +105,7 @@ module PetStore
         raise ArgumentError.new("\"name\" is required and cannot be null")
       end
       _name = name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 255)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
       @name = _name
     end
 
@@ -117,10 +116,7 @@ module PetStore
         raise ArgumentError.new("\"class_name\" is required and cannot be null")
       end
       _class_name = class_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("class_name", _class_name.to_s.size, 64)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("class_name", _class_name.to_s.size, MAX_LENGTH_FOR_CLASS_NAME)
       @class_name = _class_name
     end
 

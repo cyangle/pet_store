@@ -35,8 +35,8 @@ module PetStore
     # Order Status
     @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter status : String? = nil
-
-    VALID_VALUES_FOR_STATUS = StaticArray["placed", "approved", "delivered"]
+    ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [placed, approved, delivered]."
+    VALID_VALUES_FOR_STATUS  = StaticArray["placed", "approved", "delivered"]
 
     @[JSON::Field(key: "complete", type: Bool?, default: false, required: false, nullable: false, emit_null: false)]
     getter complete : Bool? = false
@@ -61,7 +61,7 @@ module PetStore
       invalid_properties = Array(String).new
 
       if _status = @status
-        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 
       invalid_properties

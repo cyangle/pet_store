@@ -46,7 +46,7 @@ module PetStore
       invalid_properties = Array(String).new
 
       if _map = @map
-        invalid_properties.concat(OpenApi::HashValidator.list_invalid_properties_for(key: "map", hash: _map)) if _map.is_a?(Hash)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "map", container: _map)) if _map.is_a?(Hash)
       end
       invalid_properties
     end
@@ -55,7 +55,7 @@ module PetStore
     # @return true if the model is valid
     def valid? : Bool
       if _map = @map
-        return false if _map.is_a?(Hash) && !OpenApi::HashValidator.valid?(hash: _map)
+        return false if _map.is_a?(Hash) && !OpenApi::ContainerValidator.valid?(container: _map)
       end
 
       true
@@ -88,7 +88,7 @@ module PetStore
         return @map = nil
       end
       _map = map.not_nil!
-      OpenApi::HashValidator.validate(hash: _map) if _map.is_a?(Hash)
+      OpenApi::ContainerValidator.validate(container: _map) if _map.is_a?(Hash)
       @map = _map
     end
 
