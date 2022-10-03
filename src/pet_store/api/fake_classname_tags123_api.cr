@@ -8,6 +8,7 @@
 #
 
 require "uri"
+require "../api_client"
 
 module PetStore
   class FakeClassnameTags123Api
@@ -23,7 +24,7 @@ module PetStore
     # To test class name in snake case
     # @required @param client [PetStore::Client?] client model
     # @return [Client]
-    def test_classname(*, client : PetStore::Client? = nil)
+    def test_classname(*, client : PetStore::Client? = nil) : Client
       data, _status_code, _headers = test_classname_with_http_info(client: client)
       data
     end
@@ -32,23 +33,23 @@ module PetStore
     # To test class name in snake case
     # @required @param client [PetStore::Client?] client model
     # @return [Array<(Client, Integer, Hash)>] Client data, response status code and response headers
-    def test_classname_with_http_info(*, client : PetStore::Client? = nil)
+    def test_classname_with_http_info(*, client : PetStore::Client? = nil) : Tuple(Client, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_test_classname(client: client)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
       if debugging
-        Log.debug { "API called: FakeClassnameTags123Api#test_classname\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+        Log.debug { "API called: FakeClassnameTags123Api#test_classname\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Client.from_json(data), status_code, headers
+      return Tuple.new(Client.from_json(body), status_code, headers)
     end
 
     # To test class name in snake case
     # To test class name in snake case
     # @required @param client [PetStore::Client?] client model
     # @return nil
-    def test_classname(*, client : PetStore::Client? = nil, &block : Crest::Response ->)
+    def test_classname(*, client : PetStore::Client? = nil, &block : Crest::Response ->) : Nil
       build_api_request_for_test_classname(client: client).execute(&block)
     end
 
@@ -60,7 +61,7 @@ module PetStore
 
       if client_side_validation
         raise ArgumentError.new("\"client\" is required and cannot be null") if client.nil?
-        if _client = client
+        unless (_client = client).nil?
           _client.validate if _client.is_a?(OpenApi::Validatable)
         end
       end

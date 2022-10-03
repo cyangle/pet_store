@@ -51,7 +51,7 @@ module PetStore
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _map_of_enum_string = @map_of_enum_string
+      unless (_map_of_enum_string = @map_of_enum_string).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_MAP_OF_ENUM_STRING) unless OpenApi::EnumValidator.valid?(_map_of_enum_string, VALID_VALUES_FOR_MAP_OF_ENUM_STRING)
       end
 
@@ -61,7 +61,7 @@ module PetStore
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _map_of_enum_string = @map_of_enum_string
+      unless (_map_of_enum_string = @map_of_enum_string).nil?
         return false unless OpenApi::EnumValidator.valid?(_map_of_enum_string, VALID_VALUES_FOR_MAP_OF_ENUM_STRING)
       end
 

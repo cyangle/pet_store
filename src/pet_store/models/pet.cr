@@ -69,13 +69,13 @@ module PetStore
 
       invalid_properties.push("\"photo_urls\" is required and cannot be null") if @photo_urls.nil?
 
-      if _category = @category
+      unless (_category = @category).nil?
         invalid_properties.concat(_category.list_invalid_properties_for("category")) if _category.is_a?(OpenApi::Validatable)
       end
-      if _tags = @tags
+      unless (_tags = @tags).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "tags", container: _tags)) if _tags.is_a?(Array)
       end
-      if _status = @status
+      unless (_status = @status).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties
@@ -88,15 +88,15 @@ module PetStore
 
       return false if @photo_urls.nil?
 
-      if _category = @category
+      unless (_category = @category).nil?
         return false if _category.is_a?(OpenApi::Validatable) && !_category.valid?
       end
 
-      if _tags = @tags
+      unless (_tags = @tags).nil?
         return false if _tags.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _tags)
       end
 
-      if _status = @status
+      unless (_status = @status).nil?
         return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
 

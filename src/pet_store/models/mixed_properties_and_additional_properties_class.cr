@@ -45,7 +45,7 @@ module PetStore
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _map = @map
+      unless (_map = @map).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "map", container: _map)) if _map.is_a?(Hash)
       end
       invalid_properties
@@ -54,7 +54,7 @@ module PetStore
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _map = @map
+      unless (_map = @map).nil?
         return false if _map.is_a?(Hash) && !OpenApi::ContainerValidator.valid?(container: _map)
       end
 

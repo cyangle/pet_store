@@ -45,10 +45,10 @@ module PetStore
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _just_symbol = @just_symbol
+      unless (_just_symbol = @just_symbol).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_JUST_SYMBOL) unless OpenApi::EnumValidator.valid?(_just_symbol, VALID_VALUES_FOR_JUST_SYMBOL)
       end
-      if _array_enum = @array_enum
+      unless (_array_enum = @array_enum).nil?
         invalid_properties.push(ERROR_MESSAGE_FOR_ARRAY_ENUM) unless OpenApi::EnumValidator.valid?(_array_enum, VALID_VALUES_FOR_ARRAY_ENUM)
       end
       invalid_properties
@@ -57,11 +57,11 @@ module PetStore
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _just_symbol = @just_symbol
+      unless (_just_symbol = @just_symbol).nil?
         return false unless OpenApi::EnumValidator.valid?(_just_symbol, VALID_VALUES_FOR_JUST_SYMBOL)
       end
 
-      if _array_enum = @array_enum
+      unless (_array_enum = @array_enum).nil?
         return false unless OpenApi::EnumValidator.valid?(_array_enum, VALID_VALUES_FOR_ARRAY_ENUM)
       end
 

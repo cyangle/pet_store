@@ -8,6 +8,7 @@
 #
 
 require "uri"
+require "../api_client"
 
 module PetStore
   class DefaultApi
@@ -20,26 +21,26 @@ module PetStore
     end
 
     # @return [FooGetDefaultResponse]
-    def foo_get
+    def foo_get : FooGetDefaultResponse
       data, _status_code, _headers = foo_get_with_http_info()
       data
     end
 
     # @return [Array<(FooGetDefaultResponse, Integer, Hash)>] FooGetDefaultResponse data, response status code and response headers
-    def foo_get_with_http_info
+    def foo_get_with_http_info : Tuple(FooGetDefaultResponse, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_foo_get()
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
       if debugging
-        Log.debug { "API called: DefaultApi#foo_get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+        Log.debug { "API called: DefaultApi#foo_get\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return FooGetDefaultResponse.from_json(data), status_code, headers
+      return Tuple.new(FooGetDefaultResponse.from_json(body), status_code, headers)
     end
 
     # @return nil
-    def foo_get(&block : Crest::Response ->)
+    def foo_get(&block : Crest::Response ->) : Nil
       build_api_request_for_foo_get().execute(&block)
     end
 

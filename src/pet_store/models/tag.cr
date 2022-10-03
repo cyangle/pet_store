@@ -43,12 +43,12 @@ module PetStore
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _id = @id
+      unless (_id = @id).nil?
         if min_number_error = OpenApi::PrimitiveValidator.min_number_error("id", _id, MIN_FOR_ID)
           invalid_properties.push(min_number_error)
         end
       end
-      if _name = @name
+      unless (_name = @name).nil?
         if min_length_error = OpenApi::PrimitiveValidator.min_length_error("name", _name.to_s.size, MIN_LENGTH_FOR_NAME)
           invalid_properties.push(min_length_error)
         end
@@ -59,11 +59,11 @@ module PetStore
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _id = @id
+      unless (_id = @id).nil?
         return false if _id < MIN_FOR_ID
       end
 
-      if _name = @name
+      unless (_name = @name).nil?
         return false if _name.to_s.size < MIN_LENGTH_FOR_NAME
       end
 

@@ -47,7 +47,7 @@ module PetStore
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _array_of_string = @array_of_string
+      unless (_array_of_string = @array_of_string).nil?
         if max_items_error = OpenApi::PrimitiveValidator.max_items_error("array_of_string", _array_of_string.size, MAX_ITEMS_FOR_ARRAY_OF_STRING)
           invalid_properties.push(max_items_error)
         end
@@ -63,7 +63,7 @@ module PetStore
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _array_of_string = @array_of_string
+      unless (_array_of_string = @array_of_string).nil?
         return false if _array_of_string.size > MAX_ITEMS_FOR_ARRAY_OF_STRING
         return false if _array_of_string.size < MIN_ITEMS_FOR_ARRAY_OF_STRING
       end

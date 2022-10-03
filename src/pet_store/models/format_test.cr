@@ -117,7 +117,7 @@ module PetStore
 
       invalid_properties.push("\"number\" is required and cannot be null") if @number.nil?
 
-      if _number = @number
+      unless (_number = @number).nil?
         if max_number_error = OpenApi::PrimitiveValidator.max_number_error("number", _number, MAX_FOR_NUMBER)
           invalid_properties.push(max_number_error)
         end
@@ -132,7 +132,7 @@ module PetStore
 
       invalid_properties.push("\"password\" is required and cannot be null") if @password.nil?
 
-      if _password = @password
+      unless (_password = @password).nil?
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("password", _password.to_s.size, MAX_LENGTH_FOR_PASSWORD)
           invalid_properties.push(max_length_error)
         end
@@ -141,7 +141,7 @@ module PetStore
           invalid_properties.push(min_length_error)
         end
       end
-      if _integer = @integer
+      unless (_integer = @integer).nil?
         if max_number_error = OpenApi::PrimitiveValidator.max_number_error("integer", _integer, MAX_FOR_INTEGER)
           invalid_properties.push(max_number_error)
         end
@@ -150,7 +150,7 @@ module PetStore
           invalid_properties.push(min_number_error)
         end
       end
-      if _int32 = @int32
+      unless (_int32 = @int32).nil?
         if max_number_error = OpenApi::PrimitiveValidator.max_number_error("int32", _int32, MAX_FOR_INT32)
           invalid_properties.push(max_number_error)
         end
@@ -160,7 +160,7 @@ module PetStore
         end
       end
 
-      if _float = @float
+      unless (_float = @float).nil?
         if max_number_error = OpenApi::PrimitiveValidator.max_number_error("float", _float, MAX_FOR_FLOAT)
           invalid_properties.push(max_number_error)
         end
@@ -169,7 +169,7 @@ module PetStore
           invalid_properties.push(min_number_error)
         end
       end
-      if _double = @double
+      unless (_double = @double).nil?
         if max_number_error = OpenApi::PrimitiveValidator.max_number_error("double", _double, MAX_FOR_DOUBLE)
           invalid_properties.push(max_number_error)
         end
@@ -178,18 +178,18 @@ module PetStore
           invalid_properties.push(min_number_error)
         end
       end
-      if _string = @string
+      unless (_string = @string).nil?
         if pattern_error = OpenApi::PrimitiveValidator.pattern_error("string", _string, PATTERN_FOR_STRING)
           invalid_properties.push(pattern_error)
         end
       end
 
-      if _pattern_with_digits = @pattern_with_digits
+      unless (_pattern_with_digits = @pattern_with_digits).nil?
         if pattern_error = OpenApi::PrimitiveValidator.pattern_error("pattern_with_digits", _pattern_with_digits, PATTERN_FOR_PATTERN_WITH_DIGITS)
           invalid_properties.push(pattern_error)
         end
       end
-      if _pattern_with_digits_and_delimiter = @pattern_with_digits_and_delimiter
+      unless (_pattern_with_digits_and_delimiter = @pattern_with_digits_and_delimiter).nil?
         if pattern_error = OpenApi::PrimitiveValidator.pattern_error("pattern_with_digits_and_delimiter", _pattern_with_digits_and_delimiter, PATTERN_FOR_PATTERN_WITH_DIGITS_AND_DELIMITER)
           invalid_properties.push(pattern_error)
         end
@@ -201,7 +201,7 @@ module PetStore
     # @return true if the model is valid
     def valid? : Bool
       return false if @number.nil?
-      if _number = @number
+      unless (_number = @number).nil?
         return false if _number > MAX_FOR_NUMBER
         return false if _number < MIN_FOR_NUMBER
       end
@@ -211,41 +211,41 @@ module PetStore
       return false if @date.nil?
 
       return false if @password.nil?
-      if _password = @password
+      unless (_password = @password).nil?
         return false if _password.to_s.size > MAX_LENGTH_FOR_PASSWORD
         return false if _password.to_s.size < MIN_LENGTH_FOR_PASSWORD
       end
 
-      if _integer = @integer
+      unless (_integer = @integer).nil?
         return false if _integer > MAX_FOR_INTEGER
         return false if _integer < MIN_FOR_INTEGER
       end
 
-      if _int32 = @int32
+      unless (_int32 = @int32).nil?
         return false if _int32 > MAX_FOR_INT32
         return false if _int32 < MIN_FOR_INT32
       end
 
-      if _float = @float
+      unless (_float = @float).nil?
         return false if _float > MAX_FOR_FLOAT
         return false if _float < MIN_FOR_FLOAT
       end
 
-      if _double = @double
+      unless (_double = @double).nil?
         return false if _double > MAX_FOR_DOUBLE
         return false if _double < MIN_FOR_DOUBLE
       end
 
-      if _string = @string
-        return false if _string !~ PATTERN_FOR_STRING
+      unless (_string = @string).nil?
+        return false if !PATTERN_FOR_STRING.matches?(_string)
       end
 
-      if _pattern_with_digits = @pattern_with_digits
-        return false if _pattern_with_digits !~ PATTERN_FOR_PATTERN_WITH_DIGITS
+      unless (_pattern_with_digits = @pattern_with_digits).nil?
+        return false if !PATTERN_FOR_PATTERN_WITH_DIGITS.matches?(_pattern_with_digits)
       end
 
-      if _pattern_with_digits_and_delimiter = @pattern_with_digits_and_delimiter
-        return false if _pattern_with_digits_and_delimiter !~ PATTERN_FOR_PATTERN_WITH_DIGITS_AND_DELIMITER
+      unless (_pattern_with_digits_and_delimiter = @pattern_with_digits_and_delimiter).nil?
+        return false if !PATTERN_FOR_PATTERN_WITH_DIGITS_AND_DELIMITER.matches?(_pattern_with_digits_and_delimiter)
       end
 
       true

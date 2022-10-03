@@ -8,6 +8,7 @@
 #
 
 require "uri"
+require "../api_client"
 
 module PetStore
   class AnotherFakeApi
@@ -23,7 +24,7 @@ module PetStore
     # To test special tags and operation ID starting with number
     # @required @param client [PetStore::Client?] client model
     # @return [Client]
-    def call_123_test_special_tags(*, client : PetStore::Client? = nil)
+    def call_123_test_special_tags(*, client : PetStore::Client? = nil) : Client
       data, _status_code, _headers = call_123_test_special_tags_with_http_info(client: client)
       data
     end
@@ -32,23 +33,23 @@ module PetStore
     # To test special tags and operation ID starting with number
     # @required @param client [PetStore::Client?] client model
     # @return [Array<(Client, Integer, Hash)>] Client data, response status code and response headers
-    def call_123_test_special_tags_with_http_info(*, client : PetStore::Client? = nil)
+    def call_123_test_special_tags_with_http_info(*, client : PetStore::Client? = nil) : Tuple(Client, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_call_123_test_special_tags(client: client)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
       if debugging
-        Log.debug { "API called: AnotherFakeApi#call_123_test_special_tags\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+        Log.debug { "API called: AnotherFakeApi#call_123_test_special_tags\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Client.from_json(data), status_code, headers
+      return Tuple.new(Client.from_json(body), status_code, headers)
     end
 
     # To test special tags
     # To test special tags and operation ID starting with number
     # @required @param client [PetStore::Client?] client model
     # @return nil
-    def call_123_test_special_tags(*, client : PetStore::Client? = nil, &block : Crest::Response ->)
+    def call_123_test_special_tags(*, client : PetStore::Client? = nil, &block : Crest::Response ->) : Nil
       build_api_request_for_call_123_test_special_tags(client: client).execute(&block)
     end
 
@@ -60,7 +61,7 @@ module PetStore
 
       if client_side_validation
         raise ArgumentError.new("\"client\" is required and cannot be null") if client.nil?
-        if _client = client
+        unless (_client = client).nil?
           _client.validate if _client.is_a?(OpenApi::Validatable)
         end
       end

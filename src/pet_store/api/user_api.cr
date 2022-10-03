@@ -8,6 +8,7 @@
 #
 
 require "uri"
+require "../api_client"
 
 module PetStore
   class UserApi
@@ -23,7 +24,7 @@ module PetStore
     # This can only be done by the logged in user.
     # @required @param user [PetStore::User?] Created user object
     # @return [nil]
-    def create_user(*, user : PetStore::User? = nil)
+    def create_user(*, user : PetStore::User? = nil) : Nil
       create_user_with_http_info(user: user)
       nil
     end
@@ -32,23 +33,23 @@ module PetStore
     # This can only be done by the logged in user.
     # @required @param user [PetStore::User?] Created user object
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def create_user_with_http_info(*, user : PetStore::User? = nil)
+    def create_user_with_http_info(*, user : PetStore::User? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_create_user(user: user)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
       if debugging
-        Log.debug { "API called: UserApi#create_user\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+        Log.debug { "API called: UserApi#create_user\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return nil, status_code, headers
+      return Tuple.new(nil, status_code, headers)
     end
 
     # Create user
     # This can only be done by the logged in user.
     # @required @param user [PetStore::User?] Created user object
     # @return nil
-    def create_user(*, user : PetStore::User? = nil, &block : Crest::Response ->)
+    def create_user(*, user : PetStore::User? = nil, &block : Crest::Response ->) : Nil
       build_api_request_for_create_user(user: user).execute(&block)
     end
 
@@ -60,7 +61,7 @@ module PetStore
 
       if client_side_validation
         raise ArgumentError.new("\"user\" is required and cannot be null") if user.nil?
-        if _user = user
+        unless (_user = user).nil?
           _user.validate if _user.is_a?(OpenApi::Validatable)
         end
       end
@@ -101,7 +102,7 @@ module PetStore
     #
     # @required @param user [Array(PetStore::User)?] List of user object
     # @return [nil]
-    def create_users_with_array_input(*, user : Array(PetStore::User)? = nil)
+    def create_users_with_array_input(*, user : Array(PetStore::User)? = nil) : Nil
       create_users_with_array_input_with_http_info(user: user)
       nil
     end
@@ -110,23 +111,23 @@ module PetStore
     #
     # @required @param user [Array(PetStore::User)?] List of user object
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def create_users_with_array_input_with_http_info(*, user : Array(PetStore::User)? = nil)
+    def create_users_with_array_input_with_http_info(*, user : Array(PetStore::User)? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_create_users_with_array_input(user: user)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
       if debugging
-        Log.debug { "API called: UserApi#create_users_with_array_input\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+        Log.debug { "API called: UserApi#create_users_with_array_input\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return nil, status_code, headers
+      return Tuple.new(nil, status_code, headers)
     end
 
     # Creates list of users with given input array
     #
     # @required @param user [Array(PetStore::User)?] List of user object
     # @return nil
-    def create_users_with_array_input(*, user : Array(PetStore::User)? = nil, &block : Crest::Response ->)
+    def create_users_with_array_input(*, user : Array(PetStore::User)? = nil, &block : Crest::Response ->) : Nil
       build_api_request_for_create_users_with_array_input(user: user).execute(&block)
     end
 
@@ -138,7 +139,7 @@ module PetStore
 
       if client_side_validation
         raise ArgumentError.new("\"user\" is required and cannot be null") if user.nil?
-        if _user = user
+        unless (_user = user).nil?
           OpenApi::ContainerValidator.validate(container: _user) if _user.is_a?(Array)
         end
       end
@@ -179,7 +180,7 @@ module PetStore
     #
     # @required @param user [Array(PetStore::User)?] List of user object
     # @return [nil]
-    def create_users_with_list_input(*, user : Array(PetStore::User)? = nil)
+    def create_users_with_list_input(*, user : Array(PetStore::User)? = nil) : Nil
       create_users_with_list_input_with_http_info(user: user)
       nil
     end
@@ -188,23 +189,23 @@ module PetStore
     #
     # @required @param user [Array(PetStore::User)?] List of user object
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def create_users_with_list_input_with_http_info(*, user : Array(PetStore::User)? = nil)
+    def create_users_with_list_input_with_http_info(*, user : Array(PetStore::User)? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_create_users_with_list_input(user: user)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
       if debugging
-        Log.debug { "API called: UserApi#create_users_with_list_input\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+        Log.debug { "API called: UserApi#create_users_with_list_input\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return nil, status_code, headers
+      return Tuple.new(nil, status_code, headers)
     end
 
     # Creates list of users with given input array
     #
     # @required @param user [Array(PetStore::User)?] List of user object
     # @return nil
-    def create_users_with_list_input(*, user : Array(PetStore::User)? = nil, &block : Crest::Response ->)
+    def create_users_with_list_input(*, user : Array(PetStore::User)? = nil, &block : Crest::Response ->) : Nil
       build_api_request_for_create_users_with_list_input(user: user).execute(&block)
     end
 
@@ -216,7 +217,7 @@ module PetStore
 
       if client_side_validation
         raise ArgumentError.new("\"user\" is required and cannot be null") if user.nil?
-        if _user = user
+        unless (_user = user).nil?
           OpenApi::ContainerValidator.validate(container: _user) if _user.is_a?(Array)
         end
       end
@@ -257,7 +258,7 @@ module PetStore
     # This can only be done by the logged in user.
     # @required @param username [String?] The name that needs to be deleted
     # @return [nil]
-    def delete_user(*, username : String? = nil)
+    def delete_user(*, username : String? = nil) : Nil
       delete_user_with_http_info(username: username)
       nil
     end
@@ -266,23 +267,23 @@ module PetStore
     # This can only be done by the logged in user.
     # @required @param username [String?] The name that needs to be deleted
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def delete_user_with_http_info(*, username : String? = nil)
+    def delete_user_with_http_info(*, username : String? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete_user(username: username)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
       if debugging
-        Log.debug { "API called: UserApi#delete_user\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+        Log.debug { "API called: UserApi#delete_user\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return nil, status_code, headers
+      return Tuple.new(nil, status_code, headers)
     end
 
     # Delete user
     # This can only be done by the logged in user.
     # @required @param username [String?] The name that needs to be deleted
     # @return nil
-    def delete_user(*, username : String? = nil, &block : Crest::Response ->)
+    def delete_user(*, username : String? = nil, &block : Crest::Response ->) : Nil
       build_api_request_for_delete_user(username: username).execute(&block)
     end
 
@@ -330,7 +331,7 @@ module PetStore
     #
     # @required @param username [String?] The name that needs to be fetched. Use user1 for testing.
     # @return [User]
-    def get_user_by_name(*, username : String? = nil)
+    def get_user_by_name(*, username : String? = nil) : User
       data, _status_code, _headers = get_user_by_name_with_http_info(username: username)
       data
     end
@@ -339,23 +340,23 @@ module PetStore
     #
     # @required @param username [String?] The name that needs to be fetched. Use user1 for testing.
     # @return [Array<(User, Integer, Hash)>] User data, response status code and response headers
-    def get_user_by_name_with_http_info(*, username : String? = nil)
+    def get_user_by_name_with_http_info(*, username : String? = nil) : Tuple(User, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_user_by_name(username: username)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
       if debugging
-        Log.debug { "API called: UserApi#get_user_by_name\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+        Log.debug { "API called: UserApi#get_user_by_name\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return User.from_json(data), status_code, headers
+      return Tuple.new(User.from_json(body), status_code, headers)
     end
 
     # Get user by user name
     #
     # @required @param username [String?] The name that needs to be fetched. Use user1 for testing.
     # @return nil
-    def get_user_by_name(*, username : String? = nil, &block : Crest::Response ->)
+    def get_user_by_name(*, username : String? = nil, &block : Crest::Response ->) : Nil
       build_api_request_for_get_user_by_name(username: username).execute(&block)
     end
 
@@ -406,7 +407,7 @@ module PetStore
     # @required @param username [String?] The user name for login
     # @required @param password [String?] The password for login in clear text
     # @return [String]
-    def login_user(*, username : String? = nil, password : String? = nil)
+    def login_user(*, username : String? = nil, password : String? = nil) : String
       data, _status_code, _headers = login_user_with_http_info(username: username, password: password)
       data
     end
@@ -416,16 +417,16 @@ module PetStore
     # @required @param username [String?] The user name for login
     # @required @param password [String?] The password for login in clear text
     # @return [Array<(String, Integer, Hash)>] String data, response status code and response headers
-    def login_user_with_http_info(*, username : String? = nil, password : String? = nil)
+    def login_user_with_http_info(*, username : String? = nil, password : String? = nil) : Tuple(String, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_login_user(username: username, password: password)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
       if debugging
-        Log.debug { "API called: UserApi#login_user\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+        Log.debug { "API called: UserApi#login_user\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return String.from_json(data), status_code, headers
+      return Tuple.new(String.from_json(body), status_code, headers)
     end
 
     # Logs user into the system
@@ -433,7 +434,7 @@ module PetStore
     # @required @param username [String?] The user name for login
     # @required @param password [String?] The password for login in clear text
     # @return nil
-    def login_user(*, username : String? = nil, password : String? = nil, &block : Crest::Response ->)
+    def login_user(*, username : String? = nil, password : String? = nil, &block : Crest::Response ->) : Nil
       build_api_request_for_login_user(username: username, password: password).execute(&block)
     end
 
@@ -486,7 +487,7 @@ module PetStore
     # Logs out current logged in user session
     #
     # @return [nil]
-    def logout_user
+    def logout_user : Nil
       logout_user_with_http_info()
       nil
     end
@@ -494,22 +495,22 @@ module PetStore
     # Logs out current logged in user session
     #
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def logout_user_with_http_info
+    def logout_user_with_http_info : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_logout_user()
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
       if debugging
-        Log.debug { "API called: UserApi#logout_user\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+        Log.debug { "API called: UserApi#logout_user\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return nil, status_code, headers
+      return Tuple.new(nil, status_code, headers)
     end
 
     # Logs out current logged in user session
     #
     # @return nil
-    def logout_user(&block : Crest::Response ->)
+    def logout_user(&block : Crest::Response ->) : Nil
       build_api_request_for_logout_user().execute(&block)
     end
 
@@ -554,7 +555,7 @@ module PetStore
     # @required @param username [String?] name that need to be deleted
     # @required @param user [PetStore::User?] Updated user object
     # @return [nil]
-    def update_user(*, username : String? = nil, user : PetStore::User? = nil)
+    def update_user(*, username : String? = nil, user : PetStore::User? = nil) : Nil
       update_user_with_http_info(username: username, user: user)
       nil
     end
@@ -564,16 +565,16 @@ module PetStore
     # @required @param username [String?] name that need to be deleted
     # @required @param user [PetStore::User?] Updated user object
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def update_user_with_http_info(*, username : String? = nil, user : PetStore::User? = nil)
+    def update_user_with_http_info(*, username : String? = nil, user : PetStore::User? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_update_user(username: username, user: user)
 
-      data, status_code, headers = @api_client.execute_api_request(request)
+      body, status_code, headers = @api_client.execute_api_request(request)
 
       if debugging
-        Log.debug { "API called: UserApi#update_user\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+        Log.debug { "API called: UserApi#update_user\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return nil, status_code, headers
+      return Tuple.new(nil, status_code, headers)
     end
 
     # Updated user
@@ -581,7 +582,7 @@ module PetStore
     # @required @param username [String?] name that need to be deleted
     # @required @param user [PetStore::User?] Updated user object
     # @return nil
-    def update_user(*, username : String? = nil, user : PetStore::User? = nil, &block : Crest::Response ->)
+    def update_user(*, username : String? = nil, user : PetStore::User? = nil, &block : Crest::Response ->) : Nil
       build_api_request_for_update_user(username: username, user: user).execute(&block)
     end
 
@@ -595,7 +596,7 @@ module PetStore
         raise ArgumentError.new("\"username\" is required and cannot be null") if username.nil?
 
         raise ArgumentError.new("\"user\" is required and cannot be null") if user.nil?
-        if _user = user
+        unless (_user = user).nil?
           _user.validate if _user.is_a?(OpenApi::Validatable)
         end
       end

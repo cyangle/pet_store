@@ -41,10 +41,10 @@ module PetStore
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      if _file = @file
+      unless (_file = @file).nil?
         invalid_properties.concat(_file.list_invalid_properties_for("file")) if _file.is_a?(OpenApi::Validatable)
       end
-      if _files = @files
+      unless (_files = @files).nil?
         invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "files", container: _files)) if _files.is_a?(Array)
       end
       invalid_properties
@@ -53,11 +53,11 @@ module PetStore
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      if _file = @file
+      unless (_file = @file).nil?
         return false if _file.is_a?(OpenApi::Validatable) && !_file.valid?
       end
 
-      if _files = @files
+      unless (_files = @files).nil?
         return false if _files.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _files)
       end
 
