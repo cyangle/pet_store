@@ -792,7 +792,7 @@ module PetStore
     # @optional @param enum_form_string_array [Array(String)?] Form parameter enum test (string array)
     # @optional @param enum_form_string [String?] Form parameter enum test (string)
     # @return [nil]
-    def test_enum_parameters(*, enum_header_string_array : Array(String)? = nil, enum_header_string : String? = "-efg", enum_query_string_array : Array(String)? = nil, enum_query_string : String? = "-efg", enum_query_integer : Int32? = nil, enum_query_double : Float64? = nil, enum_form_string_array : Array(String)? = "$", enum_form_string : String? = "-efg") : Nil
+    def test_enum_parameters(*, enum_header_string_array : Array(String)? = nil, enum_header_string : String? = "-efg", enum_query_string_array : Array(String)? = nil, enum_query_string : String? = "-efg", enum_query_integer : Int32? = nil, enum_query_double : Float64? = nil, enum_form_string_array : Array(String)? = ["$"], enum_form_string : String? = "-efg") : Nil
       test_enum_parameters_with_http_info(enum_header_string_array: enum_header_string_array, enum_header_string: enum_header_string, enum_query_string_array: enum_query_string_array, enum_query_string: enum_query_string, enum_query_integer: enum_query_integer, enum_query_double: enum_query_double, enum_form_string_array: enum_form_string_array, enum_form_string: enum_form_string)
       nil
     end
@@ -808,7 +808,7 @@ module PetStore
     # @optional @param enum_form_string_array [Array(String)?] Form parameter enum test (string array)
     # @optional @param enum_form_string [String?] Form parameter enum test (string)
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def test_enum_parameters_with_http_info(*, enum_header_string_array : Array(String)? = nil, enum_header_string : String? = "-efg", enum_query_string_array : Array(String)? = nil, enum_query_string : String? = "-efg", enum_query_integer : Int32? = nil, enum_query_double : Float64? = nil, enum_form_string_array : Array(String)? = "$", enum_form_string : String? = "-efg") : Tuple(Nil, Int32, Hash(String, Array(String) | String))
+    def test_enum_parameters_with_http_info(*, enum_header_string_array : Array(String)? = nil, enum_header_string : String? = "-efg", enum_query_string_array : Array(String)? = nil, enum_query_string : String? = "-efg", enum_query_integer : Int32? = nil, enum_query_double : Float64? = nil, enum_form_string_array : Array(String)? = ["$"], enum_form_string : String? = "-efg") : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_test_enum_parameters(enum_header_string_array: enum_header_string_array, enum_header_string: enum_header_string, enum_query_string_array: enum_query_string_array, enum_query_string: enum_query_string, enum_query_integer: enum_query_integer, enum_query_double: enum_query_double, enum_form_string_array: enum_form_string_array, enum_form_string: enum_form_string)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -831,21 +831,21 @@ module PetStore
     # @optional @param enum_form_string_array [Array(String)?] Form parameter enum test (string array)
     # @optional @param enum_form_string [String?] Form parameter enum test (string)
     # @return nil
-    def test_enum_parameters(*, enum_header_string_array : Array(String)? = nil, enum_header_string : String? = "-efg", enum_query_string_array : Array(String)? = nil, enum_query_string : String? = "-efg", enum_query_integer : Int32? = nil, enum_query_double : Float64? = nil, enum_form_string_array : Array(String)? = "$", enum_form_string : String? = "-efg", &block : Crest::Response ->) : Nil
+    def test_enum_parameters(*, enum_header_string_array : Array(String)? = nil, enum_header_string : String? = "-efg", enum_query_string_array : Array(String)? = nil, enum_query_string : String? = "-efg", enum_query_integer : Int32? = nil, enum_query_double : Float64? = nil, enum_form_string_array : Array(String)? = ["$"], enum_form_string : String? = "-efg", &block : Crest::Response ->) : Nil
       build_api_request_for_test_enum_parameters(enum_header_string_array: enum_header_string_array, enum_header_string: enum_header_string, enum_query_string_array: enum_query_string_array, enum_query_string: enum_query_string, enum_query_integer: enum_query_integer, enum_query_double: enum_query_double, enum_form_string_array: enum_form_string_array, enum_form_string: enum_form_string).execute(&block)
     end
 
-    TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_HEADER_STRING_ARRAY = StaticArray[">", "$"]
-    TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_HEADER_STRING       = StaticArray["_abc", "-efg", "(xyz)"]
-    TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_QUERY_STRING_ARRAY  = StaticArray[">", "$"]
-    TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_QUERY_STRING        = StaticArray["_abc", "-efg", "(xyz)"]
-    TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_QUERY_INTEGER       = StaticArray[Int32.new("1"), Int32.new("-2")]
-    TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_QUERY_DOUBLE        = StaticArray[Float64.new("1.1"), Float64.new("-1.2")]
-    TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_FORM_STRING_ARRAY   = StaticArray[">", "$"]
-    TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_FORM_STRING         = StaticArray["_abc", "-efg", "(xyz)"]
+    TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_HEADER_STRING_ARRAY = String.static_array(">", "$")
+    TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_HEADER_STRING       = String.static_array("_abc", "-efg", "(xyz)")
+    TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_QUERY_STRING_ARRAY  = String.static_array(">", "$")
+    TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_QUERY_STRING        = String.static_array("_abc", "-efg", "(xyz)")
+    TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_QUERY_INTEGER       = Int32.static_array("1", "-2")
+    TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_QUERY_DOUBLE        = Float64.static_array("1.1", "-1.2")
+    TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_FORM_STRING_ARRAY   = String.static_array(">", "$")
+    TEST_ENUM_PARAMETERS_VALID_VALUES_FOR_ENUM_FORM_STRING         = String.static_array("_abc", "-efg", "(xyz)")
 
     # @return Crest::Request
-    def build_api_request_for_test_enum_parameters(*, enum_header_string_array : Array(String)? = nil, enum_header_string : String? = "-efg", enum_query_string_array : Array(String)? = nil, enum_query_string : String? = "-efg", enum_query_integer : Int32? = nil, enum_query_double : Float64? = nil, enum_form_string_array : Array(String)? = "$", enum_form_string : String? = "-efg") : Crest::Request
+    def build_api_request_for_test_enum_parameters(*, enum_header_string_array : Array(String)? = nil, enum_header_string : String? = "-efg", enum_query_string_array : Array(String)? = nil, enum_query_string : String? = "-efg", enum_query_integer : Int32? = nil, enum_query_double : Float64? = nil, enum_form_string_array : Array(String)? = ["$"], enum_form_string : String? = "-efg") : Crest::Request
       if debugging
         Log.debug { "Calling API: FakeApi.test_enum_parameters ..." }
       end
@@ -891,7 +891,7 @@ module PetStore
       header_params = Hash(String, String).new
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
-      header_params["enum_header_string_array"] = @api_client.build_collection_param(enum_header_string_array, "csv") if !enum_header_string_array.nil? && !enum_header_string_array.empty?
+      header_params["enum_header_string_array"] = @api_client.build_header_param(enum_header_string_array) if !enum_header_string_array.nil? && !enum_header_string_array.empty?
       header_params["enum_header_string"] = enum_header_string.to_s if !enum_header_string.nil?
 
       # form parameters
@@ -1323,7 +1323,7 @@ module PetStore
       header_params = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
-      header_params["headerUnique"] = @api_client.build_collection_param(header_unique, "csv") if !header_unique.nil? && !header_unique.empty?
+      header_params["headerUnique"] = @api_client.build_header_param(header_unique) if !header_unique.nil? && !header_unique.empty?
 
       # form parameters
       form_params = nil

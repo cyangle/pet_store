@@ -208,7 +208,7 @@ module PetStore
       build_api_request_for_find_pets_by_status(status: status).execute(&block)
     end
 
-    FIND_PETS_BY_STATUS_VALID_VALUES_FOR_STATUS = StaticArray["available", "pending", "sold"]
+    FIND_PETS_BY_STATUS_VALID_VALUES_FOR_STATUS = String.static_array("available", "pending", "sold")
 
     # @return Crest::Request
     def build_api_request_for_find_pets_by_status(*, status : Array(String)? = nil) : Crest::Request

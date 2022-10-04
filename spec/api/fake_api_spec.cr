@@ -147,9 +147,62 @@ describe "FakeApi" do
   # @option opts [String] :enum_form_string Form parameter enum test (string)
   # @return [nil]
   describe "test_enum_parameters test" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    it "validates enum_header_string_array" do
+      api_instance = PetStore::FakeApi.new
+      expect_raises(ArgumentError, /must be one of/) do
+        api_instance.test_enum_parameters(enum_header_string_array: ["fail"])
+      end
     end
+
+    it "validates enum_header_string" do
+      api_instance = PetStore::FakeApi.new
+      expect_raises(ArgumentError, /must be one of/) do
+        api_instance.test_enum_parameters(enum_header_string: "fail")
+      end
+    end
+
+    it "validates enum_query_string_array" do
+      api_instance = PetStore::FakeApi.new
+      expect_raises(ArgumentError, /must be one of/) do
+        api_instance.test_enum_parameters(enum_query_string_array: ["fail"])
+      end
+    end
+
+    it "validates enum_query_string" do
+      api_instance = PetStore::FakeApi.new
+      expect_raises(ArgumentError, /must be one of/) do
+        api_instance.test_enum_parameters(enum_query_string: "fail")
+      end
+    end
+
+    it "validates enum_query_integer" do
+      api_instance = PetStore::FakeApi.new
+      expect_raises(ArgumentError, /must be one of/) do
+        api_instance.test_enum_parameters(enum_query_integer: 0)
+      end
+    end
+
+    it "validates enum_query_double" do
+      api_instance = PetStore::FakeApi.new
+      expect_raises(ArgumentError, /must be one of/) do
+        api_instance.test_enum_parameters(enum_query_double: 1.0_f64)
+      end
+    end
+
+    it "validates enum_form_string_array" do
+      api_instance = PetStore::FakeApi.new
+      expect_raises(ArgumentError, /must be one of/) do
+        api_instance.test_enum_parameters(enum_form_string_array: ["fail"])
+      end
+    end
+
+    it "validates enum_form_string" do
+      api_instance = PetStore::FakeApi.new
+      expect_raises(ArgumentError, /must be one of/) do
+        api_instance.test_enum_parameters(enum_form_string: "fail")
+      end
+    end
+
   end
 
   # unit tests for test_group_parameters
