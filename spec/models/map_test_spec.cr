@@ -15,14 +15,20 @@ require "../spec_helper"
 describe PetStore::MapTest do
   describe "test an instance of MapTest" do
     it "should create an instance of MapTest" do
-      # instance = PetStore::MapTest.new
-      # (instance).should be_a(PetStore::MapTest)
+      instance = PetStore::MapTest.new
+      (instance).should be_a(PetStore::MapTest)
     end
   end
 
   describe "test attribute 'map_map_of_string'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    it "deserializes map_map_of_string" do
+      json = %({"map_map_of_string":{"a":{"b":"c"},"d":{"e":"f"}}})
+      instance = PetStore::MapTest.from_json(json)
+      expect_value = {
+        "a" => {"b" => "c"},
+        "d" => {"e" => "f"},
+      }
+      instance.map_map_of_string.not_nil!.should eq(expect_value)
     end
   end
 
@@ -60,14 +66,26 @@ describe PetStore::MapTest do
   end
 
   describe "test attribute 'direct_map'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    it "deserializes map_map_of_string" do
+      json = %({"direct_map":{"a":true,"b":false}})
+      instance = PetStore::MapTest.from_json(json)
+      expect_value = {
+        "a" => true,
+        "b" => false,
+      }
+      instance.direct_map.not_nil!.should eq(expect_value)
     end
   end
 
   describe "test attribute 'indirect_map'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    it "deserializes map_map_of_string" do
+      json = %({"indirect_map":{"a":true,"b":false}})
+      instance = PetStore::MapTest.from_json(json)
+      expect_value = {
+        "a" => true,
+        "b" => false,
+      }
+      instance.indirect_map.not_nil!.should eq(expect_value)
     end
   end
 end

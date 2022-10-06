@@ -23,7 +23,7 @@ module PetStore
     @[JSON::Field(key: "enum_string_required", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter enum_string_required : String? = nil
     ERROR_MESSAGE_FOR_ENUM_STRING_REQUIRED = "invalid value for \"enum_string_required\", must be one of [UPPER, lower, ]."
-    VALID_VALUES_FOR_ENUM_STRING_REQUIRED  = StaticArray["UPPER", "lower", ""]
+    VALID_VALUES_FOR_ENUM_STRING_REQUIRED  = String.static_array("UPPER", "lower", "")
 
     @[JSON::Field(key: "outerEnumRquired", type: PetStore::OuterEnumRquired?, default: nil, required: true, nullable: false, emit_null: false)]
     getter outer_enum_rquired : PetStore::OuterEnumRquired? = nil
@@ -38,27 +38,27 @@ module PetStore
     @[JSON::Field(key: "enum_string", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter enum_string : String? = nil
     ERROR_MESSAGE_FOR_ENUM_STRING = "invalid value for \"enum_string\", must be one of [UPPER, lower, ]."
-    VALID_VALUES_FOR_ENUM_STRING  = StaticArray["UPPER", "lower", ""]
+    VALID_VALUES_FOR_ENUM_STRING  = String.static_array("UPPER", "lower", "")
 
     @[JSON::Field(key: "enum_int32", type: Int32?, default: nil, required: false, nullable: false, emit_null: false)]
     getter enum_int32 : Int32? = nil
     ERROR_MESSAGE_FOR_ENUM_INT32 = "invalid value for \"enum_int32\", must be one of [1, -1]."
-    VALID_VALUES_FOR_ENUM_INT32  = StaticArray[Int32.new("1"), Int32.new("-1")]
+    VALID_VALUES_FOR_ENUM_INT32  = Int32.static_array("1", "-1")
 
     @[JSON::Field(key: "enum_int64", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter enum_int64 : Int64? = nil
     ERROR_MESSAGE_FOR_ENUM_INT64 = "invalid value for \"enum_int64\", must be one of [1, -1]."
-    VALID_VALUES_FOR_ENUM_INT64  = StaticArray[Int64.new("1"), Int64.new("-1")]
+    VALID_VALUES_FOR_ENUM_INT64  = Int64.static_array("1", "-1")
 
     @[JSON::Field(key: "enum_float", type: Float32?, default: nil, required: false, nullable: false, emit_null: false)]
     getter enum_float : Float32? = nil
     ERROR_MESSAGE_FOR_ENUM_FLOAT = "invalid value for \"enum_float\", must be one of [1.1, -1.2]."
-    VALID_VALUES_FOR_ENUM_FLOAT  = StaticArray[Float32.new("1.1"), Float32.new("-1.2")]
+    VALID_VALUES_FOR_ENUM_FLOAT  = Float32.static_array("1.1", "-1.2")
 
     @[JSON::Field(key: "enum_double", type: Float64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter enum_double : Float64? = nil
     ERROR_MESSAGE_FOR_ENUM_DOUBLE = "invalid value for \"enum_double\", must be one of [1.1, -1.2]."
-    VALID_VALUES_FOR_ENUM_DOUBLE  = StaticArray[Float64.new("1.1"), Float64.new("-1.2")]
+    VALID_VALUES_FOR_ENUM_DOUBLE  = Float64.static_array("1.1", "-1.2")
 
     @[JSON::Field(key: "outerEnum", type: PetStore::OuterEnum?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: outer_enum.nil? && !outer_enum_present?)]
     getter outer_enum : PetStore::OuterEnum? = nil

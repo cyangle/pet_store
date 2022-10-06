@@ -202,7 +202,6 @@ describe "FakeApi" do
         api_instance.test_enum_parameters(enum_form_string: "fail")
       end
     end
-
   end
 
   # unit tests for test_group_parameters

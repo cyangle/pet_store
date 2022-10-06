@@ -30,7 +30,7 @@ module PetStore
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _type : String? = nil
     ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [plains, mountain, grevys]."
-    VALID_VALUES_FOR__TYPE  = StaticArray["plains", "mountain", "grevys"]
+    VALID_VALUES_FOR__TYPE  = String.static_array("plains", "mountain", "grevys")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

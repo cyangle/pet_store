@@ -2,6 +2,14 @@ struct Bool
   def self.new(value : String) : Bool
     value == "true"
   end
+
+  macro static_array(*strings)
+    %array = uninitialized StaticArray({{@type}}, {{strings.size}})
+    {% for string, i in strings %}
+      %array.to_unsafe[{{i}}] = {{@type}}.new({{string}})
+    {% end %}
+    %array
+  end
 end
 
 class String

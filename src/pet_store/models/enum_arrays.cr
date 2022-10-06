@@ -23,12 +23,12 @@ module PetStore
     @[JSON::Field(key: "just_symbol", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter just_symbol : String? = nil
     ERROR_MESSAGE_FOR_JUST_SYMBOL = "invalid value for \"just_symbol\", must be one of [>=, $]."
-    VALID_VALUES_FOR_JUST_SYMBOL  = StaticArray[">=", "$"]
+    VALID_VALUES_FOR_JUST_SYMBOL  = String.static_array(">=", "$")
 
     @[JSON::Field(key: "array_enum", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter array_enum : Array(String)? = nil
     ERROR_MESSAGE_FOR_ARRAY_ENUM = "invalid value for \"array_enum\", must be one of [fish, crab]."
-    VALID_VALUES_FOR_ARRAY_ENUM  = StaticArray["fish", "crab"]
+    VALID_VALUES_FOR_ARRAY_ENUM  = String.static_array("fish", "crab")
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

@@ -20,7 +20,7 @@ module PetStore
 
     ERROR_MESSAGE = %{invalid value for "outerEnumRquired", must be one of ["started", "in_progress", "completed"].}
 
-    VALID_VALUES = StaticArray["started", "in_progress", "completed"]
+    VALID_VALUES = String.static_array("started", "in_progress", "completed")
 
     delegate to_json_object_key, to: @data
 

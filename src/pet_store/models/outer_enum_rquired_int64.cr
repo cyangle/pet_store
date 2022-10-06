@@ -20,7 +20,7 @@ module PetStore
 
     ERROR_MESSAGE = %{invalid value for "outerEnumRquiredInt64", must be one of ["1", "2", "3"].}
 
-    VALID_VALUES = StaticArray[Int64.new("1"), Int64.new("2"), Int64.new("3")]
+    VALID_VALUES = Int64.static_array("1", "2", "3")
 
     delegate to_json_object_key, to: @data
 

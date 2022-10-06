@@ -26,7 +26,7 @@ module PetStore
     @[JSON::Field(key: "map_of_enum_string", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter map_of_enum_string : Hash(String, String)? = nil
     ERROR_MESSAGE_FOR_MAP_OF_ENUM_STRING = "invalid value for \"map_of_enum_string\", must be one of [UPPER, lower]."
-    VALID_VALUES_FOR_MAP_OF_ENUM_STRING  = StaticArray["UPPER", "lower"]
+    VALID_VALUES_FOR_MAP_OF_ENUM_STRING  = String.static_array("UPPER", "lower")
 
     @[JSON::Field(key: "direct_map", type: Hash(String, Bool)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter direct_map : Hash(String, Bool)? = nil

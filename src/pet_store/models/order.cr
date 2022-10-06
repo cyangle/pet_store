@@ -36,7 +36,7 @@ module PetStore
     @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter status : String? = nil
     ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [placed, approved, delivered]."
-    VALID_VALUES_FOR_STATUS  = StaticArray["placed", "approved", "delivered"]
+    VALID_VALUES_FOR_STATUS  = String.static_array("placed", "approved", "delivered")
 
     @[JSON::Field(key: "complete", type: Bool?, default: false, required: false, nullable: false, emit_null: false)]
     getter complete : Bool? = false

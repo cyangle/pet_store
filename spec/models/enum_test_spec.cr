@@ -21,7 +21,7 @@ describe PetStore::EnumTest do
         outer_enum_rquired: PetStore::OuterEnumRquired.new("in_progress")
       )
       (instance.to_json).should eq(json)
-      (instance.outer_enum_rquired_int64.not_nil!.data).should eq(3i64)
+      (instance.outer_enum_rquired_int64.not_nil!.data).should eq(3_i64)
       (instance.outer_enum_default_value.not_nil!.data).should eq("placed")
       (instance.outer_enum_integer_default_value.not_nil!.data).should eq(0)
     end
@@ -31,7 +31,7 @@ describe PetStore::EnumTest do
       json2 = %({"enum_string_required":"lower","outerEnumRquired":"in_progress","outerEnumRquiredInt64":3,"outerEnumDefaultValue":"placed","outerEnumIntegerDefaultValue":0})
       instance = PetStore::EnumTest.from_json(json)
       (instance.to_json).should eq(json2)
-      (instance.outer_enum_rquired_int64.not_nil!.data).should eq(3i64)
+      (instance.outer_enum_rquired_int64.not_nil!.data).should eq(3_i64)
       (instance.outer_enum_default_value.not_nil!.data).should eq("placed")
       (instance.outer_enum_integer_default_value.not_nil!.data).should eq(0)
     end
@@ -88,6 +88,14 @@ describe PetStore::EnumTest do
         instance.enum_string_required = value.as(String)
       end
     end
+
+    it "raises an error when set to an invalid value" do
+      json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress"})
+      instance = PetStore::EnumTest.from_json(json)
+      expect_raises(ArgumentError, /must be one of/) do
+        instance.enum_string_required = "fail"
+      end
+    end
   end
 
   describe "test attribute 'enum_int32'" do
@@ -96,7 +104,15 @@ describe PetStore::EnumTest do
       instance = PetStore::EnumTest.from_json(json)
       allowable_values = PetStore::EnumTest::VALID_VALUES_FOR_ENUM_INT32
       allowable_values.each do |value|
-        instance.enum_int32 = value.as(Int32)
+        instance.enum_int32 = value
+      end
+    end
+
+    it "raises an error when set to an invalid value" do
+      json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress"})
+      instance = PetStore::EnumTest.from_json(json)
+      expect_raises(ArgumentError, /must be one of/) do
+        instance.enum_int32 = 0_i32
       end
     end
 
@@ -160,6 +176,14 @@ describe PetStore::EnumTest do
       (instance.enum_float).should be_nil
       (instance.valid?).should be_true
     end
+
+    it "raises an error when set to an invalid value" do
+      json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress"})
+      instance = PetStore::EnumTest.from_json(json)
+      expect_raises(ArgumentError, /must be one of/) do
+        instance.enum_float = 0.0_f32
+      end
+    end
   end
 
   describe "test attribute 'enum_double'" do
@@ -180,6 +204,14 @@ describe PetStore::EnumTest do
       instance.enum_double = nil
       (instance.enum_double).should be_nil
       (instance.valid?).should be_true
+    end
+
+    it "raises an error when set to an invalid value" do
+      json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress"})
+      instance = PetStore::EnumTest.from_json(json)
+      expect_raises(ArgumentError, /must be one of/) do
+        instance.enum_double = 0.0_f64
+      end
     end
   end
 
@@ -227,20 +259,131 @@ describe PetStore::EnumTest do
   end
 
   describe "test attribute 'outer_enum_integer'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    it "raises error" do
+      expect_raises(JSON::ParseException, /Validation failed/) do
+        json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress","outerEnumRquiredInt64":3,"outerEnum":"placed","outerEnumDefaultValue":"placed","outerEnumIntegerDefaultValue":0,"outerEnumInteger":-1})
+        PetStore::EnumTest.from_json(json)
+      end
+    end
+
+    context "sets outer_enum_integer with invalid value" do
+      it "raises error" do
+        expect_raises(ArgumentError, /must be one of/) do
+          json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress"})
+          instance = PetStore::EnumTest.from_json(json)
+          (instance.outer_enum_integer).should be_nil
+          instance.outer_enum_integer = PetStore::OuterEnumInteger.new(-1)
+        end
+      end
+    end
+
+    context "sets outer_enum_integer to valid values" do
+      PetStore::OuterEnumInteger::VALID_VALUES.each do |value|
+        it "sets the value to #{value}" do
+          json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress"})
+          instance = PetStore::EnumTest.from_json(json)
+          (instance.outer_enum_integer).should be_nil
+          (instance.valid?).should be_true
+          instance.outer_enum_integer = PetStore::OuterEnumInteger.new(value)
+          (instance.valid?).should be_true
+        end
+      end
+    end
+
+    context "sets outer_enum_integer to nil" do
+      it "sets the value to nil" do
+        json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress","outerEnumInteger":0})
+        instance = PetStore::EnumTest.from_json(json)
+        (instance.outer_enum_integer.not_nil!.data).should eq(0)
+        instance.outer_enum_integer = nil
+        (instance.outer_enum_integer).should be_nil
+      end
     end
   end
 
   describe "test attribute 'outer_enum_default_value'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    it "raises error" do
+      expect_raises(JSON::ParseException, /Validation failed/) do
+        json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress","outerEnumRquiredInt64":3,"outerEnum":"placed","outerEnumDefaultValue":"fail","outerEnumIntegerDefaultValue":0})
+        PetStore::EnumTest.from_json(json)
+      end
+    end
+
+    context "sets outer_enum_default_value with invalid value" do
+      it "raises error" do
+        expect_raises(ArgumentError, /must be one of/) do
+          json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress"})
+          instance = PetStore::EnumTest.from_json(json)
+          (instance.outer_enum_default_value.not_nil!.data).should eq("placed")
+          instance.outer_enum_default_value = PetStore::OuterEnumDefaultValue.new("fail")
+        end
+      end
+    end
+
+    context "sets outer_enum_default_value to valid values" do
+      PetStore::OuterEnumDefaultValue::VALID_VALUES.each do |value|
+        it "sets the value to #{value}" do
+          json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress","outerEnumDefaultValue":null})
+          instance = PetStore::EnumTest.from_json(json)
+          (instance.outer_enum_default_value).should be_nil
+          (instance.valid?).should be_true
+          instance.outer_enum_default_value = PetStore::OuterEnumDefaultValue.new(value)
+          (instance.valid?).should be_true
+        end
+      end
+    end
+
+    context "sets outer_enum_default_value to nil" do
+      it "sets the value to nil" do
+        json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress","outerEnumDefaultValue":"placed"})
+        instance = PetStore::EnumTest.from_json(json)
+        (instance.outer_enum_default_value.not_nil!.data).should eq("placed")
+        instance.outer_enum_default_value = nil
+        (instance.outer_enum_default_value).should be_nil
+      end
     end
   end
 
   describe "test attribute 'outer_enum_integer_default_value'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    it "raises error" do
+      expect_raises(JSON::ParseException, /Validation failed/) do
+        json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress","outerEnumRquiredInt64":3,"outerEnum":"placed","outerEnumDefaultValue":"placed","outerEnumIntegerDefaultValue":3,"outerEnumInteger":0})
+        PetStore::EnumTest.from_json(json)
+      end
+    end
+
+    context "sets outer_enum_integer_default_value with invalid value" do
+      it "raises error" do
+        expect_raises(ArgumentError, /must be one of/) do
+          json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress"})
+          instance = PetStore::EnumTest.from_json(json)
+          (instance.outer_enum_integer_default_value.not_nil!.data).should eq(0)
+          instance.outer_enum_integer_default_value = PetStore::OuterEnumIntegerDefaultValue.new(-1)
+        end
+      end
+    end
+
+    context "sets outer_enum_integer_default_value to valid values" do
+      PetStore::OuterEnumIntegerDefaultValue::VALID_VALUES.each do |value|
+        it "sets the value to #{value}" do
+          json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress","outerEnumIntegerDefaultValue":null})
+          instance = PetStore::EnumTest.from_json(json)
+          (instance.outer_enum_integer_default_value).should be_nil
+          (instance.valid?).should be_true
+          instance.outer_enum_integer_default_value = PetStore::OuterEnumIntegerDefaultValue.new(value)
+          (instance.valid?).should be_true
+        end
+      end
+    end
+
+    context "sets outer_enum to nil" do
+      it "sets the value to nil" do
+        json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress","outerEnumIntegerDefaultValue":0})
+        instance = PetStore::EnumTest.from_json(json)
+        (instance.outer_enum_integer_default_value.not_nil!.data).should eq(0)
+        instance.outer_enum_integer_default_value = nil
+        (instance.outer_enum_integer_default_value).should be_nil
+      end
     end
   end
 end

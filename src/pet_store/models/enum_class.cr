@@ -20,7 +20,7 @@ module PetStore
 
     ERROR_MESSAGE = %{invalid value for "EnumClass", must be one of ["_abc", "-efg", "(xyz)"].}
 
-    VALID_VALUES = StaticArray["_abc", "-efg", "(xyz)"]
+    VALID_VALUES = String.static_array("_abc", "-efg", "(xyz)")
 
     delegate to_json_object_key, to: @data
 
