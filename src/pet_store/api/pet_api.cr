@@ -23,7 +23,7 @@ module PetStore
     # Add a new pet to the store
     #
     # @required @param pet [PetStore::Pet?] Pet object that needs to be added to the store
-    # @return [nil]
+    # @return [Nil]
     def add_pet(*, pet : PetStore::Pet? = nil) : Nil
       add_pet_with_http_info(pet: pet)
       nil
@@ -32,7 +32,7 @@ module PetStore
     # Add a new pet to the store
     #
     # @required @param pet [PetStore::Pet?] Pet object that needs to be added to the store
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    # @return [Tuple(Nil, Integer, Hash)] nil, response status code and response headers
     def add_pet_with_http_info(*, pet : PetStore::Pet? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_add_pet(pet: pet)
 
@@ -42,7 +42,7 @@ module PetStore
         Log.debug { "API called: PetApi#add_pet\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Tuple.new(nil, status_code, headers)
+      Tuple.new(nil, status_code, headers)
     end
 
     # Add a new pet to the store
@@ -102,7 +102,7 @@ module PetStore
     #
     # @required @param pet_id [Int64?] Pet id to delete
     # @optional @param api_key [String?]
-    # @return [nil]
+    # @return [Nil]
     def delete_pet(*, pet_id : Int64? = nil, api_key : String? = nil) : Nil
       delete_pet_with_http_info(pet_id: pet_id, api_key: api_key)
       nil
@@ -112,7 +112,7 @@ module PetStore
     #
     # @required @param pet_id [Int64?] Pet id to delete
     # @optional @param api_key [String?]
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    # @return [Tuple(Nil, Integer, Hash)] nil, response status code and response headers
     def delete_pet_with_http_info(*, pet_id : Int64? = nil, api_key : String? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete_pet(pet_id: pet_id, api_key: api_key)
 
@@ -122,7 +122,7 @@ module PetStore
         Log.debug { "API called: PetApi#delete_pet\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Tuple.new(nil, status_code, headers)
+      Tuple.new(nil, status_code, headers)
     end
 
     # Deletes a pet
@@ -178,8 +178,8 @@ module PetStore
     # Finds Pets by status
     # Multiple status values can be provided with comma separated strings
     # @required @param status [Array(String)?] Status values that need to be considered for filter
-    # @return [Array(Pet)]
-    def find_pets_by_status(*, status : Array(String)? = nil) : Array(Pet)
+    # @return [Array(PetStore::Pet)]
+    def find_pets_by_status(*, status : Array(String)? = nil) : Array(PetStore::Pet)
       data, _status_code, _headers = find_pets_by_status_with_http_info(status: status)
       data
     end
@@ -187,8 +187,8 @@ module PetStore
     # Finds Pets by status
     # Multiple status values can be provided with comma separated strings
     # @required @param status [Array(String)?] Status values that need to be considered for filter
-    # @return [Array<(Array(Pet), Integer, Hash)>] Array(Pet) data, response status code and response headers
-    def find_pets_by_status_with_http_info(*, status : Array(String)? = nil) : Tuple(Array(Pet), Int32, Hash(String, Array(String) | String))
+    # @return [Tuple(Array(PetStore::Pet), Integer, Hash)] Array(PetStore::Pet)? data, response status code and response headers
+    def find_pets_by_status_with_http_info(*, status : Array(String)? = nil) : Tuple(Array(PetStore::Pet), Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_find_pets_by_status(status: status)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -197,7 +197,7 @@ module PetStore
         Log.debug { "API called: PetApi#find_pets_by_status\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Tuple.new(Array(Pet).from_json(body), status_code, headers)
+      Tuple.new(Array(PetStore::Pet).from_json(body), status_code, headers)
     end
 
     # Finds Pets by status
@@ -259,8 +259,8 @@ module PetStore
     # Finds Pets by tags
     # Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
     # @required @param tags [Array(String)?] Tags to filter by
-    # @return [Array(Pet)]
-    def find_pets_by_tags(*, tags : Array(String)? = nil) : Array(Pet)
+    # @return [Array(PetStore::Pet)]
+    def find_pets_by_tags(*, tags : Array(String)? = nil) : Array(PetStore::Pet)
       data, _status_code, _headers = find_pets_by_tags_with_http_info(tags: tags)
       data
     end
@@ -268,8 +268,8 @@ module PetStore
     # Finds Pets by tags
     # Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
     # @required @param tags [Array(String)?] Tags to filter by
-    # @return [Array<(Array(Pet), Integer, Hash)>] Array(Pet) data, response status code and response headers
-    def find_pets_by_tags_with_http_info(*, tags : Array(String)? = nil) : Tuple(Array(Pet), Int32, Hash(String, Array(String) | String))
+    # @return [Tuple(Array(PetStore::Pet), Integer, Hash)] Array(PetStore::Pet)? data, response status code and response headers
+    def find_pets_by_tags_with_http_info(*, tags : Array(String)? = nil) : Tuple(Array(PetStore::Pet), Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_find_pets_by_tags(tags: tags)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -278,7 +278,7 @@ module PetStore
         Log.debug { "API called: PetApi#find_pets_by_tags\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Tuple.new(Array(Pet).from_json(body), status_code, headers)
+      Tuple.new(Array(PetStore::Pet).from_json(body), status_code, headers)
     end
 
     # Finds Pets by tags
@@ -335,8 +335,8 @@ module PetStore
     # Find pet by ID
     # Returns a single pet
     # @required @param pet_id [Int64?] ID of pet to return
-    # @return [Pet]
-    def get_pet_by_id(*, pet_id : Int64? = nil) : Pet
+    # @return [PetStore::Pet]
+    def get_pet_by_id(*, pet_id : Int64? = nil) : PetStore::Pet
       data, _status_code, _headers = get_pet_by_id_with_http_info(pet_id: pet_id)
       data
     end
@@ -344,8 +344,8 @@ module PetStore
     # Find pet by ID
     # Returns a single pet
     # @required @param pet_id [Int64?] ID of pet to return
-    # @return [Array<(Pet, Integer, Hash)>] Pet data, response status code and response headers
-    def get_pet_by_id_with_http_info(*, pet_id : Int64? = nil) : Tuple(Pet, Int32, Hash(String, Array(String) | String))
+    # @return [Tuple(PetStore::Pet, Integer, Hash)] PetStore::Pet? data, response status code and response headers
+    def get_pet_by_id_with_http_info(*, pet_id : Int64? = nil) : Tuple(PetStore::Pet, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_pet_by_id(pet_id: pet_id)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -354,7 +354,7 @@ module PetStore
         Log.debug { "API called: PetApi#get_pet_by_id\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Tuple.new(Pet.from_json(body), status_code, headers)
+      Tuple.new(PetStore::Pet.from_json(body), status_code, headers)
     end
 
     # Find pet by ID
@@ -410,7 +410,7 @@ module PetStore
     # Update an existing pet
     #
     # @required @param pet [PetStore::Pet?] Pet object that needs to be added to the store
-    # @return [nil]
+    # @return [Nil]
     def update_pet(*, pet : PetStore::Pet? = nil) : Nil
       update_pet_with_http_info(pet: pet)
       nil
@@ -419,7 +419,7 @@ module PetStore
     # Update an existing pet
     #
     # @required @param pet [PetStore::Pet?] Pet object that needs to be added to the store
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    # @return [Tuple(Nil, Integer, Hash)] nil, response status code and response headers
     def update_pet_with_http_info(*, pet : PetStore::Pet? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_update_pet(pet: pet)
 
@@ -429,7 +429,7 @@ module PetStore
         Log.debug { "API called: PetApi#update_pet\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Tuple.new(nil, status_code, headers)
+      Tuple.new(nil, status_code, headers)
     end
 
     # Update an existing pet
@@ -490,7 +490,7 @@ module PetStore
     # @required @param pet_id [Int64?] ID of pet that needs to be updated
     # @optional @param name [String?] Updated name of the pet
     # @optional @param status [String?] Updated status of the pet
-    # @return [nil]
+    # @return [Nil]
     def update_pet_with_form(*, pet_id : Int64? = nil, name : String? = nil, status : String? = nil) : Nil
       update_pet_with_form_with_http_info(pet_id: pet_id, name: name, status: status)
       nil
@@ -501,7 +501,7 @@ module PetStore
     # @required @param pet_id [Int64?] ID of pet that needs to be updated
     # @optional @param name [String?] Updated name of the pet
     # @optional @param status [String?] Updated status of the pet
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    # @return [Tuple(Nil, Integer, Hash)] nil, response status code and response headers
     def update_pet_with_form_with_http_info(*, pet_id : Int64? = nil, name : String? = nil, status : String? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_update_pet_with_form(pet_id: pet_id, name: name, status: status)
 
@@ -511,7 +511,7 @@ module PetStore
         Log.debug { "API called: PetApi#update_pet_with_form\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Tuple.new(nil, status_code, headers)
+      Tuple.new(nil, status_code, headers)
     end
 
     # Updates a pet in the store with form data
@@ -573,8 +573,8 @@ module PetStore
     # @required @param pet_id [Int64?] ID of pet to update
     # @optional @param additional_metadata [String?] Additional data to pass to server
     # @optional @param file [::File?] file to upload
-    # @return [ApiResponse]
-    def upload_file(*, pet_id : Int64? = nil, additional_metadata : String? = nil, file : ::File? = nil) : ApiResponse
+    # @return [PetStore::ApiResponse]
+    def upload_file(*, pet_id : Int64? = nil, additional_metadata : String? = nil, file : ::File? = nil) : PetStore::ApiResponse
       data, _status_code, _headers = upload_file_with_http_info(pet_id: pet_id, additional_metadata: additional_metadata, file: file)
       data
     end
@@ -584,8 +584,8 @@ module PetStore
     # @required @param pet_id [Int64?] ID of pet to update
     # @optional @param additional_metadata [String?] Additional data to pass to server
     # @optional @param file [::File?] file to upload
-    # @return [Array<(ApiResponse, Integer, Hash)>] ApiResponse data, response status code and response headers
-    def upload_file_with_http_info(*, pet_id : Int64? = nil, additional_metadata : String? = nil, file : ::File? = nil) : Tuple(ApiResponse, Int32, Hash(String, Array(String) | String))
+    # @return [Tuple(PetStore::ApiResponse, Integer, Hash)] PetStore::ApiResponse? data, response status code and response headers
+    def upload_file_with_http_info(*, pet_id : Int64? = nil, additional_metadata : String? = nil, file : ::File? = nil) : Tuple(PetStore::ApiResponse, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_upload_file(pet_id: pet_id, additional_metadata: additional_metadata, file: file)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -594,7 +594,7 @@ module PetStore
         Log.debug { "API called: PetApi#upload_file\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Tuple.new(ApiResponse.from_json(body), status_code, headers)
+      Tuple.new(PetStore::ApiResponse.from_json(body), status_code, headers)
     end
 
     # uploads an image
@@ -658,8 +658,8 @@ module PetStore
     # @required @param pet_id [Int64?] ID of pet to update
     # @required @param required_file [::File?] file to upload
     # @optional @param additional_metadata [String?] Additional data to pass to server
-    # @return [ApiResponse]
-    def upload_file_with_required_file(*, pet_id : Int64? = nil, required_file : ::File? = nil, additional_metadata : String? = nil) : ApiResponse
+    # @return [PetStore::ApiResponse]
+    def upload_file_with_required_file(*, pet_id : Int64? = nil, required_file : ::File? = nil, additional_metadata : String? = nil) : PetStore::ApiResponse
       data, _status_code, _headers = upload_file_with_required_file_with_http_info(pet_id: pet_id, required_file: required_file, additional_metadata: additional_metadata)
       data
     end
@@ -669,8 +669,8 @@ module PetStore
     # @required @param pet_id [Int64?] ID of pet to update
     # @required @param required_file [::File?] file to upload
     # @optional @param additional_metadata [String?] Additional data to pass to server
-    # @return [Array<(ApiResponse, Integer, Hash)>] ApiResponse data, response status code and response headers
-    def upload_file_with_required_file_with_http_info(*, pet_id : Int64? = nil, required_file : ::File? = nil, additional_metadata : String? = nil) : Tuple(ApiResponse, Int32, Hash(String, Array(String) | String))
+    # @return [Tuple(PetStore::ApiResponse, Integer, Hash)] PetStore::ApiResponse? data, response status code and response headers
+    def upload_file_with_required_file_with_http_info(*, pet_id : Int64? = nil, required_file : ::File? = nil, additional_metadata : String? = nil) : Tuple(PetStore::ApiResponse, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_upload_file_with_required_file(pet_id: pet_id, required_file: required_file, additional_metadata: additional_metadata)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -679,7 +679,7 @@ module PetStore
         Log.debug { "API called: PetApi#upload_file_with_required_file\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Tuple.new(ApiResponse.from_json(body), status_code, headers)
+      Tuple.new(PetStore::ApiResponse.from_json(body), status_code, headers)
     end
 
     # uploads an image (required)

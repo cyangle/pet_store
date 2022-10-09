@@ -23,8 +23,8 @@ module PetStore
     # To test class name in snake case
     # To test class name in snake case
     # @required @param client [PetStore::Client?] client model
-    # @return [Client]
-    def test_classname(*, client : PetStore::Client? = nil) : Client
+    # @return [PetStore::Client]
+    def test_classname(*, client : PetStore::Client? = nil) : PetStore::Client
       data, _status_code, _headers = test_classname_with_http_info(client: client)
       data
     end
@@ -32,8 +32,8 @@ module PetStore
     # To test class name in snake case
     # To test class name in snake case
     # @required @param client [PetStore::Client?] client model
-    # @return [Array<(Client, Integer, Hash)>] Client data, response status code and response headers
-    def test_classname_with_http_info(*, client : PetStore::Client? = nil) : Tuple(Client, Int32, Hash(String, Array(String) | String))
+    # @return [Tuple(PetStore::Client, Integer, Hash)] PetStore::Client? data, response status code and response headers
+    def test_classname_with_http_info(*, client : PetStore::Client? = nil) : Tuple(PetStore::Client, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_test_classname(client: client)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -42,7 +42,7 @@ module PetStore
         Log.debug { "API called: FakeClassnameTags123Api#test_classname\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Tuple.new(Client.from_json(body), status_code, headers)
+      Tuple.new(PetStore::Client.from_json(body), status_code, headers)
     end
 
     # To test class name in snake case

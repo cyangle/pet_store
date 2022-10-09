@@ -20,14 +20,14 @@ module PetStore
       @api_client = api_client
     end
 
-    # @return [FooGetDefaultResponse]
-    def foo_get : FooGetDefaultResponse
+    # @return [PetStore::FooGetDefaultResponse]
+    def foo_get : PetStore::FooGetDefaultResponse
       data, _status_code, _headers = foo_get_with_http_info()
       data
     end
 
-    # @return [Array<(FooGetDefaultResponse, Integer, Hash)>] FooGetDefaultResponse data, response status code and response headers
-    def foo_get_with_http_info : Tuple(FooGetDefaultResponse, Int32, Hash(String, Array(String) | String))
+    # @return [Tuple(PetStore::FooGetDefaultResponse, Integer, Hash)] PetStore::FooGetDefaultResponse? data, response status code and response headers
+    def foo_get_with_http_info : Tuple(PetStore::FooGetDefaultResponse, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_foo_get()
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -36,7 +36,7 @@ module PetStore
         Log.debug { "API called: DefaultApi#foo_get\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Tuple.new(FooGetDefaultResponse.from_json(body), status_code, headers)
+      Tuple.new(PetStore::FooGetDefaultResponse.from_json(body), status_code, headers)
     end
 
     # @return nil

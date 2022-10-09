@@ -23,7 +23,7 @@ module PetStore
     # Delete purchase order by ID
     # For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors
     # @required @param order_id [String?] ID of the order that needs to be deleted
-    # @return [nil]
+    # @return [Nil]
     def delete_order(*, order_id : String? = nil) : Nil
       delete_order_with_http_info(order_id: order_id)
       nil
@@ -32,7 +32,7 @@ module PetStore
     # Delete purchase order by ID
     # For valid response try integer IDs with value &lt; 1000. Anything above 1000 or nonintegers will generate API errors
     # @required @param order_id [String?] ID of the order that needs to be deleted
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    # @return [Tuple(Nil, Integer, Hash)] nil, response status code and response headers
     def delete_order_with_http_info(*, order_id : String? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete_order(order_id: order_id)
 
@@ -42,7 +42,7 @@ module PetStore
         Log.debug { "API called: StoreApi#delete_order\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Tuple.new(nil, status_code, headers)
+      Tuple.new(nil, status_code, headers)
     end
 
     # Delete purchase order by ID
@@ -103,7 +103,7 @@ module PetStore
 
     # Returns pet inventories by status
     # Returns a map of status codes to quantities
-    # @return [Array<(Hash(String, Int32), Integer, Hash)>] Hash(String, Int32) data, response status code and response headers
+    # @return [Tuple(Hash(String, Int32), Integer, Hash)] Hash(String, Int32)? data, response status code and response headers
     def get_inventory_with_http_info : Tuple(Hash(String, Int32), Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_inventory()
 
@@ -113,7 +113,7 @@ module PetStore
         Log.debug { "API called: StoreApi#get_inventory\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Tuple.new(Hash(String, Int32).from_json(body), status_code, headers)
+      Tuple.new(Hash(String, Int32).from_json(body), status_code, headers)
     end
 
     # Returns pet inventories by status
@@ -164,8 +164,8 @@ module PetStore
     # Find purchase order by ID
     # For valid response try integer IDs with value <= 5 or > 10. Other values will generated exceptions
     # @required @param order_id [Int64?] ID of pet that needs to be fetched
-    # @return [Order]
-    def get_order_by_id(*, order_id : Int64? = nil) : Order
+    # @return [PetStore::Order]
+    def get_order_by_id(*, order_id : Int64? = nil) : PetStore::Order
       data, _status_code, _headers = get_order_by_id_with_http_info(order_id: order_id)
       data
     end
@@ -173,8 +173,8 @@ module PetStore
     # Find purchase order by ID
     # For valid response try integer IDs with value &lt;&#x3D; 5 or &gt; 10. Other values will generated exceptions
     # @required @param order_id [Int64?] ID of pet that needs to be fetched
-    # @return [Array<(Order, Integer, Hash)>] Order data, response status code and response headers
-    def get_order_by_id_with_http_info(*, order_id : Int64? = nil) : Tuple(Order, Int32, Hash(String, Array(String) | String))
+    # @return [Tuple(PetStore::Order, Integer, Hash)] PetStore::Order? data, response status code and response headers
+    def get_order_by_id_with_http_info(*, order_id : Int64? = nil) : Tuple(PetStore::Order, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_order_by_id(order_id: order_id)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -183,7 +183,7 @@ module PetStore
         Log.debug { "API called: StoreApi#get_order_by_id\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Tuple.new(Order.from_json(body), status_code, headers)
+      Tuple.new(PetStore::Order.from_json(body), status_code, headers)
     end
 
     # Find purchase order by ID
@@ -246,8 +246,8 @@ module PetStore
     # Place an order for a pet
     #
     # @required @param order [PetStore::Order?] order placed for purchasing the pet
-    # @return [Order]
-    def place_order(*, order : PetStore::Order? = nil) : Order
+    # @return [PetStore::Order]
+    def place_order(*, order : PetStore::Order? = nil) : PetStore::Order
       data, _status_code, _headers = place_order_with_http_info(order: order)
       data
     end
@@ -255,8 +255,8 @@ module PetStore
     # Place an order for a pet
     #
     # @required @param order [PetStore::Order?] order placed for purchasing the pet
-    # @return [Array<(Order, Integer, Hash)>] Order data, response status code and response headers
-    def place_order_with_http_info(*, order : PetStore::Order? = nil) : Tuple(Order, Int32, Hash(String, Array(String) | String))
+    # @return [Tuple(PetStore::Order, Integer, Hash)] PetStore::Order? data, response status code and response headers
+    def place_order_with_http_info(*, order : PetStore::Order? = nil) : Tuple(PetStore::Order, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_place_order(order: order)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -265,7 +265,7 @@ module PetStore
         Log.debug { "API called: StoreApi#place_order\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
       end
 
-      return Tuple.new(Order.from_json(body), status_code, headers)
+      Tuple.new(PetStore::Order.from_json(body), status_code, headers)
     end
 
     # Place an order for a pet
