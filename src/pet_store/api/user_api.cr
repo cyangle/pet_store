@@ -32,7 +32,7 @@ module PetStore
     # Create user
     # This can only be done by the logged in user.
     # @required @param user [PetStore::User?] Created user object
-    # @return [Tuple(Nil, Integer, Hash)] nil, response status code and response headers
+    # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
     def create_user_with_http_info(*, user : PetStore::User? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_create_user(user: user)
 
@@ -110,7 +110,7 @@ module PetStore
     # Creates list of users with given input array
     #
     # @required @param user [Array(PetStore::User)?] List of user object
-    # @return [Tuple(Nil, Integer, Hash)] nil, response status code and response headers
+    # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
     def create_users_with_array_input_with_http_info(*, user : Array(PetStore::User)? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_create_users_with_array_input(user: user)
 
@@ -188,7 +188,7 @@ module PetStore
     # Creates list of users with given input array
     #
     # @required @param user [Array(PetStore::User)?] List of user object
-    # @return [Tuple(Nil, Integer, Hash)] nil, response status code and response headers
+    # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
     def create_users_with_list_input_with_http_info(*, user : Array(PetStore::User)? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_create_users_with_list_input(user: user)
 
@@ -266,7 +266,7 @@ module PetStore
     # Delete user
     # This can only be done by the logged in user.
     # @required @param username [String?] The name that needs to be deleted
-    # @return [Tuple(Nil, Integer, Hash)] nil, response status code and response headers
+    # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
     def delete_user_with_http_info(*, username : String? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete_user(username: username)
 
@@ -339,7 +339,7 @@ module PetStore
     # Get user by user name
     #
     # @required @param username [String?] The name that needs to be fetched. Use user1 for testing.
-    # @return [Tuple(PetStore::User, Integer, Hash)] PetStore::User? data, response status code and response headers
+    # @return [Tuple(PetStore::User, Integer, Hash)] PetStore::User, response status code and response headers
     def get_user_by_name_with_http_info(*, username : String? = nil) : Tuple(PetStore::User, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_user_by_name(username: username)
 
@@ -416,7 +416,7 @@ module PetStore
     #
     # @required @param username [String?] The user name for login
     # @required @param password [String?] The password for login in clear text
-    # @return [Tuple(String, Integer, Hash)] String? data, response status code and response headers
+    # @return [Tuple(String, Integer, Hash)] String, response status code and response headers
     def login_user_with_http_info(*, username : String? = nil, password : String? = nil) : Tuple(String, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_login_user(username: username, password: password)
 
@@ -494,7 +494,7 @@ module PetStore
 
     # Logs out current logged in user session
     #
-    # @return [Tuple(Nil, Integer, Hash)] nil, response status code and response headers
+    # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
     def logout_user_with_http_info : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_logout_user()
 
@@ -564,7 +564,7 @@ module PetStore
     # This can only be done by the logged in user.
     # @required @param username [String?] name that need to be deleted
     # @required @param user [PetStore::User?] Updated user object
-    # @return [Tuple(Nil, Integer, Hash)] nil, response status code and response headers
+    # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
     def update_user_with_http_info(*, username : String? = nil, user : PetStore::User? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_update_user(username: username, user: user)
 

@@ -32,7 +32,7 @@ module PetStore
     # To test class name in snake case
     # To test class name in snake case
     # @required @param client [PetStore::Client?] client model
-    # @return [Tuple(PetStore::Client, Integer, Hash)] PetStore::Client? data, response status code and response headers
+    # @return [Tuple(PetStore::Client, Integer, Hash)] PetStore::Client, response status code and response headers
     def test_classname_with_http_info(*, client : PetStore::Client? = nil) : Tuple(PetStore::Client, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_test_classname(client: client)
 

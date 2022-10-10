@@ -32,7 +32,7 @@ module PetStore
     # Delete purchase order by ID
     # For valid response try integer IDs with value &lt; 1000. Anything above 1000 or nonintegers will generate API errors
     # @required @param order_id [String?] ID of the order that needs to be deleted
-    # @return [Tuple(Nil, Integer, Hash)] nil, response status code and response headers
+    # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
     def delete_order_with_http_info(*, order_id : String? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete_order(order_id: order_id)
 
@@ -103,7 +103,7 @@ module PetStore
 
     # Returns pet inventories by status
     # Returns a map of status codes to quantities
-    # @return [Tuple(Hash(String, Int32), Integer, Hash)] Hash(String, Int32)? data, response status code and response headers
+    # @return [Tuple(Hash(String, Int32), Integer, Hash)] Hash(String, Int32), response status code and response headers
     def get_inventory_with_http_info : Tuple(Hash(String, Int32), Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_inventory()
 
@@ -173,7 +173,7 @@ module PetStore
     # Find purchase order by ID
     # For valid response try integer IDs with value &lt;&#x3D; 5 or &gt; 10. Other values will generated exceptions
     # @required @param order_id [Int64?] ID of pet that needs to be fetched
-    # @return [Tuple(PetStore::Order, Integer, Hash)] PetStore::Order? data, response status code and response headers
+    # @return [Tuple(PetStore::Order, Integer, Hash)] PetStore::Order, response status code and response headers
     def get_order_by_id_with_http_info(*, order_id : Int64? = nil) : Tuple(PetStore::Order, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_order_by_id(order_id: order_id)
 
@@ -255,7 +255,7 @@ module PetStore
     # Place an order for a pet
     #
     # @required @param order [PetStore::Order?] order placed for purchasing the pet
-    # @return [Tuple(PetStore::Order, Integer, Hash)] PetStore::Order? data, response status code and response headers
+    # @return [Tuple(PetStore::Order, Integer, Hash)] PetStore::Order, response status code and response headers
     def place_order_with_http_info(*, order : PetStore::Order? = nil) : Tuple(PetStore::Order, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_place_order(order: order)
 

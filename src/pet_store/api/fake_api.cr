@@ -28,7 +28,7 @@ module PetStore
     end
 
     # Health check endpoint
-    # @return [Tuple(PetStore::HealthCheckResult, Integer, Hash)] PetStore::HealthCheckResult? data, response status code and response headers
+    # @return [Tuple(PetStore::HealthCheckResult, Integer, Hash)] PetStore::HealthCheckResult, response status code and response headers
     def fake_health_get_with_http_info : Tuple(PetStore::HealthCheckResult, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_fake_health_get()
 
@@ -95,7 +95,7 @@ module PetStore
 
     # Test serialization of outer boolean types
     # @optional @param body [Bool?] Input boolean as post body
-    # @return [Tuple(Bool, Integer, Hash)] Bool? data, response status code and response headers
+    # @return [Tuple(Bool, Integer, Hash)] Bool, response status code and response headers
     def fake_outer_boolean_serialize_with_http_info(*, body : Bool? = nil) : Tuple(Bool, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_fake_outer_boolean_serialize(body: body)
 
@@ -165,7 +165,7 @@ module PetStore
 
     # Test serialization of object with outer number type
     # @optional @param outer_composite [PetStore::OuterComposite?] Input composite as post body
-    # @return [Tuple(PetStore::OuterComposite, Integer, Hash)] PetStore::OuterComposite? data, response status code and response headers
+    # @return [Tuple(PetStore::OuterComposite, Integer, Hash)] PetStore::OuterComposite, response status code and response headers
     def fake_outer_composite_serialize_with_http_info(*, outer_composite : PetStore::OuterComposite? = nil) : Tuple(PetStore::OuterComposite, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_fake_outer_composite_serialize(outer_composite: outer_composite)
 
@@ -241,7 +241,7 @@ module PetStore
 
     # Test serialization of outer number types
     # @optional @param body [Float64?] Input number as post body
-    # @return [Tuple(Float64, Integer, Hash)] Float64? data, response status code and response headers
+    # @return [Tuple(Float64, Integer, Hash)] Float64, response status code and response headers
     def fake_outer_number_serialize_with_http_info(*, body : Float64? = nil) : Tuple(Float64, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_fake_outer_number_serialize(body: body)
 
@@ -311,7 +311,7 @@ module PetStore
 
     # Test serialization of outer string types
     # @optional @param body [String?] Input string as post body
-    # @return [Tuple(String, Integer, Hash)] String? data, response status code and response headers
+    # @return [Tuple(String, Integer, Hash)] String, response status code and response headers
     def fake_outer_string_serialize_with_http_info(*, body : String? = nil) : Tuple(String, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_fake_outer_string_serialize(body: body)
 
@@ -381,7 +381,7 @@ module PetStore
 
     # For this test, the body for this request much reference a schema named &#x60;File&#x60;.
     # @required @param file_schema_test_class [PetStore::FileSchemaTestClass?]
-    # @return [Tuple(Nil, Integer, Hash)] nil, response status code and response headers
+    # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
     def test_body_with_file_schema_with_http_info(*, file_schema_test_class : PetStore::FileSchemaTestClass? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_test_body_with_file_schema(file_schema_test_class: file_schema_test_class)
 
@@ -456,7 +456,7 @@ module PetStore
 
     # @required @param query [String?]
     # @required @param user [PetStore::User?]
-    # @return [Tuple(Nil, Integer, Hash)] nil, response status code and response headers
+    # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
     def test_body_with_query_params_with_http_info(*, query : String? = nil, user : PetStore::User? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_test_body_with_query_params(query: query, user: user)
 
@@ -536,7 +536,7 @@ module PetStore
     # To test \&quot;client\&quot; model
     # To test \&quot;client\&quot; model
     # @required @param client [PetStore::Client?] client model
-    # @return [Tuple(PetStore::Client, Integer, Hash)] PetStore::Client? data, response status code and response headers
+    # @return [Tuple(PetStore::Client, Integer, Hash)] PetStore::Client, response status code and response headers
     def test_client_model_with_http_info(*, client : PetStore::Client? = nil) : Tuple(PetStore::Client, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_test_client_model(client: client)
 
@@ -642,7 +642,7 @@ module PetStore
     # @optional @param date_time [Time?] None
     # @optional @param password [String?] None
     # @optional @param callback [String?] None
-    # @return [Tuple(Nil, Integer, Hash)] nil, response status code and response headers
+    # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
     def test_endpoint_parameters_with_http_info(*, number : Float64? = nil, double : Float64? = nil, pattern_without_delimiter : String? = nil, byte : String? = nil, integer : Int32? = nil, int32 : Int32? = nil, int64 : Int64? = nil, float : Float32? = nil, string : String? = nil, binary : ::File? = nil, date : Time? = nil, date_time : Time? = nil, password : String? = nil, callback : String? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_test_endpoint_parameters(number: number, double: double, pattern_without_delimiter: pattern_without_delimiter, byte: byte, integer: integer, int32: int32, int64: int64, float: float, string: string, binary: binary, date: date, date_time: date_time, password: password, callback: callback)
 
@@ -807,7 +807,7 @@ module PetStore
     # @optional @param enum_query_double [Float64?] Query parameter enum test (double)
     # @optional @param enum_form_string_array [Array(String)?] Form parameter enum test (string array)
     # @optional @param enum_form_string [String?] Form parameter enum test (string)
-    # @return [Tuple(Nil, Integer, Hash)] nil, response status code and response headers
+    # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
     def test_enum_parameters_with_http_info(*, enum_header_string_array : Array(String)? = nil, enum_header_string : String? = "-efg", enum_query_string_array : Array(String)? = nil, enum_query_string : String? = "-efg", enum_query_integer : Int32? = nil, enum_query_double : Float64? = nil, enum_form_string_array : Array(String)? = ["$"], enum_form_string : String? = "-efg") : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_test_enum_parameters(enum_header_string_array: enum_header_string_array, enum_header_string: enum_header_string, enum_query_string_array: enum_query_string_array, enum_query_string: enum_query_string, enum_query_integer: enum_query_integer, enum_query_double: enum_query_double, enum_form_string_array: enum_form_string_array, enum_form_string: enum_form_string)
 
@@ -939,7 +939,7 @@ module PetStore
     # @optional @param string_group [Int32?] String in group parameters
     # @optional @param boolean_group [Bool?] Boolean in group parameters
     # @optional @param int64_group [Int64?] Integer in group parameters
-    # @return [Tuple(Nil, Integer, Hash)] nil, response status code and response headers
+    # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
     def test_group_parameters_with_http_info(*, required_string_group : Int32? = nil, required_boolean_group : Bool? = nil, required_int64_group : Int64? = nil, string_group : Int32? = nil, boolean_group : Bool? = nil, int64_group : Int64? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_test_group_parameters(required_string_group: required_string_group, required_boolean_group: required_boolean_group, required_int64_group: required_int64_group, string_group: string_group, boolean_group: boolean_group, int64_group: int64_group)
 
@@ -1027,7 +1027,7 @@ module PetStore
     # test inline additionalProperties
     #
     # @required @param request_body [Hash(String, String)?] request body
-    # @return [Tuple(Nil, Integer, Hash)] nil, response status code and response headers
+    # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
     def test_inline_additional_properties_with_http_info(*, request_body : Hash(String, String)? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_test_inline_additional_properties(request_body: request_body)
 
@@ -1104,7 +1104,7 @@ module PetStore
     #
     # @required @param param [String?] field1
     # @required @param param2 [String?] field2
-    # @return [Tuple(Nil, Integer, Hash)] nil, response status code and response headers
+    # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
     def test_json_form_data_with_http_info(*, param : String? = nil, param2 : String? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_test_json_form_data(param: param, param2: param2)
 
@@ -1190,7 +1190,7 @@ module PetStore
     # @required @param http [Array(String)?]
     # @required @param url [Array(String)?]
     # @required @param context [Array(String)?]
-    # @return [Tuple(Nil, Integer, Hash)] nil, response status code and response headers
+    # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
     def test_query_parameter_collection_format_with_http_info(*, pipe : Array(String)? = nil, ioutil : Array(String)? = nil, http : Array(String)? = nil, url : Array(String)? = nil, context : Array(String)? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_test_query_parameter_collection_format(pipe: pipe, ioutil: ioutil, http: http, url: url, context: context)
 
@@ -1279,7 +1279,7 @@ module PetStore
     # To test unique items in header and query parameters
     # @required @param query_unique [Array(String)?]
     # @required @param header_unique [Array(String)?]
-    # @return [Tuple(Array(PetStore::Pet), Integer, Hash)] Array(PetStore::Pet)? data, response status code and response headers
+    # @return [Tuple(Array(PetStore::Pet), Integer, Hash)] Array(PetStore::Pet), response status code and response headers
     def test_unique_items_header_and_query_parameter_collection_format_with_http_info(*, query_unique : Array(String)? = nil, header_unique : Array(String)? = nil) : Tuple(Array(PetStore::Pet), Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_test_unique_items_header_and_query_parameter_collection_format(query_unique: query_unique, header_unique: header_unique)
 

@@ -26,7 +26,7 @@ module PetStore
       data
     end
 
-    # @return [Tuple(PetStore::FooGetDefaultResponse, Integer, Hash)] PetStore::FooGetDefaultResponse? data, response status code and response headers
+    # @return [Tuple(PetStore::FooGetDefaultResponse, Integer, Hash)] PetStore::FooGetDefaultResponse, response status code and response headers
     def foo_get_with_http_info : Tuple(PetStore::FooGetDefaultResponse, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_foo_get()
 
