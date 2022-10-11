@@ -77,6 +77,9 @@ module PetStore
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -93,6 +96,7 @@ module PetStore
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -155,6 +159,9 @@ module PetStore
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -171,6 +178,7 @@ module PetStore
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -233,6 +241,9 @@ module PetStore
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -249,6 +260,7 @@ module PetStore
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -306,6 +318,9 @@ module PetStore
       # header parameters
       header_params = Hash(String, String).new
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -322,6 +337,7 @@ module PetStore
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -381,6 +397,9 @@ module PetStore
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/xml", "application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -397,6 +416,7 @@ module PetStore
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -463,6 +483,9 @@ module PetStore
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/xml", "application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -479,6 +502,7 @@ module PetStore
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -529,6 +553,9 @@ module PetStore
       # header parameters
       header_params = Hash(String, String).new
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -545,6 +572,7 @@ module PetStore
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -612,6 +640,9 @@ module PetStore
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -628,6 +659,7 @@ module PetStore
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

@@ -22,19 +22,21 @@ module PetStore
 
     # Add a new pet to the store
     #
+    # @required @param csrftoken [String?] csrf token in cookie
     # @required @param pet [PetStore::Pet?] Pet object that needs to be added to the store
     # @return [Nil]
-    def add_pet(*, pet : PetStore::Pet? = nil) : Nil
-      add_pet_with_http_info(pet: pet)
+    def add_pet(*, csrftoken : String? = nil, pet : PetStore::Pet? = nil) : Nil
+      add_pet_with_http_info(csrftoken: csrftoken, pet: pet)
       nil
     end
 
     # Add a new pet to the store
     #
+    # @required @param csrftoken [String?] csrf token in cookie
     # @required @param pet [PetStore::Pet?] Pet object that needs to be added to the store
     # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
-    def add_pet_with_http_info(*, pet : PetStore::Pet? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
-      request = build_api_request_for_add_pet(pet: pet)
+    def add_pet_with_http_info(*, csrftoken : String? = nil, pet : PetStore::Pet? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_add_pet(csrftoken: csrftoken, pet: pet)
 
       body, status_code, headers = @api_client.execute_api_request(request)
 
@@ -47,19 +49,28 @@ module PetStore
 
     # Add a new pet to the store
     #
+    # @required @param csrftoken [String?] csrf token in cookie
     # @required @param pet [PetStore::Pet?] Pet object that needs to be added to the store
     # @return nil
-    def add_pet(*, pet : PetStore::Pet? = nil, &block : Crest::Response ->) : Nil
-      build_api_request_for_add_pet(pet: pet).execute(&block)
+    def add_pet(*, csrftoken : String? = nil, pet : PetStore::Pet? = nil, &block : Crest::Response ->) : Nil
+      build_api_request_for_add_pet(csrftoken: csrftoken, pet: pet).execute(&block)
     end
 
+    ADD_PET_MAX_LENGTH_FOR_CSRFTOKEN = 64
+    ADD_PET_MIN_LENGTH_FOR_CSRFTOKEN = 64
+
     # @return Crest::Request
-    def build_api_request_for_add_pet(*, pet : PetStore::Pet? = nil) : Crest::Request
+    def build_api_request_for_add_pet(*, csrftoken : String? = nil, pet : PetStore::Pet? = nil) : Crest::Request
       if debugging
         Log.debug { "Calling API: PetApi.add_pet ..." }
       end
 
       if client_side_validation
+        raise ArgumentError.new("\"csrftoken\" is required and cannot be null") if csrftoken.nil?
+        unless (_csrftoken = csrftoken).nil?
+          OpenApi::PrimitiveValidator.validate_max_length("csrftoken", csrftoken.to_s.size, ADD_PET_MAX_LENGTH_FOR_CSRFTOKEN)
+          OpenApi::PrimitiveValidator.validate_min_length("csrftoken", csrftoken.to_s.size, ADD_PET_MIN_LENGTH_FOR_CSRFTOKEN)
+        end
         raise ArgumentError.new("\"pet\" is required and cannot be null") if pet.nil?
         unless (_pet = pet).nil?
           _pet.validate if _pet.is_a?(OpenApi::Validatable)
@@ -77,6 +88,10 @@ module PetStore
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/json", "application/xml"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+      cookie_params["csrftoken"] = csrftoken.to_s if !csrftoken.nil?
+
       # form parameters
       form_params = nil
 
@@ -84,7 +99,7 @@ module PetStore
       post_body = pet.to_json
 
       # auth_names
-      auth_names = ["http_signature_test", "petstore_auth"]
+      auth_names = ["api_key_cookie", "petstore_auth"]
 
       @api_client.build_api_request(
         http_method: :"POST",
@@ -93,6 +108,7 @@ module PetStore
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -154,6 +170,9 @@ module PetStore
       header_params = Hash(String, String).new
       header_params["api_key"] = api_key.to_s if !api_key.nil?
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -170,6 +189,7 @@ module PetStore
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -235,6 +255,9 @@ module PetStore
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/xml", "application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -251,6 +274,7 @@ module PetStore
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -311,6 +335,9 @@ module PetStore
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/xml", "application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -327,6 +354,7 @@ module PetStore
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -386,6 +414,9 @@ module PetStore
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/xml", "application/json"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -402,6 +433,7 @@ module PetStore
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -464,6 +496,9 @@ module PetStore
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/json", "application/xml"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = nil
 
@@ -480,6 +515,7 @@ module PetStore
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -545,6 +581,9 @@ module PetStore
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["name"] = name.to_s if !name.nil?
@@ -563,6 +602,7 @@ module PetStore
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -630,6 +670,9 @@ module PetStore
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["multipart/form-data"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["additionalMetadata"] = additional_metadata.to_s if !additional_metadata.nil?
@@ -648,6 +691,7 @@ module PetStore
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )
@@ -717,6 +761,9 @@ module PetStore
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["multipart/form-data"])
 
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
       # form parameters
       form_params = Hash(String, (String | Array(String) | IO)).new
       form_params["additionalMetadata"] = additional_metadata.to_s if !additional_metadata.nil?
@@ -735,6 +782,7 @@ module PetStore
         post_body: post_body,
         auth_names: auth_names,
         header_params: header_params,
+        cookie_params: cookie_params,
         query_params: query_params,
         form_params: form_params
       )

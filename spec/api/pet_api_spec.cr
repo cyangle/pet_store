@@ -28,7 +28,15 @@ describe "PetApi" do
   # @return [nil]
   describe "add_pet test" do
     it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      load_cassette("pet_api") do
+        api_instance = PetStore::PetApi.new
+        pet = PetStore::Pet.new(name: "pet", photo_urls: Array(String).new)
+        csrftoken = "csrf_tokencsrf_tokencsrf_tokencsrf_tokencsrf_tokencsrf_token1234"
+        api_instance.add_pet(pet: pet, csrftoken: csrftoken)
+        request = api_instance.build_api_request_for_add_pet(pet: pet, csrftoken: csrftoken)
+        secured_request = VCR.filter_sensitive_data!(request.http_request)
+        secured_request.to_json.should eq(File.read("spec/fixtures/requests/pet_api/add_pet.json"))
+      end
     end
   end
 

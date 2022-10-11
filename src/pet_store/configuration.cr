@@ -224,6 +224,12 @@ module PetStore
           "key"   => "api_key",
           "value" => api_key_with_prefix("api_key"),
         },
+        "api_key_cookie" => {
+          "type"  => "api_key",
+          "in"    => "cookie",
+          "key"   => "api_key_cookie",
+          "value" => api_key_with_prefix("api_key_cookie"),
+        },
         "api_key_query" => {
           "type"  => "api_key",
           "in"    => "query",

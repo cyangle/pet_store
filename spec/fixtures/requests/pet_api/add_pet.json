@@ -1,0 +1,1 @@
+{"method":"POST","host":null,"resource":"/v2/pet","headers":{"Content-Type":["application/json"],"Authorization":["<Authorization>"],"User-Agent":["<User-Agent>"],"Cookie":["csrftoken=csrf_tokencsrf_tokencsrf_tokencsrf_tokencsrf_tokencsrf_token1234; api_key_cookie=ignored_by_vcr"],"Content-Length":["29"]},"body":"{\"name\":\"pet\",\"photoUrls\":[]}","query_params":{}}

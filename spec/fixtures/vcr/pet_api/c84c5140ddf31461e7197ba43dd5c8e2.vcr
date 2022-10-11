@@ -1,0 +1,10 @@
+HTTP/1.1 200 OK
+Server: awselb/2.0
+Date: Tue, 11 Oct 2022 03:49:05 GMT
+Content-Type: application/json; charset=UTF-8
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Content-Length: 2
+Connection: keep-alive
+
+{}
