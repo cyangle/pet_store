@@ -31,6 +31,10 @@ module PetStore
     #
     # @return [Hash]
     property default_headers : Hash(String, String)
+
+    # Defines the cookies to be used in HTTP requests of all API calls by default.
+    #
+    # @return [Hash]
     property default_cookies : Hash(String, String)
 
     # Initializes the ApiClient
