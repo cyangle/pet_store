@@ -41,6 +41,9 @@ module PetStore
     @[JSON::Field(key: "complete", type: Bool?, default: false, required: false, nullable: false, emit_null: false)]
     getter complete : Bool? = false
 
+    @[JSON::Field(key: "price", type: BigDecimal?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter price : BigDecimal? = nil
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
@@ -51,7 +54,8 @@ module PetStore
       @quantity : Int32? = nil,
       @ship_date : Time? = nil,
       @status : String? = nil,
-      @complete : Bool? = false
+      @complete : Bool? = false,
+      @price : BigDecimal? = nil
     )
     end
 
@@ -138,10 +142,20 @@ module PetStore
       @complete = _complete
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] price Object to be assigned
+    def price=(price : BigDecimal?)
+      if price.nil?
+        return @price = nil
+      end
+      _price = price.not_nil!
+      @price = _price
+    end
+
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@id, @pet_id, @quantity, @ship_date, @status, @complete)
+    def_equals_and_hash(@id, @pet_id, @quantity, @ship_date, @status, @complete, @price)
   end
 end

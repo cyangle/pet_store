@@ -59,4 +59,14 @@ describe PetStore::Order do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
+
+  describe "test attribute 'price'" do
+    it "should work" do
+      json = %({"complete":false,"price":"12.34"})
+      order = PetStore::Order.from_json(json)
+      order.price.should be_a(BigDecimal)
+      order.price.should eq(BigDecimal.new("12.34"))
+      order.to_json.should eq(json)
+    end
+  end
 end
