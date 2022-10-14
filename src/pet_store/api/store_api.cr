@@ -24,7 +24,10 @@ module PetStore
     # For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors
     # @required @param order_id [String?] ID of the order that needs to be deleted
     # @return [Nil]
-    def delete_order(*, order_id : String? = nil) : Nil
+    def delete_order(
+      *,
+      order_id : String? = nil
+    ) : Nil
       delete_order_with_http_info(order_id: order_id)
       nil
     end
@@ -33,7 +36,10 @@ module PetStore
     # For valid response try integer IDs with value &lt; 1000. Anything above 1000 or nonintegers will generate API errors
     # @required @param order_id [String?] ID of the order that needs to be deleted
     # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
-    def delete_order_with_http_info(*, order_id : String? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
+    def delete_order_with_http_info(
+      *,
+      order_id : String? = nil
+    ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete_order(order_id: order_id)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -49,12 +55,19 @@ module PetStore
     # For valid response try integer IDs with value &lt; 1000. Anything above 1000 or nonintegers will generate API errors
     # @required @param order_id [String?] ID of the order that needs to be deleted
     # @return nil
-    def delete_order(*, order_id : String? = nil, &block : Crest::Response ->) : Nil
+    def delete_order(
+      *,
+      order_id : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_delete_order(order_id: order_id).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_delete_order(*, order_id : String? = nil) : Crest::Request
+    def build_api_request_for_delete_order(
+      *,
+      order_id : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: StoreApi.delete_order ..." }
       end
@@ -123,7 +136,9 @@ module PetStore
     # Returns pet inventories by status
     # Returns a map of status codes to quantities
     # @return nil
-    def get_inventory(&block : Crest::Response ->) : Nil
+    def get_inventory(
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_inventory().execute(&block)
     end
 
@@ -173,7 +188,10 @@ module PetStore
     # For valid response try integer IDs with value <= 5 or > 10. Other values will generated exceptions
     # @required @param order_id [Int64?] ID of pet that needs to be fetched
     # @return [PetStore::Order]
-    def get_order_by_id(*, order_id : Int64? = nil) : PetStore::Order
+    def get_order_by_id(
+      *,
+      order_id : Int64? = nil
+    ) : PetStore::Order
       data, _status_code, _headers = get_order_by_id_with_http_info(order_id: order_id)
       data
     end
@@ -182,7 +200,10 @@ module PetStore
     # For valid response try integer IDs with value &lt;&#x3D; 5 or &gt; 10. Other values will generated exceptions
     # @required @param order_id [Int64?] ID of pet that needs to be fetched
     # @return [Tuple(PetStore::Order, Integer, Hash)] PetStore::Order, response status code and response headers
-    def get_order_by_id_with_http_info(*, order_id : Int64? = nil) : Tuple(PetStore::Order, Int32, Hash(String, Array(String) | String))
+    def get_order_by_id_with_http_info(
+      *,
+      order_id : Int64? = nil
+    ) : Tuple(PetStore::Order, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_order_by_id(order_id: order_id)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -198,7 +219,11 @@ module PetStore
     # For valid response try integer IDs with value &lt;&#x3D; 5 or &gt; 10. Other values will generated exceptions
     # @required @param order_id [Int64?] ID of pet that needs to be fetched
     # @return nil
-    def get_order_by_id(*, order_id : Int64? = nil, &block : Crest::Response ->) : Nil
+    def get_order_by_id(
+      *,
+      order_id : Int64? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_order_by_id(order_id: order_id).execute(&block)
     end
 
@@ -206,7 +231,10 @@ module PetStore
     GET_ORDER_BY_ID_MIN_FOR_ORDER_ID = Int64.new("1")
 
     # @return Crest::Request
-    def build_api_request_for_get_order_by_id(*, order_id : Int64? = nil) : Crest::Request
+    def build_api_request_for_get_order_by_id(
+      *,
+      order_id : Int64? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: StoreApi.get_order_by_id ..." }
       end
@@ -259,7 +287,10 @@ module PetStore
     #
     # @required @param order [PetStore::Order?] order placed for purchasing the pet
     # @return [PetStore::Order]
-    def place_order(*, order : PetStore::Order? = nil) : PetStore::Order
+    def place_order(
+      *,
+      order : PetStore::Order? = nil
+    ) : PetStore::Order
       data, _status_code, _headers = place_order_with_http_info(order: order)
       data
     end
@@ -268,7 +299,10 @@ module PetStore
     #
     # @required @param order [PetStore::Order?] order placed for purchasing the pet
     # @return [Tuple(PetStore::Order, Integer, Hash)] PetStore::Order, response status code and response headers
-    def place_order_with_http_info(*, order : PetStore::Order? = nil) : Tuple(PetStore::Order, Int32, Hash(String, Array(String) | String))
+    def place_order_with_http_info(
+      *,
+      order : PetStore::Order? = nil
+    ) : Tuple(PetStore::Order, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_place_order(order: order)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -284,12 +318,19 @@ module PetStore
     #
     # @required @param order [PetStore::Order?] order placed for purchasing the pet
     # @return nil
-    def place_order(*, order : PetStore::Order? = nil, &block : Crest::Response ->) : Nil
+    def place_order(
+      *,
+      order : PetStore::Order? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_place_order(order: order).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_place_order(*, order : PetStore::Order? = nil) : Crest::Request
+    def build_api_request_for_place_order(
+      *,
+      order : PetStore::Order? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: StoreApi.place_order ..." }
       end

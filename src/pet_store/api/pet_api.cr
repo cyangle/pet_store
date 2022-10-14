@@ -25,7 +25,11 @@ module PetStore
     # @required @param csrftoken [String?] csrf token in cookie
     # @required @param pet [PetStore::Pet?] Pet object that needs to be added to the store
     # @return [Nil]
-    def add_pet(*, csrftoken : String? = nil, pet : PetStore::Pet? = nil) : Nil
+    def add_pet(
+      *,
+      csrftoken : String? = nil,
+      pet : PetStore::Pet? = nil
+    ) : Nil
       add_pet_with_http_info(csrftoken: csrftoken, pet: pet)
       nil
     end
@@ -35,7 +39,11 @@ module PetStore
     # @required @param csrftoken [String?] csrf token in cookie
     # @required @param pet [PetStore::Pet?] Pet object that needs to be added to the store
     # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
-    def add_pet_with_http_info(*, csrftoken : String? = nil, pet : PetStore::Pet? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
+    def add_pet_with_http_info(
+      *,
+      csrftoken : String? = nil,
+      pet : PetStore::Pet? = nil
+    ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_add_pet(csrftoken: csrftoken, pet: pet)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -52,7 +60,12 @@ module PetStore
     # @required @param csrftoken [String?] csrf token in cookie
     # @required @param pet [PetStore::Pet?] Pet object that needs to be added to the store
     # @return nil
-    def add_pet(*, csrftoken : String? = nil, pet : PetStore::Pet? = nil, &block : Crest::Response ->) : Nil
+    def add_pet(
+      *,
+      csrftoken : String? = nil,
+      pet : PetStore::Pet? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_add_pet(csrftoken: csrftoken, pet: pet).execute(&block)
     end
 
@@ -60,7 +73,11 @@ module PetStore
     ADD_PET_MIN_LENGTH_FOR_CSRFTOKEN = 64
 
     # @return Crest::Request
-    def build_api_request_for_add_pet(*, csrftoken : String? = nil, pet : PetStore::Pet? = nil) : Crest::Request
+    def build_api_request_for_add_pet(
+      *,
+      csrftoken : String? = nil,
+      pet : PetStore::Pet? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PetApi.add_pet ..." }
       end
@@ -119,7 +136,11 @@ module PetStore
     # @required @param pet_id [Int64?] Pet id to delete
     # @optional @param api_key [String?]
     # @return [Nil]
-    def delete_pet(*, pet_id : Int64? = nil, api_key : String? = nil) : Nil
+    def delete_pet(
+      *,
+      pet_id : Int64? = nil,
+      api_key : String? = nil
+    ) : Nil
       delete_pet_with_http_info(pet_id: pet_id, api_key: api_key)
       nil
     end
@@ -129,7 +150,11 @@ module PetStore
     # @required @param pet_id [Int64?] Pet id to delete
     # @optional @param api_key [String?]
     # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
-    def delete_pet_with_http_info(*, pet_id : Int64? = nil, api_key : String? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
+    def delete_pet_with_http_info(
+      *,
+      pet_id : Int64? = nil,
+      api_key : String? = nil
+    ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete_pet(pet_id: pet_id, api_key: api_key)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -146,12 +171,21 @@ module PetStore
     # @required @param pet_id [Int64?] Pet id to delete
     # @optional @param api_key [String?]
     # @return nil
-    def delete_pet(*, pet_id : Int64? = nil, api_key : String? = nil, &block : Crest::Response ->) : Nil
+    def delete_pet(
+      *,
+      pet_id : Int64? = nil,
+      api_key : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_delete_pet(pet_id: pet_id, api_key: api_key).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_delete_pet(*, pet_id : Int64? = nil, api_key : String? = nil) : Crest::Request
+    def build_api_request_for_delete_pet(
+      *,
+      pet_id : Int64? = nil,
+      api_key : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PetApi.delete_pet ..." }
       end
@@ -199,7 +233,10 @@ module PetStore
     # Multiple status values can be provided with comma separated strings
     # @required @param status [Array(String)?] Status values that need to be considered for filter
     # @return [Array(PetStore::Pet)]
-    def find_pets_by_status(*, status : Array(String)? = nil) : Array(PetStore::Pet)
+    def find_pets_by_status(
+      *,
+      status : Array(String)? = nil
+    ) : Array(PetStore::Pet)
       data, _status_code, _headers = find_pets_by_status_with_http_info(status: status)
       data
     end
@@ -208,7 +245,10 @@ module PetStore
     # Multiple status values can be provided with comma separated strings
     # @required @param status [Array(String)?] Status values that need to be considered for filter
     # @return [Tuple(Array(PetStore::Pet), Integer, Hash)] Array(PetStore::Pet), response status code and response headers
-    def find_pets_by_status_with_http_info(*, status : Array(String)? = nil) : Tuple(Array(PetStore::Pet), Int32, Hash(String, Array(String) | String))
+    def find_pets_by_status_with_http_info(
+      *,
+      status : Array(String)? = nil
+    ) : Tuple(Array(PetStore::Pet), Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_find_pets_by_status(status: status)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -224,14 +264,21 @@ module PetStore
     # Multiple status values can be provided with comma separated strings
     # @required @param status [Array(String)?] Status values that need to be considered for filter
     # @return nil
-    def find_pets_by_status(*, status : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def find_pets_by_status(
+      *,
+      status : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_find_pets_by_status(status: status).execute(&block)
     end
 
     FIND_PETS_BY_STATUS_VALID_VALUES_FOR_STATUS = String.static_array("available", "pending", "sold")
 
     # @return Crest::Request
-    def build_api_request_for_find_pets_by_status(*, status : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_find_pets_by_status(
+      *,
+      status : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PetApi.find_pets_by_status ..." }
       end
@@ -284,7 +331,10 @@ module PetStore
     # Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
     # @required @param tags [Array(String)?] Tags to filter by
     # @return [Array(PetStore::Pet)]
-    def find_pets_by_tags(*, tags : Array(String)? = nil) : Array(PetStore::Pet)
+    def find_pets_by_tags(
+      *,
+      tags : Array(String)? = nil
+    ) : Array(PetStore::Pet)
       data, _status_code, _headers = find_pets_by_tags_with_http_info(tags: tags)
       data
     end
@@ -293,7 +343,10 @@ module PetStore
     # Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
     # @required @param tags [Array(String)?] Tags to filter by
     # @return [Tuple(Array(PetStore::Pet), Integer, Hash)] Array(PetStore::Pet), response status code and response headers
-    def find_pets_by_tags_with_http_info(*, tags : Array(String)? = nil) : Tuple(Array(PetStore::Pet), Int32, Hash(String, Array(String) | String))
+    def find_pets_by_tags_with_http_info(
+      *,
+      tags : Array(String)? = nil
+    ) : Tuple(Array(PetStore::Pet), Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_find_pets_by_tags(tags: tags)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -309,12 +362,19 @@ module PetStore
     # Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
     # @required @param tags [Array(String)?] Tags to filter by
     # @return nil
-    def find_pets_by_tags(*, tags : Array(String)? = nil, &block : Crest::Response ->) : Nil
+    def find_pets_by_tags(
+      *,
+      tags : Array(String)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_find_pets_by_tags(tags: tags).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_find_pets_by_tags(*, tags : Array(String)? = nil) : Crest::Request
+    def build_api_request_for_find_pets_by_tags(
+      *,
+      tags : Array(String)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PetApi.find_pets_by_tags ..." }
       end
@@ -364,7 +424,10 @@ module PetStore
     # Returns a single pet
     # @required @param pet_id [Int64?] ID of pet to return
     # @return [PetStore::Pet]
-    def get_pet_by_id(*, pet_id : Int64? = nil) : PetStore::Pet
+    def get_pet_by_id(
+      *,
+      pet_id : Int64? = nil
+    ) : PetStore::Pet
       data, _status_code, _headers = get_pet_by_id_with_http_info(pet_id: pet_id)
       data
     end
@@ -373,7 +436,10 @@ module PetStore
     # Returns a single pet
     # @required @param pet_id [Int64?] ID of pet to return
     # @return [Tuple(PetStore::Pet, Integer, Hash)] PetStore::Pet, response status code and response headers
-    def get_pet_by_id_with_http_info(*, pet_id : Int64? = nil) : Tuple(PetStore::Pet, Int32, Hash(String, Array(String) | String))
+    def get_pet_by_id_with_http_info(
+      *,
+      pet_id : Int64? = nil
+    ) : Tuple(PetStore::Pet, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_pet_by_id(pet_id: pet_id)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -389,12 +455,19 @@ module PetStore
     # Returns a single pet
     # @required @param pet_id [Int64?] ID of pet to return
     # @return nil
-    def get_pet_by_id(*, pet_id : Int64? = nil, &block : Crest::Response ->) : Nil
+    def get_pet_by_id(
+      *,
+      pet_id : Int64? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_pet_by_id(pet_id: pet_id).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_get_pet_by_id(*, pet_id : Int64? = nil) : Crest::Request
+    def build_api_request_for_get_pet_by_id(
+      *,
+      pet_id : Int64? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PetApi.get_pet_by_id ..." }
       end
@@ -443,7 +516,10 @@ module PetStore
     #
     # @required @param pet [PetStore::Pet?] Pet object that needs to be added to the store
     # @return [Nil]
-    def update_pet(*, pet : PetStore::Pet? = nil) : Nil
+    def update_pet(
+      *,
+      pet : PetStore::Pet? = nil
+    ) : Nil
       update_pet_with_http_info(pet: pet)
       nil
     end
@@ -452,7 +528,10 @@ module PetStore
     #
     # @required @param pet [PetStore::Pet?] Pet object that needs to be added to the store
     # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
-    def update_pet_with_http_info(*, pet : PetStore::Pet? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
+    def update_pet_with_http_info(
+      *,
+      pet : PetStore::Pet? = nil
+    ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_update_pet(pet: pet)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -468,12 +547,19 @@ module PetStore
     #
     # @required @param pet [PetStore::Pet?] Pet object that needs to be added to the store
     # @return nil
-    def update_pet(*, pet : PetStore::Pet? = nil, &block : Crest::Response ->) : Nil
+    def update_pet(
+      *,
+      pet : PetStore::Pet? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_update_pet(pet: pet).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_update_pet(*, pet : PetStore::Pet? = nil) : Crest::Request
+    def build_api_request_for_update_pet(
+      *,
+      pet : PetStore::Pet? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PetApi.update_pet ..." }
       end
@@ -527,7 +613,12 @@ module PetStore
     # @optional @param name [String?] Updated name of the pet
     # @optional @param status [String?] Updated status of the pet
     # @return [Nil]
-    def update_pet_with_form(*, pet_id : Int64? = nil, name : String? = nil, status : String? = nil) : Nil
+    def update_pet_with_form(
+      *,
+      pet_id : Int64? = nil,
+      name : String? = nil,
+      status : String? = nil
+    ) : Nil
       update_pet_with_form_with_http_info(pet_id: pet_id, name: name, status: status)
       nil
     end
@@ -538,7 +629,12 @@ module PetStore
     # @optional @param name [String?] Updated name of the pet
     # @optional @param status [String?] Updated status of the pet
     # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
-    def update_pet_with_form_with_http_info(*, pet_id : Int64? = nil, name : String? = nil, status : String? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
+    def update_pet_with_form_with_http_info(
+      *,
+      pet_id : Int64? = nil,
+      name : String? = nil,
+      status : String? = nil
+    ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_update_pet_with_form(pet_id: pet_id, name: name, status: status)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -556,12 +652,23 @@ module PetStore
     # @optional @param name [String?] Updated name of the pet
     # @optional @param status [String?] Updated status of the pet
     # @return nil
-    def update_pet_with_form(*, pet_id : Int64? = nil, name : String? = nil, status : String? = nil, &block : Crest::Response ->) : Nil
+    def update_pet_with_form(
+      *,
+      pet_id : Int64? = nil,
+      name : String? = nil,
+      status : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_update_pet_with_form(pet_id: pet_id, name: name, status: status).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_update_pet_with_form(*, pet_id : Int64? = nil, name : String? = nil, status : String? = nil) : Crest::Request
+    def build_api_request_for_update_pet_with_form(
+      *,
+      pet_id : Int64? = nil,
+      name : String? = nil,
+      status : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PetApi.update_pet_with_form ..." }
       end
@@ -614,7 +721,12 @@ module PetStore
     # @optional @param additional_metadata [String?] Additional data to pass to server
     # @optional @param file [::File?] file to upload
     # @return [PetStore::ApiResponse]
-    def upload_file(*, pet_id : Int64? = nil, additional_metadata : String? = nil, file : ::File? = nil) : PetStore::ApiResponse
+    def upload_file(
+      *,
+      pet_id : Int64? = nil,
+      additional_metadata : String? = nil,
+      file : ::File? = nil
+    ) : PetStore::ApiResponse
       data, _status_code, _headers = upload_file_with_http_info(pet_id: pet_id, additional_metadata: additional_metadata, file: file)
       data
     end
@@ -625,7 +737,12 @@ module PetStore
     # @optional @param additional_metadata [String?] Additional data to pass to server
     # @optional @param file [::File?] file to upload
     # @return [Tuple(PetStore::ApiResponse, Integer, Hash)] PetStore::ApiResponse, response status code and response headers
-    def upload_file_with_http_info(*, pet_id : Int64? = nil, additional_metadata : String? = nil, file : ::File? = nil) : Tuple(PetStore::ApiResponse, Int32, Hash(String, Array(String) | String))
+    def upload_file_with_http_info(
+      *,
+      pet_id : Int64? = nil,
+      additional_metadata : String? = nil,
+      file : ::File? = nil
+    ) : Tuple(PetStore::ApiResponse, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_upload_file(pet_id: pet_id, additional_metadata: additional_metadata, file: file)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -643,12 +760,23 @@ module PetStore
     # @optional @param additional_metadata [String?] Additional data to pass to server
     # @optional @param file [::File?] file to upload
     # @return nil
-    def upload_file(*, pet_id : Int64? = nil, additional_metadata : String? = nil, file : ::File? = nil, &block : Crest::Response ->) : Nil
+    def upload_file(
+      *,
+      pet_id : Int64? = nil,
+      additional_metadata : String? = nil,
+      file : ::File? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_upload_file(pet_id: pet_id, additional_metadata: additional_metadata, file: file).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_upload_file(*, pet_id : Int64? = nil, additional_metadata : String? = nil, file : ::File? = nil) : Crest::Request
+    def build_api_request_for_upload_file(
+      *,
+      pet_id : Int64? = nil,
+      additional_metadata : String? = nil,
+      file : ::File? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PetApi.upload_file ..." }
       end
@@ -703,7 +831,12 @@ module PetStore
     # @required @param required_file [::File?] file to upload
     # @optional @param additional_metadata [String?] Additional data to pass to server
     # @return [PetStore::ApiResponse]
-    def upload_file_with_required_file(*, pet_id : Int64? = nil, required_file : ::File? = nil, additional_metadata : String? = nil) : PetStore::ApiResponse
+    def upload_file_with_required_file(
+      *,
+      pet_id : Int64? = nil,
+      required_file : ::File? = nil,
+      additional_metadata : String? = nil
+    ) : PetStore::ApiResponse
       data, _status_code, _headers = upload_file_with_required_file_with_http_info(pet_id: pet_id, required_file: required_file, additional_metadata: additional_metadata)
       data
     end
@@ -714,7 +847,12 @@ module PetStore
     # @required @param required_file [::File?] file to upload
     # @optional @param additional_metadata [String?] Additional data to pass to server
     # @return [Tuple(PetStore::ApiResponse, Integer, Hash)] PetStore::ApiResponse, response status code and response headers
-    def upload_file_with_required_file_with_http_info(*, pet_id : Int64? = nil, required_file : ::File? = nil, additional_metadata : String? = nil) : Tuple(PetStore::ApiResponse, Int32, Hash(String, Array(String) | String))
+    def upload_file_with_required_file_with_http_info(
+      *,
+      pet_id : Int64? = nil,
+      required_file : ::File? = nil,
+      additional_metadata : String? = nil
+    ) : Tuple(PetStore::ApiResponse, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_upload_file_with_required_file(pet_id: pet_id, required_file: required_file, additional_metadata: additional_metadata)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -732,12 +870,23 @@ module PetStore
     # @required @param required_file [::File?] file to upload
     # @optional @param additional_metadata [String?] Additional data to pass to server
     # @return nil
-    def upload_file_with_required_file(*, pet_id : Int64? = nil, required_file : ::File? = nil, additional_metadata : String? = nil, &block : Crest::Response ->) : Nil
+    def upload_file_with_required_file(
+      *,
+      pet_id : Int64? = nil,
+      required_file : ::File? = nil,
+      additional_metadata : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_upload_file_with_required_file(pet_id: pet_id, required_file: required_file, additional_metadata: additional_metadata).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_upload_file_with_required_file(*, pet_id : Int64? = nil, required_file : ::File? = nil, additional_metadata : String? = nil) : Crest::Request
+    def build_api_request_for_upload_file_with_required_file(
+      *,
+      pet_id : Int64? = nil,
+      required_file : ::File? = nil,
+      additional_metadata : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: PetApi.upload_file_with_required_file ..." }
       end

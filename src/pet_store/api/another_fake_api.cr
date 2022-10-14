@@ -24,7 +24,10 @@ module PetStore
     # To test special tags and operation ID starting with number
     # @required @param client [PetStore::Client?] client model
     # @return [PetStore::Client]
-    def call_123_test_special_tags(*, client : PetStore::Client? = nil) : PetStore::Client
+    def call_123_test_special_tags(
+      *,
+      client : PetStore::Client? = nil
+    ) : PetStore::Client
       data, _status_code, _headers = call_123_test_special_tags_with_http_info(client: client)
       data
     end
@@ -33,7 +36,10 @@ module PetStore
     # To test special tags and operation ID starting with number
     # @required @param client [PetStore::Client?] client model
     # @return [Tuple(PetStore::Client, Integer, Hash)] PetStore::Client, response status code and response headers
-    def call_123_test_special_tags_with_http_info(*, client : PetStore::Client? = nil) : Tuple(PetStore::Client, Int32, Hash(String, Array(String) | String))
+    def call_123_test_special_tags_with_http_info(
+      *,
+      client : PetStore::Client? = nil
+    ) : Tuple(PetStore::Client, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_call_123_test_special_tags(client: client)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -49,12 +55,19 @@ module PetStore
     # To test special tags and operation ID starting with number
     # @required @param client [PetStore::Client?] client model
     # @return nil
-    def call_123_test_special_tags(*, client : PetStore::Client? = nil, &block : Crest::Response ->) : Nil
+    def call_123_test_special_tags(
+      *,
+      client : PetStore::Client? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_call_123_test_special_tags(client: client).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_call_123_test_special_tags(*, client : PetStore::Client? = nil) : Crest::Request
+    def build_api_request_for_call_123_test_special_tags(
+      *,
+      client : PetStore::Client? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: AnotherFakeApi.call_123_test_special_tags ..." }
       end

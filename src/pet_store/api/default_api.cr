@@ -40,7 +40,9 @@ module PetStore
     end
 
     # @return nil
-    def foo_get(&block : Crest::Response ->) : Nil
+    def foo_get(
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_foo_get().execute(&block)
     end
 

@@ -24,7 +24,10 @@ module PetStore
     # This can only be done by the logged in user.
     # @required @param user [PetStore::User?] Created user object
     # @return [Nil]
-    def create_user(*, user : PetStore::User? = nil) : Nil
+    def create_user(
+      *,
+      user : PetStore::User? = nil
+    ) : Nil
       create_user_with_http_info(user: user)
       nil
     end
@@ -33,7 +36,10 @@ module PetStore
     # This can only be done by the logged in user.
     # @required @param user [PetStore::User?] Created user object
     # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
-    def create_user_with_http_info(*, user : PetStore::User? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
+    def create_user_with_http_info(
+      *,
+      user : PetStore::User? = nil
+    ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_create_user(user: user)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -49,12 +55,19 @@ module PetStore
     # This can only be done by the logged in user.
     # @required @param user [PetStore::User?] Created user object
     # @return nil
-    def create_user(*, user : PetStore::User? = nil, &block : Crest::Response ->) : Nil
+    def create_user(
+      *,
+      user : PetStore::User? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_create_user(user: user).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_create_user(*, user : PetStore::User? = nil) : Crest::Request
+    def build_api_request_for_create_user(
+      *,
+      user : PetStore::User? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: UserApi.create_user ..." }
       end
@@ -106,7 +119,10 @@ module PetStore
     #
     # @required @param user [Array(PetStore::User)?] List of user object
     # @return [Nil]
-    def create_users_with_array_input(*, user : Array(PetStore::User)? = nil) : Nil
+    def create_users_with_array_input(
+      *,
+      user : Array(PetStore::User)? = nil
+    ) : Nil
       create_users_with_array_input_with_http_info(user: user)
       nil
     end
@@ -115,7 +131,10 @@ module PetStore
     #
     # @required @param user [Array(PetStore::User)?] List of user object
     # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
-    def create_users_with_array_input_with_http_info(*, user : Array(PetStore::User)? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
+    def create_users_with_array_input_with_http_info(
+      *,
+      user : Array(PetStore::User)? = nil
+    ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_create_users_with_array_input(user: user)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -131,12 +150,19 @@ module PetStore
     #
     # @required @param user [Array(PetStore::User)?] List of user object
     # @return nil
-    def create_users_with_array_input(*, user : Array(PetStore::User)? = nil, &block : Crest::Response ->) : Nil
+    def create_users_with_array_input(
+      *,
+      user : Array(PetStore::User)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_create_users_with_array_input(user: user).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_create_users_with_array_input(*, user : Array(PetStore::User)? = nil) : Crest::Request
+    def build_api_request_for_create_users_with_array_input(
+      *,
+      user : Array(PetStore::User)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: UserApi.create_users_with_array_input ..." }
       end
@@ -188,7 +214,10 @@ module PetStore
     #
     # @required @param user [Array(PetStore::User)?] List of user object
     # @return [Nil]
-    def create_users_with_list_input(*, user : Array(PetStore::User)? = nil) : Nil
+    def create_users_with_list_input(
+      *,
+      user : Array(PetStore::User)? = nil
+    ) : Nil
       create_users_with_list_input_with_http_info(user: user)
       nil
     end
@@ -197,7 +226,10 @@ module PetStore
     #
     # @required @param user [Array(PetStore::User)?] List of user object
     # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
-    def create_users_with_list_input_with_http_info(*, user : Array(PetStore::User)? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
+    def create_users_with_list_input_with_http_info(
+      *,
+      user : Array(PetStore::User)? = nil
+    ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_create_users_with_list_input(user: user)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -213,12 +245,19 @@ module PetStore
     #
     # @required @param user [Array(PetStore::User)?] List of user object
     # @return nil
-    def create_users_with_list_input(*, user : Array(PetStore::User)? = nil, &block : Crest::Response ->) : Nil
+    def create_users_with_list_input(
+      *,
+      user : Array(PetStore::User)? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_create_users_with_list_input(user: user).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_create_users_with_list_input(*, user : Array(PetStore::User)? = nil) : Crest::Request
+    def build_api_request_for_create_users_with_list_input(
+      *,
+      user : Array(PetStore::User)? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: UserApi.create_users_with_list_input ..." }
       end
@@ -270,7 +309,10 @@ module PetStore
     # This can only be done by the logged in user.
     # @required @param username [String?] The name that needs to be deleted
     # @return [Nil]
-    def delete_user(*, username : String? = nil) : Nil
+    def delete_user(
+      *,
+      username : String? = nil
+    ) : Nil
       delete_user_with_http_info(username: username)
       nil
     end
@@ -279,7 +321,10 @@ module PetStore
     # This can only be done by the logged in user.
     # @required @param username [String?] The name that needs to be deleted
     # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
-    def delete_user_with_http_info(*, username : String? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
+    def delete_user_with_http_info(
+      *,
+      username : String? = nil
+    ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_delete_user(username: username)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -295,12 +340,19 @@ module PetStore
     # This can only be done by the logged in user.
     # @required @param username [String?] The name that needs to be deleted
     # @return nil
-    def delete_user(*, username : String? = nil, &block : Crest::Response ->) : Nil
+    def delete_user(
+      *,
+      username : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_delete_user(username: username).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_delete_user(*, username : String? = nil) : Crest::Request
+    def build_api_request_for_delete_user(
+      *,
+      username : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: UserApi.delete_user ..." }
       end
@@ -347,7 +399,10 @@ module PetStore
     #
     # @required @param username [String?] The name that needs to be fetched. Use user1 for testing.
     # @return [PetStore::User]
-    def get_user_by_name(*, username : String? = nil) : PetStore::User
+    def get_user_by_name(
+      *,
+      username : String? = nil
+    ) : PetStore::User
       data, _status_code, _headers = get_user_by_name_with_http_info(username: username)
       data
     end
@@ -356,7 +411,10 @@ module PetStore
     #
     # @required @param username [String?] The name that needs to be fetched. Use user1 for testing.
     # @return [Tuple(PetStore::User, Integer, Hash)] PetStore::User, response status code and response headers
-    def get_user_by_name_with_http_info(*, username : String? = nil) : Tuple(PetStore::User, Int32, Hash(String, Array(String) | String))
+    def get_user_by_name_with_http_info(
+      *,
+      username : String? = nil
+    ) : Tuple(PetStore::User, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_get_user_by_name(username: username)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -372,12 +430,19 @@ module PetStore
     #
     # @required @param username [String?] The name that needs to be fetched. Use user1 for testing.
     # @return nil
-    def get_user_by_name(*, username : String? = nil, &block : Crest::Response ->) : Nil
+    def get_user_by_name(
+      *,
+      username : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_get_user_by_name(username: username).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_get_user_by_name(*, username : String? = nil) : Crest::Request
+    def build_api_request_for_get_user_by_name(
+      *,
+      username : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: UserApi.get_user_by_name ..." }
       end
@@ -427,7 +492,11 @@ module PetStore
     # @required @param username [String?] The user name for login
     # @required @param password [String?] The password for login in clear text
     # @return [String]
-    def login_user(*, username : String? = nil, password : String? = nil) : String
+    def login_user(
+      *,
+      username : String? = nil,
+      password : String? = nil
+    ) : String
       data, _status_code, _headers = login_user_with_http_info(username: username, password: password)
       data
     end
@@ -437,7 +506,11 @@ module PetStore
     # @required @param username [String?] The user name for login
     # @required @param password [String?] The password for login in clear text
     # @return [Tuple(String, Integer, Hash)] String, response status code and response headers
-    def login_user_with_http_info(*, username : String? = nil, password : String? = nil) : Tuple(String, Int32, Hash(String, Array(String) | String))
+    def login_user_with_http_info(
+      *,
+      username : String? = nil,
+      password : String? = nil
+    ) : Tuple(String, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_login_user(username: username, password: password)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -454,12 +527,21 @@ module PetStore
     # @required @param username [String?] The user name for login
     # @required @param password [String?] The password for login in clear text
     # @return nil
-    def login_user(*, username : String? = nil, password : String? = nil, &block : Crest::Response ->) : Nil
+    def login_user(
+      *,
+      username : String? = nil,
+      password : String? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_login_user(username: username, password: password).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_login_user(*, username : String? = nil, password : String? = nil) : Crest::Request
+    def build_api_request_for_login_user(
+      *,
+      username : String? = nil,
+      password : String? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: UserApi.login_user ..." }
       end
@@ -534,7 +616,9 @@ module PetStore
     # Logs out current logged in user session
     #
     # @return nil
-    def logout_user(&block : Crest::Response ->) : Nil
+    def logout_user(
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_logout_user().execute(&block)
     end
 
@@ -583,7 +667,11 @@ module PetStore
     # @required @param username [String?] name that need to be deleted
     # @required @param user [PetStore::User?] Updated user object
     # @return [Nil]
-    def update_user(*, username : String? = nil, user : PetStore::User? = nil) : Nil
+    def update_user(
+      *,
+      username : String? = nil,
+      user : PetStore::User? = nil
+    ) : Nil
       update_user_with_http_info(username: username, user: user)
       nil
     end
@@ -593,7 +681,11 @@ module PetStore
     # @required @param username [String?] name that need to be deleted
     # @required @param user [PetStore::User?] Updated user object
     # @return [Tuple(Nil, Integer, Hash)] Nil, response status code and response headers
-    def update_user_with_http_info(*, username : String? = nil, user : PetStore::User? = nil) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
+    def update_user_with_http_info(
+      *,
+      username : String? = nil,
+      user : PetStore::User? = nil
+    ) : Tuple(Nil, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_update_user(username: username, user: user)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -610,12 +702,21 @@ module PetStore
     # @required @param username [String?] name that need to be deleted
     # @required @param user [PetStore::User?] Updated user object
     # @return nil
-    def update_user(*, username : String? = nil, user : PetStore::User? = nil, &block : Crest::Response ->) : Nil
+    def update_user(
+      *,
+      username : String? = nil,
+      user : PetStore::User? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_update_user(username: username, user: user).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_update_user(*, username : String? = nil, user : PetStore::User? = nil) : Crest::Request
+    def build_api_request_for_update_user(
+      *,
+      username : String? = nil,
+      user : PetStore::User? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: UserApi.update_user ..." }
       end

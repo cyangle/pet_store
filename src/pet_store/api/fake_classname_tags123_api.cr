@@ -24,7 +24,10 @@ module PetStore
     # To test class name in snake case
     # @required @param client [PetStore::Client?] client model
     # @return [PetStore::Client]
-    def test_classname(*, client : PetStore::Client? = nil) : PetStore::Client
+    def test_classname(
+      *,
+      client : PetStore::Client? = nil
+    ) : PetStore::Client
       data, _status_code, _headers = test_classname_with_http_info(client: client)
       data
     end
@@ -33,7 +36,10 @@ module PetStore
     # To test class name in snake case
     # @required @param client [PetStore::Client?] client model
     # @return [Tuple(PetStore::Client, Integer, Hash)] PetStore::Client, response status code and response headers
-    def test_classname_with_http_info(*, client : PetStore::Client? = nil) : Tuple(PetStore::Client, Int32, Hash(String, Array(String) | String))
+    def test_classname_with_http_info(
+      *,
+      client : PetStore::Client? = nil
+    ) : Tuple(PetStore::Client, Int32, Hash(String, Array(String) | String))
       request = build_api_request_for_test_classname(client: client)
 
       body, status_code, headers = @api_client.execute_api_request(request)
@@ -49,12 +55,19 @@ module PetStore
     # To test class name in snake case
     # @required @param client [PetStore::Client?] client model
     # @return nil
-    def test_classname(*, client : PetStore::Client? = nil, &block : Crest::Response ->) : Nil
+    def test_classname(
+      *,
+      client : PetStore::Client? = nil,
+      &block : Crest::Response ->
+    ) : Nil
       build_api_request_for_test_classname(client: client).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_test_classname(*, client : PetStore::Client? = nil) : Crest::Request
+    def build_api_request_for_test_classname(
+      *,
+      client : PetStore::Client? = nil
+    ) : Crest::Request
       if debugging
         Log.debug { "Calling API: FakeClassnameTags123Api.test_classname ..." }
       end
