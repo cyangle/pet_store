@@ -30,6 +30,9 @@ module PetStore
 
     # Optional Properties
 
+    @[JSON::Field(key: "uuid", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter uuid : String? = nil
+
     @[JSON::Field(key: "id", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter id : Int64? = nil
 
@@ -53,6 +56,7 @@ module PetStore
       @name : String? = nil,
       @photo_urls : Array(String)? = nil,
       # Optional properties
+      @uuid : String? = nil,
       @id : Int64? = nil,
       @category : PetStore::Category? = nil,
       @tags : Array(PetStore::Tag)? = nil,
@@ -124,6 +128,16 @@ module PetStore
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] uuid Object to be assigned
+    def uuid=(uuid : String?)
+      if uuid.nil?
+        return @uuid = nil
+      end
+      _uuid = uuid.not_nil!
+      @uuid = _uuid
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
     def id=(id : Int64?)
       if id.nil?
@@ -170,6 +184,6 @@ module PetStore
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@name, @photo_urls, @id, @category, @tags, @status)
+    def_equals_and_hash(@name, @photo_urls, @uuid, @id, @category, @tags, @status)
   end
 end

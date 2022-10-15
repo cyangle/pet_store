@@ -445,6 +445,95 @@ module PetStore
       )
     end
 
+    # Returns a user based on a single ID, if the user does not have access to the pet
+    # @required @param id [String?] ID of pet to fetch
+    # @return [PetStore::Pet]
+    def find_pet_by_id(
+      *,
+      id : String? = "954b95b6-43cf-4104-8354-dea4d9b10ddf"
+    ) : PetStore::Pet
+      data, _status_code, _headers = find_pet_by_id_with_http_info(id: id)
+      data
+    end
+
+    # Returns a user based on a single ID, if the user does not have access to the pet
+    # @required @param id [String?] ID of pet to fetch
+    # @return [Tuple(PetStore::Pet, Integer, Hash)] PetStore::Pet, response status code and response headers
+    def find_pet_by_id_with_http_info(
+      *,
+      id : String? = "954b95b6-43cf-4104-8354-dea4d9b10ddf"
+    ) : Tuple(PetStore::Pet, Int32, Hash(String, Array(String) | String))
+      request = build_api_request_for_find_pet_by_id(id: id)
+
+      body, status_code, headers = @api_client.execute_api_request(request)
+
+      if debugging
+        Log.debug { "API called: FakeApi#find_pet_by_id\nBody: #{body.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}" }
+      end
+
+      Tuple.new(PetStore::Pet.from_json(body), status_code, headers)
+    end
+
+    # Returns a user based on a single ID, if the user does not have access to the pet
+    # @required @param id [String?] ID of pet to fetch
+    # @return nil
+    def find_pet_by_id(
+      *,
+      id : String? = "954b95b6-43cf-4104-8354-dea4d9b10ddf",
+      &block : Crest::Response ->
+    ) : Nil
+      build_api_request_for_find_pet_by_id(id: id).execute(&block)
+    end
+
+    # @return Crest::Request
+    def build_api_request_for_find_pet_by_id(
+      *,
+      id : String? = "954b95b6-43cf-4104-8354-dea4d9b10ddf"
+    ) : Crest::Request
+      if debugging
+        Log.debug { "Calling API: FakeApi.find_pet_by_id ..." }
+      end
+
+      if client_side_validation
+        raise ArgumentError.new("\"id\" is required and cannot be null") if id.nil?
+      end
+
+      # resource path
+      local_var_path = "/fake/{id}".sub("{" + "id" + "}", URI.encode_path(id.to_s))
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String))).new
+
+      # header parameters
+      header_params = Hash(String, String).new
+      # HTTP header "Accept" (if needed)
+      header_params["Accept"] = @api_client.select_header_accept(["application/json"])
+
+      # cookie parameters
+      cookie_params = Hash(String, String).new
+
+      # form parameters
+      form_params = nil
+
+      # http body (model)
+      post_body = nil
+
+      # auth_names
+      auth_names = [] of String
+
+      @api_client.build_api_request(
+        http_method: :"GET",
+        path: local_var_path,
+        operation: "FakeApi.find_pet_by_id",
+        post_body: post_body,
+        auth_names: auth_names,
+        header_params: header_params,
+        cookie_params: cookie_params,
+        query_params: query_params,
+        form_params: form_params
+      )
+    end
+
     # For this test, the body for this request much reference a schema named `File`.
     # @required @param file_schema_test_class [PetStore::FileSchemaTestClass?]
     # @return [Nil]
