@@ -82,9 +82,6 @@ module PetStore
       # resource path
       local_var_path = "/another-fake/dummy"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Accept" (if needed)
@@ -94,6 +91,9 @@ module PetStore
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
       form_params = nil

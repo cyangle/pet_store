@@ -58,9 +58,6 @@ module PetStore
       # resource path
       local_var_path = "/fake/health"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Accept" (if needed)
@@ -68,6 +65,9 @@ module PetStore
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
       form_params = nil
@@ -143,9 +143,6 @@ module PetStore
       # resource path
       local_var_path = "/fake/outer/boolean"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Accept" (if needed)
@@ -155,6 +152,9 @@ module PetStore
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
       form_params = nil
@@ -236,9 +236,6 @@ module PetStore
       # resource path
       local_var_path = "/fake/outer/composite"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Accept" (if needed)
@@ -248,6 +245,9 @@ module PetStore
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
       form_params = nil
@@ -323,9 +323,6 @@ module PetStore
       # resource path
       local_var_path = "/fake/outer/number"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Accept" (if needed)
@@ -335,6 +332,9 @@ module PetStore
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
       form_params = nil
@@ -410,9 +410,6 @@ module PetStore
       # resource path
       local_var_path = "/fake/outer/string"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Accept" (if needed)
@@ -422,6 +419,9 @@ module PetStore
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
       form_params = nil
@@ -501,9 +501,6 @@ module PetStore
       # resource path
       local_var_path = "/fake/{id}".sub("{" + "id" + "}", URI.encode_path(id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Accept" (if needed)
@@ -511,6 +508,9 @@ module PetStore
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
       form_params = nil
@@ -593,9 +593,6 @@ module PetStore
       # resource path
       local_var_path = "/fake/body-with-file-schema"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Content-Type"
@@ -603,6 +600,9 @@ module PetStore
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
       form_params = nil
@@ -691,10 +691,6 @@ module PetStore
       # resource path
       local_var_path = "/fake/body-with-query-params"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["query"] = query.to_s if !query.nil?
-
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Content-Type"
@@ -702,6 +698,10 @@ module PetStore
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["query"] = query.to_s if !query.nil?
 
       # form parameters
       form_params = nil
@@ -787,9 +787,6 @@ module PetStore
       # resource path
       local_var_path = "/fake"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Accept" (if needed)
@@ -799,6 +796,9 @@ module PetStore
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
       form_params = nil
@@ -1021,9 +1021,6 @@ module PetStore
       # resource path
       local_var_path = "/fake"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Content-Type"
@@ -1032,8 +1029,11 @@ module PetStore
       # cookie parameters
       cookie_params = Hash(String, String).new
 
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
+      form_params = Hash(String, (String | Array(String) | JSON::Any | IO)).new
       form_params["integer"] = integer.to_s if !integer.nil?
       form_params["int32"] = int32.to_s if !int32.nil?
       form_params["int64"] = int64.to_s if !int64.nil?
@@ -1208,13 +1208,6 @@ module PetStore
       # resource path
       local_var_path = "/fake"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["enum_query_string_array"] = @api_client.build_collection_param(enum_query_string_array, "multi") if !enum_query_string_array.nil? && !enum_query_string_array.empty?
-      query_params["enum_query_string"] = enum_query_string.to_s if !enum_query_string.nil?
-      query_params["enum_query_integer"] = enum_query_integer.to_s if !enum_query_integer.nil?
-      query_params["enum_query_double"] = enum_query_double.to_s if !enum_query_double.nil?
-
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Content-Type"
@@ -1225,8 +1218,15 @@ module PetStore
       # cookie parameters
       cookie_params = Hash(String, String).new
 
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["enum_query_string_array"] = @api_client.build_collection_param(enum_query_string_array, "multi") if !enum_query_string_array.nil? && !enum_query_string_array.empty?
+      query_params["enum_query_string"] = enum_query_string.to_s if !enum_query_string.nil?
+      query_params["enum_query_integer"] = enum_query_integer.to_s if !enum_query_integer.nil?
+      query_params["enum_query_double"] = enum_query_double.to_s if !enum_query_double.nil?
+
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
+      form_params = Hash(String, (String | Array(String) | JSON::Any | IO)).new
       form_params["enum_form_string_array"] = @api_client.build_collection_param(enum_form_string_array, "csv") if !enum_form_string_array.nil? && !enum_form_string_array.empty?
       form_params["enum_form_string"] = enum_form_string.to_s if !enum_form_string.nil?
 
@@ -1347,13 +1347,6 @@ module PetStore
       # resource path
       local_var_path = "/fake"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["required_string_group"] = required_string_group.to_s if !required_string_group.nil?
-      query_params["required_int64_group"] = required_int64_group.to_s if !required_int64_group.nil?
-      query_params["string_group"] = string_group.to_s if !string_group.nil?
-      query_params["int64_group"] = int64_group.to_s if !int64_group.nil?
-
       # header parameters
       header_params = Hash(String, String).new
       header_params["required_boolean_group"] = required_boolean_group.to_s if !required_boolean_group.nil?
@@ -1361,6 +1354,13 @@ module PetStore
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["required_string_group"] = required_string_group.to_s if !required_string_group.nil?
+      query_params["required_int64_group"] = required_int64_group.to_s if !required_int64_group.nil?
+      query_params["string_group"] = string_group.to_s if !string_group.nil?
+      query_params["int64_group"] = int64_group.to_s if !int64_group.nil?
 
       # form parameters
       form_params = nil
@@ -1443,9 +1443,6 @@ module PetStore
       # resource path
       local_var_path = "/fake/inline-additionalProperties"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Content-Type"
@@ -1453,6 +1450,9 @@ module PetStore
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
       form_params = nil
@@ -1544,9 +1544,6 @@ module PetStore
       # resource path
       local_var_path = "/fake/jsonFormData"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Content-Type"
@@ -1555,8 +1552,11 @@ module PetStore
       # cookie parameters
       cookie_params = Hash(String, String).new
 
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+
       # form parameters
-      form_params = Hash(String, (String | Array(String) | IO)).new
+      form_params = Hash(String, (String | Array(String) | JSON::Any | IO)).new
       form_params["param"] = param.to_s if !param.nil?
       form_params["param2"] = param2.to_s if !param2.nil?
 
@@ -1671,19 +1671,19 @@ module PetStore
       # resource path
       local_var_path = "/fake/test-query-parameters"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["pipe"] = @api_client.build_collection_param(pipe, "multi") if !pipe.nil? && !pipe.empty?
-      query_params["ioutil"] = @api_client.build_collection_param(ioutil, "csv") if !ioutil.nil? && !ioutil.empty?
-      query_params["http"] = @api_client.build_collection_param(http, "ssv") if !http.nil? && !http.empty?
-      query_params["url"] = @api_client.build_collection_param(url, "csv") if !url.nil? && !url.empty?
-      query_params["context"] = @api_client.build_collection_param(context, "multi") if !context.nil? && !context.empty?
-
       # header parameters
       header_params = Hash(String, String).new
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["pipe"] = @api_client.build_collection_param(pipe, "multi") if !pipe.nil? && !pipe.empty?
+      query_params["ioutil"] = @api_client.build_collection_param(ioutil, "csv") if !ioutil.nil? && !ioutil.empty?
+      query_params["http"] = @api_client.build_collection_param(http, "ssv") if !http.nil? && !http.empty?
+      query_params["url"] = @api_client.build_collection_param(url, "csv") if !url.nil? && !url.empty?
+      query_params["context"] = @api_client.build_collection_param(context, "multi") if !context.nil? && !context.empty?
 
       # form parameters
       form_params = nil
@@ -1772,10 +1772,6 @@ module PetStore
       # resource path
       local_var_path = "/fake/test-unique-parameters"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["queryUnique"] = @api_client.build_collection_param(query_unique, "multi") if !query_unique.nil? && !query_unique.empty?
-
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Accept" (if needed)
@@ -1784,6 +1780,10 @@ module PetStore
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["queryUnique"] = @api_client.build_collection_param(query_unique, "multi") if !query_unique.nil? && !query_unique.empty?
 
       # form parameters
       form_params = nil

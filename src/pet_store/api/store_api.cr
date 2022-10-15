@@ -79,14 +79,14 @@ module PetStore
       # resource path
       local_var_path = "/store/order/{order_id}".sub("{" + "order_id" + "}", URI.encode_path(order_id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
       header_params = Hash(String, String).new
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
       form_params = nil
@@ -151,9 +151,6 @@ module PetStore
       # resource path
       local_var_path = "/store/inventory"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Accept" (if needed)
@@ -161,6 +158,9 @@ module PetStore
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
       form_params = nil
@@ -250,9 +250,6 @@ module PetStore
       # resource path
       local_var_path = "/store/order/{order_id}".sub("{" + "order_id" + "}", URI.encode_path(order_id.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Accept" (if needed)
@@ -260,6 +257,9 @@ module PetStore
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
       form_params = nil
@@ -345,9 +345,6 @@ module PetStore
       # resource path
       local_var_path = "/store/order"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Accept" (if needed)
@@ -357,6 +354,9 @@ module PetStore
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
       form_params = nil

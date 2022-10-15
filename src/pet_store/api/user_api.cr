@@ -82,9 +82,6 @@ module PetStore
       # resource path
       local_var_path = "/user"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Content-Type"
@@ -92,6 +89,9 @@ module PetStore
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
       form_params = nil
@@ -177,9 +177,6 @@ module PetStore
       # resource path
       local_var_path = "/user/createWithArray"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Content-Type"
@@ -187,6 +184,9 @@ module PetStore
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
       form_params = nil
@@ -272,9 +272,6 @@ module PetStore
       # resource path
       local_var_path = "/user/createWithList"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Content-Type"
@@ -282,6 +279,9 @@ module PetStore
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
       form_params = nil
@@ -364,14 +364,14 @@ module PetStore
       # resource path
       local_var_path = "/user/{username}".sub("{" + "username" + "}", URI.encode_path(username.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
       header_params = Hash(String, String).new
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
       form_params = nil
@@ -454,9 +454,6 @@ module PetStore
       # resource path
       local_var_path = "/user/{username}".sub("{" + "username" + "}", URI.encode_path(username.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Accept" (if needed)
@@ -464,6 +461,9 @@ module PetStore
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
       form_params = nil
@@ -555,11 +555,6 @@ module PetStore
       # resource path
       local_var_path = "/user/login"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-      query_params["username"] = username.to_s if !username.nil?
-      query_params["password"] = password.to_s if !password.nil?
-
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Accept" (if needed)
@@ -567,6 +562,11 @@ module PetStore
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params["username"] = username.to_s if !username.nil?
+      query_params["password"] = password.to_s if !password.nil?
 
       # form parameters
       form_params = nil
@@ -631,14 +631,14 @@ module PetStore
       # resource path
       local_var_path = "/user/logout"
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
       header_params = Hash(String, String).new
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
       form_params = nil
@@ -733,9 +733,6 @@ module PetStore
       # resource path
       local_var_path = "/user/{username}".sub("{" + "username" + "}", URI.encode_path(username.to_s))
 
-      # query parameters
-      query_params = Hash(String, (String | Array(String))).new
-
       # header parameters
       header_params = Hash(String, String).new
       # HTTP header "Content-Type"
@@ -743,6 +740,9 @@ module PetStore
 
       # cookie parameters
       cookie_params = Hash(String, String).new
+
+      # query parameters
+      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
       form_params = nil
