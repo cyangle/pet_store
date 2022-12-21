@@ -217,7 +217,7 @@ module PetStore
 
     # Returns Auth Settings hash for api client.
     def auth_settings
-      Hash{
+      {
         "api_key" => {
           "type"  => "api_key",
           "in"    => "header",
@@ -255,7 +255,7 @@ module PetStore
           "key"   => "Authorization",
           "value" => "Bearer #{access_token}",
         },
-      }
+      } of String => Hash(String, String)
     end
 
     # Returns an array of Server setting

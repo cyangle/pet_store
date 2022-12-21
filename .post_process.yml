@@ -1,19 +1,19 @@
 tasks:
-  - name: 'Update models'
-    file_glob: './src/pet_store/models/*cr'
-    changes:
-      -
-        name: 'Correct AnyType?'
-        pattern: 'JSONAny'
-        new_value: 'JSON::Any'
-      -
-        name: 'Correct AnyType?'
-        pattern: 'JSONType?'
-        new_value: 'JSON::Type'
-      -
-        name: 'Correct AnyType?'
-        pattern: 'JSONType'
-        new_value: 'JSON::Type'
+  # - name: 'Update models'
+  #   file_glob: './src/pet_store/**/*cr'
+  #   changes:
+  #     -
+  #       name: 'Correct AnyType?'
+  #       pattern: 'JSONAny'
+  #       new_value: 'JSON::Any'
+  #     -
+  #       name: 'Correct AnyType?'
+  #       pattern: 'JSONType?'
+  #       new_value: 'JSON::Type'
+  #     -
+  #       name: 'Correct AnyType?'
+  #       pattern: 'JSONType'
+  #       new_value: 'JSON::Type'
   - name: 'Update all'
     file_glob: './src/pet_store/**/*cr'
     changes:

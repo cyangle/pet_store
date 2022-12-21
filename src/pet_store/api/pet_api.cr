@@ -98,22 +98,22 @@ module PetStore
       local_var_path = "/pet"
 
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/json", "application/xml"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
       cookie_params["csrftoken"] = csrftoken.to_s if !csrftoken.nil?
 
       # query parameters
-      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = pet.to_json
+      post_body : IO | String | Nil = @api_client.encode(body: pet, content_type: header_params["Content-Type"]?) if !pet.nil?
 
       # auth_names
       auth_names = ["api_key_cookie", "petstore_auth"]
@@ -198,20 +198,20 @@ module PetStore
       local_var_path = "/pet/{petId}".sub("{" + "petId" + "}", URI.encode_path(pet_id.to_s))
 
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       header_params["api_key"] = api_key.to_s if !api_key.nil?
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
 
       # query parameters
-      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["petstore_auth"]
@@ -294,22 +294,22 @@ module PetStore
       local_var_path = "/pet/findByStatus"
 
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/xml", "application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
 
       # query parameters
-      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["status"] = @api_client.build_collection_param(status, "csv") if !status.nil? && !status.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["http_signature_test", "petstore_auth"]
@@ -387,22 +387,22 @@ module PetStore
       local_var_path = "/pet/findByTags"
 
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/xml", "application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
 
       # query parameters
-      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["tags"] = @api_client.build_collection_param(tags, "csv") if !tags.nil? && !tags.empty?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["http_signature_test", "petstore_auth"]
@@ -480,21 +480,21 @@ module PetStore
       local_var_path = "/pet/{petId}".sub("{" + "petId" + "}", URI.encode_path(pet_id.to_s))
 
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/xml", "application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
 
       # query parameters
-      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["api_key"]
@@ -575,21 +575,21 @@ module PetStore
       local_var_path = "/pet"
 
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/json", "application/xml"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
 
       # query parameters
-      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = pet.to_json
+      post_body : IO | String | Nil = @api_client.encode(body: pet, content_type: header_params["Content-Type"]?) if !pet.nil?
 
       # auth_names
       auth_names = ["http_signature_test", "petstore_auth"]
@@ -681,23 +681,23 @@ module PetStore
       local_var_path = "/pet/{petId}".sub("{" + "petId" + "}", URI.encode_path(pet_id.to_s))
 
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/x-www-form-urlencoded"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
 
       # query parameters
-      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | JSON::Any | IO)).new
-      form_params["name"] = name.to_s if !name.nil?
-      form_params["status"] = status.to_s if !status.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
+      form_params << Tuple(String, Crest::ParamsValue).new("name", name.to_s) if !name.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("status", status.to_s) if !status.nil?
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["petstore_auth"]
@@ -789,25 +789,25 @@ module PetStore
       local_var_path = "/pet/{petId}/uploadImage".sub("{" + "petId" + "}", URI.encode_path(pet_id.to_s))
 
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["multipart/form-data"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
 
       # query parameters
-      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | JSON::Any | IO)).new
-      form_params["additionalMetadata"] = additional_metadata.to_s if !additional_metadata.nil?
-      form_params["file"] = file if !file.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
+      form_params << Tuple(String, Crest::ParamsValue).new("additionalMetadata", additional_metadata.to_s) if !additional_metadata.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("file", file) if !file.nil?
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["petstore_auth"]
@@ -901,25 +901,25 @@ module PetStore
       local_var_path = "/fake/{petId}/uploadImageWithRequiredFile".sub("{" + "petId" + "}", URI.encode_path(pet_id.to_s))
 
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["multipart/form-data"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
 
       # query parameters
-      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = Hash(String, (String | Array(String) | JSON::Any | IO)).new
-      form_params["additionalMetadata"] = additional_metadata.to_s if !additional_metadata.nil?
-      form_params["requiredFile"] = required_file if !required_file.nil?
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = Array(Tuple(String, Crest::ParamsValue)).new
+      form_params << Tuple(String, Crest::ParamsValue).new("additionalMetadata", additional_metadata.to_s) if !additional_metadata.nil?
+      form_params << Tuple(String, Crest::ParamsValue).new("requiredFile", required_file) if !required_file.nil?
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = ["petstore_auth"]

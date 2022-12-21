@@ -83,21 +83,21 @@ module PetStore
       local_var_path = "/user"
 
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
 
       # query parameters
-      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = user.to_json
+      post_body : IO | String | Nil = @api_client.encode(body: user, content_type: header_params["Content-Type"]?) if !user.nil?
 
       # auth_names
       auth_names = [] of String
@@ -178,21 +178,21 @@ module PetStore
       local_var_path = "/user/createWithArray"
 
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
 
       # query parameters
-      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = user.to_json
+      post_body : IO | String | Nil = @api_client.encode(body: user, content_type: header_params["Content-Type"]?) if !user.nil?
 
       # auth_names
       auth_names = [] of String
@@ -273,21 +273,21 @@ module PetStore
       local_var_path = "/user/createWithList"
 
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
 
       # query parameters
-      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = user.to_json
+      post_body : IO | String | Nil = @api_client.encode(body: user, content_type: header_params["Content-Type"]?) if !user.nil?
 
       # auth_names
       auth_names = [] of String
@@ -365,19 +365,19 @@ module PetStore
       local_var_path = "/user/{username}".sub("{" + "username" + "}", URI.encode_path(username.to_s))
 
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
 
       # query parameters
-      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = [] of String
@@ -455,21 +455,21 @@ module PetStore
       local_var_path = "/user/{username}".sub("{" + "username" + "}", URI.encode_path(username.to_s))
 
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/xml", "application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
 
       # query parameters
-      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = [] of String
@@ -556,23 +556,23 @@ module PetStore
       local_var_path = "/user/login"
 
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/xml", "application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
 
       # query parameters
-      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
       query_params["username"] = username.to_s if !username.nil?
       query_params["password"] = password.to_s if !password.nil?
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = [] of String
@@ -632,19 +632,19 @@ module PetStore
       local_var_path = "/user/logout"
 
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
 
       # query parameters
-      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = nil
+      post_body : IO | String | Nil = nil
 
       # auth_names
       auth_names = [] of String
@@ -734,21 +734,21 @@ module PetStore
       local_var_path = "/user/{username}".sub("{" + "username" + "}", URI.encode_path(username.to_s))
 
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
 
       # query parameters
-      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = user.to_json
+      post_body : IO | String | Nil = @api_client.encode(body: user, content_type: header_params["Content-Type"]?) if !user.nil?
 
       # auth_names
       auth_names = [] of String

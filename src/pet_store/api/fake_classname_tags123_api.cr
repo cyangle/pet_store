@@ -83,23 +83,23 @@ module PetStore
       local_var_path = "/fake_classname_test"
 
       # header parameters
-      header_params = Hash(String, String).new
+      header_params : Hash(String, String) = Hash(String, String).new
       # HTTP header "Accept" (if needed)
       header_params["Accept"] = @api_client.select_header_accept(["application/json"])
       # HTTP header "Content-Type"
       header_params["Content-Type"] = @api_client.select_header_content_type(["application/json"])
 
       # cookie parameters
-      cookie_params = Hash(String, String).new
+      cookie_params : Hash(String, String) = Hash(String, String).new
 
       # query parameters
-      query_params = Hash(String, (String | Array(String) | JSON::Any)).new
+      query_params : Hash(String, (String | Array(String) | JSON::Any)) = Hash(String, (String | Array(String) | JSON::Any)).new
 
       # form parameters
-      form_params = nil
+      form_params : Array(Tuple(String, Crest::ParamsValue)) | Nil = nil
 
       # http body (model)
-      post_body = client.to_json
+      post_body : IO | String | Nil = @api_client.encode(body: client, content_type: header_params["Content-Type"]?) if !client.nil?
 
       # auth_names
       auth_names = ["api_key_query"]
