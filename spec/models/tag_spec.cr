@@ -27,8 +27,12 @@ describe PetStore::Tag do
   end
 
   describe "test attribute 'name'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    it "should not validate name" do
+      tag = PetStore::Tag.new(id: 0, name: "test")
+      tag.valid?.should be_true
+      tag.list_invalid_properties.should eq(Array(String).new)
+      tag.name = "ok"
+      tag.name = nil
     end
   end
 end

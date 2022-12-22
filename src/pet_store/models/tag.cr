@@ -48,11 +48,6 @@ module PetStore
           invalid_properties.push(min_number_error)
         end
       end
-      unless (_name = @name).nil?
-        if min_length_error = OpenApi::PrimitiveValidator.min_length_error("name", _name.to_s.size, MIN_LENGTH_FOR_NAME)
-          invalid_properties.push(min_length_error)
-        end
-      end
       invalid_properties
     end
 
@@ -61,10 +56,6 @@ module PetStore
     def valid? : Bool
       unless (_id = @id).nil?
         return false if _id < MIN_FOR_ID
-      end
-
-      unless (_name = @name).nil?
-        return false if _name.to_s.size < MIN_LENGTH_FOR_NAME
       end
 
       true
@@ -84,12 +75,7 @@ module PetStore
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
     def name=(name : String?)
-      if name.nil?
-        return @name = nil
-      end
-      _name = name.not_nil!
-      OpenApi::PrimitiveValidator.validate_min_length("name", _name.to_s.size, MIN_LENGTH_FOR_NAME)
-      @name = _name
+      @name = name
     end
 
     # Generates #hash and #== methods from all fields

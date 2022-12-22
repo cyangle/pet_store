@@ -68,7 +68,6 @@ describe PetStore::Pet do
       pet2.valid?.should be_false
       pet2.list_invalid_properties.should eq([
         "tags: invalid value for \"id\", must be greater than or equal to 0.",
-        "tags: invalid value for \"name\", the character length must be greater than or equal to 5.",
       ])
     end
   end
