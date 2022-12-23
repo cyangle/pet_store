@@ -54,12 +54,10 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] count Object to be assigned
-    def count=(count : Float64?)
-      if count.nil?
-        raise ArgumentError.new("\"count\" is required and cannot be null")
-      end
-      _count = count.not_nil!
-      @count = _count
+    def count=(new_value : Float64?)
+      raise ArgumentError.new("\"count\" is required and cannot be null") if new_value.nil?
+
+      @count = new_value
     end
 
     # Generates #hash and #== methods from all fields

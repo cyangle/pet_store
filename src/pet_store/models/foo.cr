@@ -48,12 +48,8 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bar Object to be assigned
-    def bar=(bar : String?)
-      if bar.nil?
-        return @bar = nil
-      end
-      _bar = bar.not_nil!
-      @bar = _bar
+    def bar=(new_value : String?)
+      @bar = new_value
     end
 
     # Generates #hash and #== methods from all fields

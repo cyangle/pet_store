@@ -52,12 +52,8 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] nullable_message Object to be assigned
-    def nullable_message=(nullable_message : String?)
-      if nullable_message.nil?
-        return @nullable_message = nil
-      end
-      _nullable_message = nullable_message.not_nil!
-      @nullable_message = _nullable_message
+    def nullable_message=(new_value : String?)
+      @nullable_message = new_value
     end
 
     # Generates #hash and #== methods from all fields

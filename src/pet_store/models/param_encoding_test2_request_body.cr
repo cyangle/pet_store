@@ -101,85 +101,62 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] any_value Object to be assigned
-    def any_value=(any_value : JSON::Any?)
-      if any_value.nil?
-        return @any_value = nil
-      end
-      _any_value = any_value.not_nil!
-      @any_value = _any_value
+    def any_value=(new_value : JSON::Any?)
+      @any_value = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] any_object Object to be assigned
-    def any_object=(any_object : JSON::Any?)
-      if any_object.nil?
-        return @any_object = nil
-      end
-      _any_object = any_object.not_nil!
-      @any_object = _any_object
+    def any_object=(new_value : JSON::Any?)
+      @any_object = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] array_in_body Object to be assigned
-    def array_in_body=(array_in_body : Array(String)?)
-      if array_in_body.nil?
-        return @array_in_body = nil
-      end
-      _array_in_body = array_in_body.not_nil!
-      @array_in_body = _array_in_body
+    def array_in_body=(new_value : Array(String)?)
+      @array_in_body = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] map_in_body Object to be assigned
-    def map_in_body=(map_in_body : Hash(String, String)?)
-      if map_in_body.nil?
-        return @map_in_body = nil
-      end
-      _map_in_body = map_in_body.not_nil!
-      @map_in_body = _map_in_body
+    def map_in_body=(new_value : Hash(String, String)?)
+      @map_in_body = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] dog Object to be assigned
-    def dog=(dog : PetStore::Dog?)
-      if dog.nil?
-        return @dog = nil
+    def dog=(new_value : PetStore::Dog?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _dog = dog.not_nil!
-      _dog.validate if _dog.is_a?(OpenApi::Validatable)
-      @dog = _dog
+
+      @dog = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] array_of_apples Object to be assigned
-    def array_of_apples=(array_of_apples : Array(PetStore::Apple)?)
-      if array_of_apples.nil?
-        return @array_of_apples = nil
+    def array_of_apples=(new_value : Array(PetStore::Apple)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _array_of_apples = array_of_apples.not_nil!
-      OpenApi::ContainerValidator.validate(container: _array_of_apples) if _array_of_apples.is_a?(Array)
-      @array_of_apples = _array_of_apples
+
+      @array_of_apples = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] map_of_pet Object to be assigned
-    def map_of_pet=(map_of_pet : Hash(String, PetStore::Pet)?)
-      if map_of_pet.nil?
-        return @map_of_pet = nil
+    def map_of_pet=(new_value : Hash(String, PetStore::Pet)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Hash)
       end
-      _map_of_pet = map_of_pet.not_nil!
-      OpenApi::ContainerValidator.validate(container: _map_of_pet) if _map_of_pet.is_a?(Hash)
-      @map_of_pet = _map_of_pet
+
+      @map_of_pet = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] inline_map Object to be assigned
-    def inline_map=(inline_map : Hash(String, String)?)
-      if inline_map.nil?
-        return @inline_map = nil
-      end
-      _inline_map = inline_map.not_nil!
-      @inline_map = _inline_map
+    def inline_map=(new_value : Hash(String, String)?)
+      @inline_map = new_value
     end
 
     # Generates #hash and #== methods from all fields

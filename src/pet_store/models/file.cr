@@ -50,12 +50,8 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] source_uri Object to be assigned
-    def source_uri=(source_uri : String?)
-      if source_uri.nil?
-        return @source_uri = nil
-      end
-      _source_uri = source_uri.not_nil!
-      @source_uri = _source_uri
+    def source_uri=(new_value : String?)
+      @source_uri = new_value
     end
 
     # Generates #hash and #== methods from all fields

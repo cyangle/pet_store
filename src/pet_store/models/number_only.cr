@@ -48,12 +48,8 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] just_number Object to be assigned
-    def just_number=(just_number : Float64?)
-      if just_number.nil?
-        return @just_number = nil
-      end
-      _just_number = just_number.not_nil!
-      @just_number = _just_number
+    def just_number=(new_value : Float64?)
+      @just_number = new_value
     end
 
     # Generates #hash and #== methods from all fields

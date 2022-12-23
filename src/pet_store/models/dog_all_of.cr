@@ -48,12 +48,8 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] breed Object to be assigned
-    def breed=(breed : String?)
-      if breed.nil?
-        return @breed = nil
-      end
-      _breed = breed.not_nil!
-      @breed = _breed
+    def breed=(new_value : String?)
+      @breed = new_value
     end
 
     # Generates #hash and #== methods from all fields

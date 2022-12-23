@@ -72,24 +72,22 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enum_form_string_array Object to be assigned
-    def enum_form_string_array=(enum_form_string_array : Array(String)?)
-      if enum_form_string_array.nil?
-        return @enum_form_string_array = nil
+    def enum_form_string_array=(new_value : Array(String)?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("enum_form_string_array", new_value, VALID_VALUES_FOR_ENUM_FORM_STRING_ARRAY)
       end
-      _enum_form_string_array = enum_form_string_array.not_nil!
-      OpenApi::EnumValidator.validate("enum_form_string_array", _enum_form_string_array, VALID_VALUES_FOR_ENUM_FORM_STRING_ARRAY)
-      @enum_form_string_array = _enum_form_string_array
+
+      @enum_form_string_array = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enum_form_string Object to be assigned
-    def enum_form_string=(enum_form_string : String?)
-      if enum_form_string.nil?
-        return @enum_form_string = nil
+    def enum_form_string=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("enum_form_string", new_value, VALID_VALUES_FOR_ENUM_FORM_STRING)
       end
-      _enum_form_string = enum_form_string.not_nil!
-      OpenApi::EnumValidator.validate("enum_form_string", _enum_form_string, VALID_VALUES_FOR_ENUM_FORM_STRING)
-      @enum_form_string = _enum_form_string
+
+      @enum_form_string = new_value
     end
 
     # Generates #hash and #== methods from all fields

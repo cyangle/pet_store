@@ -83,73 +83,48 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : Int64?)
-      if id.nil?
-        return @id = nil
-      end
-      _id = id.not_nil!
-      @id = _id
+    def id=(new_value : Int64?)
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] pet_id Object to be assigned
-    def pet_id=(pet_id : Int64?)
-      if pet_id.nil?
-        return @pet_id = nil
-      end
-      _pet_id = pet_id.not_nil!
-      @pet_id = _pet_id
+    def pet_id=(new_value : Int64?)
+      @pet_id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] quantity Object to be assigned
-    def quantity=(quantity : Int32?)
-      if quantity.nil?
-        return @quantity = nil
-      end
-      _quantity = quantity.not_nil!
-      @quantity = _quantity
+    def quantity=(new_value : Int32?)
+      @quantity = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ship_date Object to be assigned
-    def ship_date=(ship_date : Time?)
-      if ship_date.nil?
-        return @ship_date = nil
-      end
-      _ship_date = ship_date.not_nil!
-      @ship_date = _ship_date
+    def ship_date=(new_value : Time?)
+      @ship_date = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status : String?)
-      if status.nil?
-        return @status = nil
+    def status=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("status", new_value, VALID_VALUES_FOR_STATUS)
       end
-      _status = status.not_nil!
-      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
-      @status = _status
+
+      @status = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] complete Object to be assigned
-    def complete=(complete : Bool?)
-      if complete.nil?
-        return @complete = nil
-      end
-      _complete = complete.not_nil!
-      @complete = _complete
+    def complete=(new_value : Bool?)
+      @complete = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] price Object to be assigned
-    def price=(price : BigDecimal?)
-      if price.nil?
-        return @price = nil
-      end
-      _price = price.not_nil!
-      @price = _price
+    def price=(new_value : BigDecimal?)
+      @price = new_value
     end
 
     # Generates #hash and #== methods from all fields

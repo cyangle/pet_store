@@ -54,12 +54,10 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] length_cm Object to be assigned
-    def length_cm=(length_cm : Float64?)
-      if length_cm.nil?
-        raise ArgumentError.new("\"length_cm\" is required and cannot be null")
-      end
-      _length_cm = length_cm.not_nil!
-      @length_cm = _length_cm
+    def length_cm=(new_value : Float64?)
+      raise ArgumentError.new("\"length_cm\" is required and cannot be null") if new_value.nil?
+
+      @length_cm = new_value
     end
 
     # Generates #hash and #== methods from all fields

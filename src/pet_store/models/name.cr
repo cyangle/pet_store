@@ -70,42 +70,28 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
-    def name=(name : Int32?)
-      if name.nil?
-        raise ArgumentError.new("\"name\" is required and cannot be null")
-      end
-      _name = name.not_nil!
-      @name = _name
+    def name=(new_value : Int32?)
+      raise ArgumentError.new("\"name\" is required and cannot be null") if new_value.nil?
+
+      @name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] snake_case Object to be assigned
-    def snake_case=(snake_case : Int32?)
-      if snake_case.nil?
-        return @snake_case = nil
-      end
-      _snake_case = snake_case.not_nil!
-      @snake_case = _snake_case
+    def snake_case=(new_value : Int32?)
+      @snake_case = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] property Object to be assigned
-    def property=(property : String?)
-      if property.nil?
-        return @property = nil
-      end
-      _property = property.not_nil!
-      @property = _property
+    def property=(new_value : String?)
+      @property = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _123_number Object to be assigned
-    def _123_number=(_123_number : Int32?)
-      if _123_number.nil?
-        return @_123_number = nil
-      end
-      __123_number = _123_number.not_nil!
-      @_123_number = __123_number
+    def _123_number=(new_value : Int32?)
+      @_123_number = new_value
     end
 
     # Generates #hash and #== methods from all fields

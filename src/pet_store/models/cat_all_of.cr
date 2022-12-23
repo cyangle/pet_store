@@ -71,23 +71,19 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
-    def name=(name : String?)
-      if name.nil?
-        raise ArgumentError.new("\"name\" is required and cannot be null")
+    def name=(new_value : String?)
+      raise ArgumentError.new("\"name\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("name", new_value.to_s.size, MAX_LENGTH_FOR_NAME)
       end
-      _name = name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
-      @name = _name
+
+      @name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] declawed Object to be assigned
-    def declawed=(declawed : Bool?)
-      if declawed.nil?
-        return @declawed = nil
-      end
-      _declawed = declawed.not_nil!
-      @declawed = _declawed
+    def declawed=(new_value : Bool?)
+      @declawed = new_value
     end
 
     # Generates #hash and #== methods from all fields

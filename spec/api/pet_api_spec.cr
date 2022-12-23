@@ -30,6 +30,7 @@ describe "PetApi" do
     it "should work" do
       load_cassette("pet_api") do
         api_instance = PetStore::PetApi.new
+        api_instance.api_client.user_agent = "crystal"
         pet = PetStore::Pet.new(name: "pet", photo_urls: Array(String).new)
         csrftoken = "csrf_tokencsrf_tokencsrf_tokencsrf_tokencsrf_tokencsrf_token1234"
         api_instance.add_pet(pet: pet, csrftoken: csrftoken)

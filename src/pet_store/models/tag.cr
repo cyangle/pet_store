@@ -63,19 +63,18 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : Int64?)
-      if id.nil?
-        return @id = nil
+    def id=(new_value : Int64?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_min_number("id", new_value, MIN_FOR_ID)
       end
-      _id = id.not_nil!
-      OpenApi::PrimitiveValidator.validate_min_number("id", _id, MIN_FOR_ID)
-      @id = _id
+
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
-    def name=(name : String?)
-      @name = name
+    def name=(new_value : String?)
+      @name = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -48,12 +48,8 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] array_number Object to be assigned
-    def array_number=(array_number : Array(Float64)?)
-      if array_number.nil?
-        return @array_number = nil
-      end
-      _array_number = array_number.not_nil!
-      @array_number = _array_number
+    def array_number=(new_value : Array(Float64)?)
+      @array_number = new_value
     end
 
     # Generates #hash and #== methods from all fields

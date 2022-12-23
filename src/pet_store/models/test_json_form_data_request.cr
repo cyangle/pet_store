@@ -64,22 +64,18 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] param Object to be assigned
-    def param=(param : String?)
-      if param.nil?
-        raise ArgumentError.new("\"param\" is required and cannot be null")
-      end
-      _param = param.not_nil!
-      @param = _param
+    def param=(new_value : String?)
+      raise ArgumentError.new("\"param\" is required and cannot be null") if new_value.nil?
+
+      @param = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] param2 Object to be assigned
-    def param2=(param2 : String?)
-      if param2.nil?
-        raise ArgumentError.new("\"param2\" is required and cannot be null")
-      end
-      _param2 = param2.not_nil!
-      @param2 = _param2
+    def param2=(new_value : String?)
+      raise ArgumentError.new("\"param2\" is required and cannot be null") if new_value.nil?
+
+      @param2 = new_value
     end
 
     # Generates #hash and #== methods from all fields

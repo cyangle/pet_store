@@ -205,134 +205,125 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enum_string_required Object to be assigned
-    def enum_string_required=(enum_string_required : String?)
-      if enum_string_required.nil?
-        raise ArgumentError.new("\"enum_string_required\" is required and cannot be null")
+    def enum_string_required=(new_value : String?)
+      raise ArgumentError.new("\"enum_string_required\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("enum_string_required", new_value, VALID_VALUES_FOR_ENUM_STRING_REQUIRED)
       end
-      _enum_string_required = enum_string_required.not_nil!
-      OpenApi::EnumValidator.validate("enum_string_required", _enum_string_required, VALID_VALUES_FOR_ENUM_STRING_REQUIRED)
-      @enum_string_required = _enum_string_required
+
+      @enum_string_required = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outer_enum_rquired Object to be assigned
-    def outer_enum_rquired=(outer_enum_rquired : PetStore::OuterEnumRquired?)
-      if outer_enum_rquired.nil?
-        raise ArgumentError.new("\"outer_enum_rquired\" is required and cannot be null")
+    def outer_enum_rquired=(new_value : PetStore::OuterEnumRquired?)
+      raise ArgumentError.new("\"outer_enum_rquired\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate
       end
-      _outer_enum_rquired = outer_enum_rquired.not_nil!
-      _outer_enum_rquired.validate
-      @outer_enum_rquired = _outer_enum_rquired
+
+      @outer_enum_rquired = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outer_enum_rquired_int64 Object to be assigned
-    def outer_enum_rquired_int64=(outer_enum_rquired_int64 : PetStore::OuterEnumRquiredInt64?)
-      if outer_enum_rquired_int64.nil?
-        raise ArgumentError.new("\"outer_enum_rquired_int64\" is required and cannot be null")
+    def outer_enum_rquired_int64=(new_value : PetStore::OuterEnumRquiredInt64?)
+      raise ArgumentError.new("\"outer_enum_rquired_int64\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        new_value.validate
       end
-      _outer_enum_rquired_int64 = outer_enum_rquired_int64.not_nil!
-      _outer_enum_rquired_int64.validate
-      @outer_enum_rquired_int64 = _outer_enum_rquired_int64
+
+      @outer_enum_rquired_int64 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enum_string Object to be assigned
-    def enum_string=(enum_string : String?)
-      if enum_string.nil?
-        return @enum_string = nil
+    def enum_string=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("enum_string", new_value, VALID_VALUES_FOR_ENUM_STRING)
       end
-      _enum_string = enum_string.not_nil!
-      OpenApi::EnumValidator.validate("enum_string", _enum_string, VALID_VALUES_FOR_ENUM_STRING)
-      @enum_string = _enum_string
+
+      @enum_string = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enum_int32 Object to be assigned
-    def enum_int32=(enum_int32 : Int32?)
-      if enum_int32.nil?
-        return @enum_int32 = nil
+    def enum_int32=(new_value : Int32?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("enum_int32", new_value, VALID_VALUES_FOR_ENUM_INT32)
       end
-      _enum_int32 = enum_int32.not_nil!
-      OpenApi::EnumValidator.validate("enum_int32", _enum_int32, VALID_VALUES_FOR_ENUM_INT32)
-      @enum_int32 = _enum_int32
+
+      @enum_int32 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enum_int64 Object to be assigned
-    def enum_int64=(enum_int64 : Int64?)
-      if enum_int64.nil?
-        return @enum_int64 = nil
+    def enum_int64=(new_value : Int64?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("enum_int64", new_value, VALID_VALUES_FOR_ENUM_INT64)
       end
-      _enum_int64 = enum_int64.not_nil!
-      OpenApi::EnumValidator.validate("enum_int64", _enum_int64, VALID_VALUES_FOR_ENUM_INT64)
-      @enum_int64 = _enum_int64
+
+      @enum_int64 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enum_float Object to be assigned
-    def enum_float=(enum_float : Float32?)
-      if enum_float.nil?
-        return @enum_float = nil
+    def enum_float=(new_value : Float32?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("enum_float", new_value, VALID_VALUES_FOR_ENUM_FLOAT)
       end
-      _enum_float = enum_float.not_nil!
-      OpenApi::EnumValidator.validate("enum_float", _enum_float, VALID_VALUES_FOR_ENUM_FLOAT)
-      @enum_float = _enum_float
+
+      @enum_float = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enum_double Object to be assigned
-    def enum_double=(enum_double : Float64?)
-      if enum_double.nil?
-        return @enum_double = nil
+    def enum_double=(new_value : Float64?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("enum_double", new_value, VALID_VALUES_FOR_ENUM_DOUBLE)
       end
-      _enum_double = enum_double.not_nil!
-      OpenApi::EnumValidator.validate("enum_double", _enum_double, VALID_VALUES_FOR_ENUM_DOUBLE)
-      @enum_double = _enum_double
+
+      @enum_double = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outer_enum Object to be assigned
-    def outer_enum=(outer_enum : PetStore::OuterEnum?)
-      if outer_enum.nil?
-        return @outer_enum = nil
+    def outer_enum=(new_value : PetStore::OuterEnum?)
+      unless new_value.nil?
+        new_value.validate
       end
-      _outer_enum = outer_enum.not_nil!
-      _outer_enum.validate
-      @outer_enum = _outer_enum
+
+      @outer_enum = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outer_enum_integer Object to be assigned
-    def outer_enum_integer=(outer_enum_integer : PetStore::OuterEnumInteger?)
-      if outer_enum_integer.nil?
-        return @outer_enum_integer = nil
+    def outer_enum_integer=(new_value : PetStore::OuterEnumInteger?)
+      unless new_value.nil?
+        new_value.validate
       end
-      _outer_enum_integer = outer_enum_integer.not_nil!
-      _outer_enum_integer.validate
-      @outer_enum_integer = _outer_enum_integer
+
+      @outer_enum_integer = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outer_enum_default_value Object to be assigned
-    def outer_enum_default_value=(outer_enum_default_value : PetStore::OuterEnumDefaultValue?)
-      if outer_enum_default_value.nil?
-        return @outer_enum_default_value = nil
+    def outer_enum_default_value=(new_value : PetStore::OuterEnumDefaultValue?)
+      unless new_value.nil?
+        new_value.validate
       end
-      _outer_enum_default_value = outer_enum_default_value.not_nil!
-      _outer_enum_default_value.validate
-      @outer_enum_default_value = _outer_enum_default_value
+
+      @outer_enum_default_value = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outer_enum_integer_default_value Object to be assigned
-    def outer_enum_integer_default_value=(outer_enum_integer_default_value : PetStore::OuterEnumIntegerDefaultValue?)
-      if outer_enum_integer_default_value.nil?
-        return @outer_enum_integer_default_value = nil
+    def outer_enum_integer_default_value=(new_value : PetStore::OuterEnumIntegerDefaultValue?)
+      unless new_value.nil?
+        new_value.validate
       end
-      _outer_enum_integer_default_value = outer_enum_integer_default_value.not_nil!
-      _outer_enum_integer_default_value.validate
-      @outer_enum_integer_default_value = _outer_enum_integer_default_value
+
+      @outer_enum_integer_default_value = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -65,32 +65,22 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] class_name Object to be assigned
-    def class_name=(class_name : String?)
-      if class_name.nil?
-        raise ArgumentError.new("\"class_name\" is required and cannot be null")
-      end
-      _class_name = class_name.not_nil!
-      @class_name = _class_name
+    def class_name=(new_value : String?)
+      raise ArgumentError.new("\"class_name\" is required and cannot be null") if new_value.nil?
+
+      @class_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] has_baleen Object to be assigned
-    def has_baleen=(has_baleen : Bool?)
-      if has_baleen.nil?
-        return @has_baleen = nil
-      end
-      _has_baleen = has_baleen.not_nil!
-      @has_baleen = _has_baleen
+    def has_baleen=(new_value : Bool?)
+      @has_baleen = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] has_teeth Object to be assigned
-    def has_teeth=(has_teeth : Bool?)
-      if has_teeth.nil?
-        return @has_teeth = nil
-      end
-      _has_teeth = has_teeth.not_nil!
-      @has_teeth = _has_teeth
+    def has_teeth=(new_value : Bool?)
+      @has_teeth = new_value
     end
 
     # Generates #hash and #== methods from all fields

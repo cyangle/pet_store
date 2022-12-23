@@ -106,122 +106,74 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : Int64?)
-      if id.nil?
-        return @id = nil
-      end
-      _id = id.not_nil!
-      @id = _id
+    def id=(new_value : Int64?)
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] username Object to be assigned
-    def username=(username : String?)
-      if username.nil?
-        return @username = nil
-      end
-      _username = username.not_nil!
-      @username = _username
+    def username=(new_value : String?)
+      @username = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] first_name Object to be assigned
-    def first_name=(first_name : String?)
-      if first_name.nil?
-        return @first_name = nil
-      end
-      _first_name = first_name.not_nil!
-      @first_name = _first_name
+    def first_name=(new_value : String?)
+      @first_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] last_name Object to be assigned
-    def last_name=(last_name : String?)
-      if last_name.nil?
-        return @last_name = nil
-      end
-      _last_name = last_name.not_nil!
-      @last_name = _last_name
+    def last_name=(new_value : String?)
+      @last_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] email Object to be assigned
-    def email=(email : String?)
-      if email.nil?
-        return @email = nil
-      end
-      _email = email.not_nil!
-      @email = _email
+    def email=(new_value : String?)
+      @email = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] password Object to be assigned
-    def password=(password : String?)
-      if password.nil?
-        return @password = nil
-      end
-      _password = password.not_nil!
-      @password = _password
+    def password=(new_value : String?)
+      @password = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] phone Object to be assigned
-    def phone=(phone : String?)
-      if phone.nil?
-        return @phone = nil
-      end
-      _phone = phone.not_nil!
-      @phone = _phone
+    def phone=(new_value : String?)
+      @phone = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] user_status Object to be assigned
-    def user_status=(user_status : Int32?)
-      if user_status.nil?
-        return @user_status = nil
-      end
-      _user_status = user_status.not_nil!
-      @user_status = _user_status
+    def user_status=(new_value : Int32?)
+      @user_status = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] arbitrary_object Object to be assigned
-    def arbitrary_object=(arbitrary_object : Hash(String, String)?)
-      if arbitrary_object.nil?
-        return @arbitrary_object = nil
-      end
-      _arbitrary_object = arbitrary_object.not_nil!
-      @arbitrary_object = _arbitrary_object
+    def arbitrary_object=(new_value : Hash(String, String)?)
+      @arbitrary_object = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] arbitrary_nullable_object Object to be assigned
-    def arbitrary_nullable_object=(arbitrary_nullable_object : Hash(String, String)?)
-      if arbitrary_nullable_object.nil?
-        return @arbitrary_nullable_object = nil
-      end
-      _arbitrary_nullable_object = arbitrary_nullable_object.not_nil!
-      @arbitrary_nullable_object = _arbitrary_nullable_object
+    def arbitrary_nullable_object=(new_value : Hash(String, String)?)
+      @arbitrary_nullable_object = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] arbitrary_type_value Object to be assigned
-    def arbitrary_type_value=(arbitrary_type_value : JSON::Any?)
-      if arbitrary_type_value.nil?
-        return @arbitrary_type_value = nil
-      end
-      _arbitrary_type_value = arbitrary_type_value.not_nil!
-      @arbitrary_type_value = _arbitrary_type_value
+    def arbitrary_type_value=(new_value : JSON::Any?)
+      @arbitrary_type_value = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] arbitrary_nullable_type_value Object to be assigned
-    def arbitrary_nullable_type_value=(arbitrary_nullable_type_value : JSON::Any?)
-      if arbitrary_nullable_type_value.nil?
-        return @arbitrary_nullable_type_value = nil
-      end
-      _arbitrary_nullable_type_value = arbitrary_nullable_type_value.not_nil!
-      @arbitrary_nullable_type_value = _arbitrary_nullable_type_value
+    def arbitrary_nullable_type_value=(new_value : JSON::Any?)
+      @arbitrary_nullable_type_value = new_value
     end
 
     # Generates #hash and #== methods from all fields

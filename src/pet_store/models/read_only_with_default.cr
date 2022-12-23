@@ -72,72 +72,44 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] prop1 Object to be assigned
-    def prop1=(prop1 : String?)
-      if prop1.nil?
-        return @prop1 = nil
-      end
-      _prop1 = prop1.not_nil!
-      @prop1 = _prop1
+    def prop1=(new_value : String?)
+      @prop1 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] prop2 Object to be assigned
-    def prop2=(prop2 : String?)
-      if prop2.nil?
-        return @prop2 = nil
-      end
-      _prop2 = prop2.not_nil!
-      @prop2 = _prop2
+    def prop2=(new_value : String?)
+      @prop2 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] prop3 Object to be assigned
-    def prop3=(prop3 : String?)
-      if prop3.nil?
-        return @prop3 = nil
-      end
-      _prop3 = prop3.not_nil!
-      @prop3 = _prop3
+    def prop3=(new_value : String?)
+      @prop3 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bool_prop1 Object to be assigned
-    def bool_prop1=(bool_prop1 : Bool?)
-      if bool_prop1.nil?
-        return @bool_prop1 = nil
-      end
-      _bool_prop1 = bool_prop1.not_nil!
-      @bool_prop1 = _bool_prop1
+    def bool_prop1=(new_value : Bool?)
+      @bool_prop1 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bool_prop2 Object to be assigned
-    def bool_prop2=(bool_prop2 : Bool?)
-      if bool_prop2.nil?
-        return @bool_prop2 = nil
-      end
-      _bool_prop2 = bool_prop2.not_nil!
-      @bool_prop2 = _bool_prop2
+    def bool_prop2=(new_value : Bool?)
+      @bool_prop2 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] int_prop1 Object to be assigned
-    def int_prop1=(int_prop1 : Float64?)
-      if int_prop1.nil?
-        return @int_prop1 = nil
-      end
-      _int_prop1 = int_prop1.not_nil!
-      @int_prop1 = _int_prop1
+    def int_prop1=(new_value : Float64?)
+      @int_prop1 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] int_prop2 Object to be assigned
-    def int_prop2=(int_prop2 : Float64?)
-      if int_prop2.nil?
-        return @int_prop2 = nil
-      end
-      _int_prop2 = int_prop2.not_nil!
-      @int_prop2 = _int_prop2
+    def int_prop2=(new_value : Float64?)
+      @int_prop2 = new_value
     end
 
     # Generates #hash and #== methods from all fields

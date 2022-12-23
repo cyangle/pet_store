@@ -49,12 +49,8 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _return Object to be assigned
-    def _return=(_return : Int32?)
-      if _return.nil?
-        return @_return = nil
-      end
-      __return = _return.not_nil!
-      @_return = __return
+    def _return=(new_value : Int32?)
+      @_return = new_value
     end
 
     # Generates #hash and #== methods from all fields

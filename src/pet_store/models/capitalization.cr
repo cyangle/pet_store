@@ -69,62 +69,38 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] small_camel Object to be assigned
-    def small_camel=(small_camel : String?)
-      if small_camel.nil?
-        return @small_camel = nil
-      end
-      _small_camel = small_camel.not_nil!
-      @small_camel = _small_camel
+    def small_camel=(new_value : String?)
+      @small_camel = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] capital_camel Object to be assigned
-    def capital_camel=(capital_camel : String?)
-      if capital_camel.nil?
-        return @capital_camel = nil
-      end
-      _capital_camel = capital_camel.not_nil!
-      @capital_camel = _capital_camel
+    def capital_camel=(new_value : String?)
+      @capital_camel = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] small_snake Object to be assigned
-    def small_snake=(small_snake : String?)
-      if small_snake.nil?
-        return @small_snake = nil
-      end
-      _small_snake = small_snake.not_nil!
-      @small_snake = _small_snake
+    def small_snake=(new_value : String?)
+      @small_snake = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] capital_snake Object to be assigned
-    def capital_snake=(capital_snake : String?)
-      if capital_snake.nil?
-        return @capital_snake = nil
-      end
-      _capital_snake = capital_snake.not_nil!
-      @capital_snake = _capital_snake
+    def capital_snake=(new_value : String?)
+      @capital_snake = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sca_eth_flow_points Object to be assigned
-    def sca_eth_flow_points=(sca_eth_flow_points : String?)
-      if sca_eth_flow_points.nil?
-        return @sca_eth_flow_points = nil
-      end
-      _sca_eth_flow_points = sca_eth_flow_points.not_nil!
-      @sca_eth_flow_points = _sca_eth_flow_points
+    def sca_eth_flow_points=(new_value : String?)
+      @sca_eth_flow_points = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] att_name Object to be assigned
-    def att_name=(att_name : String?)
-      if att_name.nil?
-        return @att_name = nil
-      end
-      _att_name = att_name.not_nil!
-      @att_name = _att_name
+    def att_name=(new_value : String?)
+      @att_name = new_value
     end
 
     # Generates #hash and #== methods from all fields

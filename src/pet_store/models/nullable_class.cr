@@ -150,162 +150,100 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] required_nullable_prop Object to be assigned
-    def required_nullable_prop=(required_nullable_prop : String?)
-      if required_nullable_prop.nil?
-        return @required_nullable_prop = nil
-      end
-      _required_nullable_prop = required_nullable_prop.not_nil!
-      @required_nullable_prop = _required_nullable_prop
+    def required_nullable_prop=(new_value : String?)
+      @required_nullable_prop = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] required_non_nullable_prop Object to be assigned
-    def required_non_nullable_prop=(required_non_nullable_prop : String?)
-      if required_non_nullable_prop.nil?
-        raise ArgumentError.new("\"required_non_nullable_prop\" is required and cannot be null")
-      end
-      _required_non_nullable_prop = required_non_nullable_prop.not_nil!
-      @required_non_nullable_prop = _required_non_nullable_prop
+    def required_non_nullable_prop=(new_value : String?)
+      raise ArgumentError.new("\"required_non_nullable_prop\" is required and cannot be null") if new_value.nil?
+
+      @required_non_nullable_prop = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] optional_nullable_prop Object to be assigned
-    def optional_nullable_prop=(optional_nullable_prop : String?)
-      if optional_nullable_prop.nil?
-        return @optional_nullable_prop = nil
-      end
-      _optional_nullable_prop = optional_nullable_prop.not_nil!
-      @optional_nullable_prop = _optional_nullable_prop
+    def optional_nullable_prop=(new_value : String?)
+      @optional_nullable_prop = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] optional_non_nullable_prop Object to be assigned
-    def optional_non_nullable_prop=(optional_non_nullable_prop : String?)
-      if optional_non_nullable_prop.nil?
-        return @optional_non_nullable_prop = nil
-      end
-      _optional_non_nullable_prop = optional_non_nullable_prop.not_nil!
-      @optional_non_nullable_prop = _optional_non_nullable_prop
+    def optional_non_nullable_prop=(new_value : String?)
+      @optional_non_nullable_prop = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] integer_prop Object to be assigned
-    def integer_prop=(integer_prop : Int32?)
-      if integer_prop.nil?
-        return @integer_prop = nil
-      end
-      _integer_prop = integer_prop.not_nil!
-      @integer_prop = _integer_prop
+    def integer_prop=(new_value : Int32?)
+      @integer_prop = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] number_prop Object to be assigned
-    def number_prop=(number_prop : Float64?)
-      if number_prop.nil?
-        return @number_prop = nil
-      end
-      _number_prop = number_prop.not_nil!
-      @number_prop = _number_prop
+    def number_prop=(new_value : Float64?)
+      @number_prop = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] boolean_prop Object to be assigned
-    def boolean_prop=(boolean_prop : Bool?)
-      if boolean_prop.nil?
-        return @boolean_prop = nil
-      end
-      _boolean_prop = boolean_prop.not_nil!
-      @boolean_prop = _boolean_prop
+    def boolean_prop=(new_value : Bool?)
+      @boolean_prop = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] string_prop Object to be assigned
-    def string_prop=(string_prop : String?)
-      if string_prop.nil?
-        return @string_prop = nil
-      end
-      _string_prop = string_prop.not_nil!
-      @string_prop = _string_prop
+    def string_prop=(new_value : String?)
+      @string_prop = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] date_prop Object to be assigned
-    def date_prop=(date_prop : Time?)
-      if date_prop.nil?
-        return @date_prop = nil
-      end
-      _date_prop = date_prop.not_nil!
-      @date_prop = _date_prop
+    def date_prop=(new_value : Time?)
+      @date_prop = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] datetime_prop Object to be assigned
-    def datetime_prop=(datetime_prop : Time?)
-      if datetime_prop.nil?
-        return @datetime_prop = nil
-      end
-      _datetime_prop = datetime_prop.not_nil!
-      @datetime_prop = _datetime_prop
+    def datetime_prop=(new_value : Time?)
+      @datetime_prop = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] array_nullable_prop Object to be assigned
-    def array_nullable_prop=(array_nullable_prop : Array(JSON::Any)?)
-      if array_nullable_prop.nil?
-        return @array_nullable_prop = nil
-      end
-      _array_nullable_prop = array_nullable_prop.not_nil!
-      @array_nullable_prop = _array_nullable_prop
+    def array_nullable_prop=(new_value : Array(JSON::Any)?)
+      @array_nullable_prop = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] array_and_items_nullable_prop Object to be assigned
-    def array_and_items_nullable_prop=(array_and_items_nullable_prop : Array(JSON::Any)?)
-      if array_and_items_nullable_prop.nil?
-        return @array_and_items_nullable_prop = nil
-      end
-      _array_and_items_nullable_prop = array_and_items_nullable_prop.not_nil!
-      @array_and_items_nullable_prop = _array_and_items_nullable_prop
+    def array_and_items_nullable_prop=(new_value : Array(JSON::Any)?)
+      @array_and_items_nullable_prop = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] array_items_nullable Object to be assigned
-    def array_items_nullable=(array_items_nullable : Array(JSON::Any)?)
-      if array_items_nullable.nil?
-        return @array_items_nullable = nil
-      end
-      _array_items_nullable = array_items_nullable.not_nil!
-      @array_items_nullable = _array_items_nullable
+    def array_items_nullable=(new_value : Array(JSON::Any)?)
+      @array_items_nullable = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object_nullable_prop Object to be assigned
-    def object_nullable_prop=(object_nullable_prop : Hash(String, JSON::Any)?)
-      if object_nullable_prop.nil?
-        return @object_nullable_prop = nil
-      end
-      _object_nullable_prop = object_nullable_prop.not_nil!
-      @object_nullable_prop = _object_nullable_prop
+    def object_nullable_prop=(new_value : Hash(String, JSON::Any)?)
+      @object_nullable_prop = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object_and_items_nullable_prop Object to be assigned
-    def object_and_items_nullable_prop=(object_and_items_nullable_prop : Hash(String, JSON::Any)?)
-      if object_and_items_nullable_prop.nil?
-        return @object_and_items_nullable_prop = nil
-      end
-      _object_and_items_nullable_prop = object_and_items_nullable_prop.not_nil!
-      @object_and_items_nullable_prop = _object_and_items_nullable_prop
+    def object_and_items_nullable_prop=(new_value : Hash(String, JSON::Any)?)
+      @object_and_items_nullable_prop = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object_items_nullable Object to be assigned
-    def object_items_nullable=(object_items_nullable : Hash(String, JSON::Any)?)
-      if object_items_nullable.nil?
-        return @object_items_nullable = nil
-      end
-      _object_items_nullable = object_items_nullable.not_nil!
-      @object_items_nullable = _object_items_nullable
+    def object_items_nullable=(new_value : Hash(String, JSON::Any)?)
+      @object_items_nullable = new_value
     end
 
     # Generates #hash and #== methods from all fields

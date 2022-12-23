@@ -48,12 +48,8 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] client Object to be assigned
-    def client=(client : String?)
-      if client.nil?
-        return @client = nil
-      end
-      _client = client.not_nil!
-      @client = _client
+    def client=(new_value : String?)
+      @client = new_value
     end
 
     # Generates #hash and #== methods from all fields

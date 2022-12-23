@@ -61,22 +61,16 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cultivar Object to be assigned
-    def cultivar=(cultivar : String?)
-      if cultivar.nil?
-        raise ArgumentError.new("\"cultivar\" is required and cannot be null")
-      end
-      _cultivar = cultivar.not_nil!
-      @cultivar = _cultivar
+    def cultivar=(new_value : String?)
+      raise ArgumentError.new("\"cultivar\" is required and cannot be null") if new_value.nil?
+
+      @cultivar = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mealy Object to be assigned
-    def mealy=(mealy : Bool?)
-      if mealy.nil?
-        return @mealy = nil
-      end
-      _mealy = mealy.not_nil!
-      @mealy = _mealy
+    def mealy=(new_value : Bool?)
+      @mealy = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -48,12 +48,8 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] special_property_name Object to be assigned
-    def special_property_name=(special_property_name : Int64?)
-      if special_property_name.nil?
-        return @special_property_name = nil
-      end
-      _special_property_name = special_property_name.not_nil!
-      @special_property_name = _special_property_name
+    def special_property_name=(new_value : Int64?)
+      @special_property_name = new_value
     end
 
     # Generates #hash and #== methods from all fields

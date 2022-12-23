@@ -63,22 +63,16 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] required_file Object to be assigned
-    def required_file=(required_file : ::File?)
-      if required_file.nil?
-        raise ArgumentError.new("\"required_file\" is required and cannot be null")
-      end
-      _required_file = required_file.not_nil!
-      @required_file = _required_file
+    def required_file=(new_value : ::File?)
+      raise ArgumentError.new("\"required_file\" is required and cannot be null") if new_value.nil?
+
+      @required_file = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] additional_metadata Object to be assigned
-    def additional_metadata=(additional_metadata : String?)
-      if additional_metadata.nil?
-        return @additional_metadata = nil
-      end
-      _additional_metadata = additional_metadata.not_nil!
-      @additional_metadata = _additional_metadata
+    def additional_metadata=(new_value : String?)
+      @additional_metadata = new_value
     end
 
     # Generates #hash and #== methods from all fields

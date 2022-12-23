@@ -56,32 +56,20 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] code Object to be assigned
-    def code=(code : Int32?)
-      if code.nil?
-        return @code = nil
-      end
-      _code = code.not_nil!
-      @code = _code
+    def code=(new_value : Int32?)
+      @code = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      if _type.nil?
-        return @_type = nil
-      end
-      __type = _type.not_nil!
-      @_type = __type
+    def _type=(new_value : String?)
+      @_type = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] message Object to be assigned
-    def message=(message : String?)
-      if message.nil?
-        return @message = nil
-      end
-      _message = message.not_nil!
-      @message = _message
+    def message=(new_value : String?)
+      @message = new_value
     end
 
     # Generates #hash and #== methods from all fields

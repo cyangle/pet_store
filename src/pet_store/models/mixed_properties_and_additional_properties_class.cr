@@ -63,33 +63,24 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] uuid Object to be assigned
-    def uuid=(uuid : String?)
-      if uuid.nil?
-        return @uuid = nil
-      end
-      _uuid = uuid.not_nil!
-      @uuid = _uuid
+    def uuid=(new_value : String?)
+      @uuid = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] date_time Object to be assigned
-    def date_time=(date_time : Time?)
-      if date_time.nil?
-        return @date_time = nil
-      end
-      _date_time = date_time.not_nil!
-      @date_time = _date_time
+    def date_time=(new_value : Time?)
+      @date_time = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] map Object to be assigned
-    def map=(map : Hash(String, PetStore::Animal)?)
-      if map.nil?
-        return @map = nil
+    def map=(new_value : Hash(String, PetStore::Animal)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Hash)
       end
-      _map = map.not_nil!
-      OpenApi::ContainerValidator.validate(container: _map) if _map.is_a?(Hash)
-      @map = _map
+
+      @map = new_value
     end
 
     # Generates #hash and #== methods from all fields

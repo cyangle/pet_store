@@ -54,12 +54,10 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] kind Object to be assigned
-    def kind=(kind : String?)
-      if kind.nil?
-        raise ArgumentError.new("\"kind\" is required and cannot be null")
-      end
-      _kind = kind.not_nil!
-      @kind = _kind
+    def kind=(new_value : String?)
+      raise ArgumentError.new("\"kind\" is required and cannot be null") if new_value.nil?
+
+      @kind = new_value
     end
 
     # Generates #hash and #== methods from all fields

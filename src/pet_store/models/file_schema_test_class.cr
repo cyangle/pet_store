@@ -66,24 +66,22 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] file Object to be assigned
-    def file=(file : PetStore::File?)
-      if file.nil?
-        return @file = nil
+    def file=(new_value : PetStore::File?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _file = file.not_nil!
-      _file.validate if _file.is_a?(OpenApi::Validatable)
-      @file = _file
+
+      @file = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] files Object to be assigned
-    def files=(files : Array(PetStore::File)?)
-      if files.nil?
-        return @files = nil
+    def files=(new_value : Array(PetStore::File)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _files = files.not_nil!
-      OpenApi::ContainerValidator.validate(container: _files) if _files.is_a?(Array)
-      @files = _files
+
+      @files = new_value
     end
 
     # Generates #hash and #== methods from all fields

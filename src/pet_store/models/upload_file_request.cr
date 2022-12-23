@@ -54,22 +54,14 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] additional_metadata Object to be assigned
-    def additional_metadata=(additional_metadata : String?)
-      if additional_metadata.nil?
-        return @additional_metadata = nil
-      end
-      _additional_metadata = additional_metadata.not_nil!
-      @additional_metadata = _additional_metadata
+    def additional_metadata=(new_value : String?)
+      @additional_metadata = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] file Object to be assigned
-    def file=(file : ::File?)
-      if file.nil?
-        return @file = nil
-      end
-      _file = file.not_nil!
-      @file = _file
+    def file=(new_value : ::File?)
+      @file = new_value
     end
 
     # Generates #hash and #== methods from all fields

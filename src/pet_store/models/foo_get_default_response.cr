@@ -55,13 +55,12 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] string Object to be assigned
-    def string=(string : PetStore::Foo?)
-      if string.nil?
-        return @string = nil
+    def string=(new_value : PetStore::Foo?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _string = string.not_nil!
-      _string.validate if _string.is_a?(OpenApi::Validatable)
-      @string = _string
+
+      @string = new_value
     end
 
     # Generates #hash and #== methods from all fields

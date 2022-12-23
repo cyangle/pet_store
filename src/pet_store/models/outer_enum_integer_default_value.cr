@@ -33,18 +33,15 @@ module PetStore
     end
 
     def self.new(pull : JSON::PullParser)
-      new(Int32.new(pull))
+      new(Int32.new(pull), false)
     end
 
     def self.from_json_object_key?(key : String)
       Int32.from_json_object_key?(key)
     end
 
-    def self.new!(data : Int32)
-      new(data).tap(&.validate)
-    end
-
-    def initialize(@data : Int32)
+    def initialize(@data : Int32, strict : Bool = true)
+      validate if strict
     end
 
     def error_message : String

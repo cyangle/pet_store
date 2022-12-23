@@ -70,43 +70,30 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] map_map_of_string Object to be assigned
-    def map_map_of_string=(map_map_of_string : Hash(String, Hash(String, String))?)
-      if map_map_of_string.nil?
-        return @map_map_of_string = nil
-      end
-      _map_map_of_string = map_map_of_string.not_nil!
-      @map_map_of_string = _map_map_of_string
+    def map_map_of_string=(new_value : Hash(String, Hash(String, String))?)
+      @map_map_of_string = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] map_of_enum_string Object to be assigned
-    def map_of_enum_string=(map_of_enum_string : Hash(String, String)?)
-      if map_of_enum_string.nil?
-        return @map_of_enum_string = nil
+    def map_of_enum_string=(new_value : Hash(String, String)?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("map_of_enum_string", new_value, VALID_VALUES_FOR_MAP_OF_ENUM_STRING)
       end
-      _map_of_enum_string = map_of_enum_string.not_nil!
-      OpenApi::EnumValidator.validate("map_of_enum_string", _map_of_enum_string, VALID_VALUES_FOR_MAP_OF_ENUM_STRING)
-      @map_of_enum_string = _map_of_enum_string
+
+      @map_of_enum_string = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] direct_map Object to be assigned
-    def direct_map=(direct_map : Hash(String, Bool)?)
-      if direct_map.nil?
-        return @direct_map = nil
-      end
-      _direct_map = direct_map.not_nil!
-      @direct_map = _direct_map
+    def direct_map=(new_value : Hash(String, Bool)?)
+      @direct_map = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] indirect_map Object to be assigned
-    def indirect_map=(indirect_map : Hash(String, Bool)?)
-      if indirect_map.nil?
-        return @indirect_map = nil
-      end
-      _indirect_map = indirect_map.not_nil!
-      @indirect_map = _indirect_map
+    def indirect_map=(new_value : Hash(String, Bool)?)
+      @indirect_map = new_value
     end
 
     # Generates #hash and #== methods from all fields

@@ -56,32 +56,20 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] my_number Object to be assigned
-    def my_number=(my_number : Float64?)
-      if my_number.nil?
-        return @my_number = nil
-      end
-      _my_number = my_number.not_nil!
-      @my_number = _my_number
+    def my_number=(new_value : Float64?)
+      @my_number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] my_string Object to be assigned
-    def my_string=(my_string : String?)
-      if my_string.nil?
-        return @my_string = nil
-      end
-      _my_string = my_string.not_nil!
-      @my_string = _my_string
+    def my_string=(new_value : String?)
+      @my_string = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] my_boolean Object to be assigned
-    def my_boolean=(my_boolean : Bool?)
-      if my_boolean.nil?
-        return @my_boolean = nil
-      end
-      _my_boolean = my_boolean.not_nil!
-      @my_boolean = _my_boolean
+    def my_boolean=(new_value : Bool?)
+      @my_boolean = new_value
     end
 
     # Generates #hash and #== methods from all fields

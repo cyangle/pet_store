@@ -70,23 +70,20 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] class_name Object to be assigned
-    def class_name=(class_name : String?)
-      if class_name.nil?
-        raise ArgumentError.new("\"class_name\" is required and cannot be null")
-      end
-      _class_name = class_name.not_nil!
-      @class_name = _class_name
+    def class_name=(new_value : String?)
+      raise ArgumentError.new("\"class_name\" is required and cannot be null") if new_value.nil?
+
+      @class_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String?)
-      if _type.nil?
-        return @_type = nil
+    def _type=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("_type", new_value, VALID_VALUES_FOR__TYPE)
       end
-      __type = _type.not_nil!
-      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
-      @_type = __type
+
+      @_type = new_value
     end
 
     # Generates #hash and #== methods from all fields

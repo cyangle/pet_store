@@ -70,24 +70,22 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] just_symbol Object to be assigned
-    def just_symbol=(just_symbol : String?)
-      if just_symbol.nil?
-        return @just_symbol = nil
+    def just_symbol=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("just_symbol", new_value, VALID_VALUES_FOR_JUST_SYMBOL)
       end
-      _just_symbol = just_symbol.not_nil!
-      OpenApi::EnumValidator.validate("just_symbol", _just_symbol, VALID_VALUES_FOR_JUST_SYMBOL)
-      @just_symbol = _just_symbol
+
+      @just_symbol = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] array_enum Object to be assigned
-    def array_enum=(array_enum : Array(String)?)
-      if array_enum.nil?
-        return @array_enum = nil
+    def array_enum=(new_value : Array(String)?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("array_enum", new_value, VALID_VALUES_FOR_ARRAY_ENUM)
       end
-      _array_enum = array_enum.not_nil!
-      OpenApi::EnumValidator.validate("array_enum", _array_enum, VALID_VALUES_FOR_ARRAY_ENUM)
-      @array_enum = _array_enum
+
+      @array_enum = new_value
     end
 
     # Generates #hash and #== methods from all fields

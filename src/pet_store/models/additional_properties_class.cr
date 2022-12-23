@@ -52,22 +52,14 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] map_property Object to be assigned
-    def map_property=(map_property : Hash(String, String)?)
-      if map_property.nil?
-        return @map_property = nil
-      end
-      _map_property = map_property.not_nil!
-      @map_property = _map_property
+    def map_property=(new_value : Hash(String, String)?)
+      @map_property = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] map_of_map_property Object to be assigned
-    def map_of_map_property=(map_of_map_property : Hash(String, Hash(String, String))?)
-      if map_of_map_property.nil?
-        return @map_of_map_property = nil
-      end
-      _map_of_map_property = map_of_map_property.not_nil!
-      @map_of_map_property = _map_of_map_property
+    def map_of_map_property=(new_value : Hash(String, Hash(String, String))?)
+      @map_of_map_property = new_value
     end
 
     # Generates #hash and #== methods from all fields

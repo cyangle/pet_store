@@ -245,155 +245,128 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] number Object to be assigned
-    def number=(number : Float64?)
-      if number.nil?
-        raise ArgumentError.new("\"number\" is required and cannot be null")
+    def number=(new_value : Float64?)
+      raise ArgumentError.new("\"number\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_number("number", new_value, MAX_FOR_NUMBER)
+        OpenApi::PrimitiveValidator.validate_min_number("number", new_value, MIN_FOR_NUMBER)
       end
-      _number = number.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_number("number", _number, MAX_FOR_NUMBER)
-      OpenApi::PrimitiveValidator.validate_min_number("number", _number, MIN_FOR_NUMBER)
-      @number = _number
+
+      @number = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] double Object to be assigned
-    def double=(double : Float64?)
-      if double.nil?
-        raise ArgumentError.new("\"double\" is required and cannot be null")
+    def double=(new_value : Float64?)
+      raise ArgumentError.new("\"double\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_number("double", new_value, MAX_FOR_DOUBLE)
+        OpenApi::PrimitiveValidator.validate_min_number("double", new_value, MIN_FOR_DOUBLE)
       end
-      _double = double.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_number("double", _double, MAX_FOR_DOUBLE)
-      OpenApi::PrimitiveValidator.validate_min_number("double", _double, MIN_FOR_DOUBLE)
-      @double = _double
+
+      @double = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] pattern_without_delimiter Object to be assigned
-    def pattern_without_delimiter=(pattern_without_delimiter : String?)
-      if pattern_without_delimiter.nil?
-        raise ArgumentError.new("\"pattern_without_delimiter\" is required and cannot be null")
+    def pattern_without_delimiter=(new_value : String?)
+      raise ArgumentError.new("\"pattern_without_delimiter\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_pattern("pattern_without_delimiter", new_value, PATTERN_FOR_PATTERN_WITHOUT_DELIMITER)
       end
-      _pattern_without_delimiter = pattern_without_delimiter.not_nil!
-      OpenApi::PrimitiveValidator.validate_pattern("pattern_without_delimiter", _pattern_without_delimiter, PATTERN_FOR_PATTERN_WITHOUT_DELIMITER)
-      @pattern_without_delimiter = _pattern_without_delimiter
+
+      @pattern_without_delimiter = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] byte Object to be assigned
-    def byte=(byte : String?)
-      if byte.nil?
-        raise ArgumentError.new("\"byte\" is required and cannot be null")
-      end
-      _byte = byte.not_nil!
-      @byte = _byte
+    def byte=(new_value : String?)
+      raise ArgumentError.new("\"byte\" is required and cannot be null") if new_value.nil?
+
+      @byte = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] integer Object to be assigned
-    def integer=(integer : Int32?)
-      if integer.nil?
-        return @integer = nil
+    def integer=(new_value : Int32?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_number("integer", new_value, MAX_FOR_INTEGER)
+        OpenApi::PrimitiveValidator.validate_min_number("integer", new_value, MIN_FOR_INTEGER)
       end
-      _integer = integer.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_number("integer", _integer, MAX_FOR_INTEGER)
-      OpenApi::PrimitiveValidator.validate_min_number("integer", _integer, MIN_FOR_INTEGER)
-      @integer = _integer
+
+      @integer = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] int32 Object to be assigned
-    def int32=(int32 : Int32?)
-      if int32.nil?
-        return @int32 = nil
+    def int32=(new_value : Int32?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_number("int32", new_value, MAX_FOR_INT32)
+        OpenApi::PrimitiveValidator.validate_min_number("int32", new_value, MIN_FOR_INT32)
       end
-      _int32 = int32.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_number("int32", _int32, MAX_FOR_INT32)
-      OpenApi::PrimitiveValidator.validate_min_number("int32", _int32, MIN_FOR_INT32)
-      @int32 = _int32
+
+      @int32 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] int64 Object to be assigned
-    def int64=(int64 : Int64?)
-      if int64.nil?
-        return @int64 = nil
-      end
-      _int64 = int64.not_nil!
-      @int64 = _int64
+    def int64=(new_value : Int64?)
+      @int64 = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] float Object to be assigned
-    def float=(float : Float32?)
-      if float.nil?
-        return @float = nil
+    def float=(new_value : Float32?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_number("float", new_value, MAX_FOR_FLOAT)
       end
-      _float = float.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_number("float", _float, MAX_FOR_FLOAT)
-      @float = _float
+
+      @float = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] string Object to be assigned
-    def string=(string : String?)
-      if string.nil?
-        return @string = nil
+    def string=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_pattern("string", new_value, PATTERN_FOR_STRING)
       end
-      _string = string.not_nil!
-      OpenApi::PrimitiveValidator.validate_pattern("string", _string, PATTERN_FOR_STRING)
-      @string = _string
+
+      @string = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] binary Object to be assigned
-    def binary=(binary : ::File?)
-      if binary.nil?
-        return @binary = nil
-      end
-      _binary = binary.not_nil!
-      @binary = _binary
+    def binary=(new_value : ::File?)
+      @binary = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] date Object to be assigned
-    def date=(date : Time?)
-      if date.nil?
-        return @date = nil
-      end
-      _date = date.not_nil!
-      @date = _date
+    def date=(new_value : Time?)
+      @date = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] date_time Object to be assigned
-    def date_time=(date_time : Time?)
-      if date_time.nil?
-        return @date_time = nil
-      end
-      _date_time = date_time.not_nil!
-      @date_time = _date_time
+    def date_time=(new_value : Time?)
+      @date_time = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] password Object to be assigned
-    def password=(password : String?)
-      if password.nil?
-        return @password = nil
+    def password=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("password", new_value.to_s.size, MAX_LENGTH_FOR_PASSWORD)
+        OpenApi::PrimitiveValidator.validate_min_length("password", new_value.to_s.size, MIN_LENGTH_FOR_PASSWORD)
       end
-      _password = password.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("password", _password.to_s.size, MAX_LENGTH_FOR_PASSWORD)
-      OpenApi::PrimitiveValidator.validate_min_length("password", _password.to_s.size, MIN_LENGTH_FOR_PASSWORD)
-      @password = _password
+
+      @password = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] callback Object to be assigned
-    def callback=(callback : String?)
-      if callback.nil?
-        return @callback = nil
-      end
-      _callback = callback.not_nil!
-      @callback = _callback
+    def callback=(new_value : String?)
+      @callback = new_value
     end
 
     # Generates #hash and #== methods from all fields

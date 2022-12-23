@@ -55,13 +55,12 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] kids Object to be assigned
-    def kids=(kids : Array(PetStore::OneOfPrimitive)?)
-      if kids.nil?
-        return @kids = nil
+    def kids=(new_value : Array(PetStore::OneOfPrimitive)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _kids = kids.not_nil!
-      OpenApi::ContainerValidator.validate(container: _kids) if _kids.is_a?(Array)
-      @kids = _kids
+
+      @kids = new_value
     end
 
     # Generates #hash and #== methods from all fields

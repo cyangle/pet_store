@@ -73,34 +73,25 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] array_of_string Object to be assigned
-    def array_of_string=(array_of_string : Array(String)?)
-      if array_of_string.nil?
-        return @array_of_string = nil
+    def array_of_string=(new_value : Array(String)?)
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_items("array_of_string", new_value.size, MAX_ITEMS_FOR_ARRAY_OF_STRING)
+        OpenApi::PrimitiveValidator.validate_min_items("array_of_string", new_value.size, MIN_ITEMS_FOR_ARRAY_OF_STRING)
       end
-      _array_of_string = array_of_string.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_items("array_of_string", _array_of_string.size, MAX_ITEMS_FOR_ARRAY_OF_STRING)
-      OpenApi::PrimitiveValidator.validate_min_items("array_of_string", _array_of_string.size, MIN_ITEMS_FOR_ARRAY_OF_STRING)
-      @array_of_string = _array_of_string
+
+      @array_of_string = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] array_array_of_integer Object to be assigned
-    def array_array_of_integer=(array_array_of_integer : Array(Array(Int64))?)
-      if array_array_of_integer.nil?
-        return @array_array_of_integer = nil
-      end
-      _array_array_of_integer = array_array_of_integer.not_nil!
-      @array_array_of_integer = _array_array_of_integer
+    def array_array_of_integer=(new_value : Array(Array(Int64))?)
+      @array_array_of_integer = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] array_array_of_model Object to be assigned
-    def array_array_of_model=(array_array_of_model : Array(Array(ReadOnlyFirst))?)
-      if array_array_of_model.nil?
-        return @array_array_of_model = nil
-      end
-      _array_array_of_model = array_array_of_model.not_nil!
-      @array_array_of_model = _array_array_of_model
+    def array_array_of_model=(new_value : Array(Array(ReadOnlyFirst))?)
+      @array_array_of_model = new_value
     end
 
     # Generates #hash and #== methods from all fields

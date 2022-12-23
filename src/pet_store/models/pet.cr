@@ -109,75 +109,60 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
-    def name=(name : String?)
-      if name.nil?
-        raise ArgumentError.new("\"name\" is required and cannot be null")
-      end
-      _name = name.not_nil!
-      @name = _name
+    def name=(new_value : String?)
+      raise ArgumentError.new("\"name\" is required and cannot be null") if new_value.nil?
+
+      @name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] photo_urls Object to be assigned
-    def photo_urls=(photo_urls : Array(String)?)
-      if photo_urls.nil?
-        raise ArgumentError.new("\"photo_urls\" is required and cannot be null")
-      end
-      _photo_urls = photo_urls.not_nil!
-      @photo_urls = _photo_urls
+    def photo_urls=(new_value : Array(String)?)
+      raise ArgumentError.new("\"photo_urls\" is required and cannot be null") if new_value.nil?
+
+      @photo_urls = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] uuid Object to be assigned
-    def uuid=(uuid : String?)
-      if uuid.nil?
-        return @uuid = nil
-      end
-      _uuid = uuid.not_nil!
-      @uuid = _uuid
+    def uuid=(new_value : String?)
+      @uuid = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] id Object to be assigned
-    def id=(id : Int64?)
-      if id.nil?
-        return @id = nil
-      end
-      _id = id.not_nil!
-      @id = _id
+    def id=(new_value : Int64?)
+      @id = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] category Object to be assigned
-    def category=(category : PetStore::Category?)
-      if category.nil?
-        return @category = nil
+    def category=(new_value : PetStore::Category?)
+      unless new_value.nil?
+        new_value.validate if new_value.is_a?(OpenApi::Validatable)
       end
-      _category = category.not_nil!
-      _category.validate if _category.is_a?(OpenApi::Validatable)
-      @category = _category
+
+      @category = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tags Object to be assigned
-    def tags=(tags : Array(PetStore::Tag)?)
-      if tags.nil?
-        return @tags = nil
+    def tags=(new_value : Array(PetStore::Tag)?)
+      unless new_value.nil?
+        OpenApi::ContainerValidator.validate(container: new_value) if new_value.is_a?(Array)
       end
-      _tags = tags.not_nil!
-      OpenApi::ContainerValidator.validate(container: _tags) if _tags.is_a?(Array)
-      @tags = _tags
+
+      @tags = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status : String?)
-      if status.nil?
-        return @status = nil
+    def status=(new_value : String?)
+      unless new_value.nil?
+        OpenApi::EnumValidator.validate("status", new_value, VALID_VALUES_FOR_STATUS)
       end
-      _status = status.not_nil!
-      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
-      @status = _status
+
+      @status = new_value
     end
 
     # Generates #hash and #== methods from all fields

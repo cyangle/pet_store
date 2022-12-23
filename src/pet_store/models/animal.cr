@@ -78,23 +78,19 @@ module PetStore
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] class_name Object to be assigned
-    def class_name=(class_name : String?)
-      if class_name.nil?
-        raise ArgumentError.new("\"class_name\" is required and cannot be null")
+    def class_name=(new_value : String?)
+      raise ArgumentError.new("\"class_name\" is required and cannot be null") if new_value.nil?
+      unless new_value.nil?
+        OpenApi::PrimitiveValidator.validate_max_length("class_name", new_value.to_s.size, MAX_LENGTH_FOR_CLASS_NAME)
       end
-      _class_name = class_name.not_nil!
-      OpenApi::PrimitiveValidator.validate_max_length("class_name", _class_name.to_s.size, MAX_LENGTH_FOR_CLASS_NAME)
-      @class_name = _class_name
+
+      @class_name = new_value
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] color Object to be assigned
-    def color=(color : String?)
-      if color.nil?
-        return @color = nil
-      end
-      _color = color.not_nil!
-      @color = _color
+    def color=(new_value : String?)
+      @color = new_value
     end
 
     # Generates #hash and #== methods from all fields
