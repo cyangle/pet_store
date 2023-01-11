@@ -8,41 +8,7 @@
 #
 # OpenAPI Generator version: 6.3.0-SNAPSHOT
 
-# Dependencies
-require "crest"
-require "log"
-require "json"
-require "time"
-require "uri"
+require "./core"
 
-# Project files
-require "./ext/**"
-require "./validators/**"
-require "./pet_store/configuration.cr"
-require "./pet_store/api_error.cr"
-require "./pet_store/api_client.cr"
 require "./pet_store/models/**"
 require "./pet_store/api/**"
-
-module PetStore
-  Log = ::Log.for("PetStore") # => Log for PetStore source
-
-  VERSION = {{ `shards version #{__DIR__}`.chomp.stringify }}
-
-  # Return the default `Configuration` object.
-  def self.configure
-    Configuration.default
-  end
-
-  # Customize default settings for the SDK using block.
-  #
-  # ```
-  # PetStore.configure do |config|
-  #   config.username = "xxx"
-  #   config.password = "xxx"
-  # end
-  # ```
-  def self.configure
-    yield Configuration.default
-  end
-end
