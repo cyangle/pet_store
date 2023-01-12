@@ -14,6 +14,7 @@ require "../models/file_schema_test_class"
 require "../models/health_check_result"
 require "../models/outer_composite"
 require "../models/pet"
+
 require "../models/user"
 
 module PetStore

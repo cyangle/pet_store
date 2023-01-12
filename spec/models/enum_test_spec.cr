@@ -221,8 +221,8 @@ describe PetStore::EnumTest do
       expect_raises(JSON::ParseException, /Validation failed/) do
         json = %({"enum_string_required":"lower","outerEnumRquired":"in_progress","outerEnumRquiredInt64":3,"outerEnum":"invalid","outerEnumDefaultValue":"placed","outerEnumIntegerDefaultValue":0})
         PetStore::EnumTest.from_json(json)
+      end
     end
-  end
 
     context "sets outer_enum with invalid value" do
       it "raises error" do
@@ -232,8 +232,8 @@ describe PetStore::EnumTest do
           (instance.outer_enum).should be_nil
           instance.outer_enum = PetStore::OuterEnum.new("invalid")
         end
+      end
     end
-  end
 
     context "sets outer_enum to valid values" do
       PetStore::OuterEnum::VALID_VALUES.each do |value|
